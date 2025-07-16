@@ -1,0 +1,198 @@
+/* CSS Updates for Right-Aligned Sources and Fixed Layout */
+
+.chat-container {
+  display: flex;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.chat-sidebar {
+  width: 25%;
+  background-color: #111;
+  overflow-y: auto;
+  border-right: 1px solid rgb(80, 80, 80);
+  padding-top: 10px;
+}
+
+.chat-history {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.chat-history li {
+  padding: 10px;
+  font-size: 12px;
+  color: rgb(210, 210, 210);
+  cursor: pointer;
+}
+
+.chat-history li:hover {
+  background-color: #222;
+}
+
+.chat-main {
+  width: 75%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.filter-section {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #ddd;
+  background-color: #1a1a1a;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s ease-in-out;
+}
+
+.filter-toggle:hover {
+  background-color: #2a2a2a;
+}
+
+.filter-toggle input[type="checkbox"] {
+  accent-color: #3ac0fa;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.wo-input,
+.topk-input {
+  width: 90px;
+  padding: 4px 6px;
+  background: #0f0f0f;
+  color: #ffffff;
+  font-size: 13px;
+  border: 1px solid white;
+  appearance: textfield;
+}
+
+.wo-input::-webkit-outer-spin-button,
+.wo-input::-webkit-inner-spin-button,
+.topk-input::-webkit-outer-spin-button,
+.topk-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.file-list-scroll {
+  max-height: 30vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.file-card-no-border {
+  padding: 4px 10px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.file-card-no-border:hover {
+  background-color: #1b1b1b;
+}
+
+.chat-output {
+  flex-grow: 1;
+  font-weight: normal;
+    overflow-y: auto;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.ai-answer-box {
+  display: flex;
+  padding: 5px;
+}
+
+.ai-answer-box > div:first-child {
+  flex: 1;
+}
+
+.sources-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 12px;
+  margin: 0;
+}
+
+.sources-list li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sources-list li a:hover {
+  text-decoration: underline;
+}
+
+.chat-input-bar {
+  display: flex;
+  align-items: center;
+  padding: 5px 16px;
+  gap: 10px;
+  justify-content: center
+}
+
+.chatbot-input {
+  flex-grow: 1;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  resize: none;
+  width: 50vw;
+  background-color: black;
+  font-family: inherit;
+  font-weight: normal;
+}
+
+/* Make placeholder text white */
+.chatbot-input::placeholder {
+  color: white;
+  opacity: 0.6; /* optional for a subtle effect */
+}
+.submit-arrow {
+  background: transparent;
+  border: none;
+  color: #b6e9ff;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.submit-arrow:hover {
+  background-color: #1a1a1a;
+}

@@ -1,0 +1,8 @@
+.footer {
+    font-weight: bold;
+  background-color: black;
+  font-size: 0.9rem;
+  border-top: 1px solid rgb(80, 80, 80);
+  color: rgb(210, 210, 210);
+  text-align: center;
+}

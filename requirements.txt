@@ -1,0 +1,8 @@
+openai
+faiss-cpu
+tqdm
+python-dotenv
+numpy
+google-cloud-aiplatform
+
+AIzaSyDqi4HACfmjzWp_8_yg0t_Q_xqu9HL5AQA
