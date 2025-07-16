@@ -57,8 +57,6 @@ chat_history.json
 geolabs-project-*.json
 inverted_index.json
 preprocessed_chunks.json
-pythonCleaner/
-pythonFlask/
 *.sqlite3
 *.db
 
