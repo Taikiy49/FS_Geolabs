@@ -23,9 +23,9 @@ function Reports() {
   const [filterFile, setFilterFile] = useState(false);
 
   useEffect(() => {
-    axios.get('https://geolabs-software.com/api/files')
+    axios.get('https://api.geolabs-software.com/api/files')
       .then(res => setFiles(res.data));
-    axios.get(`https://geolabs-software.com/api/chat_history?user=${userEmail}`)
+    axios.get(`https://api.geolabs-software.com/api/chat_history?user=${userEmail}`)
       .then(res => setChatHistory(res.data.reverse()));
   }, [userEmail]);
 
@@ -40,7 +40,7 @@ function Reports() {
     if (!query.trim()) return;
     setLoading(true);
     try {
-      const res = await axios.post('https://geolabs-software.com/api/question', {
+      const res = await axios.post('https://api.geolabs-software.com/api/question', {
         query,
         min: minWO,
         max: maxWO,
@@ -48,7 +48,7 @@ function Reports() {
         user: userEmail
       });
       setResults(res.data);
-      const updated = await axios.get(`https://geolabs-software.com/api/chat_history?user=${userEmail}`);
+      const updated = await axios.get(`https://api.geolabs-software.com/api/chat_history?user=${userEmail}`);
       setChatHistory(updated.data.reverse());
       setQuery('');
     } catch (err) {
