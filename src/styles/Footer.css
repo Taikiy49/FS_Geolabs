@@ -1,8 +1,13 @@
 .footer {
-    font-weight: bold;
-  background-color: black;
-  font-size: 0.9rem;
-  border-top: 1px solid rgb(80, 80, 80);
-  color: rgb(210, 210, 210);
+  color: #999;
   text-align: center;
+  padding: 10px 8px;
+  font-size: 12px;
+  border-top: 1px solid #222; /* subtle */
+  margin-top: auto;
+  font-weight: normal;
+}
+
+.footer:hover {
+  color: #ccc;
 }

@@ -1,62 +1,111 @@
+/* HomePage.css */
+
 .homepage-container {
-  margin-top: auto;
-  display: flex;             
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 85vh;
+  padding: 2vh 1vw; /* smaller side padding */
+  background-color: #0b0c10;
   color: white;
-  height: 86vh;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
+
 
 .homepage-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 3vw;
+  gap: 1.5vw; /* slightly tighter gaps */
+  width: 100%;
+  max-width: 98vw; /* allow more width for 4 cols */
+  margin: auto;
 }
 
 
+@media (min-width: 1000px) {
+  .homepage-grid {
+    grid-template-columns: repeat(2, 1fr); /* <-- ensure 4 per row */
+  }
+
+  .homepage-card {
+    min-height: 18vh; /* taller cards at full screen */
+  }
+}
+
+
+@media (min-width: 600px) and (max-width: 999px) {
+  .homepage-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .homepage-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .homepage-card {
-  background-color: rgb(10, 10, 10);
-  border: 1px solid rgb(50, 50, 50);
-  padding: 20px;
+  background-color: #161b22;
+  border: 1px solid #2c313a;
+  padding: 18px;
   border-radius: 12px;
-  transition: transform 0.2s;
-  width: 20vw;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.homepage-card:hover {
+  transform: translateY(-3px);
+  border-color: #1e90ff;
+  box-shadow: 0 6px 16px rgba(30, 144, 255, 0.2);
 }
 
 .homepage-card-header {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .homepage-icon {
   margin-right: 12px;
-  color: white;
+  font-size: 20px;
+  color: #1e90ff;
 }
 
 .homepage-card h2 {
-  font-size: 22px;
+  font-size: 18px;
   margin: 0;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .homepage-sublabel {
-  font-size: 14px;
-  color: rgb(150, 150, 150);
+  font-size: 13px;
+  color: #8b949e;
   margin-top: 2px;
+  font-weight: normal;
 }
 
 .homepage-card p {
-  font-size: 15px;
-  color: rgb(210, 210, 210);
+  font-size: 13px;
+  color: #d0d0d0;
   margin: 10px 0;
+  flex-grow: 1;
+  font-weight: normal;
 }
 
 .homepage-link {
   color: #1e90ff;
   font-weight: bold;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 13px;
   transition: color 0.2s;
+  align-self: flex-start;
+  text-decoration: none;
 }
 
 .homepage-link:hover {

@@ -1,22 +1,49 @@
+# app.py
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import json
 from datetime import datetime
+import sqlite3
+import os
 from helpers import rank_documents, ask_gemini
+import traceback
 
 app = Flask(__name__)
 CORS(app)
 
-CHAT_HISTORY_FILE = "chat_history.json"
+DB_FILE = "chat_history.db"
+GEO_DB = "geolabs.db"
+
+# Initialize chat history DB
+
+def init_db():
+    if not os.path.exists(DB_FILE):
+        conn = sqlite3.connect(DB_FILE)
+        cur = conn.cursor()
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS chat_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user TEXT,
+            question TEXT,
+            answer TEXT,
+            sources TEXT,
+            timestamp TEXT
+        )
+        """)
+        conn.commit()
+        conn.close()
 
 @app.route('/api/files', methods=['GET'])
 def list_files():
     try:
-        with open("preprocessed_chunks.json", "r", encoding="utf-8") as f:
-            metadata = json.load(f)
-        unique_files = sorted(set(entry['file'] for entry in metadata))
-        return jsonify(unique_files)
+        with sqlite3.connect(GEO_DB) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT DISTINCT file FROM chunks")
+            files = sorted(set(row[0] for row in cursor.fetchall()))
+        return jsonify(files)
     except Exception as e:
+        print("\u274C Error in /api/files:", str(e))
+        traceback.print_exc()
         return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/api/question', methods=['POST'])
@@ -30,61 +57,59 @@ def answer_question():
         user = data.get('user', 'guest')
 
         ranked_chunks = rank_documents(
-            query,
-            inverted_index_file='inverted_index.json',
-            metadata_file='preprocessed_chunks.json',
+            query=query,
+            db_path=GEO_DB,
             min_wo=min_wo,
             max_wo=max_wo,
             top_k=top_k
         )
 
-        top_files = [doc['file'] for doc in ranked_chunks]
+        top_files = list({doc['file'] for doc in ranked_chunks})
         answer = ask_gemini(query, ranked_chunks)
 
-        # Save to chat history
-        new_entry = {
-            "timestamp": datetime.now().isoformat(),
-            "question": query,
-            "answer": answer,
-            "sources": top_files
-        }
+        conn = sqlite3.connect(DB_FILE)
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO chat_history (user, question, answer, sources, timestamp)
+            VALUES (?, ?, ?, ?, ?)
+        """, (user, query, answer, ",".join(top_files), datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
 
-        try:
-            with open(CHAT_HISTORY_FILE, "r", encoding="utf-8") as f:
-                history = json.load(f)
-        except FileNotFoundError:
-            history = {}
-
-        if user not in history:
-            history[user] = []
-
-        history[user].append(new_entry)
-
-        with open(CHAT_HISTORY_FILE, "w", encoding="utf-8") as f:
-            json.dump(history, f, indent=2)
-
-        return jsonify({
-            "answer": answer,
-            "sources": top_files
-        })
+        return jsonify({"answer": answer, "sources": top_files})
 
     except Exception as e:
-        print("❌ Backend Error:", str(e))
+        print("\u274C Backend Error:", str(e))
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/chat_history', methods=['GET'])
 def get_chat_history():
     user = request.args.get("user", "guest")
     try:
-        with open(CHAT_HISTORY_FILE, "r", encoding="utf-8") as f:
-            history = json.load(f)
-        return jsonify(history.get(user, []))
-    except FileNotFoundError:
+        conn = sqlite3.connect(DB_FILE)
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT question, answer, sources, timestamp
+            FROM chat_history
+            WHERE user = ?
+            ORDER BY id DESC
+        """, (user,))
+        rows = cur.fetchall()
+        conn.close()
+
+        history = [{
+            "question": row[0],
+            "answer": row[1],
+            "sources": row[2].split(","),
+            "timestamp": row[3]
+        } for row in rows]
+
+        return jsonify(history)
+    except Exception as e:
+        print("\u274C History Fetch Error:", str(e))
         return jsonify([])
 
 if __name__ == '__main__':
+    init_db()
     app.run(host='0.0.0.0', port=5000)
-
-"""
-http://13.56.211.75:5000
-"""

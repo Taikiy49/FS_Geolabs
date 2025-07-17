@@ -1,5 +1,7 @@
+# helpers.py
+
 import re
-import json
+import sqlite3
 from collections import Counter
 import google.generativeai as genai
 
@@ -17,32 +19,31 @@ def is_in_work_order_range(filename, min_wo, max_wo):
         return min_wo <= work_order <= max_wo
     return False
 
-def rank_documents(query, inverted_index_file, metadata_file, min_wo, max_wo, top_k):
-    with open(inverted_index_file, 'r', encoding='utf-8') as f:
-        inverted_index = json.load(f)
-    with open(metadata_file, 'r', encoding='utf-8') as f:
-        metadata = json.load(f)
-
+def rank_documents(query, db_path, min_wo, max_wo, top_k):
     query_tokens = preprocess_query(query)
     file_scores = Counter()
 
-    for token in query_tokens:
-        if token in inverted_index:
-            for file_name in inverted_index[token]:
+    with sqlite3.connect(db_path) as conn:
+        cursor = conn.cursor()
+
+        for token in query_tokens:
+            cursor.execute("SELECT DISTINCT file FROM inverted_index WHERE keyword = ?", (token,))
+            for (file_name,) in cursor.fetchall():
                 if is_in_work_order_range(file_name, min_wo, max_wo):
                     file_scores[file_name] += 1
 
-    top_files = file_scores.most_common(min(top_k, 30))
-    results = []
+        top_files = file_scores.most_common(min(top_k, 30))
+        results = []
 
-    for file_name, score in top_files:
-        matching_chunks = [entry['chunk'] for entry in metadata if entry['file'] == file_name]
-        combined_text = "\n---\n".join(matching_chunks[:3])
-        results.append({
-            'file': file_name,
-            'chunk': combined_text,
-            'score': score
-        })
+        for file_name, score in top_files:
+            cursor.execute("SELECT chunk FROM chunks WHERE file = ? LIMIT 3", (file_name,))
+            chunks = [row[0] for row in cursor.fetchall()]
+            combined_text = "\n---\n".join(chunks)
+            results.append({
+                'file': file_name,
+                'chunk': combined_text,
+                'score': score
+            })
 
     return results
 

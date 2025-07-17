@@ -1,9 +1,9 @@
-// Updated Reports.jsx to match compact, fixed layout with right-aligned sources
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/Reports.css';
 import { useMsal } from '@azure/msal-react';
 import { FaArrowRight } from 'react-icons/fa';
+import API_URL from '../config'; // ✅ Dynamic API endpoint
 
 function Reports() {
   const { accounts } = useMsal();
@@ -23,9 +23,9 @@ function Reports() {
   const [filterFile, setFilterFile] = useState(false);
 
   useEffect(() => {
-    axios.get('https://api.geolabs-software.com/api/files')
+    axios.get(`${API_URL}/api/files`)
       .then(res => setFiles(res.data));
-    axios.get(`https://api.geolabs-software.com/api/chat_history?user=${userEmail}`)
+    axios.get(`${API_URL}/api/chat_history?user=${userEmail}`)
       .then(res => setChatHistory(res.data.reverse()));
   }, [userEmail]);
 
@@ -40,7 +40,7 @@ function Reports() {
     if (!query.trim()) return;
     setLoading(true);
     try {
-      const res = await axios.post('https://api.geolabs-software.com/api/question', {
+      const res = await axios.post(`${API_URL}/api/question`, {
         query,
         min: minWO,
         max: maxWO,
@@ -48,15 +48,14 @@ function Reports() {
         user: userEmail
       });
       setResults(res.data);
-      const updated = await axios.get(`https://api.geolabs-software.com/api/chat_history?user=${userEmail}`);
+      const updated = await axios.get(`${API_URL}/api/chat_history?user=${userEmail}`);
       setChatHistory(updated.data.reverse());
       setQuery('');
     } catch (err) {
-      alert("\u274C Failed to get an answer from the server.");
+      alert("❌ Failed to get an answer from the server.");
     }
     setLoading(false);
   };
-
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
