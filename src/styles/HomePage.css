@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   min-height: 85vh;
-  padding: 2vh 1vw; /* smaller side padding */
+  padding: 10px 10px; /* smaller side padding */
   background-color: #0b0c10;
   color: white;
   overflow-y: auto;
@@ -16,7 +16,7 @@
 
 .homepage-grid {
   display: grid;
-  gap: 1.5vw; /* slightly tighter gaps */
+  gap: 10px; /* slightly tighter gaps */
   width: 100%;
   max-width: 98vw; /* allow more width for 4 cols */
   margin: auto;
@@ -47,7 +47,7 @@
 }
 
 .homepage-card {
-  background-color: #161b22;
+  background: linear-gradient(135deg, #161b22, #1b1f27);
   border: 1px solid #2c313a;
   padding: 18px;
   border-radius: 12px;

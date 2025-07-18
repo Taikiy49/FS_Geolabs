@@ -55,7 +55,9 @@ def answer_question():
         max_wo = int(data.get('max', 99999))
         top_k = min(int(data.get('top_k', 10)), 30)
         user = data.get('user', 'guest')
+        selected_files = data.get('selected_files', [])
 
+        # Rank remaining files if needed
         ranked_chunks = rank_documents(
             query=query,
             db_path=GEO_DB,
@@ -64,24 +66,31 @@ def answer_question():
             top_k=top_k
         )
 
-        top_files = list({doc['file'] for doc in ranked_chunks})
-        answer = ask_gemini(query, ranked_chunks)
+        ranked_files = list({doc['file'] for doc in ranked_chunks if doc['file'] not in selected_files})
+        final_files = selected_files + ranked_files[:max(0, top_k - len(selected_files))]
 
+        # Only include chunks from selected + ranked files
+        relevant_chunks = [doc for doc in ranked_chunks if doc['file'] in final_files]
+
+        answer = ask_gemini(query, relevant_chunks)
+
+        # Save to history
         conn = sqlite3.connect(DB_FILE)
         cur = conn.cursor()
         cur.execute("""
             INSERT INTO chat_history (user, question, answer, sources, timestamp)
             VALUES (?, ?, ?, ?, ?)
-        """, (user, query, answer, ",".join(top_files), datetime.now().isoformat()))
+        """, (user, query, answer, ",".join(final_files), datetime.now().isoformat()))
         conn.commit()
         conn.close()
 
-        return jsonify({"answer": answer, "sources": top_files})
+        return jsonify({"answer": answer, "sources": final_files})
 
     except Exception as e:
-        print("\u274C Backend Error:", str(e))
+        print("❌ Backend Error:", str(e))
         traceback.print_exc()
-        return jsonify({"error": str(e)}), 500
+        return
+
 
 @app.route('/api/chat_history', methods=['GET'])
 def get_chat_history():

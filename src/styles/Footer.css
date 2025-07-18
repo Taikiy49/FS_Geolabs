@@ -1,8 +1,8 @@
 .footer {
   color: #999;
   text-align: center;
-  padding: 10px 8px;
-  font-size: 12px;
+  padding: 5px 5px;
+  font-size: 10px;
   border-top: 1px solid #222; /* subtle */
   margin-top: auto;
   font-weight: normal;
@@ -11,3 +11,4 @@
 .footer:hover {
   color: #ccc;
 }
+ 

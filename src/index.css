@@ -5,3 +5,9 @@ html, body, #root {
   overflow-y: auto;
   letter-spacing: 0.2px;
 }
+
+body {
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #0a0a0a;
+  color: white;
+}
