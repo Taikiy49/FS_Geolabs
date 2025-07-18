@@ -4,3 +4,4 @@ tqdm
 python-dotenv
 numpy
 google-cloud-aiplatform
+nltk

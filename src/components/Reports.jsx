@@ -1,3 +1,4 @@
+// Reports.jsx (React frontend)
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/Reports.css';
@@ -22,6 +23,7 @@ function Reports() {
   const [topK, setTopK] = useState(5);
   const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [quickView, setQuickView] = useState(null);
 
   const clearSelectedFiles = () => setSelectedFiles([]);
 
@@ -44,6 +46,8 @@ function Reports() {
     setLoading(true);
     setSelectedChat(null);
     setResults(null);
+    setQuickView(null);
+
     try {
       const numSelected = selectedFiles.length;
       const remainingToRank = onlySelectedMode ? 0 : Math.max(0, topK - numSelected);
@@ -74,6 +78,18 @@ function Reports() {
       alert('❌ Failed to get an answer from the server.');
     }
     setLoading(false);
+  };
+
+  const getQuickView = async (filename) => {
+    try {
+      const res = await axios.post(`${API_URL}/api/quick_view`, {
+        filename,
+        query,
+      });
+      setQuickView({ filename, snippets: res.data.snippets });
+    } catch (err) {
+      setQuickView(null);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -114,46 +130,17 @@ function Reports() {
 
       <div className="chat-main">
         <div className="filters-header">Apply filters to narrow down your file search:</div>
-
         <div className="filter-section">
-          <input
-            type="number"
-            className="wo-input"
-            value={minWO}
-            onChange={e => setMinWO(e.target.value)}
-            placeholder="Min WO #"
-          />
-          <input
-            type="number"
-            className="wo-input"
-            value={maxWO}
-            onChange={e => setMaxWO(e.target.value)}
-            placeholder="Max WO #"
-          />
-          <input
-            type="text"
-            className="file-input"
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            placeholder="Search by file name"
-          />
+          <input type="number" className="wo-input" value={minWO} onChange={e => setMinWO(e.target.value)} placeholder="Min WO #" />
+          <input type="number" className="wo-input" value={maxWO} onChange={e => setMaxWO(e.target.value)} placeholder="Max WO #" />
+          <input type="text" className="file-input" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search by file name" />
           <div className="only-selected-toggle">
-            <input
-              type="checkbox"
-              checked={onlySelectedMode}
-              onChange={() => setOnlySelectedMode(prev => !prev)}
-            />
+            <input type="checkbox" checked={onlySelectedMode} onChange={() => setOnlySelectedMode(prev => !prev)} />
             <label className="toggle-label">Only Selected Files</label>
           </div>
           <div className="topk-dropdown-container">
             <label className="topk-dropdown-label" htmlFor="topk-select">Rank:</label>
-            <select
-              id="topk-select"
-              className="topk-dropdown"
-              value={topK}
-              onChange={(e) => setTopK(parseInt(e.target.value))}
-              disabled={selectedFiles.length > 0}
-            >
+            <select id="topk-select" className="topk-dropdown" value={topK} onChange={(e) => setTopK(parseInt(e.target.value))} disabled={selectedFiles.length > 0}>
               {Array.from({ length: 20 }, (_, i) => i + 1).map((val) => (
                 <option key={val} value={val}>{val}</option>
               ))}
@@ -166,14 +153,15 @@ function Reports() {
             const cleanName = file.replace(/\.txt$/, '');
             const isSelected = selectedFiles.includes(file);
             const isDisabled = !isSelected && selectedFiles.length >= topK;
-
             return (
               <div
                 className={`file-card-no-border ${isSelected ? 'selected-file' : ''} ${isDisabled ? 'disabled-file' : ''}`}
                 key={idx}
                 title={cleanName}
-                onClick={() => !isDisabled && toggleFileSelection(file)}
-              >
+                onClick={() => {
+                  toggleFileSelection(file);
+                  getQuickView(file);
+                }}>
                 {cleanName}
               </div>
             );
@@ -217,6 +205,14 @@ function Reports() {
                 <div className="ai-answer-box">
                   <div className="chat-output-title"><strong>Q:</strong> {submittedQuery}</div>
                   <div className="chat-output-title"><strong>A:</strong> {results.answer}</div>
+                </div>
+              )}
+              {quickView && (
+                <div className="chat-output-title">
+                  <strong>Quick Snippets from {quickView.filename.replace(/\.txt$/, '')}:</strong>
+                  <ul>
+                    {quickView.snippets.map((s, i) => <li key={i}>{s}</li>)}
+                  </ul>
                 </div>
               )}
             </div>
