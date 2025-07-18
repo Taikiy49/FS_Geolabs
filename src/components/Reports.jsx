@@ -7,9 +7,10 @@ import API_URL from '../config';
 
 function Reports() {
   const { accounts } = useMsal();
-  const userEmail = accounts[0]?.username || "guest";
+  const userEmail = accounts[0]?.username || 'guest';
 
   const [query, setQuery] = useState('');
+  const [onlySelectedMode, setOnlySelectedMode] = useState(false);
   const [submittedQuery, setSubmittedQuery] = useState('');
   const [files, setFiles] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,13 +21,9 @@ function Reports() {
   const [maxWO, setMaxWO] = useState('');
   const [topK, setTopK] = useState(5);
   const [loading, setLoading] = useState(false);
-  const [filterWO, setFilterWO] = useState(false);
-  const [filterFile, setFilterFile] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const clearSelectedFiles = () => {
-  setSelectedFiles([]);
-};
 
+  const clearSelectedFiles = () => setSelectedFiles([]);
 
   useEffect(() => {
     axios.get(`${API_URL}/api/files`).then(res => setFiles(res.data));
@@ -39,36 +36,45 @@ function Reports() {
     const num = woMatch ? parseInt(woMatch[1]) : 0;
     const min = minWO === '' ? -Infinity : parseInt(minWO);
     const max = maxWO === '' ? Infinity : parseInt(maxWO);
-    return (!filterFile || matchName) && (!filterWO || (num >= min && num <= max));
+    return matchName && (num >= min && num <= max);
   });
 
   const askQuestion = async (customQuery = query) => {
     if (!customQuery.trim()) return;
     setLoading(true);
     setSelectedChat(null);
-
+    setResults(null);
     try {
       const numSelected = selectedFiles.length;
-      const remainingToRank = Math.max(0, topK - numSelected);
+      const remainingToRank = onlySelectedMode ? 0 : Math.max(0, topK - numSelected);
 
-      const res = await axios.post(`${API_URL}/api/question`, {
+      const rankRes = await axios.post(`${API_URL}/api/rank_only`, {
+        query: customQuery,
+        min: minWO === '' ? 0 : parseInt(minWO),
+        max: maxWO === '' ? 99999 : parseInt(maxWO),
+        top_k: remainingToRank,
+        selected_files: selectedFiles,
+      });
+
+      setResults({ ranked_files: rankRes.data.ranked_files });
+
+      const answerRes = await axios.post(`${API_URL}/api/question`, {
         query: customQuery,
         min: minWO === '' ? 0 : parseInt(minWO),
         max: maxWO === '' ? 99999 : parseInt(maxWO),
         top_k: remainingToRank,
         user: userEmail,
-        selected_files: selectedFiles, // 👈 Pass these to the backend
+        selected_files: selectedFiles,
       });
 
-      setResults(res.data);
+      setResults(answerRes.data);
       const updated = await axios.get(`${API_URL}/api/chat_history?user=${userEmail}`);
       setChatHistory(updated.data.reverse());
     } catch (err) {
-      alert("❌ Failed to get an answer from the server.");
+      alert('❌ Failed to get an answer from the server.');
     }
     setLoading(false);
   };
-
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -83,28 +89,20 @@ function Reports() {
   };
 
   const toggleFileSelection = (file) => {
-  setSelectedFiles(prev => {
-    const isAlreadySelected = prev.includes(file);
-
-    if (isAlreadySelected) {
-      return prev.filter(f => f !== file); // Remove it if already selected
-    }
-
-    // If adding this would exceed topK, do nothing
-    if (prev.length >= topK) {
-      alert(`You can only select up to ${topK} file${topK > 1 ? 's' : ''} for ranking.`);
-      return prev;
-    }
-
-    return [...prev, file]; // Add the new file
-  });
-};
-
+    setSelectedFiles(prev => {
+      const isAlreadySelected = prev.includes(file);
+      if (isAlreadySelected) return prev.filter(f => f !== file);
+      if (prev.length >= 20) {
+        alert("You can only select up to 20 files.");
+        return prev;
+      }
+      return [...prev, file];
+    });
+  };
 
   return (
     <div className="chat-container">
       <div className="chat-sidebar">
-        <div className="sidebar-title">Personal History</div>
         <div className="chat-history">
           {chatHistory.map((chat, i) => (
             <div className='chat-history-item' key={i} onClick={() => setSelectedChat(chat)}>
@@ -115,15 +113,38 @@ function Reports() {
       </div>
 
       <div className="chat-main">
-        <div className="filters-header">Select filters to narrow down your file search:</div>
+        <div className="filters-header">Apply filters to narrow down your file search:</div>
 
         <div className="filter-section">
-          <label className="filter-toggle">
-            <input type="checkbox" checked={filterWO} onChange={() => setFilterWO(!filterWO)} /> Work Order Range
-          </label>
-          <label className="filter-toggle">
-            <input type="checkbox" checked={filterFile} onChange={() => setFilterFile(!filterFile)} /> File Name
-          </label>
+          <input
+            type="number"
+            className="wo-input"
+            value={minWO}
+            onChange={e => setMinWO(e.target.value)}
+            placeholder="Min WO #"
+          />
+          <input
+            type="number"
+            className="wo-input"
+            value={maxWO}
+            onChange={e => setMaxWO(e.target.value)}
+            placeholder="Max WO #"
+          />
+          <input
+            type="text"
+            className="file-input"
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            placeholder="Search by file name"
+          />
+          <div className="only-selected-toggle">
+            <input
+              type="checkbox"
+              checked={onlySelectedMode}
+              onChange={() => setOnlySelectedMode(prev => !prev)}
+            />
+            <label className="toggle-label">Only Selected Files</label>
+          </div>
           <div className="topk-dropdown-container">
             <label className="topk-dropdown-label" htmlFor="topk-select">Rank:</label>
             <select
@@ -131,6 +152,7 @@ function Reports() {
               className="topk-dropdown"
               value={topK}
               onChange={(e) => setTopK(parseInt(e.target.value))}
+              disabled={selectedFiles.length > 0}
             >
               {Array.from({ length: 20 }, (_, i) => i + 1).map((val) => (
                 <option key={val} value={val}>{val}</option>
@@ -138,20 +160,6 @@ function Reports() {
             </select>
           </div>
         </div>
-
-        {(filterWO || filterFile) && (
-          <div className="filters">
-            {filterWO && (
-              <>
-                <input type="number" className="wo-input" value={minWO} onChange={e => setMinWO(e.target.value)} placeholder="Min WO #" />
-                <input type="number" className="wo-input" value={maxWO} onChange={e => setMaxWO(e.target.value)} placeholder="Max WO #" />
-              </>
-            )}
-            {filterFile && (
-              <input type="text" className="file-input" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search by file name" />
-            )}
-          </div>
-        )}
 
         <div className="file-list-scroll">
           {filteredFiles.map((file, idx) => {
@@ -170,61 +178,63 @@ function Reports() {
               </div>
             );
           })}
-
         </div>
 
         {selectedFiles.length > 0 && (
-  <div className="selected-files-bar">
-    <span>
-      {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected.
-    </span>
-    <button className="clear-selected-btn" onClick={clearSelectedFiles}>
-      Clear
-    </button>
-  </div>
-)}
-
+          <div className="selected-files-bar">
+            <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected.</span>
+            <button className="clear-selected-btn" onClick={clearSelectedFiles}>Clear</button>
+          </div>
+        )}
 
         <div className="chat-output">
-          {selectedChat ? (
-            <div className="ai-answer-box">
-              <div><strong>Question:</strong></div> {selectedChat.question}
-              <div className="chatbot-output-title"><strong>Answer:</strong></div> {selectedChat.answer}
-              {selectedChat.sources?.length > 0 && (
-                <div>
-                  <div className="chatbot-output-title"><strong>Sources:</strong></div>
-                  <ul className="sources-list">
-                    {selectedChat.sources.map((src, i) => (
-                      <li key={i}><a href={`#${src}`}>{src.replace(/\.txt$/, '')}</a></li>
-                    ))}
-                  </ul>
+          <div className="chat-columns">
+            <div className="ai-answer-section">
+              {selectedChat ? (
+                <div className="ai-answer-box">
+                  <div><strong>Question:</strong></div> {selectedChat.question}
+                  <div className="chatbot-output-title"><strong>Answer:</strong></div> {selectedChat.answer}
+                  {selectedChat.sources?.length > 0 && (
+                    <div>
+                      <div className="chatbot-output-title"><strong>Sources:</strong></div>
+                      <ul className="sources-list">
+                        {selectedChat.sources.map((src, i) => (
+                          <li key={i}><a href={`#${src}`}>{src.replace(/\.txt$/, '')}</a></li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ) : submittedQuery ? (
+                <div className="ai-answer-box">
+                  <div><strong>Q:</strong> {submittedQuery}</div>
+                  <div className="loading-response">
+                    <span className="dot-text">Generating response</span>
+                    <span className="dot-anim"><span>.</span><span>.</span><span>.</span></span>
+                  </div>
+                </div>
+              ) : results && (
+                <div className="ai-answer-box">
+                  <div className="chat-output-title"><strong>Q:</strong> {submittedQuery}</div>
+                  <div className="chat-output-title"><strong>A:</strong> {results.answer}</div>
                 </div>
               )}
             </div>
-          ) : loading && submittedQuery ? (
-            <div className="ai-answer-box">
-              <h4><strong>Q:</strong> {submittedQuery}</h4>
-              <div className="loading-response">
-                <span className="dot-text">Generating response</span>
-                <span className="dot-anim"><span>.</span><span>.</span><span>.</span></span>
+
+            {results?.ranked_files?.length > 0 && (
+              <div className="ranked-files-side">
+                <div className="ranked-header">Ranked File List</div>
+                <div className="ranked-files-scroll">
+                  {results.ranked_files.map((file, i) => (
+                    <div key={i} className="ranked-mini-item">
+                      <span className="mini-filename">{file.file.replace(/\.txt$/, '')}</span>
+                      <span className="mini-score">{file.score}%</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : results && (
-            <div className="ai-answer-box">
-              <div className='chat-output-title'><strong>Q:</strong> {submittedQuery}</div>
-              <div className='chat-output-title'><strong>A:</strong> {results.answer}</div>
-              {results.sources?.length > 0 && (
-                <div>
-                  <div><strong>Sources:</strong></div>
-                  <ul className="sources-list">
-                    {results.sources.map((file, i) => (
-                      <li key={i}><a href={`#${file}`}>{file.replace(/\.txt$/, '')}</a></li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         <div className="chat-input-bar">
@@ -236,14 +246,18 @@ function Reports() {
             onKeyDown={handleKeyDown}
             rows={1}
           />
-          <button className="submit-arrow" onClick={() => {
-            const currentQuery = query.trim();
-            if (currentQuery) {
-              setSubmittedQuery(currentQuery);
-              setQuery('');
-              askQuestion(currentQuery);
-            }
-          }} disabled={loading}>
+          <button
+            className="submit-arrow"
+            onClick={() => {
+              const currentQuery = query.trim();
+              if (currentQuery) {
+                setSubmittedQuery(currentQuery);
+                setQuery('');
+                askQuestion(currentQuery);
+              }
+            }}
+            disabled={loading}
+          >
             <FaArrowRight size={16} />
           </button>
         </div>

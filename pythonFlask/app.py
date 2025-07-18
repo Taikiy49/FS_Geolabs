@@ -1,12 +1,10 @@
-# app.py
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
 import sqlite3
 import os
-from helpers import rank_documents, ask_gemini
 import traceback
+from helpers import rank_documents, ask_gemini
 
 app = Flask(__name__)
 CORS(app)
@@ -15,7 +13,6 @@ DB_FILE = "chat_history.db"
 GEO_DB = "geolabs.db"
 
 # Initialize chat history DB
-
 def init_db():
     if not os.path.exists(DB_FILE):
         conn = sqlite3.connect(DB_FILE)
@@ -32,6 +29,30 @@ def init_db():
         """)
         conn.commit()
         conn.close()
+
+@app.route('/api/rank_only', methods=['POST'])
+def rank_only():
+    try:
+        data = request.get_json()
+        query = data.get('query')
+        min_wo = int(data.get('min', 0))
+        max_wo = int(data.get('max', 99999))
+        top_k = min(int(data.get('top_k', 10)), 30)
+        selected_files = data.get('selected_files', [])
+
+        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, 100)
+
+        return jsonify({
+            "ranked_files": [
+                {"file": doc["file"], "score": round(doc["score"] / len(query.split()) * 100, 1)}
+                for doc in ranked_chunks
+            ]
+        })
+
+    except Exception as e:
+        print("❌ Error in /api/rank_only:", str(e))
+        traceback.print_exc()
+        return jsonify({"error": "Ranking failed."}), 500
 
 @app.route('/api/files', methods=['GET'])
 def list_files():
@@ -57,24 +78,18 @@ def answer_question():
         user = data.get('user', 'guest')
         selected_files = data.get('selected_files', [])
 
-        # Rank remaining files if needed
-        ranked_chunks = rank_documents(
-            query=query,
-            db_path=GEO_DB,
-            min_wo=min_wo,
-            max_wo=max_wo,
-            top_k=top_k
-        )
+        # Rank top_k files from ALL documents within work order range
+        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, 30)
 
-        ranked_files = list({doc['file'] for doc in ranked_chunks if doc['file'] not in selected_files})
+        # Determine final file list based on selected + ranked
+        ranked_files = [doc['file'] for doc in ranked_chunks if doc['file'] not in selected_files]
         final_files = selected_files + ranked_files[:max(0, top_k - len(selected_files))]
 
-        # Only include chunks from selected + ranked files
+        # Include only the chunks from selected + ranked files
         relevant_chunks = [doc for doc in ranked_chunks if doc['file'] in final_files]
 
         answer = ask_gemini(query, relevant_chunks)
 
-        # Save to history
         conn = sqlite3.connect(DB_FILE)
         cur = conn.cursor()
         cur.execute("""
@@ -84,13 +99,21 @@ def answer_question():
         conn.commit()
         conn.close()
 
-        return jsonify({"answer": answer, "sources": final_files})
+        return jsonify({
+            "answer": answer,
+            "sources": final_files,
+            "ranked_files": [
+                {"file": doc["file"], "score": round(doc["score"] / len(query.split()) * 100, 1)}
+                for doc in ranked_chunks
+            ]
+        })
+
+
 
     except Exception as e:
-        print("❌ Backend Error:", str(e))
+        print("\u274C Backend Error:", str(e))
         traceback.print_exc()
-        return
-
+        return jsonify({"error": "An error occurred processing your request."}), 500
 
 @app.route('/api/chat_history', methods=['GET'])
 def get_chat_history():

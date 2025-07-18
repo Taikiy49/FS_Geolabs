@@ -9,7 +9,7 @@
   background-color: #111;
   overflow-y: auto;
   overflow-x: hidden;
-  border-right: 1px solid #444;
+  border-right: 1px solid #2c313a;
   box-sizing: border-box;
 }
 
@@ -25,26 +25,27 @@
 
 .chat-history-item {
   background: linear-gradient(135deg, #161b22, #1b1f27);
-  padding: 2px 4px;
+  padding: 7px;
   padding-left: 5px;
-  margin-left: 7px;
-  margin-right: 7px;
-  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 1px;
   font-size: 11px;
   color: white;
-  border: 1px solid #2c313a;
   cursor: pointer;
   transition: background-color 0.2s;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
   border-radius: 3px;
+  border-bottom: 1px solid #2c313a;
 
 }
 
 .chat-history-item:hover {
-  transform: translateY(-1px);
   color: #1e90ff;
+  transition: background-color 0.2s;
 }
 
 
@@ -69,16 +70,33 @@
 }
 
 .filters-header {
-  font-size: 13px;
+  font-size: 12px;
   color: #bbb;
-  margin-bottom: 2px;
+  margin-bottom: 7px;
+  margin-left: 2px;
 }
 
 .filter-section {
   display: flex;
   gap: 16px;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
   margin-top: 0;
+  height: 25px;
+}
+
+.toggle-label {
+  font-size: 11px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+.only-selected-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .filter-toggle {
@@ -110,19 +128,21 @@
 }
 
 .wo-input,
-.topk-input,
 .file-input {
   padding: 2px 5px;
   font-size: 12px;
   border-radius: 4px;
-  border: 1px solid #666;
-  background-color: #161b22;
+  border: 1px solid #2c313a;;
+    background-color: #1a1a1a;
   color: #fff;
-  width: 120px;
+}
+
+.wo-input{
+  width: 7vw;
 }
 
 .file-input {
-  width: 220px;
+  width: 12vw;
 }
 
 .file-list-scroll {
@@ -151,7 +171,9 @@
   padding: 5px 10px;
   background-color: #1e1e1e;
   color: #f0f0f0;
-  border: 1px solid #2c313a;
+  border: 1px solid transparent;
+    border-bottom: 1px solid #2c313a;
+
   border-radius: 3px;
   white-space: nowrap;
   overflow: hidden;
@@ -163,7 +185,7 @@
 
 .file-card-no-border:hover {
   cursor: pointer;
-  background-color: #2c313a;
+  border: 1px solid #1e90ff;
 }
 
 .chat-output {
@@ -172,7 +194,6 @@
   background-color: #1a1a1a;
   border: 1px solid #2c313a;
   border-radius: 5px;
-  overflow-y: auto;
   font-size: 12px;
 }
 
@@ -213,7 +234,7 @@
   padding: 3px 8px;
   font-size: 12px;
   border-radius: 5px;
-  border: 1px solid #444;
+  border: 1px solid #2c313a;
     background-color: #1a1a1a;
 
   color: white;
@@ -301,6 +322,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  
 }
 
 .topk-dropdown-label {
@@ -315,6 +337,7 @@
   border-radius: 4px;
   padding: 2px 6px;
   font-size: 12px;
+  width: 41px;
 }
 
 
@@ -328,7 +351,7 @@
   color: #ddd;
   padding: 1px 5px;
   margin-bottom: 5px;
-  border: 1px solid #444;
+  border: 1px solid #2c313a;
   border-radius: 4px;
   font-size: 12px;
   display: flex;
@@ -376,4 +399,59 @@
 .disabled-file {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+
+
+.chat-columns {
+  display: flex;
+  height: 100%;
+}
+
+.ai-answer-section {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranked-files-side {
+  flex: 1;
+  border-radius: 6px;
+  padding: 6px 8px;
+  padding-right: 10px;
+  font-size: 11px;
+  color: white;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  height: 41vh;
+  overflow-y: auto;
+  margin-top: auto; margin-bottom: auto;
+}
+
+.ranked-header {
+  font-weight: bold;
+  color: #3ac0fa;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.ranked-files-scroll {
+  overflow-y: auto;
+}
+
+.ranked-mini-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.mini-filename {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-score {
+  color: #aaa;
+  font-size: 11px;
 }

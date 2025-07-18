@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 85vh;
+  min-height: 84vh;
   padding: 10px 10px; /* smaller side padding */
   background-color: #0b0c10;
   color: white;
@@ -25,11 +25,11 @@
 
 @media (min-width: 1000px) {
   .homepage-grid {
-    grid-template-columns: repeat(2, 1fr); /* <-- ensure 4 per row */
+    grid-template-columns: repeat(4, 1fr); /* <-- ensure 4 per row */
   }
 
   .homepage-card {
-    min-height: 18vh; /* taller cards at full screen */
+    min-height: 34vh; /* taller cards at full screen */
   }
 }
 
