@@ -1,5 +1,6 @@
 import React from 'react';
 import { useMsal } from '@azure/msal-react';
+import { Link } from 'react-router-dom'; // ✅ import Link
 import '../styles/Header.css';
 
 function Header() {
@@ -23,10 +24,10 @@ function Header() {
         </div>
       </div>
       <nav className="header-nav">
-        <a href="/">Home</a>
-        <a href="/reports">Reports</a>
-        <a href="#admin">Admin</a>
-        <a href="#handbook">Employee Handbook</a>
+        <Link to="/">Home</Link>
+        <Link to="/reports">Reports</Link>
+        <Link to="/admin">Admin</Link>
+        <Link to="/employee">Employee Handbook</Link> {/* ✅ correct route here */}
         <a href="#contact">Tools</a>
         <a href="#contact">Analytics</a>
         <a href="#contact">Coming</a>
