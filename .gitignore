@@ -59,6 +59,8 @@ inverted_index.json
 preprocessed_chunks.json
 *.sqlite3
 *.db
+geolabs_faiss.index
+geolabs.db
 
 # ---------------------
 # VS Code

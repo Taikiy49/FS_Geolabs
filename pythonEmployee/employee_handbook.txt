@@ -1,0 +1,3410 @@
+ 
+GEOLABS, INC.  
+EMPLOYEE 
+HANDBOOK  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2019 Employee Handbook – r.8.1 Feb 2019 
+ 
+ 
+
+
+ 
+TABLE OF CONTENTS 
+ 
+ 
+WELCOME 
+COMPANY BACKGROUND 
+ 
+ 
+1. 
+EMPLOYMENT PRACTICES ......................................................................................... 1-1 
+1.1 
+EQUAL EMPLOYMENT OPPORTUNITY ................................................................. 1-1 
+1.2 
+BUSINESS ETHICS POLICY ..................................................................................... 1-2 
+1.3 
+EMPLOYMENT STATUS AND CLASSIFICATIONS ................................................... 1-2 
+1.3.1 Employment Status .................................................................................. 1-2 
+1.3.2 Employment Classifications ..................................................................... 1-2 
+1.3.3 Exempt or Non-Exempt Status ................................................................. 1-3 
+1.4 
+HIRE DATE ............................................................................................................ 1-3 
+1.5 
+REHIRE DATE ........................................................................................................ 1-3 
+1.6 
+MEDICAL EXAMINATION ...................................................................................... 1-3 
+1.7 
+OUTSIDE EMPLOYMENT ....................................................................................... 1-4 
+1.8 
+WORK SCHEDULE ................................................................................................. 1-5 
+1.9 
+BREAK AND MEAL PERIODS ................................................................................. 1-5 
+1.10 
+PERSONNEL DATA CHANGES ............................................................................... 1-5 
+1.11 
+PROMOTIONS AND TRANSFERS ........................................................................... 1-5 
+1.12 
+SEPARATION OF EMPLOYMENT ........................................................................... 1-6 
+1.12.1 Termination .............................................................................................. 1-6 
+1.12.2 Resignation .............................................................................................. 1-6 
+1.12.3 Layoff ........................................................................................................ 1-6 
+1.13 
+EMPLOYMENT REFERENCES ................................................................................ 1-7 
+1.14 
+BREAK TIME FOR NURSING MOTHERS ................................................................ 1-7 
+1.15 
+BACKGROUND CHECKS ........................................................................................ 1-7 
+2. 
+COMPENSATION ....................................................................................................... 2-1 
+2.1 
+POLICY ON PAY ..................................................................................................... 2-1 
+2.2 
+PERFORMANCE APPRAISAL .................................................................................. 2-1 
+2.3 
+PAY DAY ................................................................................................................ 2-1 
+2.4 
+TIMEKEEPING ....................................................................................................... 2-1 
+2.4.1 Time Sheet Submittal ............................................................................... 2-1 
+2.5 
+OVERTIME ............................................................................................................ 2-2 
+2.6 
+TRAVEL TIME ........................................................................................................ 2-2 
+2.7 
+DEDUCTIONS ........................................................................................................ 2-3 
+2.8 
+USE OF PERSONAL VEHICLE ................................................................................. 2-3 
+3. 
+EMPLOYEE BENEFITS ................................................................................................. 3-1 
+3.1 
+BENEFITS DISCLAIMER ......................................................................................... 3-1 
+3.2 
+TIME SCHEDULE OF BENEFIT ELIGIBILITY ............................................................. 3-1 
+3.3 
+PAID TIME OFF (PTO) ........................................................................................... 3-2 
+3.3.1 Who Is Eligible for the PTO Plan .............................................................. 3-2 
+
+
+TABLE OF CONTENTS 
+3.3.2 When PTO Plan Participation Begins ....................................................... 3-2 
+3.3.3 Prior Service ............................................................................................. 3-2 
+3.3.4 How PTO Works ....................................................................................... 3-2 
+3.3.5 Accrual Rates ............................................................................................ 3-3 
+3.3.6 Carry Over ................................................................................................ 3-3 
+3.3.7 If You Are On Leave .................................................................................. 3-4 
+3.3.8 PTO Requests ........................................................................................... 3-4 
+3.3.9 Notification for Unplanned PTO .............................................................. 3-5 
+3.3.10 Terminal Vacation PTO Credits ................................................................ 3-5 
+3.4 
+HOLIDAYS ............................................................................................................. 3-5 
+3.5 
+BEREAVEMENT LEAVE .......................................................................................... 3-6 
+3.6 
+SUPPLEMENTAL PAID LEAVE ................................................................................ 3-6 
+3.7 
+LEAVE WITHOUT PAY ........................................................................................... 3-7 
+3.8 
+FAMILY AND MEDICAL LEAVE .............................................................................. 3-7 
+3.8.1 General Provisions ................................................................................... 3-7 
+3.8.2 Eligibility ................................................................................................... 3-7 
+3.8.3 Type of Leave Covered ............................................................................. 3-8 
+3.8.4 Amount of Leave .................................................................................... 3-10 
+3.8.5 Employee Status and Benefits During Leave ......................................... 3-10 
+3.8.6 Employee Status After Leave ................................................................. 3-11 
+3.8.7 Use of Paid and Unpaid Leave ............................................................... 3-11 
+3.8.8 Intermittent Leave or a Reduced Work Schedule ................................. 3-11 
+3.8.9 Certification for the Employee’s Serious Health Condition ................... 3-12 
+3.8.10 Certification for the Family Member’s Serious Health Condition ......... 3-13 
+3.8.11 Certification of Leave for a Qualifying Exigency .................................... 3-13 
+3.8.12 Certification for Serious Injury or Illness of Covered Service Member for 
+Military Family Leave ............................................................................. 3-14 
+3.8.13 Certification for Serious Injury or Illness of a Veteran for Military 
+Caregiver Leave ...................................................................................... 3-14 
+3.8.14 Recertification ........................................................................................ 3-14 
+3.8.15 Procedure for Requesting FMLA Leave .................................................. 3-15 
+3.8.16 Designation of FMLA Leave .................................................................... 3-15 
+3.8.17 Intent to Return to Work from FMLA Leave .......................................... 3-15 
+3.9 
+MILITARY LEAVE AND USERRA ........................................................................... 3-15 
+3.10 
+JURY AND WITNESS DUTY .................................................................................. 3-16 
+3.11 
+TIME OFF TO VOTE ............................................................................................. 3-16 
+3.12 
+LEAVE FOR VICTIMS OF DOMESTIC OR SEXUAL VIOLENCE ............................... 3-16 
+3.12.1 Permissible Purposes for Leave ............................................................. 3-17 
+3.12.2 Leave Certifications ................................................................................ 3-17 
+3.13 
+MEDICAL, DENTAL, DRUG AND VISION INSURANCE.......................................... 3-18 
+3.14 
+COBRA ................................................................................................................ 3-19 
+3.15 
+UNEMPLOYMENT INSURANCE ........................................................................... 3-20 
+3.16 
+TEMPORARY DISABILITY ..................................................................................... 3-20 
+3.17 
+WORKERS’ COMPENSATION .............................................................................. 3-20 
+
+
+TABLE OF CONTENTS 
+3.18 
+GROUP TERM LIFE INSURANCE .......................................................................... 3-21 
+3.19 
+EMPLOYEE STOCK OWNERSHIP PLAN (ESOP) .................................................... 3-21 
+3.20 
+401(k) PROFIT SHARING PLAN ........................................................................... 3-22 
+3.21 
+FLEXIBLE SPENDING PLAN .................................................................................. 3-23 
+3.22 
+LEAVE RESULTING FROM MAJOR OCCURRENCES ............................................. 3-24 
+4. 
+PROFESSIONAL DEVELOPMENT ................................................................................. 4-1 
+4.1 
+EXAMINATIONS FOR REGISTERED PROFESSIONALS ............................................ 4-1 
+4.2 
+PROFESSIONAL ORGANIZATIONS ......................................................................... 4-1 
+4.3 
+WRITING TECHNICAL PAPERS .............................................................................. 4-1 
+4.4 
+EDUCATIONAL & TRAINING PROGRAMS ............................................................. 4-2 
+4.4.1 Drilling Department Personnel ................................................................ 4-2 
+4.4.2 Laboratory Department (Field Personnel) ............................................... 4-3 
+4.4.3 Laboratory Department (Laboratory Personnel) ..................................... 4-3 
+4.4.4 Staff Engineers/Staff Geologists (Field Personnel) .................................. 4-3 
+5. 
+COMMUNICATIONS .................................................................................................. 5-1 
+5.1 
+COMMUNICATIONS/OPEN DOOR POLICY ........................................................... 5-1 
+5.2 
+SUGGESTION PROGRAM ...................................................................................... 5-1 
+6. 
+COMPANY REGULATIONS .......................................................................................... 6-1 
+6.1 
+RULES OF CONDUCT ............................................................................................. 6-1 
+6.2 
+PUBLIC IMAGE ...................................................................................................... 6-3 
+6.3 
+SMOKE FREE ENVIRONMENT ............................................................................... 6-4 
+6.4 
+HEALTH AND SAFETY ............................................................................................ 6-4 
+6.5 
+ALCOHOL-FREE AND DRUG-FREE WORKPLACE ................................................... 6-4 
+6.6 
+COMPUTER, NETWORK AND INTERNET USAGE .................................................. 6-5 
+6.6.1 E-Mail and Internet Usage ....................................................................... 6-5 
+6.6.2 Computer Work Station and Network ..................................................... 6-6 
+6.6.3 Use of Blogs and Social Networking Sites ................................................ 6-7 
+6.6.4 Bring Your Own Device (BYOD) Policy ..................................................... 6-8 
+6.7 
+COMPANY CELLULAR PHONES ........................................................................... 6-10 
+6.7.1 Safety Issues ........................................................................................... 6-10 
+6.7.2 Hands-Free Device ................................................................................. 6-11 
+6.7.3 Reimbursement for Cell Phone Use ....................................................... 6-11 
+6.8 
+DRIVING COMPANY VEHICLES ........................................................................... 6-11 
+6.8.1 Driver’s License ...................................................................................... 6-12 
+6.8.2 Driver’s Abstract .................................................................................... 6-12 
+6.8.3 Vehicle Maintenance ............................................................................. 6-12 
+6.8.4 Reporting Vehicle Accidents .................................................................. 6-12 
+6.8.5 Seat Belts ................................................................................................ 6-12 
+6.8.6 Gasoline Purchases ................................................................................ 6-13 
+6.8.7 Global Positioning System (GPS) ............................................................ 6-13 
+6.9 
+PERSONAL VEHICLE ............................................................................................ 6-13 
+6.10 
+PARKING ............................................................................................................. 6-13 
+6.11 
+WORK RECORDS & ACCOUNTING CODES .......................................................... 6-14 
+
+
+TABLE OF CONTENTS 
+6.12 
+SUPPLY PURCHASE ............................................................................................. 6-14 
+6.13 
+BUSINESS TRAVEL .............................................................................................. 6-14 
+6.13.1 Travel Pay ............................................................................................... 6-14 
+6.13.2 Per Diem ................................................................................................. 6-14 
+6.13.3 Travel Advances ..................................................................................... 6-15 
+6.13.4 Travel and Entertainment Reimbursements ......................................... 6-15 
+6.13.5 Carriers ................................................................................................... 6-15 
+6.14 
+LOSS OF COMPANY PROPERTY .......................................................................... 6-15 
+6.15 
+COMPANY LIBRARY MATERIALS ........................................................................ 6-16 
+6.16 
+LOCKERS ............................................................................................................. 6-16 
+6.17 
+SECURITY INSPECTION ....................................................................................... 6-16 
+6.18 
+BUILDING AND YARD SECURITY ......................................................................... 6-16 
+6.19 
+VISITORS IN THE WORKPLACE ........................................................................... 6-17 
+6.20 
+CHILDREN IN THE WORKPLACE .......................................................................... 6-17 
+6.21 
+COMMUNICABLE AND LIFE-THREATENING ILLNESSES POLICY ......................... 6-18 
+6.22 
+CONFIDENTIALITY POLICY .................................................................................. 6-18 
+6.23 
+NON-SOLICITATION ............................................................................................ 6-19 
+7. 
+SEXUAL AND OTHER FORMS OF UNLAWFUL HARASSMENT POLICY ........................... 7-1 
+7.1 
+COMPLAINT AND INVESTIGATION PROCEDURES ................................................ 7-2 
+7.2 
+CORRECTIVE ACTION/DISCIPLINE ........................................................................ 7-2 
+7.3 
+OTHER FORMS OF HARASSMENT ........................................................................ 7-2 
+7.4 
+RETALIATION ........................................................................................................ 7-3 
+8. 
+WORKPLACE VIOLENCE PREVENTION POLICY ............................................................ 8-1 
+8.1 
+DOMESTIC VIOLENCE ........................................................................................... 8-1 
+8.2 
+ANTI-BULLYING .................................................................................................... 8-1 
+9. 
+DISCIPLINARY/CORRECTIVE ACTION .......................................................................... 9-1 
+9.1 
+RESOLVING CONCERNS ........................................................................................ 9-1 
+ 
+APPENDIX A 
+APPENDIX B 
+ 
+DISCLAIMER 
+ 
+ACKNOWLEDGEMENT 
+ 
+ 
+
+
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE i 
+WELCOME 
+ 
+Dear Employee: 
+ 
+ 
+Aloha and welcome to Geolabs, Inc. We are pleased to have you with us. We believe our 
+employees are an important asset.  
+ 
+This handbook contains general descriptions of Geolabs’ current policies and guidelines but it 
+does not constitute an agreement or an employment contract. In order to keep our policies and 
+guidelines current, the Company reserves the right to modify, suspend or terminate any or all 
+plans, policies, or procedures at any time, with or without cause. Management has the right to 
+make final decisions regarding the interpretation and application of the policies and procedures 
+described in this manual.  
+ 
+After reviewing this handbook, you may still have questions about particular policies and 
+guidelines. If so, please contact your supervisor or the HR Manager. 
+ 
+Thank you for joining our Company. 
+ 
+ 
+ 
+ 
+Robin M. Lim 
+President 
+
+
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE ii 
+COMPANY BACKGROUND 
+ 
+Geolabs, Inc. is a Hawaii-based Company established in 1975. It is employee-owned and provides 
+geotechnical-engineering services throughout the State of Hawaii and the Pacific Basin. The 
+Company is an independent organization directed chiefly by engineers working with other 
+professionals, specialists and technicians in related fields. 
+ 
+Our principal office is located in Honolulu, Hawaii and has a Drilling and Laboratory Department. 
+Our Maui office in Kahului consists of a Laboratory and our Oakland, California office specializes 
+in Geotechnical and Earthquake engineering. We also have employees working on the Big Island 
+and Kauai. 
+ 
+Our Mission Statement: “It is the goal of Geolabs, Inc. to provide geotechnical engineering 
+service that incorporates high standards of professionalism, ethics, and engineering excellence 
+in Hawaii and the Pacific Rim; to provide a stimulating work environment that promotes 
+teamwork, retains valued employees, is accident free, and reduces waste. 
+ 
+Employee Handbook Purpose and Management Rights 
+ 
+This Employee Handbook (“Handbook”) provides an overview of the Company’s history, values, 
+performance expectations, employment policies and general work rules pertinent to 
+employment with Geolabs, Inc. In addition, the Handbook provides a general overview of the 
+benefits available to eligible employees while employed with Geolabs, Inc. The Handbook is not 
+designed to explain benefits policy or administration of benefits, which are governed by the 
+health plan document.  
+ 
+This Handbook contains general descriptions of Geolabs, Inc.’s current policies and guidelines 
+but IT DOES NOT CONSTITUTE AN AGREEMENT OR AN EMPLOYMENT CONTRACT. Geolabs, Inc. 
+reserves the right to alter, delete, or add to any of the provisions of this Handbook at any time 
+and to change or modify any of the employee benefits which are described herein, without 
+notice or consideration to employees, to the extent permitted by law. Further, Geolabs, Inc. 
+reserves for its management representatives all the normal and customary rights of 
+management, such as the right to supervise and control all operations; direct all work; 
+interpret, change or cancel all Company guidelines and policies at any time with or without 
+notice, provided each change is authorized by the Geolabs, Inc.’s President or designated 
+representative and is in writing; and in its discretion to hire, schedule, train, terminate, layoff, 
+transfer, promote, reward, evaluate, discipline or otherwise deal with its employees and select 
+the manner, method, and means of production. These rights are not limited or waived by any 
+provision in this employee handbook or any other statements or documents.    
+   
+This Handbook supersedes all previous spoken or written policies relating to the items covered 
+in this Handbook. 
+
+
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 1-1 
+1. 
+EMPLOYMENT PRACTICES 
+1.1 
+EQUAL EMPLOYMENT OPPORTUNITY 
+Geolabs, Inc. (the Company) provides equal employment opportunities (EEO) to all 
+employees and applicants for employment without regard to race, color, religion, gender 
+or gender identity, sexual orientation, national origin, age, disability, genetic information, 
+marital status, amnesty or status as a covered veteran and lactation in accordance with 
+applicable federal, state and local laws. The Company complies with applicable state and 
+local laws governing nondiscrimination in employment in every location in which the 
+Company has facilities. This policy applies to all terms and conditions of employment 
+including hiring, placement, promotion, termination, layoff, recall, transfer, leaves of 
+absence, compensation, and training. 
+The Company expressly prohibits any form of unlawful employee harassment based on 
+race, color, religion, gender or gender identity, sexual orientation, national origin, age, 
+genetic information, disability, or veteran status.  Improper interference with the ability 
+of the Company employees to perform their expected job duties is absolutely not 
+tolerated.  For more details, see the Company’s Policy prohibiting sexual and other forms 
+of unlawful harassment in Section 7 of this Employee Handbook. 
+The Company will make accommodations to enable an otherwise qualified individual with 
+a protected disability, whether an applicant or employee, to perform the essential 
+functions of the relevant position, unless such accommodations are unreasonable or pose 
+an undue hardship to the Company. This policy governs all aspects of hiring, promotion, 
+discharge, pay, fringe benefits, job training, classification, referral, and other aspects 
+related to the terms and conditions of employment. Employees should raise reasonable 
+accommodation requests with their supervisor or the HR Manager. 
+In addition to a commitment to provide equal employment opportunities to all qualified 
+individuals, the Company has established an affirmative action program to promote 
+opportunities for individuals in certain protected classes throughout the organization. 
+Please see the HR Manager to review the Affirmative Action Plan. 
+Any employees with questions or concerns about any type of discrimination in the 
+workplace are encouraged to bring these issues to the attention of their immediate 
+supervisor or the HR Manager. Employees are expected to raise concerns and make 
+reports and may do so without fear of any form of retaliation or reprisal. Anyone found 
+to be engaging in any type of unlawful discrimination will be subject to disciplinary action, 
+up to and including termination of employment. The Company will take effective 
+corrective action to prevent future occurrences of prohibited conduct.  
+Neither this policy nor those outlined in Section 7 of this employee handbook creates any 
+contractual promises, but instead is a description of the standards of behavior expected 
+of all employees. 
+
+
+ 
+EMPLOYMENT PRACTICES 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 1-2 
+1.2 
+BUSINESS ETHICS POLICY 
+We adhere to the highest standards of ethics, responsibility and accountability. All   
+employees shall at all times: comply with all laws and the highest standards of business 
+ethics and conduct in every state in which the Company conducts business; avoid 
+situations which might involve a conflict between their personal interests and the interest 
+of the Company, and those situations which create the appearance of conflict; and 
+protect confidential and proprietary information held by the Company or entrusted to it. 
+If you have any concerns about the business ethics of the Company and its employees, 
+we encourage you to bring them to management’s attention without fear of retaliation.  
+1.3 
+EMPLOYMENT STATUS AND CLASSIFICATIONS 
+An “employee” of the Company is a person who works for the Company on an hourly 
+wage or salary basis that is on the payroll to whom we issue a W-2. “Employees” may 
+include exempt, non-exempt, full-time, part-time, temporary and on-call persons, and 
+others employed with the Company who are subject to the control and direction of the 
+Company in the performance of their duties. 
+1.3.1 Employment Status 
+The first 6 months of your employment provide you and the Company with the 
+opportunity to learn more about each other and to evaluate whether the job for 
+which you were hired is suitable to your skills, personality, and career goals. The 
+Company may extend your introductory period for any reason.  
+WHETHER OR NOT YOUR EMPLOYMENT CONTINUES AFTER THE INTRODUCTORY 
+PERIOD, YOUR EMPLOYMENT WITH THE COMPANY REMAINS AT-WILL, BOTH 
+DURING AND AFTER YOUR INTRODUCTORY PERIOD; THAT IS, YOU RETAIN THE 
+RIGHT TO TERMINATE YOUR EMPLOYMENT WITH THE COMPANY, WITHOUT 
+PRIOR NOTICE OR REASON, AND THE COMPANY RETAINS THE RIGHT TO 
+TERMINATE YOUR EMPLOYMENT AT ANY TIME WITHOUT PRIOR NOTICE OR 
+REASON. 
+1.3.2 Employment Classifications 
+a. Full-time employees are regularly scheduled for 40 or more hours of work per 
+week.  
+b. Part-time employees are regularly scheduled to work fewer than 40 hours in a 
+normal workweek.  
+c. Temporary employees are hired for a specified period, whether full-time or 
+part-time, and regardless of the hours worked per week.  
+
+
+ 
+EMPLOYMENT PRACTICES 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 1-3 
+1.3.3 Exempt or Non-Exempt Status  
+Under the wage and hour laws, employees are classified as exempt or nonexempt 
+employees. You will fall into one of these two classifications depending on your 
+duties and salary.  
+Non-exempt employees include all hourly employees who are covered by the 
+overtime provisions of the federal Fair Labor Standards Act and the state wage 
+and hour law. Employees in this category are entitled to premium pay for any work 
+performed in excess of 40 hours in a single workweek.  
+Exempt employees include all eligible employees whose duties and salaries qualify 
+them as exempt from the overtime provisions of the federal Fair Labor Standards 
+Act and state wage and hour law. Such employees may include executive, 
+administrative, and professional employees, and those other employees who are 
+not covered by the overtime provisions. See Section 2.5, Overtime.  
+The Company intends to pay its exempt employees on a salary basis and will not 
+make any deductions from their salary that are otherwise prohibited by the Fair 
+Labor Standards Act or any other state or federal wage and hour or payment of 
+wages laws.  
+1.4 
+HIRE DATE 
+Your first day of employment is your “hire date” at the Company and will be used to 
+determine your eligibility for benefits. The “hire date” for part-time and temporary 
+employees who transfer without interruption into full-time employment is the first date 
+on which they began any employment, for the purpose of computing certain benefits. The 
+“hire date” for temporary employees who transfer without interruption into part-time or 
+full-time employment is the first date on which they began any employment, for the 
+purpose of computing eligibility for certain benefits.  See Section 3.2, Time Schedule of 
+Benefits.  
+1.5 
+REHIRE DATE 
+A former employee returning to the Company within 5 years of separation have certain 
+benefits immediately reinstated on the date of rehire, using the employees original hire 
+day prior to their separation. If a break in service is 5 years or longer, the prior years the 
+employee was employed by the Company cannot count toward years of service. 
+1.6 
+MEDICAL EXAMINATION 
+The Company requires a medical examination including drug and alcohol testing to be 
+conducted by a health professional of the Company’s choice after making a conditional 
+offer of employment to a job applicant, and before employment begins. The Company 
+pays the costs associated with the medical examination and tests. An offer of 
+
+
+ 
+EMPLOYMENT PRACTICES 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 1-4 
+employment is conditioned on the results of the examination to the extent permissible 
+under state and federal law. 
+For current employees, a job-related medical examination may be required to verify your 
+physical ability to perform the essential functions of the job and/or to identify activity 
+limitations or restrictions and/or to provide reasonable accommodations. The Company 
+may also require a medical examination for the purpose of identifying a significant health 
+or safety risk or for any other reason required by federal, state, or other law. 
+The following are examples of situations in which a medical examination or certification 
+may be required: 
+A. When an employee wishes to return to work following an absence due to illness or 
+injury: A doctor’s certification releasing the employee back to work may be required. 
+An examination may be conducted to determine if the employee, with or without 
+reasonable accommodation, can safely and effectively perform the essential functions 
+of the job or an equivalent available position. 
+B. When an employee requests an accommodation: A doctor’s certification is required 
+to determine and identify any potential reasonable accommodations that will enable 
+the employee to safely perform the essential functions of the job. 
+C. When the examination is required by federal and state law: Medical examination or 
+monitoring may be required under certain circumstances by regulations and laws, 
+such as those issued by the Department of Transportation and the Occupational 
+Safety and Health Administration. 
+All information obtained from a medical examination will be kept confidential and 
+separate from other employee information. Access to this information will be limited to 
+those who have a legitimate need to know. 
+1.7 
+OUTSIDE EMPLOYMENT 
+The Company is committed to maximizing the quality of service that it provides to its 
+clients. The Company requires employees to notify their supervisors about any outside 
+employment opportunities.  
+If the Company determines that an employee’s outside work interferes with performance, 
+impairs the employee’s objectivity or judgment in the exercise of his/her duties for the 
+Company, or interferes with the ability to meet the requirements of the Company as they 
+are modified from time to time, the employee may be asked to terminate the outside 
+employment if s/he wishes to remain with the Company. 
+Outside employment that the Company determines conflicts with or is contrary to its interests 
+is prohibited. Employees who are engaged in outside employment may not utilize Company 
+facilities, resources, property, or staff in support of such activities. In addition, outside activities 
+that reflect unfavorably upon our Company may lead to termination.  
+
+
+ 
+EMPLOYMENT PRACTICES 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 1-5 
+1.8 
+WORK SCHEDULE 
+The Company’s office hours are 7:00 AM to 5:00 PM, Monday through Friday. 
+Shop and at job site hours are 7:00 AM to 3:30 PM, Monday through Friday. Under some 
+circumstances, and for certain individuals, the work schedule may vary from the above. 
+The Company may need to revise working hours to fit the needs of individual projects. 
+When this occurs, you will be advised of the change and will be expected to comply. 
+At field locations, hours of work will depend on the project, the site, and local conditions 
+but the work week will generally be 40 hours each week. Hours of work for employees on 
+overseas or out of town assignments will be determined by project requirements, the site, 
+and by what is most effective and efficient. 
+The standard work week is defined as the seven consecutive-day period within which 
+overtime will be paid to those employees who are required to be paid overtime when 
+hours worked are considered to be overtime. See Section 2.5, Overtime. The work week 
+begins at 12:01 AM Monday and concludes at midnight on the following Sunday. 
+1.9 
+BREAK AND MEAL PERIODS 
+Hourly employees who work less than an 8-hour workday but work at least 4 hours are 
+allowed one paid 15-minute break during their regular work hours. Hourly employees 
+who work an 8-hour workday are allowed two paid 15-minute breaks during their regular 
+workday. Unused break times may be shifted in order to extend an unpaid lunch period 
+within the same day. Employee approved to do so will be paid for the shifted paid break 
+times and will not be paid for the normally-scheduled, unpaid lunch period.  Employees 
+that do not take any portion of their paid breaks during the day will not be allowed to 
+utilize those unused paid break times outside their normally scheduled work time each 
+day. 
+1.10 
+PERSONNEL DATA CHANGES 
+For benefits administration and emergency purposes, it is your responsibility to 
+immediately notify the HR Manager of any change in your residence address, phone and 
+cellular numbers, number and names of dependents, the name and phone number of a 
+person to contact in the event of an emergency, or other necessary personal information. 
+An Address/Emergency Change Form can be obtained from HR Manager. Updates can 
+also be made through the employee ADP portal.    
+1.11 
+PROMOTIONS AND TRANSFERS 
+The Company believes that employees are valued assets and is committed to placing 
+employees in positions best suited to their talents, skills, and abilities. Therefore, 
+whenever possible and practical, qualified internal applicants are given first consideration 
+for promotions and transfers, when such consideration is consistent with the Company’s 
+affirmative action policy, and in accordance with operational and management goals.  
+
+
+ 
+EMPLOYMENT PRACTICES 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 1-6 
+Selection decisions will be based on job related factors such as experience, skills, 
+knowledge, education, training, ability, work record, and current and anticipated business 
+conditions and needs.  We affirm our policy of equal employment opportunity for 
+promotion and transfer. 
+1.12 
+SEPARATION OF EMPLOYMENT 
+Employee benefits will be affected by employment termination in the following manner. 
+Your medical benefits may be continued for a period of up to 18 months, at the 
+employee’s expense after termination if the employee elects to. See Section 3.14, COBRA.   
+EMPLOYMENT AT OUR COMPANY IS AT-WILL; THAT IS, EITHER YOU OR THE COMPANY 
+MAY TERMINATE YOUR EMPLOYMENT AT ANY TIME, FOR ANY REASON WITH OR 
+WITHOUT NOTICE.  
+1.12.1 Termination 
+If your employment is terminated by the Company, you will be paid your wages 
+due in full at time of discharge or not later than the next working day if discharge 
+occurs at a time and under conditions that prevent immediate payment.  
+1.12.2 Resignation 
+If you voluntarily resign, we ask that you give management two weeks’ advance 
+written notice. This advance notice provides time for the Company to prepare for 
+your departure, transition your duties, prepare your paycheck, and process the 
+return of any Company property issued to you.  
+Employees who quit or resign without giving at least two weeks’ notice of 
+intention to quit will be paid wages due in full not later than the next regular 
+payday.  
+On or before the last day of work, all employees must return office and/or vehicle 
+keys, cell phone, camera, laptop computer, and all other Company property issued 
+to them. 
+1.12.3 Layoff 
+When employees are temporarily laid off due to a lack of work, layoffs will be 
+governed by Company work requirements. A temporary layoff may also result 
+from circumstances beyond the control of the Company, such as a fire or other 
+unforeseen event. In such cases, the Company may be forced to adjust its work 
+force immediately. When this happens, employees will be laid off without regard 
+to Company service for a period not to exceed 30 days. Should the need for a 
+reduced workforce exceed 30 days, employees will be laid off according to 
+business needs and in compliance with all State and Federal Laws. 
+
+
+ 
+EMPLOYMENT PRACTICES 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 1-7 
+Company paid medical insurance will continue for the remainder of the calendar 
+month in which you are laid off. Depending upon whether your layoff constitutes 
+a qualifying event under COBRA, you may be entitled to continuation coverage. 
+See Section 3.14, COBRA for specific information on continuation coverage. 
+1.13 
+EMPLOYMENT REFERENCES 
+Direct all inquiries regarding a current or former employee’s employment and requests 
+for references to the HR Manager. 
+1.14 
+BREAK TIME FOR NURSING MOTHERS 
+The Company will provide a nursing mother a reasonable break time for the employee to 
+express breast milk for her nursing child for one year after the child’s birth each time the 
+employee has need to express the milk. The amount of break time for the nursing mother 
+to express milk is as frequently as needed since the frequency of breaks needed to express 
+milk as well as the duration of each break will likely vary. 
+A private, temporary space, other than a bathroom, that is functional for expressing 
+breast milk will be made available when needed by the nursing mother to express milk. 
+The space will be shielded from view and free from intrusion from coworkers and the 
+public. 
+An employee will not receive compensation for “reasonable breaks” during “work time” 
+to express milk for a nursing child. In addition, the employee must be completely relieved 
+from duty or else the time must be compensated as work time.   
+The FLSA does not preempt Hawaii State laws that seek to provide greater protections to 
+employees than Section 4207 of the Patient Protection and Affordable Care Act.  
+Any employee who elects to use a regularly scheduled paid break to express milk at any 
+time will be compensated the same way that other employees are compensated for paid 
+break times.  
+One year after the child’s birth, nursing mother who chooses to utilize their meal and 
+break periods to express milk may do so without interference or discrimination, as 
+required by state law. 
+1.15 
+BACKGROUND CHECKS 
+An employee may be subject to background checks including, but not limited to criminal 
+and sex offender searches by The Company as requested by a Federal Contractor for 
+security clearance to access a military worksite. 
+The Company hires a third party to conduct background checks or to obtain reports from 
+outside agencies, therefore, such reports are subject to the federal Fair Credit Reporting 
+Act (FCRA), Title VII, the ADA, and federal and state privacy laws.  
+ 
+
+
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 2-1 
+2. 
+COMPENSATION 
+2.1 
+POLICY ON PAY 
+It is our policy to pay employees based upon rewarding them for the work they perform 
+and motivating them toward continued high accomplishments. Rates of pay are 
+determined according to the level of skill, responsibility, education, and experience 
+required in your specific job.  
+2.2 
+PERFORMANCE APPRAISAL 
+Your job performance may be subject to review by management at any time prior to the 
+end of your introductory period, with additional periodic performance appraisals 
+conducted thereafter as deemed necessary by the Company. When you receive a 
+performance appraisal, you should take the opportunity to discuss your performance with 
+your supervisor. If asked, you should sign the performance appraisal document to show 
+it was reviewed with you and submit your own comments on the appraisal. Pay reviews 
+may not necessarily be conducted at the same time as performance appraisals. 
+2.3 
+PAY DAY 
+Employees are paid bi-weekly via electronic fund transfer or by check. Regular paydays 
+are every other Friday, except when these days fall on a holiday, then checks will be issued 
+on the last workday preceding the regular pay date. 
+2.4 
+TIMEKEEPING 
+Weekly time sheets are the basis for recording time expenditures. Accurately recording 
+time worked on a time sheet or BillQuick is the responsibility of every employee because 
+our clients may be billed based on this information. Time worked is time actually spent 
+on the job performing assigned duties. (See Appendix A for Online Time Entry 
+Procedures).  
+Non-exempt employees who record time worked on a time card should punch in and out 
+using the time clock when they 1) begin and end their work shift, 2) take a lunch break, 
+and 3) depart from work for personal or other non-work-related reasons.  
+Hand written submissions on the time card need to be verified and initialed by the 
+supervisor on that date. Altering, falsifying, tampering with time records, or recording 
+time on another employee’s time card may result in disciplinary action, up to and 
+including termination of employment.  
+2.4.1 Time Sheet Submittal  
+Time sheets are to be submitted each Monday morning to Accounting. Time 
+sheets may include the following attachments:  
+ 
+Daily Field Reports 
+
+
+ 
+COMPENSATION 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 2-2 
+ 
+Sample Casting Report 
+ 
+Copy of Pick-up Slip 
+When employees submit timesheets after the payroll-processing deadline, all 
+regular hours will be compensated based on the best estimate for the workweek 
+but not to exceed 40 hours. All extra and/or overtime hours will be compensated 
+when timesheets are submitted. 
+When an employee anticipates being away from the office on the day for 
+submitting time sheets, he or she should submit a completed time sheet to 
+Accounting on the last day of the week before leaving. When leaving on vacation 
+or a business trip, a time sheet covering the anticipated absence must be 
+submitted on the evening of departure. Any adjustments caused by changes in 
+plans must be reported to Accounting as soon as possible. 
+2.5 
+OVERTIME 
+Time and one-half rate is paid to non-exempt employees for actual HOURS WORKED over 
+40 hours in a standard work week. Overtime must be authorized by the appropriate 
+supervisor. Working overtime without first securing adequate supervisory authority may 
+subject you to disciplinary action, up to and including termination. When a holiday occurs 
+in a work week, you will receive time and one-half pay only when you have actually 
+worked over 40 hours during that work week.  
+Company holidays, paid time off and unpaid time off will not be considered hours worked 
+for purposes of calculating overtime. See Section 1.3.3, Exempt or Non-Exempt Status. 
+Exempt salaried employees are exempt from the overtime provisions of state and federal 
+wage and hour laws. However exempt salaried engineers/geologists may be 
+compensated at straight time after 40 hours per week on billable jobs when authorized 
+by the appropriate supervisor.  See Section 1.3.3, Exempt or Non-Exempt Status. 
+2.6 
+TRAVEL TIME 
+The following provisions apply to all employees: 
+ Commute time:  In the ordinary situation where you commute to and from work, you 
+are not entitled to additional compensation for such travel time. If you are required 
+to report to a meeting place to pick up materials, equipment, or other employees, or 
+to receive instructions before traveling to work, your compensable time starts from 
+the meeting place.  
+ Travel during the workday:  Time spent by you in traveling after your work day has 
+commenced is counted as hours worked. For example, if you are required to travel 
+from one job site to another during the day or report to a meeting place to receive 
+instructions or pick up assignments or equipment or other employees, and then travel 
+to the place of work, you will be compensated for this time. Travel time from your 
+
+
+ 
+COMPENSATION 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 2-3 
+home to a work site at the beginning of the day or from a work site to your home at 
+the end of the day is not compensable. 
+ Assignments in other cities:  If you are assigned to report to work in another city or 
+island for the day, you will be compensated for the time spent from when you arrive 
+at the airport until the time you return to the airport. Time spent driving to or from 
+the airport is not deemed compensable.     
+ Overnight travel:  Time spent traveling is compensable to a maximum of 8 hours if 
+that travel time cuts across your normally scheduled work day, whether that travel 
+occurs on a regularly scheduled working day or on a non-working day when you would 
+normally not be scheduled to work. Time spent in travel outside your normally 
+scheduled working hours is only compensable if you perform productive work during 
+that time. Thus, if you are away from your home on overnight travel, you will only be 
+compensated for time worked and travel completed during your normally scheduled 
+work hours unless you are actively performing work other than traveling outside of 
+those normally scheduled workday hours. Time spent eating meals and sleeping is not 
+compensable. Travel pay is not compensable during stopovers resulting from the 
+employee's voluntary act or disregard of Company instructions, or during deviations 
+made for the employee's personal convenience.  
+2.7 
+DEDUCTIONS 
+The Company will make only those deductions from your compensation that are required 
+by federal or state statute, by court process, for your portion of the health insurance 
+premium, or authorized in writing by you as provided by law.  
+When you receive your paycheck, review the figures carefully to be certain that there are 
+no errors in the deductions or payment. If you find an error, report it directly to the CFO.  
+The Company intends to pay its exempt employees on a salary basis and will not make 
+deductions from your salary that is prohibited under the Fair Labor Standards Act. Exempt 
+employees who have questions or concerns about deductions from your salary may 
+report them freely to the CFO and without concern for retaliation or discrimination. 
+2.8 
+USE OF PERSONAL VEHICLE 
+The Company will reimburse you the standard deductible mileage rate that is set up 
+annually by the Internal Revenue Service. Employees should record the mileage on the 
+expense sheet by work order number, with the word “MILEAGE.”  See Section 6.9, 
+Personal Vehicle. 
+
+
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 3-1 
+3. 
+EMPLOYEE BENEFITS 
+In this section of the handbook, the Company identifies benefits available to eligible employees. 
+ 
+The applicable plan fiduciary or the Company has discretionary authority to determine eligibility 
+for any benefit and to interpret the applicable provision, participation may be subject to eligibility 
+and vesting rules under the plan, and the Company retains the right to amend or terminate any 
+plan at any time. 
+3.1 
+BENEFITS DISCLAIMER 
+PURSUANT TO THE EMPLOYEE RETIREMENT INCOME SECURITY ACT OF 1974, THE 
+COMPANY RESERVES THE RIGHT, TO THE MAXIMUM EXTENT PERMITTED BY LAW, TO 
+AMEND OR TERMINATE ANY OF THESE BENEFIT PLANS, IN WHOLE OR IN PART, OR TO 
+ESTABLISH OTHER PLANS IN ANY WAY WHICH SEEMS ADVISABLE TO THE BOARD OF 
+DIRECTORS IN THE BOARDS DISCRETION. THE COMPANY ALSO RESERVES THE RIGHT TO 
+INCREASE, REDUCE, OR ELIMINATE THE AMOUNT AND APPLICATION OF THE COMPANY’S 
+CONTRIBUTIONS TO ANY EMPLOYEE BENEFIT PLAN. FURTHERMORE, THE COMPANY 
+RESERVES THE RIGHT TO INTERPRET ITS EMPLOYEE BENEFIT PLANS IN THE EVENT OF ANY 
+DISPUTE AND ITS INTERPRETATION SHALL BE FINAL AND BINDING ON ALL PARTIES. 
+3.2 
+TIME SCHEDULE OF BENEFIT ELIGIBILITY 
+You may be eligible to receive the following benefits according to the following time 
+schedule: 
+Upon Hire 
+After Four Consecutive Weeks of 20 or More 
+hours of Work Per Week 
+ Paid Time Off 
+ Unemployment Insurance 
+ Workers’ Compensation 
+ Temporary Disability Insurance 
+ Unpaid Leave of Absence as Mandated 
+by Statute 
+ Medical, Drug and Vision Insurance 
+ Dental Insurance 
+ 
+180 Days After Full-Time Employment 
+After One Full Year of Continuous Active 
+Employment 
+ Group Life Insurance 
+ 
+ Employee Stock Ownership Plan known as 
+ESOP (must meet 1000 hours worked 
+eligibility) 
+ 401(K) Profit Sharing Plan (must meet 
+1000 hours worked eligibility) 
+ Family and Medical Leave (must have 
+worked at least 1250 hours in the 12 
+months prior to the leave and be located 
+within 75 miles of at least 49 other 
+employees). 
+After Six Full Months of Full-Time 
+Continuous Active Employment 
+ Leave for Victims of Domestic or Sexual 
+Violence 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-2 
+To determine your eligibility for any of these benefits, please contact the HR Manager or 
+CFO. Some benefit programs require contributions from the employee, and some are fully 
+paid by the Company. 
+3.3 
+PAID TIME OFF (PTO) 
+Geolabs, Inc. converted to a Paid Time Off (PTO) Plan effective January 2019 (pay period 
+beginning on December 24, 2018). The PTO Plan combines vacation and sick leave into a 
+pool of paid leave hours that a full-time employee will accrue at varying rates, based on 
+his/her years of continuous service.  PTO may  be used for vacation, sick leave, and/or 
+personal paid time off.  
+3.3.1 Who Is Eligible for the PTO Plan 
+ 
+You are eligible to participate in the PTO Plan if you are classified as a full-time, 
+part-time, or temporary employee in exempt or non-exempt status.  
+ 
+If you are classified as an independent contractor or other individual who is  
+not an employee for payroll purposes and you are later characterized by the 
+Internal Revenue Service, another government agency, or a court as an 
+“employee,” any such recharacterization will take effect for eligibility purposes 
+on the actual date of such change in characterization without regard to any 
+retroactive recharacterization. 
+3.3.2 When PTO Plan Participation Begins 
+ 
+A new employee eligible for PTO, will begin accruing PTO as of his/her date of 
+hire. 
+3.3.3 Prior Service 
+A former employee returning to the Company within 5 years of separation will 
+have their service duration included in the years of service calculation used to 
+determine the rate at which their PTO will accrue. The total years of service 
+calculation will add the time from the first hire date until the initial termination 
+date to the time span from the rehire date until the present. All service, excluding 
+any part-time service, will count toward your continuous service. See Section 1.5 
+Rehire. 
+3.3.4 How PTO Works 
+ 
+PTO hours are available to use as they are accrued throughout the year.  
+ 
+As long as PTO-related absences do not interfere with the efficient operation 
+of the business, PTO may be scheduled at any time during the calendar year 
+by mutual agreement between you and your supervisor.  
+ 
+Your recently accrued PTO hours will be added to your accrual balance after 
+each pay period. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-3 
+ 
+If your status changes (you move to or from a full-time 40-hour work week), 
+your PTO accrual rate will be adjusted based on your change of status.  
+ 
+When a full-time employee reaches a specific anniversary during a calendar 
+year, your PTO accrual rate will change to the higher accrual rate accordingly 
+at the start of the next full pay period following the date of your anniversary. 
+ 
+All leave is tracked in hours on a calendar year basis. PTO taken, and PTO 
+balances are recorded and reported in two decimal places (to the nearest 
+hundredth).  
+ 
+An exempt salaried employee who is absent part of a work day must charge 
+the absence to accrued PTO to complete their 40-hour work week. 
+ 
+All PTO must be scheduled in accordance with the PTO request procedures in 
+Section 3.3.8. Part-time employees may only utilize PTO for regularly 
+scheduled days and shifts.   
+3.3.5 Accrual Rates 
+ 
+FULL TIME EMPLOYEES 
+PART-TIME AND  
+TEMPORARY EMPLOYEES 
+Years of Service 
+PTO Days Accrued 
+Per Year 
+PTO Hours Accrued  
+Each Full Pay Period 
+Worked 
+PTO Hours Accrued  
+Each Hour Worked 
+2 years or less 
+14 days 
+4.31 
+0.05 
+More than 2 years 
+15 days 
+4.62 
+0.05 
+More than 4 years 
+16 days 
+4.92 
+0.05 
+More than 6 years 
+17 days 
+5.23 
+0.05 
+More than 8 years 
+18 days 
+5.54 
+0.05 
+More than 10 years 
+20 days 
+6.15 
+0.05 
+More than 12 years 
+22 days 
+6.77 
+0.05 
+More than 15 years 
+24 days 
+7.38 
+0.05 
+More than 18 years 
+26 days 
+8.00 
+0.05 
+More than 20 years 
+28 days 
+8.62 
+0.05 
+PTO will accrue at the next higher rate when employee reaches the 
+anniversary date, per the rate for the years of service in above table 
+ 
+3.3.6 Carry Over 
+Carry over of up to 25 days (200 unused PTO hours) is allowed at the end of each 
+calendar year. Unused PTO hours more than 200 hours will be paid off at the end 
+of each year at the current rate in effect at the time of pay-off. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-4 
+3.3.7 If You Are On Leave 
+ 
+While you are on paid leave from the Company, you will continue to accrue 
+PTO. This means you will accrue PTO hours during leaves such as PTO, 
+bereavement leave or jury duty.  
+ 
+Before taking any unpaid leave, you must first exhaust all accrued PTO 
+balances, unless applicable leave laws allow you to reserve accrued PTO 
+balances. You will not earn PTO for any period in which you are on an approved 
+unpaid leave. (e.g., Temporary Disability Insurance, Worker’s Compensation, 
+Family Medical Leave, extended medical leave, Leave Without Pay, etc., unless 
+you are utilizing PTO during such leaves to change them either partially or 
+totally from unpaid to paid leave).    
+ 
+If the employee qualifies for the temporary disability or worker's 
+compensation claim as defined under Federal or State Regulations, he/she can 
+utilize their accrued PTO for compensation during the waiting period required 
+by law and/or the insurance carrier. 
+ 
+For periods of absence compensable under either Temporary Disability or 
+Workers' Compensation Insurance, the employee may be compensated the 
+difference between the benefit paid by the insurance company and the 
+employee’s regular base pay by using their available accrued PTO.  This is the 
+one exception where PTO may be used in increments less than 2 hours if 
+needed to “gross up” the employee to a full day’s pay. 
+ 
+An employee who takes an unscheduled leave and reports it as PTO must 
+submit a note (such as a doctor’s note) to their supervisor upon return to work, 
+if absent from work for three or more consecutive days. 
+3.3.8 PTO Requests 
+ 
+Employees will email a meeting invitation in Outlook calendar covering the 
+period of their leave to their immediate supervisor. See Appendix B for 
+instruction.  
+ 
+Drilling Department employees will submit a PTO Request form to their 
+immediate supervisor. The immediate supervisor will post approved requests 
+to the Outlook Out of Office calendar.  
+ 
+Employees may submit a request for PTO as far in advance as possible but no 
+later than seven calendar days prior to the start of the requested leave where 
+the need for leave is foreseeable, and in other cases as soon as is practical. 
+Employees must ensure that they have enough accrued PTO available to cover 
+the dates requested. Negative PTO balances are only allowed with prior 
+approval from management. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-5 
+3.3.9 Notification for Unplanned PTO 
+ 
+An employee that reports an unplanned absence as PTO must email a meeting 
+invitation in Outlook calendar to their immediate supervisor no later than 15 
+minutes after the beginning of their normal starting time as notification, they 
+are unable to report for work.  See Appendix B for instructions.  
+ 
+Field Engineers and Technicians will also call their supervisor to arrange for 
+back-up, if they are unable to report for work because of an illness. If their 
+supervisor or Project Engineer is unavailable, Field Engineers and Technicians 
+should notify their back-ups to ensure there is no lapse in service to clients.  
+ 
+Drilling Department employees must call their supervisor no later than 
+15 minutes after the beginning of their normal shift. If the supervisor is 
+unavailable, the employee should notify the HR Manager. If neither is 
+available, leave a message for your supervisor. 
+3.3.10 Terminal Vacation PTO Credits 
+ 
+An employee whose employment is terminated for any reason prior to the 
+completion of their first year of service will forfeit any unused PTO benefits.  
+ 
+Upon termination, if you have a negative accrued balance, it will be deducted 
+from your final paycheck. An employee who voluntarily terminates 
+employment at any time following the first full year with the Company may 
+qualify to receive pay for all unused PTO provided he or she is an employee in 
+good standing, furnishes the Company with two weeks’ advance notice, timely 
+returns all Company property in good and workable condition, and owes no 
+monies or obligations to the Company. Any available PTO credits will be paid 
+out in the employee’s last paycheck. See Section 1.11.1 Separation of 
+Employment; Termination. 
+3.4 
+HOLIDAYS 
+The Company normally observes paid holidays sanctioned by the General Contractors 
+Association of Hawaii. We recognize the following as paid holidays for full time 
+employees: 
+New Year's Day 
+Independence Day 
+Martin Luther King Jr. Day 
+Labor Day 
+Presidents' Day 
+Veterans Day 
+Memorial Day 
+Thanksgiving Day 
+King Kamehameha Day 
+Christmas Day 
+The Company generally substitutes Veterans Day as a workday in lieu of a day off on the 
+Friday after Thanksgiving, subject to the workload and clients’ schedules. Employees 
+wishing to take Veterans Day off (as PTO or in lieu of the day after Thanksgiving or as 
+unpaid leave) must submit a request by the first Monday of November. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-6 
+You will receive holiday pay if the holiday occurs during a paid PTO leave day and the 
+leave will not be charged against your accrued PTO. 
+For full-time non-exempt employees, work performed on all holidays designated above 
+shall be paid for the holiday and all hours worked. Holiday pay received for time not 
+worked shall not be considered when computing overtime pay.  
+Part-time, and temporary employees are not eligible to receive holiday pay, if they work 
+on the holiday; in such instances, they will be paid their straight time wage plus any 
+overtime pay, if applicable. 
+3.5 
+BEREAVEMENT LEAVE 
+Up to three working days of leave with pay is authorized for full-time employees for 
+absences due to the death of an immediate family member, which is defined as an 
+employee’s spouse, parents (and spouse’s parents), domestic partner, siblings, children, 
+grandparents, and grandchildren.  The Company reserves the right to require the 
+submission of appropriate verifying documentation. 
+3.6 
+SUPPLEMENTAL PAID LEAVE 
+A full-time employee in good standing who has exhausted his/her accrued PTO while on 
+TDI and/or FMLA due to the employee’s serious health condition may be entitled to 
+additional paid leave. This leave is calculated based on the continuous years of service. 
+Management may grant use of this leave at its sole discretion, and the decision will be 
+based upon the circumstances of each case, including employee performance, medical 
+necessity, Company performance, anticipated business circumstances, and client service 
+needs.  A request for this leave must be submitted to the HR Manager.  
+ 
+PAID LEAVE DAYS PER 
+YEAR OF CONTINUOUS SERVICE 
+5 days per year = 1 week 
+ 
+Note: An employee can utilize the maximum paid leave only once. E.g. Employee works 
+17 years is entitled to 17 (years) x 5 (days/year) = 17 weeks of supplemental paid leave. 
+Employee uses the entire 17 weeks of paid leave and returns to work. Say the same 
+employee has another serious health issue 5 years later and requests supplemental paid 
+leave again. Said employee who has now worked 22 years is entitled to 22 (years) x 
+5 days/year) = 22 weeks – 17 weeks (previously taken) = 5 weeks, which is the difference 
+between the first and second leave request. 
+Employees may have the right to pay for continuation of medical, dental, drug and/or 
+vision coverage if they would otherwise lose such coverage during the period of leave 
+beyond TDI and FMLA. Please see the HR Manager for specific information concerning 
+COBRA continuation coverage. See Section 3.14, COBRA.    
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-7 
+The Company’s supplemental paid leave option is neither an accrual nor an entitlement. 
+The Company reserves the right to deny use of supplemental paid leave for any legitimate 
+business reason or to terminate the supplemental paid leave option all together. 
+3.7 
+LEAVE WITHOUT PAY 
+For all leaves requested that are not otherwise covered or protected by a Company leave 
+accrual policy, a state or federal leave or disability law, a personal unpaid leave of absence 
+of not more than one month in duration without pay may be available for compelling, 
+urgent or unusual circumstances. You must state a reason for your leave, its beginning 
+and ending date, and your date of return to work. Your supervisor will make the decision 
+whether or not to approve the requested leave of absence.  
+Employees will be required to use all PTO before taking such leave without pay.  
+Employees may have the right to pay for continuation of medical dental, drug and/or 
+vision coverage if they would otherwise lose such coverage during the period of leave 
+without pay. Please see the HR Manager for specific information concerning COBRA 
+continuation coverage. See Section 3.14, COBRA.     
+You must notify your supervisor of your scheduled return-to-work date at least one week 
+before that date. If you do not return to work on the agreed date, you may be considered 
+to have voluntarily terminated your employment with the Company. 
+3.8 
+FAMILY AND MEDICAL LEAVE 
+Family and Medical Leave Act (FMLA) entitles eligible employees to take unpaid, job-
+protected leave for specified family and medical reasons with continuation of group 
+health insurance coverage under the same terms and conditions as if the employee had 
+not taken leave.   
+This policy provides employees with a general description of their FMLA rights. In the 
+event of any conflict between this policy and the applicable law, employees will be 
+afforded all rights required by law.  
+3.8.1 General Provisions  
+The Company will grant up to 12 weeks (or up to 26 weeks of military caregiver 
+leave to care for a covered servicemember or eligible veteran with a serious injury 
+or illness) during a 12-month period to eligible employees. The leave may be paid, 
+unpaid or a combination of paid and unpaid leaves, depending on the 
+circumstances of the leave.  
+3.8.2 Eligibility  
+To be eligible to take family or medical leave, the employee must meet all the 
+following conditions:  
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-8 
+ 
+The employee must have worked for the Company for at least 12 months or 
+52 weeks. The 12 months or 52 weeks need not have been consecutive. 
+Separate periods of employment will be counted, provided that the break in 
+service does not exceed seven years. Separate periods of employment will be 
+counted if the break in service exceeds seven years due to National Guard or 
+reserve military service obligations or when there is a written agreement, 
+stating the employer’s intention to rehire the employee after the service 
+break. For eligibility purposes, an employee will be considered to have been 
+employed for an entire week even if the employee was on the payroll for only 
+part of a week or if the employee is on leave during the week.  
+ 
+The employee must have worked at least 1,250 hours during the 12-month 
+period immediately before the date when the leave begins. The principles 
+established under the Fair Labor Standards Act (FLSA) determine the number 
+of hours worked by an employee. The FLSA does not include time spent on 
+paid or unpaid leave as hours worked. Only actual hours worked are counted 
+in determining the 1,250 hours eligibility test for an employee under FMLA.  
+ 
+The employee must work in a worksite where 50 or more employees are 
+employed by the Company within 75 miles of that office or worksite. The 
+distance is calculated by using available transportation by the most direct 
+route.  
+3.8.3 Type of Leave Covered  
+To qualify as FMLA leave, the employee must be taking leave for one of the 
+reasons listed below:  
+a. The birth of a child and in order to care for that child. 
+b. The placement of a child for adoption or foster care and to care for the newly 
+placed child. 
+c. To care for a spouse, child or parent with a serious health condition (described 
+below). 
+d. The serious health condition (described below) of the employee.  
+An employee may take leave because of a serious health condition that makes 
+the employee unable to perform the functions of the employee's position.  
+A serious health condition is defined as a condition that requires inpatient care 
+at a hospital, hospice or residential medical care facility, including any period 
+of incapacity or any subsequent treatment in connection with such inpatient 
+care or a condition that requires continuing care by a licensed health care 
+provider. 
+This policy covers illnesses of a serious and long-term nature, resulting in 
+recurring or lengthy absences. Generally, a chronic or long-term health 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-9 
+condition that would result in a period of three consecutive days of incapacity 
+with the first visit to the health care provider within seven days of the onset 
+of the incapacity and a second visit within 30 days of the incapacity would be 
+considered a serious health condition. For chronic conditions requiring 
+periodic health care visits for treatment, such visits must take place at least 
+twice a year.  
+Employees with questions about this FMLA policy or coverage under the 
+Company's PTO plan should consult with the HR Manager.  
+If an employee takes PTO for a condition that progresses into a serious health 
+condition and the employee requests unpaid leave, the Company may 
+designate all or some portion of related leave taken as leave under this policy, 
+to the extent that the earlier leave meets the necessary qualifications.  
+e. Qualifying exigency leave: An eligible employee is entitled to take up to 
+12 weeks of FMLA leave in a 12-month period because of any qualifying 
+exigency arising out of the fact that the employee’s spouse, son, daughter, or 
+parent is on covered active duty (or has been notified of an impending call to 
+active duty) in the Armed Forces.  
+“Covered active duty” for members of a regular component of the Armed 
+Forces means duty during deployment of the member with the Armed Forces 
+to a foreign country. “Covered active duty” for members of the reserve 
+components of the Armed Forces (members of the U.S. National Guard and 
+Reserves) means duty during deployment of the member with the Armed 
+Forces to a foreign country under a call or order to active duty in a contingency 
+operation as defined in section 101(a)(13)(B) of title 10, United States Code.  
+The qualifying exigency must be one of the following: 1) short-notice 
+deployment, 2) military events and activities, 3) child care and school 
+activities, 4) financial and legal arrangements, 5) counseling, 6) rest and 
+recuperation, 7) post-deployment activities and 8) additional activities that 
+arise out of active duty, provided that the employer and employee agree, 
+including agreement on timing and duration of the leave. 
+The leave may commence as soon as the individual receives the call-up notice. 
+(Son or daughter for this type of FMLA leave is defined the same as for child 
+for other types of FMLA leave except that the person does not have to be a 
+minor.) This type of leave would be counted toward the employee’s 12-week 
+maximum of FMLA leave in a 12-month period. 
+f. Military caregiver leave: Entitles an eligible employee who is the spouse, son, 
+daughter, parent, or next of kin of a “covered servicemember” to take up to 
+26 workweeks of FMLA leave in a single 12-month period to care for a 
+“covered servicemember” with a “serious injury or illness” or to  a veteran 
+“who is undergoing medical treatment, recuperation, or therapy for a serious 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-10 
+injury or illness” if the veteran was a member of the Armed Forces “at any time 
+during the period of 5 years preceding the date on which the veteran 
+undergoes that medical treatment, recuperation, or therapy.”  
+A “serious injury or illness” for a current member of the Armed Forces include 
+not only a serious injury or illness that was incurred by the member in line of 
+duty on active duty but also a serious injury or illness that “existed before the 
+beginning of the member’s active duty and was aggravated by service in line 
+of duty on active duty in the Armed Forces” that may render the member 
+medically unfit to perform the duties of the member’s office, grade, rank, or 
+rating.  
+For a veteran, a serious injury or illness is defined as “a qualifying injury or 
+illness that was incurred by the member in line of duty on active duty in the 
+Armed Forces (or existed before the beginning of the member’s active duty 
+and was aggravated by service in line of duty on active duty in the Armed 
+Forces) and that manifested itself before or after the member became a 
+veteran.”  
+3.8.4 Amount of Leave 
+An eligible employee can take up to 12 weeks for the FMLA circumstances (a) 
+through (e) above under this policy in a 12-month period calculated as a calendar 
+year (January to December). Each time an employee takes leave, the Company will 
+compute the amount of leave the employee has taken under this policy in the last 
+12 months and subtract it from the 12 weeks of available leave, and the balance 
+remaining is the amount the employee is entitled to take at that time. 
+An eligible employee can take up to 26 weeks for the FMLA circumstance (f) above 
+(military caregiver leave) during a single fixed 12-month period. FMLA leave 
+already taken for other FMLA circumstances will be deducted from the total of 
+26 weeks available.  
+If a husband and wife both work for the Company and each wishes to take leave 
+for the birth of a child, adoption or placement of a child in foster care, or to care 
+for a parent (but not a parent "in-law") with a serious health condition, the 
+husband and wife may only take a combined total of 12 weeks of leave. If a 
+husband and wife both work for the Company and each wishes to take leave to 
+care for a covered injured or ill service member, the husband and wife may only 
+take a combined total of 26 weeks of leave. 
+3.8.5 Employee Status and Benefits During Leave  
+If the employee chooses not to return to work for reasons other than a continued 
+serious health condition of the employee or the employee's family member or a 
+circumstance beyond the employee's control, the Company will require the 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-11 
+employee to reimburse the Company the amount it paid for the employee's health 
+insurance premium during all unpaid portions of the leave. 
+While an employee is on leave, the Company will continue to pay its share of the 
+premium for group health insurance coverage provided to the employee and any 
+dependents, or the applicable COBRA premiums for up to six months of a 
+qualifying leave at the Company’s discretion. Thereafter, the employee has the 
+right to pay for continuation of medical dental, drug and/or vision coverage if you 
+would otherwise lose such coverage. Please see the HR Manager for specific 
+information concerning COBRA continuation coverage.  
+3.8.6 Employee Status After Leave  
+An employee who takes leave under this policy may be asked to provide a fitness 
+for duty (FFD) clearance from the health care provider. This requirement will be 
+included in the employer’s response to the FMLA request. Generally, an employee 
+who takes FMLA leave will be able to return to the same position or a position 
+with equivalent status, pay, benefits and other employment terms. The position 
+will be the same or one which is virtually identical in terms of pay, benefits and 
+working conditions. The Company may choose to exempt certain key employees 
+from this requirement and not return them to the same or similar position.  
+3.8.7 Use of Paid and Unpaid Leave  
+An employee who is taking FMLA leave because of the employee's own serious 
+health condition or that of a family member, the employee must use all accrued 
+PTO during their FMLA leave, before using unpaid FMLA leave. PTO will run 
+concurrently with FMLA. 
+Disability leave for the birth of the child and for an employee's serious health 
+condition, including workers' compensation leave (to the extent that it qualifies), 
+will be designated as FMLA leave and will run concurrently with FMLA. For 
+example, if an employee takes six weeks of pregnancy disability leave, the six 
+weeks will be designated as FMLA leave and counted toward the employee's 
+12-week entitlement. The employee may then be required to substitute accrued 
+(or earned) paid leave as appropriate before being eligible for unpaid leave for 
+what remains of the 12-week entitlement. An employee who is taking leave for 
+the adoption or foster care of a child must use all paid PTO during their FMLA leave 
+before using unpaid FMLA leave.  
+An employee who is using military FMLA leave for a qualifying exigency must use 
+all accrued PTO during their FMLA leave, before using unpaid FMLA leave. The 
+same applies to military caregiver leaves.  
+3.8.8 Intermittent Leave or a Reduced Work Schedule  
+The employee may take FMLA leave in 12 consecutive weeks, may use the leave 
+intermittently (take a day periodically when needed over the year) or, under 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-12 
+certain circumstances, may use the leave to reduce the workweek or workday, 
+resulting in a reduced hour schedule. In all cases, the leave may not exceed a total 
+of 12 workweeks (or 26 workweeks to care for an injured or ill service member 
+over a 12-month period).  
+The Company may temporarily transfer an employee to an available alternative 
+position with equivalent pay and benefits if the alternative position would better 
+accommodate the intermittent or reduced schedule. When leave for the 
+employee or employee's family member is foreseeable and for planned medical 
+treatment, including recovery from a serious health condition or to care for a child 
+after birth, or placement for adoption or foster care the Company requests that 
+the employee make every reasonable effort to schedule leave(s) when there will 
+be the least amount of disruption to the Company and its clients’ needs.  Leave 
+for birth, adoption or foster care of a child must be taken within one year of the 
+birth or placement of the child. 
+If the employee is taking leave for a serious health condition or because of the 
+serious health condition of a family member, the employee should try to reach 
+agreement with the Company before taking intermittent leave or working a 
+reduced hour schedule.  
+3.8.9 Certification for the Employee’s Serious Health Condition  
+The Company will require certification for the employee’s serious health 
+condition. The employee must respond to such a request within 15 days of the 
+request or provide a reasonable explanation for the delay. Failure to provide 
+certification may result in a denial of continuation of leave. Medical certification 
+will be provided using the DOL Certification of Health Care Provider for Employee’s 
+Serious Health Condition (http://www.dol.gov/whd/forms/WH-380-E.pdf). 
+The Company may directly contact the employee’s health care provider for 
+verification or clarification purposes using a health care professional, the HR 
+Manager or management official. The Company will not use the employee’s direct 
+supervisor for this contact. Before the Company makes this direct contact with the 
+health care provider, the employee will be a given an opportunity to resolve any 
+deficiencies in the medical certification. In compliance with HIPAA Medical Privacy 
+Rules, the Company will obtain the employee’s permission for clarification of 
+individually identifiable health information.  
+The Company has the right to ask for a second opinion if it has reason to doubt 
+the certification. The Company will pay for the employee to get a certification from 
+a second doctor, which the Company will select. The Company may deny FMLA 
+leave to an employee who refuses to release relevant medical records to the 
+health care provider designated to provide a second or third opinion. If necessary, 
+to resolve a conflict between the original certification and the second opinion, the 
+Company will require the opinion of a third doctor. The Company and the 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-13 
+employee will mutually select the third doctor, and the Company will pay for the 
+opinion. This third opinion will be considered final. The employee will be 
+provisionally entitled to leave and benefits under the FMLA pending the second 
+and/or third opinion.  
+3.8.10 Certification for the Family Member’s Serious Health Condition 
+The Company will require certification for the family member’s serious health 
+condition. The employee must respond to such a request within 15 days of the 
+request or provide a reasonable explanation for the delay. Failure to provide 
+certification may result in a denial of continuation of leave. Medical certification 
+will be provided using the DOL Certification of Health Care Provider for Family 
+Member’s Serious Health Condition (http://www.dol.gov/whd/forms/WH-380-
+F.pdf). 
+The Company may directly contact the employee’s family member’s health care 
+provider for verification or clarification purposes using a health care professional, 
+HR Manager or management official. The Company will not use the employee’s 
+direct supervisor for this contact. Before the Company makes this direct contact 
+with the health care provider, the employee will be a given an opportunity to 
+resolve any deficiencies in the medical certification. In compliance with HIPAA 
+Medical Privacy Rules, the Company will obtain the employee’s family member’s 
+permission for clarification of individually identifiable health information.  
+The Company has the right to ask for a second opinion if it has reason to doubt 
+the certification. The Company will pay for the employee’s family member to get 
+a certification from a second doctor, which the Company will select. The Company 
+may deny FMLA leave to an employee whose family member refuses to release 
+relevant medical records to the health care provider designated to provide a 
+second or third opinion. If necessary to resolve a conflict between the original 
+certification and the second opinion, the Company will require the opinion of a 
+third doctor. The Company and the employee will mutually select the third doctor, 
+and the Company will pay for the opinion. This third opinion will be considered 
+final. The employee will be provisionally entitled to leave and benefits under the 
+FMLA pending the second and/or third opinion. 
+3.8.11 Certification of Leave for a Qualifying Exigency 
+The first time an employee requests leave because of a qualifying exigency; the 
+Company may require that the employee provide a copy of the active-duty orders 
+or other documentation issued by the military. This information need be provided 
+to the Company only once. 
+The Company may require that leave for any qualifying exigency be supported by 
+a certification from the employee that sets forth an extensive list of information 
+relating to the qualifying exigency. Certifications could include documents such as 
+meeting announcements for informational briefings, a document confirming a 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-14 
+meeting with a counselor or school official, or a bill of service for legal or financial 
+affairs. DOL’s Certification of Qualifying Exigency for Family Military Leave 
+(http://www.dol.gov/whd/forms/WH-384.pdf). 
+3.8.12 Certification for Serious Injury or Illness of Covered Service Member for Military 
+Family Leave 
+The Company may request that the covered service member’s healthcare provider 
+furnish an extensive list of information that is contained in DOL’s Certification for 
+Serious Injury or Illness of Covered Service Member for Military Family Leave 
+(http://www.dol.gov/whd/forms/WH-385.pdf). No information may be required 
+beyond that specified by the regulations (and contained in the WH-385).  
+Second and third opinions and recertifications are expressly prohibited for leave 
+to care for a covered service member. 
+The Company requiring an employee to submit a certification for leave to care for 
+a covered service member must accept invitational travel orders (ITOs) or 
+invitational travel authorizations (ITAs) issued to any family member to join an 
+injured or ill service member at his or her bedside as sufficient certification, in lieu 
+of the WH-385  
+3.8.13 Certification for Serious Injury or Illness of a Veteran for Military Caregiver Leave 
+The Company may require an employee seeking military caregiver leave under the 
+FMLA leave due to a serious injury or illness of a covered veteran to submit a 
+certification providing sufficient facts to support the request for leave for Serious 
+Injury 
+or 
+Illness 
+of 
+a 
+Veteran 
+for 
+Military 
+Caregiver 
+Leave 
+(http://www.dol.gov/whd/forms/wh385V.pdf).  
+The Company may require an employee to submit a timely, complete, and 
+sufficient certification to support a request for military caregiver leave under the 
+FMLA leave due to a serious injury or illness of a covered veteran. 
+3.8.14 Recertification 
+The Company may request recertification for the serious health condition of the 
+employee or the employee’s family member no more frequently than every 30 
+days and only when circumstances have changed significantly, or if the employee 
+receives information casting doubt on the reason given for the absence, or if the 
+employee seeks an extension of his or her leave. Otherwise, the Company may 
+request recertification for the serious health condition of the employee or the 
+employee’s family member every six months in connection with an FMLA absence. 
+The Company may provide the employee’s health care provider with the 
+employee’s attendance records and ask whether need for leave is consistent with 
+the employee’s serious health condition.  
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-15 
+3.8.15 Procedure for Requesting FMLA Leave  
+All employees requesting FMLA leave must provide verbal or written notice of the 
+need for the leave to the HR Manager. Within five business days after the 
+employee has provided this notice, the HR Manager will complete and provide the 
+employee 
+with 
+the 
+DOL 
+Notice 
+of 
+Eligibility 
+and 
+Rights 
+(http://www.dol.gov/whd/forms/WH-381.pdf).  
+When the need for the leave is foreseeable, the employee must provide the 
+employer with at least 30 days' notice. When an employee becomes aware of a 
+need for FMLA leave less than 30 days in advance, the employee must provide 
+notice of the need for the leave either the same day or the next business day. 
+When the need for FMLA leave is not foreseeable, the employee must notify the 
+Company as soon as employee is able or have a family member inform the 
+Company to request leave, absent unusual circumstances.  
+3.8.16 Designation of FMLA Leave 
+Within five business days after the employee has submitted the appropriate 
+certification form, the HR Manager will complete and provide the employee with 
+a written response to the employee’s request for FMLA leave using the DOL 
+Designation Notice (http://www.dol.gov/whd/forms/WH-382.pdf). 
+3.8.17 Intent to Return to Work from FMLA Leave 
+On a basis that does not discriminate against employees on FMLA leave; the 
+Company may require an employee on FMLA leave to report periodically on the 
+employee’s status and intent to return to work. 
+3.9 
+MILITARY LEAVE AND USERRA 
+An employee who is a member of or applies to be a member of a uniformed service, and 
+performs or has an obligation to perform service in a uniformed service:  
+A. Army, Navy, Marine Corps, Air Force or Coast Guard and Reserve components; 
+B. Army National Guard and Air National Guard; when engaged in active duty for 
+training, inactive duty training, or full-time National Guard duty; 
+C. The military service academies (e.g., “West Point”);  
+D. Reserve Officers Training Corps (ROTC);  
+E. Public Health Service Commissioned Corps; and 
+F. Any other category of persons designated by the President in time of war or 
+emergency.  
+G. Although not part of a “uniformed services,” Intermittent disaster-response 
+appointees when activated by, or in training for, the National Disaster Medical System 
+(FEMA, Department of Homeland Security); 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-16 
+Will be allowed military leave and will be given PTO and other earned pay due the 
+employee at the time of taking leave from the Company. Seniority will continue to accrue 
+for employees on military leave.  
+Upon satisfactory completion of military service and timely notice of intent to return to 
+work, an employee will be reinstated to his/her job or to a job comparable to the one 
+s/he left, provided the employee is qualified after reasonable efforts by the Company to 
+qualify the employee, and the Company’s circumstances have not changed to the extent 
+that it would be impossible or unreasonable to provide re-employment. Employees taking 
+military leave are responsible for providing the Company with reasonable advance notice 
+of military duty, unless notice cannot be provided due to military necessity, or is 
+unreasonable or impossible under the circumstances. 
+Full-time employees, who are in the National Guard or Reserves and required by law to 
+fulfill annual military duty, will be reimbursed for the difference between their military 
+pay and regular pay for a maximum of two (2) weeks per calendar year if their military 
+pay is less, provided they supply their supervisor with their authorized military rank, pay 
+rate, and orders. All benefits and job status will resume as if continued if the employee 
+reports back to work on the next regularly scheduled work period after his/her release 
+from active duty. Part-time employees, full-time employees whose temporary duty 
+exceeds two (2) weeks, and employees who voluntarily extend their military commitment 
+beyond the statutory requirement will be considered on an unpaid leave of absence. 
+3.10 
+JURY AND WITNESS DUTY 
+The Company will pay full-time employees the amount by which your regular pay exceeds 
+the payment you receive for jury duty or duty as a summoned witness, for the period 
+required to complete such duty. You must notify your supervisor for time off if you are 
+summoned to appear as a witness or to jury duty.  
+You must obtain a statement from the clerk of the court for the period you are required 
+in court and submit this to your supervisor promptly. If you are released from court duty 
+on any particular day during your normal working hours, you must notify your supervisor 
+of your availability and you may be required to report to work. 
+3.11 
+TIME OFF TO VOTE  
+Employees are entitled up to two hours off with pay in which to vote if s/he does not have 
+two hours before or after working hours to do so. Employees are required to obtain 
+written approval from their supervisor when time off is required within his/her regular 
+working hours. To qualify for paid time off, employees must submit a voter’s receipt and 
+written approval with their time sheet for the pay period following the election. 
+3.12 
+LEAVE FOR VICTIMS OF DOMESTIC OR SEXUAL VIOLENCE  
+If you or your minor child is a victim of domestic or sexual violence, you may be eligible 
+to take unpaid leave for a reasonable period of time, not to exceed 30 days per calendar 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-17 
+year if the Company employs 50 or more employees. If 49 or fewer employees are 
+employed by the Company, five days of victims leave per calendar year is provided. An 
+employee must have worked for the Company for at least six consecutive months to be 
+eligible for leave under this policy. For purposes of this section, your “minor child” 
+includes a biological, adopted, foster, or stepchild, or any legal ward of an employee 
+under the age of majority. 
+3.12.1 Permissible Purposes for Leave 
+a. To seek medical attention for the employee or the employee’s minor child to 
+recover from physical or psychological injury/disability caused by domestic or 
+sexual violence; 
+b. To obtain services from a victim services organization or victim advocacy 
+organization, including (a) any nonprofit organization providing assistance to 
+or serving as advocates of victims of domestic or sexual violence; (b) any 
+organization operating a shelter or providing professional counseling services 
+for victims of domestic or sexual violence; or (c) any organization providing 
+legal assistance to victims of domestic or sexual violence;  
+c. To obtain psychological or other counseling; 
+d. To temporarily or permanently relocate; or 
+e. To take legal action relating to or resulting from the domestic or sexual 
+violence, or related legal action which enhances the health/safety of the 
+employee, the employee’s minor child, or those who associate or work with 
+the employee (e.g. to obtain restraining orders or injunctions). 
+An employee must exhaust any other paid or unpaid leave which is applicable and 
+available before taking leave under this policy. For example, employees wishing to take 
+victims leave who have available PTO must first use their PTO before taking unpaid victims 
+leave.  Any combination of paid or unpaid leave benefits that may be applied to victims 
+leave benefits shall not exceed the maximum number of days of leave required by 
+Hawai`i’s Victim’s Protections law.  
+All information provided to the Company by an employee regarding a leave requested 
+under this policy, including the fact that the employee or employee’s minor child has been 
+a victim of domestic or sexual violence, or that the employee has requested leave due to 
+domestic or sexual violence, shall be kept confidential by the Company.  
+Employees should provide reasonable advance notice to the Company of their intention 
+to take leave, unless notice is not practicable due to imminent danger to the employee or 
+the employee’s minor child. 
+3.12.2 Leave Certifications 
+a. Leave Due to The Employee’s Own Physical or Psychological Injury:   If the 
+purpose of the leave is to seek medical attention to recover from the 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-18 
+employee’s own physical or psychological injury caused by domestic or sexual 
+violence, the employee should, when providing notice of intention to take 
+leave, provide a certificate from a physician estimating the number of leave 
+days necessary and the estimated commencement and termination dates of 
+the leave. Depending upon the circumstances, the Company may require 
+employees returning from leave taken under this policy to submit a medical 
+certificate from the employee’s physician attesting to the employee’s 
+condition, and approving return to work. 
+b. Leave Of Less Than Five Days For Reasons Other Than The Employee’s Own 
+Medical Treatment:  When an employee returns from a leave of 5 days or less 
+taken for reasons other than to seek medical attention for him/herself or the 
+employee’s minor child, the employee shall, within a reasonable period of 
+time,  provide a signed written statement to the Company certifying: (i) that 
+the employee or employee’s child is a victim of domestic or sexual violence, 
+and (ii) that the leave was taken for one of the permissible reasons described. 
+c. Leave Exceeding Five Days Per Calendar Year: After an employee has already 
+taken five days of leave in a given calendar year because of sexual or domestic 
+violence, an employee taking additional victims leave during that year must 
+provide a written certification for the leave from one of the sources listed:  
+1) An agent, employee or volunteer of a victim services organization; or 
+2) The employee’s attorney or advocate; or 
+3) The minor child’s attorney or advocate; or 
+4) A medical or other professional from whom the employee or employee’s 
+minor child has sought assistance relating to the domestic or sexual 
+violence; or 
+5) A police or court record related to the domestic or sexual violence. 
+An employee who returns from an authorized victims leave and who have complied with 
+certification requirements will be returned to their former position or to a position of 
+comparable status and pay.  
+3.13 
+MEDICAL, DENTAL, DRUG AND VISION INSURANCE 
+The Company provides all eligible full and part-time employees medical coverage that 
+includes drug and vision riders with University Health Alliance (UHA) and dental coverage 
+as a rider with Hawaii Dental Service (HDS). The Company may change insurers and add 
+or reduce benefits that are in excess of legal requirements. 
+Employees may choose to extend medical/dental coverage for their immediate family at 
+their own expense; the charge for additional coverage will be deducted from employee 
+paychecks until he or she completes twelve consecutive months of full-time employment. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-19 
+The Company will pay the family coverage for an employee after twelve consecutive 
+months of full-time employment.  
+An employee or his/her dependents that do not apply for coverage when they first 
+become eligible or by the first day of the month immediately after four consecutive weeks 
+at 20 hours a week or more of employment must wait until the next open enrollment 
+period. Plan membership is accepted by UHA/HDS during the Company’s open 
+enrollment period, which is held once a year between May and June (for July 
+enrollment). 
+This open enrollment period is restricted, and the Company is not responsible for 
+insurance coverage for an employee who fails to apply for it at the proper time. A 
+representative of the Company may at any time request copies of your marriage license 
+and your children’s birth certificates (and adoption papers if applicable) and social 
+security cards to verify eligibility. 
+Coverage is effective on the first of the following month after enrollment is approved. 
+Should you decide to cancel your coverage or the coverage for any of your family 
+members for the following month, please notify the HR Manager one-week before the 
+last day of the month. 
+Premium costs may change annually because UHA/HDS adjusts their premiums in 
+response to changes (usually increases) in health care costs. 
+Request by employees to make changes to their medical/dental insurance plan must also 
+be made during the open enrollment period. 
+Details of the coverage under this medical/dental insurance plan are included in the 
+contracts between the Company and the provider of medical insurance services. 
+Information about the dental, drug, and vision coverage and cost for additional coverage 
+are available from the HR Manager. 
+Employees, whose work hours are reduced to fewer than 20 hours a week, may have the 
+right to pay for continuation of medical dental, drug and/or vision coverage if you would 
+otherwise lose such coverage. 
+3.14 
+COBRA 
+The federal Consolidated Omnibus Budget Reconciliation Act (COBRA) gives employees 
+and their qualified beneficiaries the opportunity to continue health insurance coverage 
+under the Company’s health plan when a “qualifying event” would normally result in the 
+loss of eligibility. Coverage may be continued for periods of up to 18 to 36 months, 
+depending on the type of qualifying event and other circumstances. Some common 
+qualifying events are resignation, termination of employment, or death of an employee; 
+a reduction in an employee’s hours or a leave of absence; an employee’s divorce or legal 
+separation; and a dependent’s loss of dependent status under the plan. If a qualifying 
+event occurs, the employee or qualified beneficiary must notify the Company as soon as 
+possible. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-20 
+Under COBRA, the employee or beneficiary pays the full cost of coverage at the 
+Company’s group rates plus an administration fee. The Company provides each eligible 
+employee or qualified beneficiary with a written notice describing rights granted under 
+COBRA when the employee becomes eligible for coverage under the Company’s health 
+insurance plan. The notice contains important information about the employee’s rights 
+and obligations. 
+3.15 
+UNEMPLOYMENT INSURANCE 
+The Company is required by the Hawaii Employment Security Law to pay taxes for each 
+of our workers into an account from which benefits are paid out to covered employees 
+who become involuntarily unemployed. The program pays weekly benefits, up to 26 
+weeks, to individuals who meet state requirements of the unemployment insurance law. 
+Prior work history may determine whether and in what amount an individual will qualify 
+for benefits. For information on Hawaii's Employment Security Law, please contact the 
+State Unemployment Insurance Division. 
+3.16 
+TEMPORARY DISABILITY 
+The Company pays the total premium to provide partial protection from loss of earnings 
+if you become disabled due to a non-work-related accidental illness or injury, including 
+pregnancy. If you are eligible, Temporary Disability Insurance (“TDI”) will pay benefits at 
+the rate of fifty-eight percent (58%) of average weekly earnings up to a maximum benefit 
+amount set annually by the State Department of Taxation beginning with the eighth 
+calendar day of disability. Benefits are paid for a maximum of twenty-six (26) weeks in 
+any benefit year.  You may elect to be compensated for the difference between your 
+insurance benefit and your regular base pay by using your available accrued PTO.  See 
+Section 3.3.7, If You Are on Leave. 
+It is the employee’s responsibility to apply for TDI benefits and to notify the Company of 
+the needed time off. A disabled employee needs to file a claim with the Company within 
+90 days after the beginning of the period of disability.  
+Request the State TDI-45 Form from the HR Manager. For additional information on 
+Hawaii Temporary Disability Insurance Law, please contact the Disability Compensation 
+Division for TDI.  
+If leave qualifies under our Family and Medical Leave Policy, your approved TDI leave will 
+be counted as Family and Medical Leave. It is your responsibility to timely complete your 
+leave request forms to assure reinstatement and benefit continuation for the duration of 
+such approved leave. 
+3.17 
+WORKERS’ COMPENSATION  
+The Company secures Workers’ Compensation Insurance which provides benefits if you 
+sustain a work-related injury or illness. Partial wage loss payments will commence on the 
+fourth calendar day after disability from the injury or illness. IT IS COMPANY POLICY AND 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-21 
+YOUR RESPONSIBILITY TO REPORT ALL INJURIES AND ILLNESSES IMMEDIATELY TO YOUR 
+SUPERVISOR. 
+Weekly income payments (wage replacement) are paid directly by the insurance carrier 
+on the fourth day of disability at a rate representing two-thirds of the injured employee's 
+average weekly wage but not more than the maximum weekly benefit amount annually 
+set by the Department of Labor. The weekly compensation for either a permanent or 
+temporary total disability is set and fixed according to the employee’s wage or the 
+maximum amount existing the year the employee was first injured. You may elect to be 
+compensated for the difference between your insurance benefit and your regular base 
+pay by using your available accrued PTO. See Section 3.3.7, If You Are on Leave. 
+Neither the Company nor the insurance carrier will be liable for the payment of workers’ 
+compensation benefits for injuries that occur during an employee’s voluntary 
+participation in any off-duty recreational, social, or athletic activity sponsored by the 
+Company. See Occupational Safety & Health Program, Section 7, WC-1 Employer’s Report 
+of Industrial Injury. 
+If leave qualifies under our Family and Medical Leave Policy, your approved Workers’ 
+Compensation leave will be designated and counted as Family and Medical Leave. It is 
+your responsibility to timely complete your leave request forms to assure reinstatement 
+and benefit continuation for the duration of such approved leave. 
+A doctor’s note must be submitted to HR Manager notifying the Company how long the 
+employee will be incapacitated, whether s/he has restrictions and when the employee 
+will be returning to work. If any of the conditions change the employee must submit a 
+current note from the doctor.  
+3.18 
+GROUP TERM LIFE INSURANCE 
+All full-time employees are eligible for a Company-paid Group Term Life Insurance policy 
+the day following 180-days of employment. The amount of the benefit is at the discretion 
+of management and the Company pays the monthly premium. The HR Manager will 
+provide you with full details upon request. 
+3.19 
+EMPLOYEE STOCK OWNERSHIP PLAN (ESOP) 
+The Company's Profit Sharing Plan was amended into the Employee Stock Ownership Plan 
+(ESOP) effective as of January 1, 1991. The ESOP provides retirement benefits to 
+employees based on ownership interests in the Company. The plan has been adopted in 
+the hope that its benefits, together with those of social security and your own personal 
+savings, will enable you to look forward to your retirement years with confidence. 
+To become eligible an employee of the Company must be 21 years of age or older, have 
+worked at least 1,000 hours for the Company during a 12-consecutive-month period 
+beginning initially with your first hour of work, and not be included in a collective 
+bargaining unit for which retirement benefits have been bargained for in good faith. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-22 
+You become a participant of this plan on the first day of the next calendar month 
+coinciding with or following the date on which you satisfy the above-described 
+requirements. 
+You receive credit for a year of service if you worked at least 1,000 hours of service with 
+the Company during an initial period measured from your first hour of employment with 
+the Company for a continuous twelve (12) months and, thereafter, from the first day of a 
+Plan Year for such Plan Year. 
+The Company may contribute a discretionary amount to the ESOP determined for each 
+plan year. Company contributions will be made in shares of Company stock or in cash. 
+Your actual retirement benefit under this plan is your account balance at the time of your 
+retirement. The balance of your accounts will be adjusted annually for earnings, gains, 
+and losses of the trust fund attributable to investment of the account balances. Such 
+earnings, gains, and losses will be allocated to the accounts of all participants on a pro-
+rata basis based on their account balances. 
+The value of Company stock held by the ESOP reflects the earnings, assets, and growth of 
+the Company. The value of the Company stock may go up or down each year because the 
+value of each share of Company stock depends, in part, on the Company's earnings and 
+on what potential investors think of its prospects. The balance of your accounts will reflect 
+the changing value of Company stock held in the accounts. 
+The Plan Year is the Company's fiscal year, which is the calendar year. 
+For more detailed information concerning this Plan, employees may request a copy of the 
+Plan Summary. Provisions can only be determined accurately by consulting the Plan itself. 
+A copy of the Plan is on file at the Company office and may be read by any employee at 
+any reasonable time. In the event of any discrepancy between the Plan Summary and the 
+actual provisions of the Plan, the Plan shall govern. 
+3.20 
+401(k) PROFIT SHARING PLAN 
+The Company values the loyalty and efficiency of its employees and has adopted this plan 
+effective January 01, 2001. It is designed to help provide employees the potential for 
+future financial security for retirement. 
+Employees of the Company may join the Plan if they have attained age 21 and have 
+worked at least 1,000 hours for the Company during a 12 consecutive-month period 
+beginning with the date of hire or the first day of any plan year beginning after the hire 
+date. 
+Eligible employees will become a participant in the Plan as of the effective date of the 
+Plan or on the first day of the next calendar month that coincides with or follows the date 
+on which they satisfy the aforementioned eligibility requirements. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-23 
+Employees that are not eligible to participate in the Plan are (1) employees whose 
+employment is governed by a collective bargaining unit for which retirement benefits 
+have been bargained for in good faith, (2) employees who are nonresident aliens and who 
+receive no earned income from the employer which constitutes income from sources 
+within the United States, (3) leased employees, and/or (4) independent contractors or 
+other individuals who are recharacterized as employees by the Internal Revenue Service. 
+The Plan Year is the 12-month period ending December 31st. 
+A. Elective Employee Contribution: As a participant in the Plan, employees will have an 
+opportunity to contribute a percentage-limited portion of their salary, or 
+discretionary bonus, if any, to the Plan, without being currently taxed on the salary or 
+bonus contributed.  
+B. Matching Employer Contribution: For each Plan Year, the employer may contribute 
+to the Plan an amount equal to a percentage of the employees' elective contribution 
+for the Plan Year.  
+If you are an eligible participant making 401(k) deferrals, the Company will make a 
+safe harbor matching contribution to your Plan account equal to (i) 100% of the first 
+3% of compensation you defer to the Plan, plus (ii) 50% of the next 2% of 
+compensation you defer to the Plan. 
+C. Discretionary Employer Contributions: The employer may also contribute a 
+discretionary amount to the Plan determined for each Plan year.  
+ 
+For more detailed information concerning this Plan, including contribution limits, 
+employees may request a copy of the Plan Summary. Provisions can only be determined 
+accurately by consulting the Plan itself. A copy of the Plan is on file at the Company office 
+and may be read by any employee at any reasonable time. In the event of any discrepancy 
+between the Plan Summary and the actual provisions of the Plan, the Plan shall govern. 
+3.21 
+FLEXIBLE SPENDING PLAN 
+The Company offers flexible spending or reimbursement accounts that allow you to save 
+tax dollars on money you spend for eligible, non-reimbursed health care expenses, 
+insurance premiums and/or dependent care out-of-pocket expenses during the plan year. 
+Employees are eligible to participate in the Insurance Premiums Account and the Medical 
+Expense and Dependent Care Expense Accounts at the next open enrollment after 
+6 months of hire. 
+This plan is optional and voluntary if you elect any of the accounts. If you elect a 
+reimbursement account, you direct your employer to set aside from your paycheck a 
+certain amount of money for the year to be credited to the account. The amount is divided 
+into 26 equal deductions from your paycheck. As you incur unreimbursed medical 
+expenses, such as co-pays, the account pays you back, up to the total amount set aside. 
+For more information, see the HR Manager. 
+
+
+EMPLOYEE BENEFITS 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 3-24 
+3.22 
+LEAVE RESULTING FROM MAJOR OCCURRENCES 
+Employees may elect to use their accrued PTO to secure paid leave for time away from 
+work to care for their loved ones or property, or if the Company suspends operations due 
+to major occurrences or extreme weather conditions such as unusually heavy rainstorms, 
+floods, hurricanes, tsunamis, or other disasters.  
+ 
+ 
+
+
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 4-1 
+4. 
+PROFESSIONAL DEVELOPMENT 
+The Company encourages employees to participate in professional seminars and programs in 
+continuing education. The individual and the Company both benefit from the knowledge 
+acquired. 
+4.1 
+EXAMINATIONS FOR REGISTERED PROFESSIONALS 
+Registration is a requirement for the practice of Professional Engineering under the laws 
+of all states and of many countries. It is therefore the policy of the Company that 
+engineers in responsible positions be registered. Under special circumstances, the Office 
+of the President may waive this requirement. We believe that registration is valuable to 
+the Company, the profession, the individual, and the community. 
+The Company will assist individuals to become registered by the following: 
+ Giving time off at full pay to take the necessary examination, 
+ Paying the fee for the first examination, and 
+ Paying the license renewal fee. 
+The Company urges qualified personnel to consider this matter seriously and to take the 
+necessary steps to become registered. 
+4.2 
+PROFESSIONAL ORGANIZATIONS 
+It is important for the continued growth of the Company that employees advance 
+professionally. One effective step in professional growth is active membership in 
+technical and professional societies. Therefore, the Company encourages its qualified 
+employees to join at least one of the leading technical societies and actively support it on 
+the local level. 
+Examples of the society or organization are ASCE, ACECH, and GBA. 
+In connection with local professional activities, the Company may allow reasonable time 
+off to attend luncheon meetings. Attendance at these meetings should be approved by 
+the employee’s immediate supervisor prior to each meeting. The employee will pay the 
+cost of luncheon meetings. 
+The Company will pay the cost of meals at dinner meetings of local professional societies 
+for all levels of professional employees, including officers. There will be no payment of 
+time for attending dinner meetings. Again, your supervisor should approve attendance at 
+these meetings in advance. 
+4.3 
+WRITING TECHNICAL PAPERS  
+We believe that technical papers and publications provide positive publicity for the 
+Company and for the individual engineer. The contribution such papers make to the art 
+
+
+PROFESSIONAL DEVELOPMENT 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 4-2 
+and science of engineering is an additional professional value. Therefore, the policy of the 
+Company is to encourage all qualified personnel to write papers. These can be for local or 
+national societies or for periodicals. 
+Papers intended for publication shall be presented to the Company for review prior to 
+submittal. Papers must be written on the individual's own time; however, because of the 
+value to the firm of such papers, the Company will provide the following services as aids 
+in the preparation of the papers: 
+ Typing of drafts 
+ Use of the library and records 
+ Limited use of a drafter's time for drawings and charts 
+The client concerned must approve all papers about a specific project in advance of 
+publication. The Company’s policy on papers about specific projects is that they should 
+concern projects that have been built and are operating successfully, rather than projects 
+in the preconstruction stage. Any prize or payment for articles accepted for publication 
+will belong to the author. 
+If a technical paper is selected for presentation at a society meeting on the continental 
+United States, the Company may pay the travel expenses and provide the time necessary 
+for the author to attend the meeting to make the presentation. 
+4.4 
+EDUCATIONAL & TRAINING PROGRAMS 
+Some educational and training programs are mandatory, depending on your position.  For 
+all non-mandatory training and educational programs, Employees should submit details 
+of the programs they would like to attend to the President, along with an estimate of the 
+necessary expenses. If attendance is approved, the Company will normally pay the 
+seminar fee and expenses for travel and lodging. The Company may approve a request to 
+compensate  hourly employees for time spent taking courses during regularly scheduled 
+work hours if the subject matter relates directly to the employee’s work assignments and 
+responsibilities. Additional hours of training for elective programs that extend beyond an 
+employees’ regularly scheduled work day will generally be on the employees’ own time.      
+All employees who agree to attend a Company-sponsored training session must give the 
+planner 24 hours’ notice if they are unable to attend a scheduled class.  
+The Company will cover the costs of the following mandatory training classes, which are 
+job requirements. In addition to enrollment costs, employees will be compensated for 
+class times: 
+4.4.1 Drilling Department Personnel  
+ 
+Obtaining and maintaining a CDL or Type-4 driver's license. See Section 6.8.1, 
+Driver’s License. 
+ 
+Hazardous Waste - initial 40 hour or annual 8 hour refresher  
+
+
+PROFESSIONAL DEVELOPMENT 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 4-3 
+ 
+Driver’s Improvement  
+ 
+Forklift Training  
+ 
+10-hour and/or 30-hour OSHA Construction Safety Training 
+ 
+CPR/ First Aid  
+4.4.2 Laboratory Department (Field Personnel) 
+ 
+ACI Certification 
+ 
+Field Sampling and Testing Qualification Training 
+ 
+Nuclear Gauge Certification 
+ 
+Hazardous Material DOT Training – Portable Nuclear Gauge 
+ 
+CPR/First Aid 
+ 
+10-hour and/or 30-hour OSHA Construction Safety Training 
+4.4.3 Laboratory Department (Laboratory Personnel) 
+ 
+ACI Certification 
+ 
+CPR/First Aid 
+4.4.4 Staff Engineers/Staff Geologists (Field Personnel) 
+ 
+Hazardous Waste - initial 40 or 24-hour and annual 8-hour refresher  
+ 
+10-hour and/or 30-hour OSHA Construction Safety Training 
+ 
+CPR/ First Aid 
+ 
+
+
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 5-1 
+5. 
+COMMUNICATIONS 
+5.1 
+COMMUNICATIONS/OPEN DOOR POLICY 
+The Company seeks to create an atmosphere where employees will feel free to contact 
+management for information or advice on any matter of rightful concern to either. You 
+are encouraged to express your opinions freely with management regarding the 
+Company's policies, working conditions, and production processes. Through such means 
+as memoranda and meetings, the Company will, in turn, keep employees informed on all 
+matters in which they have a legitimate interest. 
+The Company encourages its employees to maintain open communication with their 
+supervisors. If you have a work-related question or problem, you should discuss it with 
+your supervisor or department head. If the problem is not resolved after such a 
+discussion, see the HR Manager. 
+If you feel that you have still not received a satisfactory answer to your question, discuss 
+the matter with the President. 
+5.2 
+SUGGESTION PROGRAM 
+As employees of the Company, you can contribute to our future success and growth by 
+submitting suggestions for practical work improvements or cost-saving ideas.  
+A suggestion is an idea that will benefit the Company by solving a problem, reducing costs, 
+improving operations or procedures, enhancing customer service, eliminating waste or 
+spoilage, or making the Company a better or safer place to work. Personnel issues, 
+declarations, statements, or complaints concerning co-workers, vendors, clients, or 
+management, or gripes without accompanying solutions or recommendations are not 
+suggestions and should be directed to either HR, supervisors, managers, and/or the 
+Company President, pursuant to the Company’s policies regarding the timely and proper 
+discussion of terms and conditions of employment, the reporting of concerns, and the 
+filing/reporting of complaints, and/or policy violations. 
+All suggestions should describe the problem or condition to be improved and explain in 
+detail the solution or improvement and the reasons why it should be implemented. If you 
+have questions or need advice about your idea, ask your supervisor for help.  
+A suggestion box is located by Word Processing. After HR Manager reviews submittals, 
+they will be forwarded to the President. If your suggestion is not anonymously submitted, 
+clearly provide your name and contact info and you will be notified as soon as possible 
+whether your suggestion has been adopted, adjusted, or rejected in whole or in part. 
+
+
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 6-1 
+6. 
+COMPANY REGULATIONS 
+6.1 
+RULES OF CONDUCT 
+The work we do and how we do it impacts the health, safety, and wellbeing of many 
+parties. To protect ourselves and others, and to ensure orderly operations and provide 
+the best possible work environment, the Company expects employees to follow rules of 
+conduct that will protect the interests and safety of all employees, clients, vendors, 
+partners, the Company and the general public. It is important for all employees to be 
+familiar with and accept these rules of conduct. 
+While not intended to list all the forms of behavior that are considered unacceptable in 
+the workplace, the following are examples of rule infractions or misconduct that may 
+result in disciplinary action, including termination of employment. Employees are 
+expected to familiarize themselves with all of the rules and adhere to them to the extent 
+that such adherence does not otherwise violate employees’ rights to engage in protected 
+and/or concerted activity.  
+A. Possession, distribution, sale, transfer, use of or under the influence of alcohol, illegal 
+drugs or drug paraphernalia in the workplace, while on duty, or while operating 
+employer-owned vehicles or equipment. 
+B. Gambling or promoting gambling during working hours and/or on Company premises 
+at any time. 
+C. Employees are expected to cooperate with coworkers, supervisors/managers, 
+customers and vendors; Always do everything you can to be fair and courteous to 
+fellow employees, customers, vendors, suppliers, and other people who work on 
+behalf of the Company. Employees should particularly avoid behaviors that violate the 
+Company’s policies regarding appropriate interactions with others. 
+D. Hostile and disparaging comments about others. Similarly, employees should not send 
+make, distribute, post, or publish messages, statements, texts, photographs, video, or 
+audio that reasonably could be viewed as disparaging or defamatory to others.  
+E. Rude, discourteous, unprofessional, un-businesslike, condescending or otherwise 
+socially unacceptable behavior; 
+F. Speaking on behalf of the Company without management’s express permission to do 
+so or making or publishing statements that defame or intentionally misrepresent the 
+Company’s products and/or services. 
+G. Fighting, physically intimidating actions, threatening violence, or other unlawfully 
+disruptive behaviors in the workplace; disorderly conduct in the workplace or during 
+work times.    
+H. Soliciting or accepting gifts or gratuities from customers or vendors; 
+I. 
+Pilferage, theft, or misappropriation or unauthorized possession or custody of 
+Company property or the property of others; any attempt to pilfer, steal, or 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-2 
+misappropriate any such property; any unauthorized use or taking of Company 
+equipment and/or supplies (including but not limited to computer use). 
+J. Intimidating, threatening, insubordinate and disrespecting customers and vendors 
+or anyone in contact with the company;  
+K. Uncooperative behavior, refusals to comply with orders or to perform work, or other 
+on-the-job behaviors that adversely affect operations.  
+L. Willful or repeated violations of the Company's cash or purchase procedures; 
+M. Improper and unauthorized disclosure of confidential Company information as 
+defined by the Confidentiality policy in this employee handbook; misappropriation of 
+Company intellectual property, including improper, unauthorized, and unlawful use 
+of Company Logos or other confidential Company information.   
+N. Falsification of Company records (including time cards) or the giving of false reports; 
+O. Possession of dangerous or unauthorized materials, such as firearms or other 
+weapons on Company premises or at a job site; 
+P. Excessive or chronic tardiness or absences that are otherwise unprotected by 
+disability or other employment or labor laws; 
+Q. Violation of Company safety and health rules; 
+R. Overstaying a Company authorized leave of absence without prior authorization; 
+S. Direct interference with others in the proper performance of their jobs. During 
+working time, the Company has every right to expect employees to perform their 
+work and follow directives. 
+T. Unsafe behaviors, including horseplay and/or disorderly conduct while on the job, on 
+Company premises, or at other workplace locations; 
+U. Unlawful harassment of employees or customers, including sexual harassment; 
+V. Failing to keep equipment, vehicles, or any other Company property in safe condition 
+and clean; 
+W. Violation of any lawful Company policies, rules, or procedures, including those set 
+forth in this handbook; 
+X. Placing personal long-distance phone calls without reimbursing the Company;  
+Y. Unsatisfactory performance or conduct that is not otherwise considered protected by 
+law; 
+Z. Negligence or improper conduct leading to damage of employer-owned or customer-
+owned property; 
+AA. Smoking in prohibited areas; 
+BB. Violation of policy prohibiting sexual and other forms of harassment. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-3 
+Employment with the Company is at-will and at the mutual consent of the Company and 
+the employee, and either party may terminate that relationship at any time, with or 
+without reason, and with or without advance notice. There is no promise of progressive 
+discipline for violation of the above rules and the Company reserves the right to terminate 
+an employee at any time and for any reason, as provided by law. 
+Nothing in the above rules or policies are designed or will be interpreted or applied in a 
+manner that chills, discourages, or otherwise interferes with an employee’s rights 
+protected by Section 7 of the National Labor Relations Act, including the right to be 
+engaged in protected concerted activities like discussing terms and conditions of 
+employment, engaging in lawful protests, and other collective bargaining activities 
+protected by law.  
+6.2 
+PUBLIC IMAGE 
+The Company always wants to make a favorable impression on the public and its clients. 
+Employees who are well groomed, cheerful, courteous, and helpful are important to this 
+effort. Your clothing, appearance, attitude and conduct are expected to be appropriate 
+for a business environment. We all must look neat and use good taste and common sense 
+in our grooming, dress and hygiene. Employees of certain departments may be required 
+to follow specific requirements and dress codes. 
+The following are guidelines for acceptable and unacceptable appearance/work attire, 
+and the Company has the right to determine and enforce as permitted by law, what is 
+acceptable and what is considered conservative in appearance. 
+Acceptable 
+ Hemlines for skirts, dresses, and culottes should be of reasonable length.  
+ Shoes, including sling-back styles and slip-ons. 
+ Hairstyles and color should be neat and appropriate for our business work 
+environment.  
+ Jewelry, nails and accessories should be appropriate and in good taste. Earrings 
+should be conservative in style and size.  
+ Makeup and perfume, when worn, should be conservative and in good taste. 
+ Aloha shirts, dress shirts, slacks, shoes and socks. 
+ 
+Unacceptable 
+ Revealing, provocative, or sexually suggestive clothing 
+ Low-cut necklines 
+ Short skirts/shorts, torn, or tight-fitting clothing.  
+ Rubber slippers 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-4 
+ Tattoos must be hidden from public view during work hours 
+ T-shirts with inappropriate or offensive gestures or advertising 
+If you have doubt as to whether a garment is acceptable for the workplace, please refrain 
+from wearing it. 
+If you report to work improperly dressed, you will be sent home by your Supervisor to 
+change into proper attire. This time is not compensable. 
+6.3 
+SMOKE FREE ENVIRONMENT 
+We are committed to minimizing the harmful effects and discomfort smoking produces 
+in the workplace and to preventing accidental fires caused by smoking. Smoking is 
+prohibited in all enclosed and partially enclosed areas of the Company premises. These 
+areas include all offices, in the lab, in the drill area and equipment yards, at all work sites, 
+and while you work. Smoking is also prohibited at all times in Company vehicles. Effective 
+January 1, 2016, the prohibition now includes electronic smoking devices also known as 
+e-cigarettes. 
+Smoking is permitted only during breaks and is not permitted in designated “Non-
+Smoking” areas, in any enclosed area, or within 20 feet of doorways, windows and 
+ventilation intakes for the prevention of secondhand smoke drifting into enclosed areas. 
+6.4 
+HEALTH AND SAFETY 
+The Company is obligated by state and federal laws to maintain a workplace that is free 
+from recognized hazards causing, or likely to cause, death or serious physical harm. 
+Additionally, the Company has the specific duty to comply with the safety and health rules 
+and regulations issued under these laws. 
+You are required by the same laws to comply with those safety and health regulations 
+that apply to your own actions and conduct. You must immediately report any unsafe 
+condition or actions to your supervisor. 
+The Company is committed to providing all employees with a safe work environment. The 
+effort to ensure safe working conditions requires all employees to work safely. Injury to 
+any employee means a loss to both that employee and the Company. All employees have 
+a duty to take reasonable care to ensure that they do not endanger themselves or anyone 
+else by their acts or omissions. Refer to GEOLABS’ Occupational Health and Safety 
+Program & Manual. 
+6.5 
+ALCOHOL-FREE AND DRUG-FREE WORKPLACE 
+The Company is committed to prevent substance abuse-related accidents and incidents 
+by our employees. We also encourage the rehabilitation of employees who have 
+substance abuse problems. This Policy helps us maintain these commitments to our 
+employees and the general public. Refer to GEOLABS’ Substance Abuse Policy. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-5 
+Federal laws and regulations mandate that the Company perform drug and alcohol testing 
+for all employees that may operate Commercial Motor Vehicles. 
+6.6 
+COMPUTER, NETWORK AND INTERNET USAGE 
+Internet access to global electronic information resources on the World Wide Web is 
+provided to the Company to assist employees in obtaining work-related data and 
+technology. The following guidelines have been established to help ensure responsible 
+and productive Internet usage. This policy applies to all users of Company owned and 
+operated computer systems and networks.  
+All Company supplied technology including the internet connections, intranet, computer 
+systems, mobile devices, and the messages, files, data, data storage, software and other 
+information stored or transmitted on them are the property of the Company. All 
+information created, sent or retrieved through the Company’s internet, intranet, and 
+computer system and all activities conducted using the Company’s internet and computer 
+system should not be considered private or confidential. As such, the Company reserves 
+the right at all times and without prior notice to the employee to inspect and search the 
+Company’s internet, intranet, devices, social media and email accounts, and computer 
+system and any and all information contained therein to determine whether this policy 
+or any other Company policy has been complied with or violated. These inspections may 
+be conducted during or outside business hours and in the presence or absence of the 
+employee.  
+The Company also reserves the right to regulate the use of and inspect and search 
+personal internet and network communication devices brought into the workplace. See 
+Section 6.6.4; Bring Your Own Device (BOYD) Policy.  
+6.6.1 E-Mail and Internet Usage 
+All Internet and intranet data that is composed, transmitted, or received via our 
+computer communications systems, devices, or networks is considered to be part 
+of the official records of the Company and, as such, is subject to disclosure to law 
+enforcement or other third parties. Consequently, employees should always 
+ensure that the business information contained in Internet e-mail messages and 
+other transmissions is accurate, appropriate, ethical, and lawful. 
+Personal use of Internet and e-mail services, whether via personal (BYOD) or 
+Company-owned devices or networks, cannot interfere with business operations 
+and must be limited to non-working hours (breaks, lunch). Personal data files 
+and/or folders shall not be stored on the Company server (H, U or any other 
+sharable Drive). 
+E-mail and Internet services, or any other network or computer resources, 
+including personal internet devices and non-Company networks shall not be used 
+in the workplace for viewing, archiving, storage, distribution, editing or recording 
+of threatening, discriminatory, offensive, intimidating, obscene, harassing or 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-6 
+derogatory material, or any kind of sexually explicit (pornographic) image, 
+material or document, or be disruptive to any employee or other person. 
+Examples of unacceptable content may include, but are not limited to, sexual 
+comments or images, racial slurs, gender-specific comments, or any other 
+comments or images that could reasonable offend someone on the basis of race, 
+age, sex, religious or political beliefs, national origin, disability, sexual orientation, 
+gender identity, or any other characteristic protected by law.  
+The following behaviors are examples of additional actions and activities that are 
+prohibited and can result in disciplinary action: 
+ 
+Creating, sending, sharing, or posting discriminatory, rude, defamatory, 
+harassing, retaliatory, or threatening messages, images, or videos; 
+ 
+Use the organization's time and resources for personal gain; 
+ 
+Participate in the viewing or exchange of pornography or obscene materials; 
+ 
+Sending or posting messages that are racial slurs, derogatory, insulting, 
+threatening, harassing, intimidating or interfere with employee’s job 
+performance; 
+ 
+Use the E-mail (domain@geolabs.net) for non-work related purposes;  
+ 
+Employees should not transmit messages or other communications by means 
+that either mask or hide their identity or indicate that they are sent by 
+someone else. Employees shall identify themselves honestly, accurately, and 
+completely and respect copyright, software licensing rules, property, and 
+privacy rights; and 
+ 
+Making or creating recordings, video or audio or both, of others in the 
+workplace without the express prior permission of management. 
+Nothing in this policy is intended to prohibit or interfere with employees engaging 
+in protected concerted activity or exercising their Section 7 rights under the 
+National Labor Relations Act. 
+6.6.2 Computer Work Station and Network  
+No employee may use any Company equipment to knowingly download or 
+distribute any pirated software. Any software or files downloaded via the internet 
+into the Company’s network may later be deemed the property of the Company. 
+Such files or software may be used only in manners consistent with their licenses 
+or copyrights.  
+No employee may use Company facilities knowingly to download or distribute 
+pirated software or data.  
+No employee may use the Company’s internet to deliberately propagate any virus, 
+worm, Trojan horse, or trap-door program code.  
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-7 
+No employee may use the Company’s internet knowingly to disable or overload 
+any computer system or network, or to circumvent any system intended to 
+protect the privacy or security of another user. 
+The Company’s internet and computer system must not be used to violate the 
+laws and regulations of the United States or any nation, state, city or province in 
+any way. Use of Company property for illegal activity is grounds for discipline, 
+including immediate termination. 
+Users of The Company’s information systems are prohibited from using password 
+protection to restrict access to files on Company systems, without authorization 
+from the Company’s Network Administrator. 
+The Company purchases and licenses the use of various computer software for 
+business purposes and does not own the copyright to this software or its related 
+documentation. Unless authorized by the software developer, the Company does 
+not have the right to reproduce such software for use on more than one computer. 
+Employees may only use software on local area networks or on multiple machines 
+according to the software license agreement. The Company prohibits the unlawful 
+duplication of Company software and its related documentation.  
+Employees should notify their immediate supervisor, or any member of 
+management, upon learning of violations of this policy. Abuse of the internet 
+access or other network and/or computer/electronic devices or resources 
+provided or owned by the Company in violation of law or the Company’s policies 
+will result in disciplinary action, up to and including termination of employment. 
+Employees may also be held personally liable for any costs or damages arising 
+from violations of this policy.  
+6.6.3 Use of Blogs and Social Networking Sites 
+ 
+Do not blog or engage in other social networking on Company time.  
+ 
+Nothing in this policy is intended to prohibit or interfere with employees 
+engaging in protected concerted activity or exercising their Section 7 rights 
+under the National Labor Relations Act such as restricting employees’ rights to 
+discuss the terms or conditions of employment while not on working time.  
+ 
+Do not disclose Confidential information and Company trade secrets like sales 
+data, customer lists, or any confidential or proprietary information regarding 
+customers, vendors, and business partners or their financial data and non-
+public proprietary information.  
+ 
+Do not view, publish or post harassing, retaliatory, derogatory, or racially or 
+sexually offensive material.  
+ 
+Do not use the Company logo to imply that your communications are endorsed 
+by the Company. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-8 
+ 
+Respect all copyrights and intellectual property owned by the Company. 
+ 
+Do not indicate or imply that you are acting as a Company representative or 
+spokesperson.  
+ 
+Be truthful and respectful.  
+ 
+All social media accounts created or used on behalf of the company belong 
+solely to the company. The company retains sole ownership of all login 
+information, passwords, and the associated content of those social media 
+accounts; no employee has no any claim of ownership or interest in the 
+content created and distributed through those social media accounts; 
+Regardless of who is responsible for posting to or managing such accounts, but 
+that all followers, friends and social connections associated with the social 
+media account belong to the Company, and employees shall relinquish and 
+not use social media accounts created or used on behalf of the Company after 
+termination of their employment. 
+6.6.4 Bring Your Own Device (BYOD) Policy 
+Employees authorized to use their own personal device to access the Company’s 
+network, must comply with Section 6, Computer, Network and Internet Usage of 
+this employee handbook in addition to this Bring Your Own Device (BYOD) policy. 
+BY CONNECTING YOUR COMPANY-APPROVED DEVICE TO COMPANY NETWORKS, 
+ACCOUNTS, AND SYSTEMS, AND BY CONDUCTING COMPANY BUSINESS ON YOUR 
+COMPANY-APPROVED 
+DEVICES, 
+YOU 
+CONSENT 
+TO 
+THE 
+COMPANY’S 
+MONITORING, ACCESSING, REVIEWING, COPYING, RECORDING, AND ERASING OF 
+CONTENT ON YOUR DEVICE AS DESCRIBED IN THE COMPANY’S BYOD POLICY.  
+If your device is lost or stolen, you must immediately notify the IT Department, 
+Human Resources, and your manager.  
+For security purposes, employees conducting company business on their own 
+devices consent to the remote or direct erasure and wipe of the entire device, 
+including all business-related and personal information that may be contained 
+thereon, to be done at the Company’s request.  
+By using your personal device to conduct Company business, you agree to assume 
+all risk associated with such use, including the risk of personal data loss or breach 
+in the even agree that a data wipe, erasures, or other IT interventions are required 
+to protect Company information and interests.   
+The Company will not be responsible for any losses, damages, or liability arising 
+out of your use of a personal device to achieve the Company’s business purposes, 
+including any loss of access to or corruption of data, software, or applications, or 
+loss of access to or functionality of the device. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-9 
+Employees are responsible for the upkeep and maintenance of their BYOD 
+device(s). The Company will not be responsible for lost, stolen or damaged BYOD 
+device(s). To the extent permitted by the NLRA, the Company also reserves the 
+right to regulate the use of and inspect and search personal internet and network 
+communication devices brought into the workplace or used to access the 
+Company’s network.  
+Employees who are authorized to BYOD must: 
+ 
+Ensure that their BYOD device(s) are properly secured physically and virtually 
+via password protection. 
+ 
+Report lost or stolen BYOD devices to the HR Manager immediately. 
+ 
+Report all instances where the Company’s network or information was 
+accessed via their BYOD device by anyone who is not unauthorized to do so. 
+ 
+Use the Company network for work related tasks and functions only. 
+ 
+Provide the Company login in and password information to their BYOD device 
+upon request. 
+ 
+Install up to date computer security software. 
+ 
+Comply with the Company’s demands to remotely secure, wipe, erase, or 
+lockdown an employee’s lost or stolen BYOD device. 
+ 
+Prior to terminating employment, or prior to selling, transferring, replacing, or 
+otherwise changing BYOD devices, notify the Company of the same and 
+provide the Company adequate time and access to the device to ensure 
+compliance with data security protocols. 
+Employees who are authorized to BYOD may not: 
+ 
+Allow unauthorized individuals to use their BYOD device to access the 
+Company’s network or information. 
+ 
+Download, save, backup or transfer information from the Company network 
+to their BYOD device, disc, hard drive, cloud drive or any other means of data 
+storage without prior authorization. 
+ 
+Modify, distort or remove security measures set in place to secure the 
+Company network. 
+ 
+Use their BYOD audio, video and still image recording functions to record 
+anything on Company property or regarding company employees, customers, 
+vendor, and business partners as well as confidential information regarding 
+financial data and non-public proprietary information unless authorized to do 
+so by Management. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-10 
+ 
+Utilize their BYOD device while operating vehicles or machinery owned by the 
+Company or in a manner otherwise prohibited by Sections 6.7.1 and 6.7.2 
+below. 
+ 
+Use their BYOD device to work unauthorized overtime by conducting Company 
+business outside of regularly scheduled working hours without prior 
+supervisory permission to do so. 
+ 
+Violate any policies or provisions of Section 6, Computer, Network and Internet 
+Usage when using BYOD Devices. 
+6.7 
+COMPANY CELLULAR PHONES 
+The Company may provide a business cell phone to employees where job or business 
+needs demand access to an employee for work-related communications. 
+Employees in possession of Company equipment such as a cell phone are expected to 
+protect the equipment from loss, damage or theft. Upon resignation or termination of 
+employment, or at any time upon request, the employee may be asked to produce the 
+phone for return.  
+All employees are expected to follow applicable state or federal laws or regulations 
+regarding the use of cell phones at all times. 
+6.7.1 Safety Issues 
+The use of a cell phone for any communication purpose is prohibited without a 
+hands-free device (except to make a 911 emergency call) while: 
+ 
+Driving a Company vehicle at any time, or 
+ 
+Driving a personal, rented, or borrowed vehicle being used on Company 
+business, or 
+ 
+Conducting Company business while driving a vehicle of any type, no matter 
+who owns it. 
+Safety must come before all other concerns; keep your eyes on the road. The only 
+time you should use a cell phone is when the vehicle is not on a roadway (including 
+roadway shoulders or emergency lanes). Wait until stopped and parked in a safe 
+location to dial, receive, converse, read, or compose text messages on the cell 
+phone in any way.  
+Employees are prohibited from using any BYOD or Company issued device to 
+conduct Company related business while driving a vehicle. Employees who are 
+charged with traffic violations resulting from the use of their cell phone while 
+driving will be solely responsible for all liabilities that result from such actions.  
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-11 
+6.7.2 Hands-Free Device 
+Non-transmitting hands-free devices will be provided with Company issued 
+phones to facilitate compliance with the provisions of this policy.  Employees are 
+responsible for ensuring that they are issued functional devices and for securing 
+repairs or replacements as needed.  Inadequate, broken, or missing equipment is 
+no excuse for violations of this policy. 
+6.7.3 Reimbursement for Cell Phone Use 
+The Company will reimburse an employee $50 per month for his/her business use 
+of a personal cell phone as a NONTAXABLE reimbursement. $23.08 will be added 
+to the bi-weekly paycheck as a NONTAXABLE reimbursement. $23.08 is $50 per 
+month spread over 26 paychecks. 
+6.8 
+DRIVING COMPANY VEHICLES 
+Use of an assigned Company (non-pool) vehicle is allowed between home and office 
+and/or job site for business purposes only. Use of an assigned Company (pool) vehicle is 
+allowed between office and job site only. Unless approved in writing by management, 
+personal use of a Company vehicle is prohibited. ONLY authorized Geolabs employees are 
+permitted to drive Company vehicles.  
+Employees driving a Company vehicle or driving on Company business must observe all 
+safety, traffic, and criminal laws. No driver may consume alcohol while driving a Company 
+vehicle, while on Company business, while in a Company vehicle, or prior to the 
+employee's shift if such consumption would result in a detectable amount of alcohol 
+being present in the employee's system while on duty. Any illegal, dangerous, or other 
+conduct while driving that would tend to place the lives or property of others at risk is 
+prohibited. 
+A driving class, written defensive-driving exam or both will be required, at the employee's 
+expense, if management deems them necessary. 
+All traffic tickets incurred by the employee while driving Company vehicles (parking 
+and/or moving violations) are the responsibility of the employee. 
+Any driver who receives a traffic citation from or is arrested by a law enforcement officer, 
+or who is involved in any kind of accident while driving, must inform an appropriate 
+supervisor thereof immediately or as soon as possible after the incident. Any penalty, fine, 
+imprisonment, fee, or other adverse action imposed by a court in connection with such 
+an incident must be reported immediately to an appropriate supervisor. In both of the 
+above situations, the matter will be reported to the Company's insurance carrier so that 
+a prompt decision on continued coverage of the employee can be made. 
+Employees with assigned vehicles who plan to be away from the office for more than a 
+few weeks (e.g. PTO) may be required to bring the vehicle back to the office. See the HR 
+Manager. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-12 
+6.8.1 Driver’s License 
+The assignee must maintain a valid driver’s license. A copy of the new license, renewal, 
+or change in type of license shall be submitted to the HR Manager within 48 hours of 
+obtaining it. Drilling personnel and the mechanic are required to obtain and maintain a 
+valid CDL or Type-4 driver’s license, whichever is appropriate. See Section 4.4.1, 
+Educational & Training Programs; Drilling Department Personnel. 
+6.8.2 Driver’s Abstract 
+Employees who drive Company vehicles are required to submit a copy of his/her 
+current driver’s abstract to personnel for the Company’s insurance record before 
+the first day of work or as soon as possible after employment begins.  
+6.8.3 Vehicle Maintenance 
+Employees that have the privilege of using a Company vehicle for transportation 
+to and from home or uses a pool vehicle during working hours to and from work 
+is responsible for keeping the vehicle in good condition, clean, and free of debris. 
+Employees assigned a (non-pool) Company vehicle are responsible for completing 
+all preventive maintenance and servicing, including ensuring that it is washed and 
+waxed regularly. Hourly employees assigned to perform or secure maintenance of 
+an assigned (non-pool) company vehicles must have managerial permission to do 
+so outside of normally scheduled working times.      
+Employees who operate Company vehicles are responsible for reporting 
+mechanical problems that affect the safety or operation of the vehicle. To report 
+a problem, an employee is required to complete a Repair Request Slip; submit it 
+to the HR Manager for coordination of the repair. Failure to report vehicle 
+problems constitutes negligence and will be noted and dealt with appropriately. 
+6.8.4 Reporting Vehicle Accidents 
+Employees involved in an accident, must file a police report and submit it along 
+with the Automobile/Damage Loss Report of the accident on the same day. The 
+Automobile/Damage Loss Report can be obtained from the HR Manager. NEVER 
+settle for any cash payment with the other party. Refer to Occupational Safety & 
+Health Program, Section 7, Accident Investigation & Reporting Procedures. 
+  Any employee who violates any part of this policy, or who becomes uninsurable 
+as a driver, will be subject to loss of vehicle privileges and/or other disciplinary 
+action. 
+6.8.5 Seat Belts 
+Seat belts are extremely effective in preventing injuries and loss of life. We care 
+about our employees and want to make sure that no one is injured or killed in a 
+tragedy that could have been prevented by the use of seat belts. Therefore, all 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-13 
+employees must wear seat belts when operating or traveling in a Company-owned 
+vehicle, or any vehicle on Company premises or on Company business; and all 
+occupants are to wear seat belts or, where appropriate, child restraints when 
+riding in a Company-owned vehicle, or in a personal vehicle being used for 
+Company business. All employees and their families are strongly encouraged to 
+always use seat belts and the proper child restraints whenever they are driving or 
+riding in any vehicle. 
+6.8.6 Gasoline Purchases 
+The Company is primarily using the 76 Fleet Charge Card for fuel purchases on 
+Oahu and Chevron/Texaco, Shell, and HFN charge cards on the neighbor islands. 
+Employees issued a charge card may only use them to purchase use for gasoline 
+for Company vehicles. Purchase of gasoline for personal vehicle or any other use 
+of Company charge cards is strictly prohibited. Any violation or abusive pattern is 
+subject to disciplinary action and/or termination.  
+The license plate number and mileage should be recorded on your receipt for 
+proof of purchase and then submitted to the Accounting Department for auditing 
+and filing.  
+For cash purchases, the license plate number and the mileage should be recorded 
+on the receipt and then submitted to the Accounting Department for 
+reimbursement. 
+6.8.7 Global Positioning System (GPS) 
+The Company reserves the right to install and use GPS trackers to monitor vehicle 
+location and activities for safety and business reasons. 
+GPS monitoring also aids in the recovery of stolen vehicles and to locate the 
+vehicle (and the employee) in case of an accident or emergency. 
+6.9 
+PERSONAL VEHICLE 
+Occasionally, in unusual circumstances, employees are asked to use their personal 
+vehicles for work-related transportation. In such a case, get the approval of your 
+immediate supervisor before doing so. The Company will reimburse employees for all 
+miles driven for business purposes. See Section 2.8, Use of Personal Vehicle. 
+Car maintenance, operating costs, wear and tear, damage to the vehicle (including the 
+insurance deductible) and any additional insurance for business use must be paid for by 
+the employee and will not be reimbursed. 
+6.10 
+PARKING 
+Employees’ are responsible for locating legal street parking. The Company will not pay for 
+parking citations received for having illegally parked a Company vehicle. The drill yard is 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-14 
+reserved for drilling equipment and flatbeds and the lab yard is reserved for field trucks 
+and for loading and unloading. 
+The three parking stalls in front of the Akahi laboratory and the four parking stalls on the 
+left side in the warehouse parking lot are not available for general employee parking.  All 
+other parking stalls may be used by office personnel on a first come first serve basis when 
+no street parking is available. Drill personnel may park in the drill yard and laboratory 
+personnel may park in the lab area when no street parking is available. Vehicles must not 
+block the entrant gates in the drilling and lab areas. 
+6.11 
+WORK RECORDS & ACCOUNTING CODES 
+All time charged on an employee's time sheet and data sheet, must be complete and have 
+the proper accounting code before it is submitted to the accounting department for 
+payroll and job cost processing. 
+6.12 
+SUPPLY PURCHASE 
+An employee who intends to make a supply purchase must complete a purchase order 
+request. Purchase order forms are available from the Drilling Department or the 
+Accounting office. The purchase order must have the following information: description 
+of the item to be purchased, vendor name, and (if applicable) the work order number and 
+project for which the purchase will be used. The employee must sign the purchase order, 
+and have it approved by authorized personnel. Without a Company purchase order, it 
+may be difficult to make a purchase from certain vendors. Receipts accompanying the 
+purchase must be submitted to Accounts Payable. 
+6.13 
+BUSINESS TRAVEL  
+6.13.1 Travel Pay 
+See Section 2.6, Travel Time; Overnight Travel. 
+6.13.2 Per Diem 
+A per diem will be paid for out-of-town assignments at the following rates 
+established by the Company. 
+a. More than one day business travel to the neighbor islands; full per diem of $50 
+will be paid when overnight stay is required. On the last day of such stay a per 
+diem of $25 unless the employee is on the job for more than 9 hours. 
+b. One day business travel to the neighbor island; per diem of $20 if less than 9 
+hours; per diem of $40 if greater than 9 hours. 
+Outer island trips to Honolulu for training purposes will not be paid per diem. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-15 
+6.13.3 Travel Advances 
+An employee may obtain an advance, in the form of a check, to cover anticipated 
+business expenses while on a travel assignment (foreign or domestic). Request for 
+such an advance should be made in writing on an Expense Sheet form. Indicate 
+anticipated days for per diems, car rental and gasoline, and other field expenses. 
+An employee is encouraged to make his/her own travel arrangements if s/he has 
+a personal preference.  
+Completed Expense Sheets and Company charge cards, along with the necessary 
+receipts for any completed trips must be turned in within 24 hours upon arrival in 
+Honolulu. If any refund or credit results from changes in accommodations or 
+routing, it should be returned to the Company, and any cash reimbursement on 
+any unused balance of travel advance should be settled with the Accounting 
+Department within the period of time specified above. See Section 6.8.6, Gasoline 
+Purchases.  
+Cash advances and airline tickets are the responsibility of the employee and 
+should be kept in a safe and secure place. See Section 6.14, Loss of Company 
+Property. 
+6.13.4 Travel and Entertainment Reimbursements 
+All travel and entertainment costs incurred for business purposes and deductible 
+under the Internal Revenue Code will be reimbursed by the Company if approved 
+in advance and submitted to the Company on the Personal Expense Sheet with 
+supporting receipts and/or invoices satisfactory to the Company. The Company 
+may request additional information to substantiate any reimbursement request. 
+6.13.5 Carriers 
+Except in special cases, the employee will fly to his/her destination by the most 
+direct route possible, in economy class or its equivalent. 
+Employees ordinarily will use regularly scheduled commercial airlines for air travel 
+on Company business. They may use chartered or military aircraft only when there 
+is no alternative. 
+Employees are expected to retain the passenger's copy of all used tickets for 
+inclusion with their expense accounts. The Company needs these copies as proof 
+of the trip and as necessary documentation for the project charge. This is 
+especially important on overseas flights when your route changes, because U.S. 
+airlines are committed to maintaining the higher insurance coverage when the 
+original ticket is issued and originates in the United States. 
+6.14 
+LOSS OF COMPANY PROPERTY 
+When a loss or damage occurs, the office and/or the police are to be notified immediately. 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-16 
+Employees may be subject to disciplinary action if the loss or damage to company 
+property was the result of the employee’s willful negligence. 
+6.15 
+COMPANY LIBRARY MATERIALS 
+The Company has an extensive library of materials concerning the geotechnical field. We 
+encourage our technical employees to use it, during work or spare time. These books and 
+other material have proved valuable to us, and most are hard to replace. An employee 
+who takes material from the library is responsible to return the material to the same place 
+in the library. 
+6.16 
+LOCKERS 
+ The Company provides lockers and locks as needed.  
+ Lockers are reserved for field personnel and for individuals who do not have an 
+assigned desk. 
+ Employees may be assigned an individual locker for storage of essential personal 
+belongings. The Company is not responsible for personal belongings left in the lockers. 
+ For the protection of employees and the Company, management reserves the right to 
+inspect employee lockers and personal belongings on Company premises. If you 
+object to having your belongings inspected, please do not bring them on premises. 
+See Section 6.17, Security Inspection. 
+ Switching lockers is prohibited. If the lock on your locker is damaged, please report it 
+to management and ask to use an unused locker until the lock is repaired. If you are 
+assigned a locker in the Drilling Department, please do not use another one in the Lab 
+or switch without written authorization. 
+6.17 
+SECURITY INSPECTION 
+To protect you, your fellow employees, our customers, and the Company from injury or 
+the loss of property, management must reserve the right to examine any and all persons 
+or objects while on Company premises including Company vehicles. Any search or 
+inspection of his/her person or personal property located on Company premises, work 
+sites, or facilities, including, but not limited to, Company parking lots, lockers and desks. 
+See Section 6.16, Lockers. 
+We appreciate your cooperation in helping the Company prevent theft and eliminate 
+hazardous materials, alcohol and illegal drugs from our workplace. 
+6.18 
+BUILDING AND YARD SECURITY 
+Authorized personnel entering or leaving the premises during non-office hours must 
+immediately call Sentinel Alarm Company with their name and pass card number; 
+otherwise the alarm Company will call the police. Sentinel allows one 15-minute early 
+entry and one three-hour late departure without a call-in. Thus, non-office hour entries 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-17 
+requiring a call to Sentinel Alarm Company include Holidays, Sundays, and all times other 
+than those listed below. Regular business operation times are Monday through Friday 
+5:30 AM to 9:00 PM and Saturday 5:30 AM to 3:00 PM. 
+The lab doors will be locked and the alarm set by the last lab or field personnel by     3:00 
+PM but no later than 5:00 PM daily. An employee returning after 3:00 PM and finds the 
+door locked must follow the procedures to disarm and arm the security system. 
+Employees discovering a breach to the premises should follow safety protocols and 
+contact management and/or security prior to entering the premises. 
+6.19 
+VISITORS IN THE WORKPLACE 
+To provide for the safety and security of employees, visitors, and the facilities at the 
+Company, only authorized individuals are allowed in the workplace. Restricting access of 
+unauthorized individuals helps maintain safety standards, protects against theft, ensures 
+security of equipment, protects confidential information, safeguards employee welfare, 
+and avoids potential distractions and disturbances. 
+All visitors should report and enter the Company at the reception area. Authorized visitors 
+will receive directions or be escorted to their destination. Employees are responsible for 
+the conduct and safety of their visitors. 
+6.20 
+CHILDREN IN THE WORKPLACE  
+The Company understands that at times there may be a need to bring a child to the 
+workplace when alternative child care is not available. However, the office is a place of 
+business and it is not equipped for child care. For the safety of your child and to maintain 
+a professional work environment, the following guidelines must be adhered to: 
+ The Child is under the age of 14 and must have adult supervision. 
+ The Child stays in an empty cubicle, in the office library or the conference room only 
+if it is available. Personnel reserve the right to use the conference room at any time. 
+ The Child is kept busy with reading materials, learning activities, electronic gadgets, 
+watching television, etc. 
+ The Child is advised to stay in his/her designated area unless they need the restroom. 
+ The Child is dressed in appropriate attire for an office environment and wears 
+footwear for his/her safety. 
+ The Child does not have an illness that should not be brought to the office.  
+ If the Child needs to rest, he/she should be advised to do so in an empty cubicle, 
+limited to no more than an hour and rest in an appropriate manner. 
+A child brought to the workplace in unavoidable situations will be the responsibility of the 
+employee parent and must be under the direct supervision of the employee parent at all 
+times. As long as the parent and child can safely abide by these guidelines without 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-18 
+diminishing anyone’s productivity, including the parent’s, we can allow your child a safe 
+haven while you work. 
+6.21 
+COMMUNICABLE AND LIFE-THREATENING ILLNESSES POLICY 
+Employees with life-threatening illnesses, such as cancer, heart disease, SARS and 
+HIV/AIDS, often wish to continue their normal pursuits, including work, to the extent 
+allowed by their condition. The Company supports these endeavors as long as employees 
+are able to perform essential job functions, meet acceptable performance standards and 
+as long as the best medical evidence available indicates that casual workplace contact 
+with the afflicted employee will not result in the transmission of the disease to other 
+employees. As is the case with all protected disabilities, the Company will make 
+reasonable accommodations in accordance with all legal requirements, to allow qualified 
+employees with life-threatening illnesses to perform the essential functions of their jobs. 
+Employee medical information will be treated confidentially. The Company will take 
+necessary precautions to protect such information from inappropriate disclosure. 
+Managers and other employees have a responsibility to respect and maintain the 
+confidentiality of employee medical information. Anyone who inappropriately discloses 
+such information is subject to disciplinary action, up to and including termination of 
+employment. 
+Employees with questions or concerns about life-threatening illnesses are encouraged to 
+contact the HR Manager for information and referral to appropriate services and 
+resources. 
+6.22 
+CONFIDENTIALITY POLICY  
+It is the Company’s policy to protect its property and proprietary information. The willful 
+disclosure of Company trade secrets and/or confidential and proprietary information 
+during or after termination of employment constitutes a violation of Company policy and 
+may result in disciplinary action up to and including discharge for current employees 
+and/or legal action.    
+Confidential and proprietary information includes any data or information that is valuable 
+to the Company and not generally known to competitors or other outsiders, regardless of 
+whether the confidential information is in printed, written, or electronic form, retained 
+in your memory, or compiled or created by you.  This includes, but is not limited to 
+documents and information relating to clients, client lists or requirements, client 
+relationships, price lists or pricing structures, profit margins, marketing and market 
+information, business plans or dealings, research or research activities, designs, plans and 
+other documents, data, or information not otherwise relating to the terms and conditions 
+of employment, but related to the Company or its client’s business.  
+Confidential information as defined by this policy and applied throughout this employee 
+handbook expressly does not include information that relates to the Company’s 
+employees or the terms and conditions of their employment and is otherwise protected 
+
+
+COMPANY REGULATIONS 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 6-19 
+by the National Labor Relations Act.  All other information and work product, including 
+letters, blueprints, memoranda, presentations, e-mail, and all other documents, whether 
+hard copy or not, is confidential and the property of the Company; as such, it may not be 
+taken, copied, shared, published or transferred from the Company’s premises, systems, 
+accounts, or networks for the employee’s personal use or other non-business related uses 
+unless the employee receives prior written authorization from the Company. 
+6.23 
+NON-SOLICITATION 
+A former employee shall not, for 12 months after the end of his/her employment with 
+the Company, solicit or attempt to entice away from the Company, any employees, 
+clients, contractors, vendors or suppliers with whom they were in contact with, 
+concerned or responsible for at any time during their employment with the Company. 
+ 
+
+
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 7-1 
+7. 
+SEXUAL AND OTHER FORMS OF UNLAWFUL HARASSMENT POLICY 
+We prohibit sexual harassment of any employee, applicant, manager, supervisor, vendor, 
+supplier, customer or member of the general public in the workplace on the basis of race, color, 
+religion, gender, sexual orientation, gender identity or expression, national origin, age, disability, 
+genetic information, marital status, amnesty or status as a covered veteran, lactation, or other 
+protected category.  
+ 
+Sexual harassment is defined as an unwelcome sexual advance, a request for sexual favors and 
+other verbal or physical conduct of a sexual nature when: (1) submission to such conduct is made 
+an implicit or explicit condition of employment; (2) submission to or rejection of such conduct 
+affects employment opportunities; or (3) the conduct interferes with an employee’s work or 
+creates an intimidating, hostile or offensive work environment. 
+ 
+This means that no manager, supervisor or employee shall threaten or imply, either directly or 
+indirectly, that another person’s refusal to submit to sexual advances or other sexual conduct will 
+adversely affect that person’s relationship and business with the company, including any 
+agreements, contracts, employment status, performance evaluation, pay, promotion, duties, 
+shifts, or any other terms or conditions of employment. Similarly, no employee shall promise, 
+imply or grant any preferential treatment in connection with another person, employee, or 
+applicant engaging in sexual conduct or consenting to or covering up harassment. Examples of 
+prohibited conduct include: 
+ Directly or indirectly requesting or suggesting sexual favors in exchange for a job, promotion, 
+raise, or business opportunity; 
+ Discipline or firing a subordinate because s/he ended, altered, or refused a romantic 
+relationship; or,  
+ Changing job performance expectations after a subordinate refuses requests for a date or 
+other requests for development of a personal relationship. 
+ 
+We prohibit unwelcome sexual or gender-based conduct in the workplace or that affects the 
+workplace. Conduct is deemed to be unwelcome when someone who experiences the conduct 
+reasonably believes or could reasonably believe it to be offensive. This victim may either be the 
+intended recipient of the unwelcome conduct or an unintended witness or bystander. Examples 
+of prohibited conduct include: 
+ Inappropriate flirtations, advances or propositions (e.g., repeated requests for dates); 
+ Inappropriate and/or unwelcome touching of an individual (e.g., back massages, hugging, 
+kissing); 
+ Gestures or comments about an individual’s body, attire, or appearance; 
+ Sexual jokes or innuendoes; 
+ Discussion about social or sexual life; 
+
+
+SEXUAL AND OTHER FORMS OF UNLAWFUL HARASSMENT POLICY 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 7-2 
+ Gender-specific words to an individual (e.g., babe, hunk, honey, dear); 
+ Use of sexually degrading or gender-specific profane words to describe an individual (e.g., b-
+t-h, c--t); or, 
+ Display in the workplace of sexually suggestive objects, cartoons, pictures, or calendars. 
+ Sharing or sending sexually suggestive texts, images, videos, or other messages that violate 
+the Company’s harassment policy. 
+7.1 
+COMPLAINT AND INVESTIGATION PROCEDURES 
+Any employee, customer, vendor, supplier or member of the public who feels that they 
+or others have been subjected to conduct that is prohibited by this Policy should 
+immediately report the matter to Management, and HR Manager. If you are not 
+comfortable reporting the behavior to your manager or direct supervisor, find another 
+member of management or the HR Manager and report the behavior immediately.  
+Employees are welcome to request and utilize an Incident / Concern Form but no 
+particular forms or procedures are required to make a report or file a complaint. 
+Once a complaint is filed or inappropriate behavior is reported, the Company will take 
+immediate and effective action to prevent future potential occurrences of prohibited 
+conduct while the matter is being investigated and addressed. 
+We will conduct a prompt and effective investigation of all allegations of prohibited 
+harassment and/or retaliation in as confidential a manner as possible. We are committed 
+to providing a workplace free of unlawful discrimination, harassment and retaliation but 
+can only do so if employees with concerns or questions bring them to our attention. 
+Reference Investigation Confidentiality Agreement Form. 
+The Company has a strict policy prohibiting retaliation against individuals who complain 
+about harassment or cooperate with an investigation. See Section 7.4, Retaliation. 
+Employees are encouraged to report inappropriate behaviors without fear of retaliation 
+or negative consequence for reporting or participating in any investigation. 
+7.2 
+CORRECTIVE ACTION/DISCIPLINE 
+If an individual is determined, after an investigation, to have engaged in conduct 
+prohibited by this Policy, s/he shall be subject to appropriate disciplinary action, up to 
+and including immediate termination of employment. 
+7.3 
+OTHER FORMS OF HARASSMENT 
+This policy also prohibits any form of discrimination or harassment of any employee, 
+customer, vendor, supplier or member of the public in the workplace and in any work-
+related setting outside the workplace, such as during business trips, business meetings 
+and business-related social events on the basis of race, color, religion, gender, sexual 
+orientation, gender identity, national origin, age, disability, genetic information, marital 
+status, amnesty or status as a covered veteran, lactation and other protected category.  
+
+
+SEXUAL AND OTHER FORMS OF UNLAWFUL HARASSMENT POLICY 
+ 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 7-3 
+We prohibit slurs, jokes, or similar-type epithets based upon any of these protected 
+categories made to any employee, customer, vendor, supplier or member of the public 
+by any employee in the workplace. Examples of prohibited conduct include: 
+ Directly or indirectly conditioning terms and conditions of employment or public 
+accommodation upon an individual’s participation or acquiescence in conduct related 
+to a protected category (e.g., requesting or suggesting that an employee attend 
+church in exchange for job benefits); 
+ Jokes or innuendoes about an individual’s protected category (e.g., jokes about racial 
+stereotypes, pejorative references to ethnic food, speaking in accents); 
+ Discussion about a protected category (e.g., religious evangelism in the workplace); 
+or, 
+ Slurs or similar-type comments or remarks about an individual’s protected category 
+(i.e., racial or sexual orientation slurs). 
+ 
+The same procedures outlined above in Complaint Procedures will be used to receive and 
+respond to complaints of such harassment. We will take appropriate action reasonably 
+designed to prevent future possible occurrences of prohibited conduct. If the individual 
+is determined, after an investigation, to have engaged in conduct prohibited by this Policy, 
+s/he shall be subject to appropriate disciplinary action, up to and including immediate 
+termination of employment. 
+7.4 
+RETALIATION 
+We prohibit retaliation against any employee or individual that has complained of sexual 
+or other forms of harassment, complained of other types of discrimination, reported or 
+complained of violations of the law or internal policy, cooperated with the investigation 
+of a complaint, or acted as a witness during the investigation of a complaint. Examples of 
+prohibited retaliation include threats, reprimands, negative evaluations, harassment in or 
+out of the workplace, hazing, and other types of adverse treatments, such as surveillance, 
+exclusion from business-related activities, or "stink eye", that are reasonably likely to 
+deter protected activity by that individual or other employees. Any employee who 
+engages in retaliation prohibited by this Policy shall be subject to appropriate disciplinary 
+action, up to and including immediate termination. 
+This policy does not create any contractual promise but instead is a description of the standards 
+of behavior expect of all employees. 
+ 
+The Company also maintains affirmative action plans in accordance with applicable federal 
+regulations. See Geolabs’ Affirmative Action Program Manual. 
+ 
+
+
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - JAN. 2019 
+ 
+PAGE 8-1 
+8. 
+WORKPLACE VIOLENCE PREVENTION POLICY 
+The Company is committed to preventing workplace violence and to maintaining a safe work 
+environment. Given the increasing violence in society in general, we have adopted the following 
+guidelines to deal with intimidation, harassment, or other threats of (or actual) violence that may 
+occur during business hours or on our premises. 
+ 
+All employees, including supervisors and temporary employees, should be treated with courtesy 
+and respect at all times. Employees are expected to refrain from fighting, "horseplay," or other 
+conduct that may be dangerous to others. Firearms, weapons, and other dangerous or hazardous 
+devices or substances are prohibited from the premises of the Company without proper 
+authorization. 
+ 
+Conduct that threatens, intimidates, or coerces another employee, a customer, supplier or 
+vendor during on or off-duty periods, will not be tolerated. This prohibition includes all 
+intimidating, hostile, threatening, and physically aggressive or confrontational acts of 
+harassment, including harassment that is based on, motivated by, or related to an individual's 
+sex or gender, gender-identity or expression, race, age, religion, color, national origin, ancestry, 
+marital status, disability, sexual orientation or any characteristic protected by federal, state, or 
+local law. 
+ 
+All threats of (or actual) violence, both direct and indirect, should be reported as soon as possible 
+to Management and the HR Manager. This includes threats by employees, their family members, 
+as well as threats by customers, vendors, solicitors, or other members of the public. When 
+reporting a threat of violence, you should be as specific and detailed as possible. 
+ 
+All suspicious individuals or activities should also be reported as soon as possible to Management 
+and the HR Manager or call the police immediately. Do not place yourself in peril.  
+8.1 
+DOMESTIC VIOLENCE 
+All individuals who apply for or obtain a protective or restraining order which lists 
+Company locations as being protected areas, must provide to the HR Manager a copy of 
+the petition and declarations used to seek the order, a copy of any temporary protective 
+or restraining order which is granted, and a copy of any protective or restraining order 
+which is made permanent. 
+8.2 
+ANTI-BULLYING  
+Workplace bullying is defined as intimidation, slandering, social isolation, or humiliation 
+by one or more persons against another.  
+We encourage employees to bring their disputes or differences with other employees to the 
+attention of Management and the HR Manager before the situation escalates. The Company is 
+
+
+WORKPLACE VIOLENCE PREVENTION POLICY 
+ 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 8-2 
+eager to assist in the resolution of employee disputes and will not discipline employees for raising 
+such concerns. 
+ 
+The Company will promptly and thoroughly investigate all reports of threats of (or actual) 
+violence and of suspicious individuals or activities. The identity of the individual making a report 
+will be protected to the extent possible. In order to maintain workplace safety and the integrity 
+of its investigation, the Company may suspend employees, either with or without pay, pending 
+investigation. 
+ 
+Anyone determined to be responsible for threats of (or actual) violence or other conduct that is 
+in violation of these guidelines will be subject to prompt disciplinary action up to and including 
+immediate termination of employment. 
+ 
+ 
+
+
+ 
+9-1 
+9. 
+DISCIPLINARY/CORRECTIVE ACTION 
+We, as a Company, consider employee discipline a management prerogative and a serious 
+responsibility. It is a necessary part of running a business and ensures fair treatment of 
+employees in an efficient and safe work environment. 
+ 
+Company regulations establish guidelines for good conduct, efficiency, and safety. They apply to 
+actions that may interfere with the safe, proper conduct of our work and the performance of 
+your job. The guidelines in this manual are examples and are not intended to be all-inclusive. 
+They are reasonable, they apply to every employee, and they will be consistently enforced. We 
+know you will want to comply with them. 
+ 
+When a clear-cut infraction occurs, disciplinary action will be taken. There is no fixed, mechanical 
+formula for determining what action will be taken in each case. The severity of any disciplinary 
+action will depend on the gravity of the situation and the nature of the infraction; however, the 
+following important factors may be considered when determining the appropriate 
+consequences, and the Company reserves the right to weigh the various factors as it best serves 
+the Company and as dictated by any lawful and legitimate business considerations: 
+ The seriousness of the offense 
+ The employee's record 
+ The circumstances surrounding the particular case 
+ Past Company practice in similar cases 
+ Changed circumstances  
+ Current operational contexts  
+ Unique personnel impacts and managerial challenges 
+Management has the exclusive responsibility and authority to determine when, whether, and 
+how to discipline employees. Discipline may consist of a verbal warning or reprimand, a written 
+warning or reprimand, loss or changes in position or responsibility, or in extreme cases, 
+suspension or termination of employment. In all cases, management reserves the right to 
+determine the type of discipline to be imposed and makes no promises of progressive discipline. 
+ 
+Company policies are for everyone's benefit and the company will make every effort to enforce 
+them in a manner that attempts to treat every employee fairly and impartially. 
+9.1 
+RESOLVING CONCERNS 
+If you have differences with your supervisor or co-workers; if you believe a co-worker is 
+not handling his/her job in a safe and professional manner; if you feel you have been 
+treated unfairly; or if you feel that a Company policy is unfair or can be improved, or if 
+you think a policy is not being properly applied, the Company will help you resolve your 
+concerns. 
+
+
+DISCIPLINARY/CORRECTIVE ACTION 
+ 
+EMPLOYEE HANDBOOK FOR GEOLABS, INC. - FEB. 2019 
+ 
+PAGE 9-2 
+Here are some options available to you, presented in no particular order: 
+1: Discuss Directly - Talk to your supervisor. If something about work is bothering you, 
+your supervisor should know about it. In fact, he or she probably already knows because 
+if you are bothered, chances are it shows in your behavior and, maybe, in your work. In 
+most cases, your problem can be solved at this level because your supervisor is usually in 
+the best position to help. But you must tell him or her what is bothering you, and the two 
+of you must discuss the problem, before he or she can help you solve it. 
+2: Get a Different Perspective - Talk to your supervisor's boss. Sometimes a working 
+relationship can deteriorate. At a certain point, clear communication can get blocked, and 
+both parties need help maintaining objectivity. If you think this is happening with you and 
+your supervisor, you are not comfortable raising issues directly with your supervisors, or 
+if you are not satisfied with the solution your supervisor proposes, you can talk to your 
+supervisor's boss and explain your concerns. He or she will try to help resolve it. 
+3: Talk to the President or HR Manager. Although it is best to resolve concerns at the 
+supervisory level where possible, you do not have to talk to anyone else first. That 
+decision is up to you. The HR Manager will work with you (and any other people you give 
+him or her permission to contact) to try to help you help resolve your concerns. 
+
+
+ 
+GEOLABS, INC. 
+DISCLAIMER 
+ 
+THE POLICIES DESCRIBED HEREIN ARE GUIDELINES REFLECTING CURRENT POLICIES AND ARE NOT 
+INTENDED TO AND DO NOT CREATE A CONTRACT BETWEEN YOU AND THE COMPANY. THE 
+COMPANY RESERVES THE RIGHT TO CHANGE, ADD, OR DELETE ANY POLICY, PRACTICE OR 
+BENEFIT (INCLUDING BENEFITS FOR WHICH AN EMPLOYEE IS ELIGIBLE BUT NOT YET ENTITLED TO 
+BE PAID) AT ANY TIME, WITH OR WITHOUT NOTICE. 
+THIS VERSION OF THE EMPLOYEE HANDBOOK REPLACES AND SUPERCEDES ALL PREVIOUS 
+VERSIONS. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+GEOLABS, INC. 
+EMPLOYEE HANDBOOK RECEIPT AND ACKNOWLEDGEMENT FORM 
+ 
+I acknowledge that I have received a copy of the Company’s Employee Handbook. 
+I understand that this Employee Handbook is a general overview of some of the Company’s 
+personnel policies and guidelines and that these policies and guidelines, as well as any other 
+policies and guidelines which may be adopted by the Company, are subject to modification, 
+discontinuation or change without notice by the President of the Company.  
+I acknowledge and understand that I alone am responsible for reading, understanding, and 
+following the guidelines and procedures contained in this Handbook. I understand that if I do not 
+understand anything in this Handbook, it is my responsibility to discuss it with either my 
+supervisor or other appropriate Company representatives. I accept responsibility for ensuring 
+that I clearly understand all Company policies and rules contained in this employee Handbook 
+and I acknowledge that I will be responsible for any violation of these policies and guidelines.  I 
+further acknowledge and understand that violation of these policies and guidelines will generally 
+constitute reason for disciplinary actions, up to and including discharge. 
+I understand that this version of the Employee Handbook replaces and supersedes all previous 
+versions.  
+I understand that because business judgments and needs may change over time, the policies and 
+guidelines described in this Handbook are not conditions of employment and do not constitute 
+any kind of employment agreement between myself and the company.  I UNDERSTAND THAT 
+THIS HANDBOOK IS NOT INTENDED TO CREATE A CONTRACT BETWEEN MYSELF AND THE 
+COMPANY. I UNDERSTAND THAT MY EMPLOYMENT IS FOR NO FIXED TERM AND MAY BE 
+TERMINATED, WITH OR WITHOUT CAUSE OR NOTICE, AT ANY TIME AT THE OPTION OF MYSELF 
+OR THE COMPANY.  
+In addition, I understand that no Company representative other than the President has the 
+authority to enter into any written or oral employment contract or agreement for employment, 
+for any specified period of time or to limit termination to certain specified reasons or only after 
+the exhaustion of certain procedures. I understand that such an agreement must be in writing 
+and signed by both parties, and I agree that no such representations have been made to me.  
+I understand the Company will evaluate my work performance and continued employment based 
+in part upon the policies and guidelines contained in this Handbook. 
+I also understand that in case of termination, I will settle all open employee charge accounts in 
+full and return all tools, Company property, including keys, prior to my last day of work.  
+THIS HANDBOOK SUPERSEDES, REPLACES AND CANCELS ALL PRIOR HANDBOOKS. 
+ 
+ 
+ 
+ 
+ 
+Print and Sign Name 
+ 
+ 
+Date 
+ 
