@@ -5,39 +5,50 @@ from datetime import datetime
 import sqlite3
 import os
 import traceback
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
-from helpers import rank_documents, ask_gemini, get_quick_view_sentences, get_system_instruction
+from helpers import rank_documents, ask_gemini_single_file, get_quick_view_sentences
 
 app = Flask(__name__)
 CORS(app)
 
 DB_FILE = "chat_history.db"
 GEO_DB = "geolabs.db"
-FAISS_INDEX_PATH = "geolab_faiss.index"
-
-# Load once
-embedding_model = SentenceTransformer("BAAI/bge-base-en-v1.5")
-faiss_index = faiss.read_index(FAISS_INDEX_PATH)
 
 # Initialize chat history DB
 def init_db():
     if not os.path.exists(DB_FILE):
-        conn = sqlite3.connect(DB_FILE)
-        cur = conn.cursor()
-        cur.execute("""
-        CREATE TABLE IF NOT EXISTS chat_history (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user TEXT,
-            question TEXT,
-            answer TEXT,
-            sources TEXT,
-            timestamp TEXT
-        )
-        """)
-        conn.commit()
-        conn.close()
+        with sqlite3.connect(DB_FILE) as conn:
+            conn.execute("""
+            CREATE TABLE IF NOT EXISTS chat_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user TEXT,
+                question TEXT,
+                answer TEXT,
+                sources TEXT,
+                timestamp TEXT
+            )
+            """)
+
+@app.route('/api/rank_only', methods=['POST'])
+def rank_only():
+    try:
+        data = request.get_json()
+        query = data.get('query')
+        min_wo = int(data.get('min', 0))
+        max_wo = int(data.get('max', 99999))
+
+        ranked = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=30)
+        return jsonify({
+            "ranked_files": [
+                {"file": doc["file"], "score": round(doc["score"], 1)}
+                for doc in ranked
+            ]
+        })
+
+    except Exception as e:
+        print("❌ /api/rank_only error:", str(e))
+        traceback.print_exc()
+        return jsonify({"error": "Failed to rank documents."}), 500
+
 
 @app.route('/api/question', methods=['POST'])
 def answer_question():
@@ -47,31 +58,10 @@ def answer_question():
         min_wo = int(data.get('min', 0))
         max_wo = int(data.get('max', 99999))
         user = data.get('user', 'guest')
-        selected_files = data.get('selected_files', [])
-        chatbot_type = data.get('chatbot_type', 'reports')
 
-        # Always rank top 5
-        top_k = 5
-        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=top_k)
-
-        ranked_files = [doc['file'] for doc in ranked_chunks if doc['file'] not in selected_files]
-        final_files = selected_files + ranked_files[:max(0, top_k - len(selected_files))]
-        relevant_chunks = [doc for doc in ranked_chunks if doc['file'] in final_files]
-
-        answer = ask_gemini(query, relevant_chunks)
-
-        conn = sqlite3.connect(DB_FILE)
-        cur = conn.cursor()
-        cur.execute("""
-            INSERT INTO chat_history (user, question, answer, sources, timestamp)
-            VALUES (?, ?, ?, ?, ?)
-        """, (user, query, answer, ",".join(final_files), datetime.now().isoformat()))
-        conn.commit()
-        conn.close()
+        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=30)
 
         return jsonify({
-            "answer": answer,
-            "sources": final_files,
             "ranked_files": [
                 {"file": doc["file"], "score": round(doc["score"], 1)}
                 for doc in ranked_chunks
@@ -82,6 +72,41 @@ def answer_question():
         print("\u274C Backend Error:", str(e))
         traceback.print_exc()
         return jsonify({"error": "An error occurred processing your request."}), 500
+
+@app.route('/api/single_file_answer', methods=['POST'])
+def answer_from_single_file():
+    try:
+        data = request.get_json()
+        print("🔍 Incoming /api/single_file_answer payload:", data)
+
+        query = data.get("query")
+        file = data.get("file")
+        user = data.get("user", "guest")
+
+        if not query or not file:
+            print("❌ Missing query or file:", query, file)
+            return jsonify({"error": "Missing query or file."}), 400
+
+        snippets = get_quick_view_sentences(file, query, GEO_DB)
+        answer = ask_gemini_single_file(query, file, snippets)
+
+        with sqlite3.connect(DB_FILE) as conn:
+            conn.execute("""
+                INSERT INTO chat_history (user, question, answer, sources, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            """, (user, query, answer, file, datetime.now().isoformat()))
+
+        return jsonify({"answer": answer})  # ✅ Make sure this return always happens
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to answer from selected file. {str(e)}"}), 500
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to answer from selected file. {str(e)}"}), 500
 
 @app.route('/api/files', methods=['GET'])
 def list_files():
@@ -99,21 +124,21 @@ def list_files():
 def get_chat_history():
     user = request.args.get("user", "guest")
     try:
-        conn = sqlite3.connect(DB_FILE)
-        cur = conn.cursor()
-        cur.execute("""
-            SELECT question, answer, sources, timestamp
-            FROM chat_history
-            WHERE user = ?
-            ORDER BY id DESC
-        """, (user,))
-        rows = cur.fetchall()
-        conn.close()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT question, answer, sources, timestamp
+                FROM chat_history
+                WHERE user = ?
+                ORDER BY id DESC
+            """, (user,))
+            rows = cursor.fetchall()
 
         history = [{
-            "question": row[0],
+            "query": row[0],
             "answer": row[1],
-            "sources": row[2].split(","),
+            "sources": row[2].split(",") if row[2] else [],
+
             "timestamp": row[3]
         } for row in rows]
 

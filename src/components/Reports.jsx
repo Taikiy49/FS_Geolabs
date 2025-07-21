@@ -1,4 +1,4 @@
-// Reports.jsx (React frontend)
+// Reports.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/Reports.css';
@@ -9,6 +9,9 @@ import API_URL from '../config';
 function Reports() {
   const { accounts } = useMsal();
   const userEmail = accounts[0]?.username || 'guest';
+
+  const [rankQuery, setRankQuery] = useState('');
+  const [questionQuery, setQuestionQuery] = useState('');
 
   const [query, setQuery] = useState('');
   const [onlySelectedMode, setOnlySelectedMode] = useState(false);
@@ -24,12 +27,13 @@ function Reports() {
   const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [quickView, setQuickView] = useState(null);
+  const [rankedOnly, setRankedOnly] = useState([]);
 
   const clearSelectedFiles = () => setSelectedFiles([]);
 
   useEffect(() => {
     axios.get(`${API_URL}/api/files`).then(res => setFiles(res.data));
-    axios.get(`${API_URL}/api/chat_history?user=${userEmail}`).then(res => setChatHistory(res.data.reverse()));
+    axios.get(`${API_URL}/api/chat_history?user=${userEmail}`).then(res => setChatHistory(res.data));
   }, [userEmail]);
 
   const filteredFiles = files.filter(file => {
@@ -41,7 +45,7 @@ function Reports() {
     return matchName && (num >= min && num <= max);
   });
 
-  const askQuestion = async (customQuery = query) => {
+  const rankFiles = async (customQuery = query) => {
     if (!customQuery.trim()) return;
     setLoading(true);
     setSelectedChat(null);
@@ -49,21 +53,43 @@ function Reports() {
     setQuickView(null);
 
     try {
-      const answerRes = await axios.post(`${API_URL}/api/question`, {
+      const res = await axios.post(`${API_URL}/api/rank_only`, {
         query: customQuery,
         min: minWO === '' ? 0 : parseInt(minWO),
         max: maxWO === '' ? 99999 : parseInt(maxWO),
+        user: userEmail
+      });
+      setRankedOnly(res.data.ranked_files);
+      setSubmittedQuery(customQuery);
+    } catch (err) {
+      alert('\u274C Failed to rank files.');
+    }
+    setLoading(false);
+  };
+
+  const getAnswerFromFile = async (filename) => {
+    if (!submittedQuery || !filename) {
+      alert("\u274C Missing filename or question.");
+      return;
+    }
+
+    try {
+      const res = await axios.post(`${API_URL}/api/single_file_answer`, {
+        file: filename,
+        query: submittedQuery,
         user: userEmail,
-        selected_files: selectedFiles,
       });
 
-      setResults(answerRes.data);
+      setResults({
+        ...res.data,
+        file: filename
+      });
+
       const updated = await axios.get(`${API_URL}/api/chat_history?user=${userEmail}`);
       setChatHistory(updated.data.reverse());
     } catch (err) {
-      alert('❌ Failed to get an answer from the server.');
+      alert('\u274C Failed to get response from Gemini.');
     }
-    setLoading(false);
   };
 
   const getQuickView = async (filename) => {
@@ -75,18 +101,6 @@ function Reports() {
       setQuickView({ filename, snippets: res.data.snippets });
     } catch (err) {
       setQuickView(null);
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      const currentQuery = query.trim();
-      if (currentQuery) {
-        setSubmittedQuery(currentQuery);
-        setQuery('');
-        askQuestion(currentQuery);
-      }
     }
   };
 
@@ -105,143 +119,132 @@ function Reports() {
   return (
     <div className="chat-container">
       <div className="chat-sidebar">
+        <div className="sidebar-title">Chat History</div>
         <div className="chat-history">
-          {chatHistory.map((chat, i) => (
-            <div className='chat-history-item' key={i} onClick={() => setSelectedChat(chat)}>
-              {chat.question}
+          {chatHistory.map((item, index) => (
+            <div
+              key={index}
+              className="chat-history-item"
+              onClick={() => {
+                setSubmittedQuery(item.query);
+                setResults({
+                  answer: item.answer,
+                  file: item.file
+                });
+              }}
+            >
+              {item.query}
             </div>
           ))}
         </div>
       </div>
 
-      <div className="chat-main">
-        <div className="filters-header">Apply filters to narrow down your file search:</div>
+      <div className="file-selector-panel">
         <div className="filter-section">
-          <input type="number" className="wo-input" value={minWO} onChange={e => setMinWO(e.target.value)} placeholder="Min WO #" />
-          <input type="number" className="wo-input" value={maxWO} onChange={e => setMaxWO(e.target.value)} placeholder="Max WO #" />
-          <input type="text" className="file-input" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search by file name" />
-          <div className="only-selected-toggle">
-            <input type="checkbox" checked={onlySelectedMode} onChange={() => setOnlySelectedMode(prev => !prev)} />
-            <label className="toggle-label">Only Selected Files</label>
-          </div>
-          <div className="topk-dropdown-container">
-            <label className="topk-dropdown-label" htmlFor="topk-select">Rank:</label>
-            <select id="topk-select" className="topk-dropdown" value={topK} onChange={(e) => setTopK(parseInt(e.target.value))} disabled={selectedFiles.length > 0}>
-              {Array.from({ length: 20 }, (_, i) => i + 1).map((val) => (
-                <option key={val} value={val}>{val}</option>
-              ))}
-            </select>
-          </div>
+          <input className='wo-input' type="number" value={minWO} onChange={e => setMinWO(e.target.value)} placeholder="Min WO#" />
+          <input className='wo-input' type="number" value={maxWO} onChange={e => setMaxWO(e.target.value)} placeholder="Max WO#" />
+          <input className='file-input' type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search file name" />
         </div>
-
         <div className="file-list-scroll">
-          {filteredFiles.map((file, idx) => {
-            const cleanName = file.replace(/\.txt$/, '');
-            const isSelected = selectedFiles.includes(file);
-            const isDisabled = !isSelected && selectedFiles.length >= topK;
-            return (
-              <div
-                className={`file-card-no-border ${isSelected ? 'selected-file' : ''} ${isDisabled ? 'disabled-file' : ''}`}
-                key={idx}
-                title={cleanName}
-                onClick={() => {
-                  toggleFileSelection(file);
-                  getQuickView(file);
-                }}>
-                {cleanName}
-              </div>
-            );
-          })}
-        </div>
-
-        {selectedFiles.length > 0 && (
-          <div className="selected-files-bar">
-            <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected.</span>
-            <button className="clear-selected-btn" onClick={clearSelectedFiles}>Clear</button>
-          </div>
-        )}
-
-        <div className="chat-output">
-          <div className="chat-columns">
-            <div className="ai-answer-section">
-              {selectedChat ? (
-                <div className="ai-answer-box">
-                  <div><strong>Question:</strong></div> {selectedChat.question}
-                  <div className="chatbot-output-title"><strong>Answer:</strong></div> {selectedChat.answer}
-                  {selectedChat.sources?.length > 0 && (
-                    <div>
-                      <div className="chatbot-output-title"><strong>Sources:</strong></div>
-                      <ul className="sources-list">
-                        {selectedChat.sources.map((src, i) => (
-                          <li key={i}><a href={`#${src}`}>{src.replace(/\.txt$/, '')}</a></li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ) : submittedQuery ? (
-                <div className="ai-answer-box">
-                  <div><strong>Q:</strong> {submittedQuery}</div>
-                  <div className="loading-response">
-                    <span className="dot-text">Generating response</span>
-                    <span className="dot-anim"><span>.</span><span>.</span><span>.</span></span>
-                  </div>
-                </div>
-              ) : results && (
-                <div className="ai-answer-box">
-                  <div className="chat-output-title"><strong>Q:</strong> {submittedQuery}</div>
-                  <div className="chat-output-title"><strong>A:</strong> {results.answer}</div>
-                </div>
-              )}
-              {quickView && (
-                <div className="chat-output-title">
-                  <strong>Quick Snippets from {quickView.filename.replace(/\.txt$/, '')}:</strong>
-                  <ul>
-                    {quickView.snippets.map((s, i) => <li key={i}>{s}</li>)}
-                  </ul>
-                </div>
-              )}
+          {filteredFiles.map((file, idx) => (
+            <div
+              key={idx}
+              className={`file-card-no-border ${selectedFiles.includes(file) ? 'selected-file' : ''}`}
+              onClick={() => {
+                toggleFileSelection(file);
+                getQuickView(file);
+              }}>
+              {file.replace(/\.txt$/, '')}
             </div>
-
-            {results?.ranked_files?.length > 0 && (
-              <div className="ranked-files-side">
-                <div className="ranked-header">Ranked File List</div>
-                <div className="ranked-files-scroll">
-                  {results.ranked_files.map((file, i) => (
-                    <div key={i} className="ranked-mini-item">
-                      <span className="mini-filename">{file.file.replace(/\.txt$/, '')}</span>
-                      <span className="mini-score">{file.score}%</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          ))}
         </div>
+      </div>
 
-        <div className="chat-input-bar">
-          <textarea
-            className="chatbot-input"
-            placeholder="Ask a question about the reports..."
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            rows={1}
-          />
-          <button
-            className="submit-arrow"
-            onClick={() => {
-              const currentQuery = query.trim();
-              if (currentQuery) {
-                setSubmittedQuery(currentQuery);
-                setQuery('');
-                askQuestion(currentQuery);
-              }
-            }}
-            disabled={loading}
-          >
-            <FaArrowRight size={16} />
-          </button>
+      <div className="chat-panel">
+        <div className="chat-columns">
+          <div className="ai-answer-section">
+            <input
+              className="chatbot-keywords-input"
+              placeholder="Enter keywords to rank files..."
+              value={rankQuery}
+              onChange={e => setRankQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  rankFiles(rankQuery.trim());
+                }
+              }}
+            />
+
+            <textarea
+              className="chatbot-input"
+              placeholder="Ask a question for a specific file..."
+              value={questionQuery}
+              onChange={e => setQuestionQuery(e.target.value)}
+              onKeyDown={async (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  const cleanQuery = questionQuery.trim();
+                  if (!cleanQuery) return;
+
+                  const activeFile = selectedFiles[0] || results?.file;
+                  if (!activeFile) {
+                    alert("\u274C Please select a file first.");
+                    return;
+                  }
+
+                  try {
+                    const res = await axios.post(`${API_URL}/api/single_file_answer`, {
+                      file: activeFile,
+                      query: cleanQuery,
+                      user: userEmail,
+                    });
+
+                    setResults({
+                      answer: res.data.answer,
+                      file: activeFile,
+                    });
+                    setSubmittedQuery(cleanQuery);
+
+                    const updated = await axios.get(`${API_URL}/api/chat_history?user=${userEmail}`);
+                    setChatHistory(updated.data.reverse());
+                  } catch (err) {
+                    alert('\u274C Failed to get response.');
+                  }
+
+                  setQuestionQuery('');
+                }
+              }}
+            />
+            <div className="chat-output">
+  {submittedQuery && results?.answer ? (
+    <>
+      <div><strong>Question:</strong> {submittedQuery}</div>
+      <div><strong>Answer:</strong> {results.answer}</div>
+      <div><strong>Source:</strong> {results.file}</div>
+    </>
+  ) : (
+    <div className="chat-placeholder">Select a ranked file and ask a question to see the answer.</div>
+  )}
+</div>
+
+          </div>
+
+          <div className="ranked-files-side">
+            <div className="ranked-header">Ranked Files</div>
+            <div className="ranked-files-scroll">
+              {rankedOnly.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="ranked-mini-item"
+                  onClick={() => getAnswerFromFile(item.file)}
+                >
+                  <div className="mini-filename">{item.file.replace(/\.txt$/, '')}</div>
+                  <div className="mini-score">{item.score.toFixed(2)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

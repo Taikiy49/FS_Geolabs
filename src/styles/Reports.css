@@ -5,14 +5,13 @@
 }
 
 .chat-sidebar {
-  width: 15%;
+  width: 12%;
   background-color: #111;
   overflow-y: auto;
   overflow-x: hidden;
   border-right: 1px solid #2c313a;
   box-sizing: border-box;
 }
-
 
 .sidebar-title {
   font-size: 12px;
@@ -25,22 +24,18 @@
 
 .chat-history-item {
   background: linear-gradient(135deg, #161b22, #1b1f27);
-  padding: 7px;
-  padding-left: 5px;
   margin-left: 5px;
   margin-right: 3px;
   margin-top: 5px;
   margin-bottom: 1px;
-  font-size: 11px;
-  color: white;
+  padding: 3px 7px;
+  font-size: 10px;
+  color: #ccc;
   cursor: pointer;
   transition: background-color 0.2s;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
-  border-radius: 3px;
-  border-bottom: 1px solid #2c313a;
-
 }
 
 .chat-history-item:hover {
@@ -48,13 +43,11 @@
   transition: background-color 0.2s;
 }
 
-
 .chat-history {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-
 
 .chat-history li:hover {
   background-color: #2a2a2a;
@@ -69,6 +62,29 @@
   overflow: auto;
 }
 
+.file-selector-panel {
+  margin-left: 8px;
+  margin-top: 8px;
+  margin-right: 8px;
+  width: 30vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.file-selector-panel {
+  scrollbar-width: thin;
+  scrollbar-color: #666 #1a1a1a;
+}
+
+.file-selector-panel::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.file-selector-panel::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
 .filters-header {
   font-size: 12px;
   color: #bbb;
@@ -78,10 +94,10 @@
 
 .filter-section {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 8px;
-  margin-top: 0;
-  height: 25px;
+  width: 30vw;
+  padding: 1px;
 }
 
 .toggle-label {
@@ -90,6 +106,7 @@
   cursor: pointer;
   margin-bottom: 2px;
 }
+
 .only-selected-toggle {
   display: flex;
   align-items: center;
@@ -132,29 +149,28 @@
   padding: 2px 5px;
   font-size: 12px;
   border-radius: 4px;
-  border: 1px solid #2c313a;;
-    background-color: #1a1a1a;
+  border: 1px solid #2c313a;
+  background-color: #1a1a1a;
   color: #fff;
 }
 
-.wo-input{
-  width: 7vw;
+.wo-input {
+  width: 5vw;
 }
 
 .file-input {
-  width: 12vw;
+  width: 10vw;
 }
 
 .file-list-scroll {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 5px;
   padding-right: 5px;
-  max-height: 150px;
   overflow-y: auto;
   margin-bottom: 5px;
-}
 
+}
 
 .file-list-scroll::-webkit-scrollbar {
   height: 6px;
@@ -172,8 +188,7 @@
   background-color: #1e1e1e;
   color: #f0f0f0;
   border: 1px solid transparent;
-    border-bottom: 1px solid #2c313a;
-
+  border-bottom: 1px solid #2c313a;
   border-radius: 3px;
   white-space: nowrap;
   overflow: hidden;
@@ -194,7 +209,10 @@
   background-color: #1a1a1a;
   border: 1px solid #2c313a;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 11px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  overflow-y: auto;
 }
 
 .chat-output-title {
@@ -227,42 +245,50 @@
   display: flex;
   align-items: center;
   padding-top: 2px;
+  
+  
+}
+
+.chatbot-keywords-input{
+  border: 1px solid #2c313a;
+  background-color: #1a1a1a;
+  color: white;
+  font-family: inherit;
+  margin-top: 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  padding-left: 5px;
 }
 
 .chatbot-input {
-  flex-grow: 1;
-  padding: 3px 8px;
-  font-size: 12px;
-  border-radius: 5px;
   border: 1px solid #2c313a;
-    background-color: #1a1a1a;
-
+  background-color: #1a1a1a;
   color: white;
-  resize: none;
   font-family: inherit;
+  margin-top: 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  padding-left: 5px;       /* Top padding to move text down */
+  min-height: 30px;         /* Ensures it's not too small */
 }
 
-.chatbot-input::placeholder {
-  color: #aaa;
-}
+
 
 .loading-response {
   display: flex;
   align-items: center;
-  font-size: 12px;              /* ✅ Match your previous style */
+  font-size: 12px;
   color: #ccc;
   font-style: italic;
   gap: 4px;
 }
 
-
 .dot-anim span {
-  display: inline-block;         /* ✅ Needed for transform animation */
+  display: inline-block;
   animation: bounce 1.2s infinite;
-  font-size: 12px;               /* ✅ Smaller font like you had earlier */
+  font-size: 12px;
   margin-left: 1px;
 }
-
 
 .dot-anim span:nth-child(2) {
   animation-delay: 0.2s;
@@ -277,12 +303,9 @@
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-3px); /* Optional: soften the bounce */
+    transform: translateY(-3px);
   }
 }
-
-
-
 
 .submit-arrow {
   padding: 5px;
@@ -298,8 +321,6 @@
   color: #1e90ff;
 }
 
-
-/* Shared Scrollbar Styling */
 .chat-sidebar,
 .chat-output {
   scrollbar-width: thin;
@@ -317,12 +338,12 @@
   background: #666;
   border-radius: 4px;
 }
+
 .topk-dropdown-container {
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 6px;
-  
 }
 
 .topk-dropdown-label {
@@ -339,7 +360,6 @@
   font-size: 12px;
   width: 41px;
 }
-
 
 .selected-file {
   background-color: #334455;
@@ -376,8 +396,6 @@
   background-color: #3ea0ff;
 }
 
-
-
 .clear-selected-btn {
   background-color: #2c313a;
   margin-top: 2px;
@@ -395,63 +413,71 @@
   color: white;
 }
 
-
 .disabled-file {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-
-
 .chat-columns {
   display: flex;
   height: 100%;
+  gap: 8px;
 }
 
 .ai-answer-section {
   flex: 3;
   display: flex;
   flex-direction: column;
+  width: 35vw;
+  padding: 1px;
 }
 
 .ranked-files-side {
   flex: 1;
-  border-radius: 6px;
-  padding: 6px 8px;
-  padding-right: 10px;
+  border: 1px solid #2c313a;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  padding: 3px 8px;
   font-size: 11px;
   color: white;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  height: 41vh;
   overflow-y: auto;
-  margin-top: auto; margin-bottom: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  width: 20vw;
+
 }
 
 .ranked-header {
   font-weight: bold;
-  color: #3ac0fa;
+  color: white;
   font-size: 12px;
-  margin-bottom: 4px;
-}
-
-.ranked-files-scroll {
-  overflow-y: auto;
+  margin-bottom: 6px;
 }
 
 .ranked-mini-item {
   display: flex;
   justify-content: space-between;
   padding: 2px 0;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.ranked-mini-item:hover {
+  color: #1e90ff;
+}
+
+.ranked-files-scroll {
+  overflow-y: auto;
 }
 
 .mini-filename {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 130px;
 }
 
 .mini-score {
   color: #aaa;
-  font-size: 11px;
 }
