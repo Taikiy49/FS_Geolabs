@@ -5,6 +5,9 @@ from datetime import datetime
 import sqlite3
 import os
 import traceback
+import faiss
+import numpy as np
+from sentence_transformers import SentenceTransformer
 from helpers import rank_documents, ask_gemini, get_quick_view_sentences, get_system_instruction
 
 app = Flask(__name__)
@@ -12,6 +15,11 @@ CORS(app)
 
 DB_FILE = "chat_history.db"
 GEO_DB = "geolabs.db"
+FAISS_INDEX_PATH = "geolab_faiss.index"
+
+# Load once
+embedding_model = SentenceTransformer("BAAI/bge-base-en-v1.5")
+faiss_index = faiss.read_index(FAISS_INDEX_PATH)
 
 # Initialize chat history DB
 def init_db():
@@ -31,29 +39,6 @@ def init_db():
         conn.commit()
         conn.close()
 
-@app.route('/api/rank_only', methods=['POST'])
-def rank_only():
-    try:
-        data = request.get_json()
-        query = data.get('query')
-        min_wo = int(data.get('min', 0))
-        max_wo = int(data.get('max', 99999))
-        top_k = min(int(data.get('top_k', 20)), 30)
-
-        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=top_k)
-
-        return jsonify({
-            "ranked_files": [
-                {"file": doc["file"], "score": round(doc["score"], 1)}
-                for doc in ranked_chunks
-            ]
-        })
-
-    except Exception as e:
-        print("\u274C Error in /api/rank_only:", str(e))
-        traceback.print_exc()
-        return jsonify({"error": "Ranking failed."}), 500
-
 @app.route('/api/question', methods=['POST'])
 def answer_question():
     try:
@@ -61,15 +46,16 @@ def answer_question():
         query = data.get('query')
         min_wo = int(data.get('min', 0))
         max_wo = int(data.get('max', 99999))
-        top_k = min(int(data.get('top_k', 10)), 30)
         user = data.get('user', 'guest')
         selected_files = data.get('selected_files', [])
+        chatbot_type = data.get('chatbot_type', 'reports')
 
-        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=20)
+        # Always rank top 5
+        top_k = 5
+        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=top_k)
 
         ranked_files = [doc['file'] for doc in ranked_chunks if doc['file'] not in selected_files]
         final_files = selected_files + ranked_files[:max(0, top_k - len(selected_files))]
-
         relevant_chunks = [doc for doc in ranked_chunks if doc['file'] in final_files]
 
         answer = ask_gemini(query, relevant_chunks)

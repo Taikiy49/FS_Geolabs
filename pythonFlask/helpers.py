@@ -39,7 +39,7 @@ def is_in_work_order_range(filename, min_wo, max_wo):
     if match:
         work_order = int(match.group(1))
         return min_wo <= work_order <= max_wo
-    return False
+    return True  # For general files like handbooks with no WO
 
 
 def rank_documents(query, db_path, min_wo, max_wo, top_k=20):

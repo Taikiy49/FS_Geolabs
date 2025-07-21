@@ -49,24 +49,10 @@ function Reports() {
     setQuickView(null);
 
     try {
-      const numSelected = selectedFiles.length;
-      const remainingToRank = onlySelectedMode ? 0 : Math.max(0, topK - numSelected);
-
-      const rankRes = await axios.post(`${API_URL}/api/rank_only`, {
-        query: customQuery,
-        min: minWO === '' ? 0 : parseInt(minWO),
-        max: maxWO === '' ? 99999 : parseInt(maxWO),
-        top_k: remainingToRank,
-        selected_files: selectedFiles,
-      });
-
-      setResults({ ranked_files: rankRes.data.ranked_files });
-
       const answerRes = await axios.post(`${API_URL}/api/question`, {
         query: customQuery,
         min: minWO === '' ? 0 : parseInt(minWO),
         max: maxWO === '' ? 99999 : parseInt(maxWO),
-        top_k: remainingToRank,
         user: userEmail,
         selected_files: selectedFiles,
       });
