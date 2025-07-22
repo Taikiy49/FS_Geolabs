@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import Reports from './components/Reports';
 import Employee from './components/Employee';
+import './App.css';
 
 const CustomLoading = () => (
   <div style={{

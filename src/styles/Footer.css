@@ -1,9 +1,10 @@
 .footer {
-  color: #999;
+  background: linear-gradient(135deg, #161b22, #1b1f27);
+  color: #bebebe;
   text-align: center;
   padding: 5px 5px;
-  font-size: 10px;
-  border-top: 1px solid #222; /* subtle */
+  font-size: 12px;
+  border-top: 1px solid #2c313a;
   margin-top: auto;
   font-weight: normal;
 }

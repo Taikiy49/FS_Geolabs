@@ -1,6 +1,6 @@
 .chat-container {
   display: flex;
-  height: 84vh;
+  height: 100%;
   overflow: hidden;
 }
 
