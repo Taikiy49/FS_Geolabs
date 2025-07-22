@@ -8,15 +8,14 @@
 }
 
 .employee-sidebar {
-  width: 20%;
-  background-color: #111;
+  width: 15%;
   overflow-y: auto;
   border-right: 1px solid #2c313a;
   box-sizing: border-box;
 }
 
-.employee-history-title {
-  font-size: 12px;
+.employee-sidebar-title {
+  font-size: 14px;
   color: #ccc;
   font-weight: bold;
   margin-bottom: 10px;
@@ -25,29 +24,33 @@
 
 .employee-history-item {
   background: linear-gradient(135deg, #161b22, #1b1f27);
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 6px;
+  margin-right: 6px;
   margin-top: 5px;
   margin-bottom: 1px;
-  padding: 5px 7px;
-  font-size: 10px;
-  color: #ccc;
+  padding: 3px 7px;
+  font-size: 12px;
+  color: white;
   cursor: pointer;
   transition: background-color 0.2s;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
-  border-radius: 4px;
+  border-radius: 2px;
+  border: 1px solid #2c313a;
+
 }
 
 .employee-history-item:hover {
-  background-color: #2c2c2c;
-  color: #1e90ff;
+  cursor: pointer;
+  transform: translateY(-.5px);
+  border-color: #1e90ff;
+  box-shadow: 0 6px 16px rgba(30, 144, 255, 0.2);
 }
 
 .employee-main {
   flex: 1;
-  padding: 20px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -70,23 +73,24 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 8px;
 }
 
 .faq-button {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background: linear-gradient(135deg, #161b22, #1b1f27);
   border: 1px solid #2c313a;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: white;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 }
 
 .faq-button:hover {
-  background-color: #1e90ff;
-  color: white;
+  cursor: pointer;
+  transform: translateY(-.5px);
+  border-color: #1e90ff;
+  box-shadow: 0 6px 16px rgba(30, 144, 255, 0.2);
 }
 
 .employee-search-bar {
@@ -136,21 +140,23 @@
 }
 
 .chat-bubble {
-  padding-right: 16px;
   font-size: 12px;
+  justify-content: center;
   word-wrap: break-word;
 }
 
 .user-bubble {
-  align-self: flex-end;
   color: white;
-  font-size: 12px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .bot-bubble {
-  align-self: flex-start;
-  color: #ddd;
+  color: white;
   overflow-y: auto;
+  font-size: 13px;
+  margin-left: 16px; margin-right: 16px;
 }
 
 
@@ -202,10 +208,65 @@
 
 
 
-.toggle-label {
-  font-size: 12px;
-  color: #ccc;
-  margin-top: 5px;
+.toggle-container {
   display: flex;
   align-items: center;
+  gap: 8px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: 8px;
+  border-bottom: 1px solid #2c313a;
+  padding: 10px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #161b22, #1b1f27);
+
+}
+
+.toggle-label-text {
+  font-size: 12px;
+  color: white;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 33px;
+  height: 16px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #666;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #1e90ff;
+}
+
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(20px);
 }

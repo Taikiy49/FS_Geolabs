@@ -20,7 +20,11 @@ const HomePage = () => {
     <div className="homepage-container" id="home">
       <div className="homepage-grid">
         {homepageCards.map((item, idx) => (
-          <div key={idx} className="homepage-card">
+          <div
+            key={idx}
+            className={`homepage-card ${item.link ? 'clickable' : ''}`}
+            onClick={() => handleClick(item.link)}
+          >
             <div className="homepage-card-header">
               <div className="homepage-icon">{item.icon}</div>
               <div>
@@ -30,7 +34,7 @@ const HomePage = () => {
             </div>
             <p>{item.description}</p>
             {item.linkText && (
-              <span className="homepage-link" onClick={() => handleClick(item.link)}>
+              <span className="homepage-link">
                 {item.linkText}
               </span>
             )}

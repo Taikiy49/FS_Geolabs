@@ -69,33 +69,31 @@
 .homepage-card-header {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
 }
 
 .homepage-icon {
   margin-right: 12px;
-  font-size: 20px;
+  font-size: 25px;
   color: #1e90ff;
 }
 
 .homepage-card h2 {
-  font-size: 18px;
+  font-size: 23px;
   margin: 0;
   color: #ffffff;
   font-weight: bold;
 }
 
 .homepage-sublabel {
-  font-size: 13px;
+  font-size: 15px;
   color: #8b949e;
-  margin-top: 2px;
+  margin-top: -7px;
   font-weight: normal;
 }
 
 .homepage-card p {
-  font-size: 13px;
+  font-size: 15px;
   color: #d0d0d0;
-  margin: 10px 0;
   flex-grow: 1;
   font-weight: normal;
 }

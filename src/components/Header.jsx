@@ -26,8 +26,8 @@ function Header() {
       <nav className="header-nav">
         <Link to="/">Home</Link>
         <Link to="/reports">Reports</Link>
-        <Link to="/admin">Admin</Link>
         <Link to="/employee">Employee Handbook</Link> {/* ✅ correct route here */}
+        <Link to="/admin">Admin</Link>
         <a href="#contact">Tools</a>
         <a href="#contact">Analytics</a>
         <a href="#contact">Coming</a>

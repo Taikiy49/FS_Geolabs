@@ -38,7 +38,7 @@ export default function Employee() {
           pairs.push({ question: raw[i].text, answer: raw[i + 1].text });
         }
       }
-      setHistory(pairs.reverse()); // newest first
+      setHistory(pairs); // newest first
     })
     .catch(() => setHistory([]));
 }, []);
@@ -101,7 +101,7 @@ setHistory(pairs);
   return (
     <div className="employee-container">
       <div className="employee-sidebar">
-        <h2 className="sidebar-title">Chat History</h2>
+        <h2 className="employee-sidebar-title">Chat History</h2>
         <div className="chat-history">
           {history.map((pair, i) => (
   <div
@@ -128,17 +128,18 @@ setHistory(pairs);
             <button key={i} onClick={(e) => handleSubmit(e, faq)} className="faq-button">{faq}</button>
           ))}
         </div>
-        <div className="toggle-label">
-  <label>
+        <div className="toggle-container">
+  <label className="toggle-switch">
     <input
       type="checkbox"
       checked={useCache}
       onChange={() => setUseCache(!useCache)}
-      style={{ marginRight: '5px' }}
     />
-    Use Cached Answers
+    <span className="slider" />
   </label>
+  <span className="toggle-label-text">Use Cached Answers</span>
 </div>
+
 
         <div className="results-panel">
           {conversation.map((item, i) => {

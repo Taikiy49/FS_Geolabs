@@ -19,7 +19,7 @@
   font-weight: 600;
   margin-bottom: 10px;
   margin-top: 10px;
-  color: #ccc;
+  color: white;
 }
 
 .chat-history-item {
@@ -146,12 +146,12 @@
 
 .wo-input,
 .file-input {
-  padding: 2px 5px;
+  padding: 4px 5px;
   font-size: 12px;
   border-radius: 4px;
   border: 1px solid #2c313a;
-  background-color: #1a1a1a;
-  color: #fff;
+   background: linear-gradient(135deg, #161b22, #1b1f27);
+  color: white;
 }
 
 .wo-input {
@@ -185,10 +185,10 @@
 .file-card-no-border {
   height: 12px;
   padding: 5px 10px;
-  background-color: #1e1e1e;
   color: #f0f0f0;
   border: 1px solid transparent;
-  border-bottom: 1px solid #2c313a;
+   border: 1px solid #2c313a;
+   background: linear-gradient(135deg, #161b22, #1b1f27);
   border-radius: 3px;
   white-space: nowrap;
   overflow: hidden;
@@ -206,8 +206,8 @@
 .chat-output {
   flex-grow: 1;
   padding: 5px 7px;
-  background-color: #1a1a1a;
   border: 1px solid #2c313a;
+   background: linear-gradient(135deg, #161b22, #1b1f27);
   border-radius: 5px;
   font-size: 11px;
   margin-top: 8px;
@@ -217,6 +217,10 @@
 
 .chat-output-title {
   margin-bottom: 10px;
+}
+
+.chat-placeholder{
+  margin: 4px;
 }
 
 .ai-answer-box {
@@ -250,25 +254,28 @@
 }
 
 .chatbot-keywords-input{
+  padding: 4px 5px;
+  font-size: 12px;
+  border-radius: 4px;
   border: 1px solid #2c313a;
-  background-color: #1a1a1a;
+   background: linear-gradient(135deg, #161b22, #1b1f27);
   color: white;
-  font-family: inherit;
   margin-top: 8px;
   font-size: 12px;
   border-radius: 4px;
-  padding-left: 5px;
 }
 
 .chatbot-input {
+  padding: 4px 5px;
+  font-size: 12px;
+  border-radius: 4px;
   border: 1px solid #2c313a;
-  background-color: #1a1a1a;
+   background: linear-gradient(135deg, #161b22, #1b1f27);
   color: white;
-  font-family: inherit;
   margin-top: 8px;
   font-size: 12px;
   border-radius: 4px;
-  padding: 3px 5px;
+  font-family: inherit;
   min-height: 30px;         /* Ensures it's not too small */
 }
 
@@ -434,14 +441,13 @@
 
 .ranked-files-side {
   flex: 1;
-  border: 1px solid #2c313a;
-  background-color: #1a1a1a;
-  border-radius: 4px;
+  font-size: 12px;
+  background-color: #111;
+  border-left: 1px solid #2c313a;
   padding: 3px 8px;
   font-size: 11px;
   color: white;
   overflow-y: auto;
-  margin-top: 8px;
   margin-bottom: 8px;
   margin-right: 8px;
   width: 20vw;
@@ -449,10 +455,12 @@
 }
 
 .ranked-header {
-  font-weight: bold;
-  color: white;
   font-size: 12px;
-  margin-bottom: 6px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 8px;
+  color: white;
 }
 
 .ranked-mini-item {

@@ -230,7 +230,7 @@ function Reports() {
       <div className="chat-source"><strong>Source:</strong> {results.file}</div>
     </>
   ) : (
-    <div className="chat-placeholder">Select a ranked file and ask a question to see the answer.</div>
+    <div className="chat-placeholder">Select a ranked file and ask a question to see the answer...</div>
   )}
 </div>
 
