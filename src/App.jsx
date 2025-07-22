@@ -18,7 +18,12 @@ const CustomLoading = () => (
     justifyContent: 'center',
     alignItems: 'center',
   }}>
-    <h2>Loading...</h2>
+    <img
+      src="/geolabs_logo.jpg"
+      alt="GeoLabs Logo"
+      style={{ width: '150px', marginBottom: '20px', borderRadius: '8px' }}
+    />
+    <h2 style={{ margin: 0 }}>Loading...</h2>
     <p>Signing you in with Microsoft...</p>
   </div>
 );
@@ -43,7 +48,7 @@ const AuthenticatedApp = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/reports" element={<Reports />} />
-          <Route path='/employee' element={<Employee />} />
+          <Route path="/employee" element={<Employee />} />
         </Routes>
       </main>
       <Footer />
