@@ -28,7 +28,6 @@ export default function Employee() {
   "How do I change my health insurance plan?",
 ];
 
-
   useEffect(() => {
   axios.get(`${API_URL}/api/handbook_chat_history?user=guest`)
     .then(res => {
