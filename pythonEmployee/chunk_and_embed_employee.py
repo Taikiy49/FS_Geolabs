@@ -58,8 +58,27 @@ def embed_to_db(input_txt, db_path):
     print("💾 Creating database and saving embeddings...")
     create_database(db_path)
     insert_chunks(db_path, chunks, embeddings)
-    print(f"🎉 Done. Saved {len(chunks)} embedded chunks to {db_path}")
 
+    # 👇 Add this line to support chatbot functionality
+    insert_into_chunks_table(db_path, chunks)
+    
+    print(f"🎉 Done. Saved {len(chunks)} embedded + plain-text chunks to {db_path}")
+
+
+def insert_into_chunks_table(db_path, chunks, file_name="EmployeeHandbook.txt"):
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    c.execute("""CREATE TABLE IF NOT EXISTS chunks (
+                    file TEXT,
+                    chunk INTEGER,
+                    text TEXT
+                )""")
+    for i, chunk in enumerate(chunks):
+        c.execute("INSERT INTO chunks (file, chunk, text) VALUES (?, ?, ?)",
+                  (file_name, i, chunk))
+    conn.commit()
+    conn.close()
+    print(f"📥 Also saved {len(chunks)} plain-text chunks into 'chunks' table.")
 
 # Run it
 if __name__ == '__main__':

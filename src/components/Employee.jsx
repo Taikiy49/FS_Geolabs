@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+// Employee.jsx
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaPaperPlane } from 'react-icons/fa';
 import '../styles/Employee.css';
+import API_URL from '../config';
+import ReactMarkdown from 'react-markdown';
 
 export default function Employee() {
+  const [conversation, setConversation] = useState([]);
   const [query, setQuery] = useState('');
-  const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
+  const [useCache, setUseCache] = useState(true);
+
 
   const faqList = [
     "What is the company's PTO policy?",
@@ -17,71 +22,157 @@ export default function Employee() {
     'How do I submit my timesheet?',
   ];
 
-  const handleFAQClick = (q) => {
-    setQuery(q);
-    handleSubmit({ preventDefault: () => {} }, q);
-  };
+  useEffect(() => {
+  axios.get(`${API_URL}/api/handbook_chat_history?user=guest`)
+    .then(res => {
+      const raw = res.data;
+      const pairs = [];
+      for (let i = 0; i < raw.length - 1; i++) {
+        if (raw[i].role === 'user' && raw[i + 1].role === 'assistant') {
+          pairs.push({ question: raw[i].text, answer: raw[i + 1].text });
+        }
+      }
+      setHistory(pairs.reverse()); // newest first
+    })
+    .catch(() => setHistory([]));
+}, []);
+
 
   const handleSubmit = async (e, optionalQuery) => {
-    e.preventDefault();
-    const inputQuery = optionalQuery || query;
-    if (!inputQuery.trim()) return;
-    setLoading(true);
-    setResponse('');
-    setHistory([...history, { role: 'user', text: inputQuery }]);
+  e.preventDefault();
+  const inputQuery = optionalQuery || query;
+  if (!inputQuery.trim()) return;
 
-    try {
-      const res = await axios.post('/api/handbook_question', { query: inputQuery });
-      setResponse(res.data.answer);
-      setHistory((prev) => [...prev, { role: 'assistant', text: res.data.answer }]);
-    } catch (err) {
-      setResponse('❌ Error: Failed to get a response.');
-    } finally {
-      setLoading(false);
-      setQuery('');
-    }
-  };
+  setQuery('');
+
+  // Step 1: Set user message and bot placeholder
+  setConversation([
+    { role: 'user', text: inputQuery },
+    { role: 'assistant', text: '', loading: true },
+  ]);
+
+  try {
+    
+  const res = await axios.post(`${API_URL}/api/handbook_question`, {
+  query: inputQuery,
+  user: "guest",
+  use_cache: useCache, // ✅ Include the state value here
+});
+
+
+
+  setConversation(prev => {
+    const updated = [...prev];
+    updated[updated.length - 1] = { role: 'assistant', text: res.data.answer };
+    return updated;
+  });
+
+  const updated = await axios.get(`${API_URL}/api/handbook_chat_history?user=guest`);
+const raw = updated.data;
+const pairs = [];
+for (let i = 0; i < raw.length - 1; i++) {
+  if (raw[i].role === 'user' && raw[i + 1].role === 'assistant') {
+    pairs.push({ question: raw[i].text, answer: raw[i + 1].text });
+  }
+}
+setHistory(pairs);
+
+} catch (err) {
+  console.error("❌ Handbook error:", err);
+  setConversation(prev => {
+    const updated = [...prev];
+    updated[updated.length - 1] = { role: 'assistant', text: '❌ Error: Failed to get a response.' };
+    return updated;
+  });
+
+
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="employee-container">
-      <div className="filters-bar">
-        <h1 className="employee-title">📘 Employee Handbook Assistant</h1>
-        <p className="employee-subtitle">Ask a question about the handbook, or click a frequently asked question below:</p>
+      <div className="employee-sidebar">
+        <h2 className="sidebar-title">Chat History</h2>
+        <div className="chat-history">
+          {history.map((pair, i) => (
+  <div
+    key={i}
+    className="employee-history-item"
+    onClick={() => {
+      setConversation([
+        { role: 'user', text: pair.question },
+        { role: 'assistant', text: pair.answer },
+      ]);
+    }}
+  >
+    {pair.question}
+  </div>
+))}
+
+        </div>
+      </div>
+
+      <div className="employee-main">
+
         <div className="faq-list">
-          {faqList.map((faq, idx) => (
-            <button
-              key={idx}
-              onClick={() => handleFAQClick(faq)}
-              className="faq-button"
-            >
-              {faq}
-            </button>
+          {faqList.map((faq, i) => (
+            <button key={i} onClick={(e) => handleSubmit(e, faq)} className="faq-button">{faq}</button>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className="employee-search-bar">
+        <div className="toggle-label">
+  <label>
+    <input
+      type="checkbox"
+      checked={useCache}
+      onChange={() => setUseCache(!useCache)}
+      style={{ marginRight: '5px' }}
+    />
+    Use Cached Answers
+  </label>
+</div>
+
+        <div className="results-panel">
+          {conversation.map((item, i) => {
+            // Only render when item is a user message, followed by an assistant message
+            if (item.role === 'user') {
+              const answer = conversation[i + 1];
+              return (
+                <React.Fragment key={i}>
+                  <div className="chat-bubble user-bubble">
+                    <ReactMarkdown>{item.text}</ReactMarkdown>
+                  </div>
+                  {answer && answer.role === 'assistant' && (
+                    <div className="chat-bubble bot-bubble">
+                      {answer.loading ? (
+                        <span className="loading-text">⏳ Thinking...</span>
+                      ) : (
+                        <ReactMarkdown>{answer.text}</ReactMarkdown>
+                      )}
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            }
+            return null;
+          })}
+        </div>
+
+
+        <form onSubmit={handleSubmit} className="employee-search-bar-bottom">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="e.g. How do I request time off?"
+            placeholder="Type your question about the handbook..."
             className="employee-search-input"
           />
           <button type="submit" className="employee-search-button">
             <FaPaperPlane className="icon" />
           </button>
         </form>
-        {loading && <p className="loading-text">⏳ Thinking...</p>}
-      </div>
-
-      <div className="results-panel">
-        {history.map((msg, i) => (
-          <div
-            key={i}
-            className={`chat-bubble ${msg.role === 'user' ? 'user-bubble' : 'bot-bubble'}`}
-          >
-            {msg.text}
-          </div>
-        ))}
       </div>
     </div>
   );

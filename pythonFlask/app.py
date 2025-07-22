@@ -108,6 +108,76 @@ def answer_from_single_file():
         traceback.print_exc()
         return jsonify({"error": f"Failed to answer from selected file. {str(e)}"}), 500
 
+@app.route('/api/handbook_chat_history', methods=['GET'])
+def get_handbook_chat_history():
+    user = request.args.get("user", "guest")
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT question, answer, sources, timestamp
+                FROM chat_history
+                WHERE user = ?
+                AND sources = 'EmployeeHandbook.txt'
+                ORDER BY id DESC
+            """, (user,))
+            rows = cursor.fetchall()
+
+        history = []
+        for row in rows:
+            history.append({"role": "user", "text": row[0]})
+            history.append({"role": "assistant", "text": row[1]})
+
+        return jsonify(history)
+    except Exception as e:
+        print("❌ Error in handbook chat history:", e)
+        return jsonify([])
+
+
+HANDBOOK_DB = "employee_handbook.db"
+
+@app.route('/api/handbook_question', methods=['POST'])
+def handbook_question():
+    try:
+        data = request.get_json()
+        query = data.get('query', '').strip()
+        if not query:
+            return jsonify({"error": "Empty question."}), 400
+
+        user = data.get('user', 'guest')
+        handbook_file = 'EmployeeHandbook.txt'
+
+        # ✅ Check if we already have this exact question cached
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT answer FROM chat_history
+                WHERE user = ? AND sources = ? AND LOWER(question) = LOWER(?)
+                ORDER BY id DESC LIMIT 1
+            """, (user, handbook_file, query))
+            cached = cursor.fetchone()
+            if cached:
+                print("⚡ Returning cached answer")
+                return jsonify({"answer": cached[0]})
+
+        # ❌ If no cached answer, call Gemini
+        snippets = get_quick_view_sentences(handbook_file, query, HANDBOOK_DB)
+        answer = ask_gemini_single_file(query, handbook_file, snippets)
+
+        # ✅ Save the new answer to DB
+        with sqlite3.connect(DB_FILE) as conn:
+            conn.execute("""
+                INSERT INTO chat_history (user, question, answer, sources, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            """, (user, query, answer, handbook_file, datetime.now().isoformat()))
+
+        return jsonify({"answer": answer})
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to process handbook question: {str(e)}"}), 500
+
+
 @app.route('/api/files', methods=['GET'])
 def list_files():
     try:

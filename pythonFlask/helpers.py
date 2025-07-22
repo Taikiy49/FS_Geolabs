@@ -14,6 +14,15 @@ MAUI_LOCATIONS = {"maui", "lahaina", "kahului", "kihei", "wailuku", "makawao", "
 GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # ✅ now this will work
 
+
+
+from difflib import SequenceMatcher
+
+query_cache = {}  # key: (user, file, query), value: answer
+
+def is_similar(q1, q2, threshold=0.92):
+    return SequenceMatcher(None, q1.lower(), q2.lower()).ratio() >= threshold
+
 def preprocess_query(query):
     return re.findall(r'\b\w+\b', query.lower())
 
@@ -69,18 +78,22 @@ def rank_documents(query, db_path, min_wo, max_wo, top_k=20):
 
     return top_docs
 
-def get_quick_view_sentences(filename, query, db_path):
-    with sqlite3.connect(db_path) as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT chunk FROM chunks WHERE file = ?", (filename,))
-        rows = cursor.fetchall()
+def get_quick_view_sentences(file, query, db_path):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # ✅ This line must select the text, not the chunk number
+    cursor.execute("SELECT text FROM chunks WHERE file = ?", (file,))
+    rows = cursor.fetchall()
+
+    full_text = " ".join(row[0] for row in rows if isinstance(row[0], str))
 
     if not rows:
-        print(f"❌ No chunks found in DB for {filename}")
+        print(f"❌ No chunks found in DB for {file}")
         return ["This file has no readable chunks in the database."]
 
     full_text = " ".join(row[0] for row in rows)
-    print(f"🧠 Feeding entire report: {filename} — approx {len(full_text.split())} words")
+    print(f"🧠 Feeding entire report: {file} — approx {len(full_text.split())} words")
 
     # Gemini 1.5 can handle up to 1M tokens, so no need to split
     return [full_text]
@@ -92,29 +105,57 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 model = genai.GenerativeModel("gemini-2.5-pro")  # ✅ You now get 1.5
 
-def ask_gemini_single_file(query, file_name, snippets):
+def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=True):
     if not query:
         return "No query provided."
     if not snippets:
         return "No relevant content found for this file."
 
-    prompt = f"""You are a geotechnical engineer. Answer the user's question using only the excerpt below.
+    cache_key = (user, file_name, query.strip().lower())
 
-Question: {query}
+    # ✅ Step 1: Check for cached similar query
+    if use_cache:
+        for (cached_user, cached_file, cached_query), cached_answer in query_cache.items():
+            if cached_user == user and cached_file == file_name and is_similar(query, cached_query):
+                print(f"⚡ Cache hit for: '{query}' ≈ '{cached_query}'")
+                return cached_answer
 
-Excerpt from {file_name}:
+    # ✅ Step 2: Compose prompt and call Gemini
+    prompt = f"""You are a helpful AI assistant. Please answer the user's question using the provided excerpt below.
+
+**Requirements:**
+- You do not need an introduction just go straight to the point!
+- Respond in **clear, readable Markdown**.
+- Use **bold headings**, bullet points, and spacing to organize content.
+- Bold any key phrases like "Work Order", "Policy", "Contact", "Deadline", or section names if mentioned.
+- Keep paragraphs short and avoid large walls of text.
+
+---
+
+**Question:**
+{query}
+
+**Excerpt from {file_name}:**
 {chr(10).join(snippets)}
 
-Answer (with citation):"""
+---
+
+**Answer (in well-formatted Markdown):**
+"""
 
     try:
         print("🧠 Gemini Prompt Preview:\n", prompt[:300])
         response = model.generate_content(prompt)
-        return response.text.strip()
+        answer = response.text.strip()
+
+        # ✅ Step 3: Cache the answer
+        if use_cache:
+            query_cache[cache_key] = answer
+
+        return answer
 
     except Exception as e:
         import traceback
         print("❌ Gemini SDK error:")
         traceback.print_exc()
         return f"Gemini SDK error: {str(e)}"
-
