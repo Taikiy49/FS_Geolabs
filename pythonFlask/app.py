@@ -32,11 +32,38 @@ def init_db():
 def rank_only():
     try:
         data = request.get_json()
-        query = data.get('query')
+        query = data.get('query', '').strip()
         min_wo = int(data.get('min', 0))
         max_wo = int(data.get('max', 99999))
+        user = data.get('user', 'guest')
+
+        if not query:
+            return jsonify({"error": "Empty keyword."}), 400
 
         ranked = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=30)
+
+        # ✅ Check if an identical ranking query was already cached
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT 1 FROM chat_history
+                WHERE user = ? AND LOWER(question) = LOWER(?) AND answer = '[Ranking Only - No answer]'
+                ORDER BY id DESC LIMIT 1
+            """, (user, query))
+            already_cached = cursor.fetchone()
+
+            if not already_cached:
+                conn.execute("""
+                    INSERT INTO chat_history (user, question, answer, sources, timestamp)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (
+                    user,
+                    query,
+                    "[Ranking Only - No answer]",
+                    ",".join(doc["file"] for doc in ranked),
+                    datetime.now().isoformat()
+                ))
+
         return jsonify({
             "ranked_files": [
                 {"file": doc["file"], "score": round(doc["score"], 1)}
@@ -48,7 +75,6 @@ def rank_only():
         print("❌ /api/rank_only error:", str(e))
         traceback.print_exc()
         return jsonify({"error": "Failed to rank documents."}), 500
-
 
 @app.route('/api/question', methods=['POST'])
 def answer_question():
@@ -95,6 +121,7 @@ def answer_from_single_file():
                 INSERT INTO chat_history (user, question, answer, sources, timestamp)
                 VALUES (?, ?, ?, ?, ?)
             """, (user, query, answer, file, datetime.now().isoformat()))
+
 
         return jsonify({"answer": answer})  # ✅ Make sure this return always happens
 
@@ -145,20 +172,23 @@ def handbook_question():
             return jsonify({"error": "Empty question."}), 400
 
         user = data.get('user', 'guest')
+        use_cache = data.get('use_cache', True)
         handbook_file = 'EmployeeHandbook.txt'
 
-        # ✅ Check if we already have this exact question cached
-        with sqlite3.connect(DB_FILE) as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                SELECT answer FROM chat_history
-                WHERE user = ? AND sources = ? AND LOWER(question) = LOWER(?)
-                ORDER BY id DESC LIMIT 1
-            """, (user, handbook_file, query))
-            cached = cursor.fetchone()
-            if cached:
-                print("⚡ Returning cached answer")
-                return jsonify({"answer": cached[0]})
+        # ✅ Only check cache if use_cache is enabled
+        if use_cache:
+            with sqlite3.connect(DB_FILE) as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT answer FROM chat_history
+                    WHERE user = ? AND sources = ? AND LOWER(question) = LOWER(?)
+                    ORDER BY id DESC LIMIT 1
+                """, (user, handbook_file, query))
+                cached = cursor.fetchone()
+                if cached:
+                    print("⚡ Returning cached answer")
+                    return jsonify({"answer": cached[0]})
+
 
         # ❌ If no cached answer, call Gemini
         snippets = get_quick_view_sentences(handbook_file, query, HANDBOOK_DB)
@@ -176,7 +206,6 @@ def handbook_question():
         import traceback
         traceback.print_exc()
         return jsonify({"error": f"Failed to process handbook question: {str(e)}"}), 500
-
 
 @app.route('/api/files', methods=['GET'])
 def list_files():

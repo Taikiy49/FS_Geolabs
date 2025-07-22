@@ -5,6 +5,8 @@ import '../styles/Reports.css';
 import { useMsal } from '@azure/msal-react';
 import { FaArrowRight } from 'react-icons/fa';
 import API_URL from '../config';
+import ReactMarkdown from 'react-markdown';
+
 
 function Reports() {
   const { accounts } = useMsal();
@@ -184,8 +186,12 @@ function Reports() {
               onKeyDown={async (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
-                  const cleanQuery = questionQuery.trim();
+                  const cleanQuestion = questionQuery.trim();
+                  const cleanKeyword = rankQuery.trim();
+                  const cleanQuery = cleanQuestion || cleanKeyword;
+
                   if (!cleanQuery) return;
+
 
                   const activeFile = selectedFiles[0] || results?.file;
                   if (!activeFile) {
@@ -219,14 +225,15 @@ function Reports() {
             <div className="chat-output">
   {submittedQuery && results?.answer ? (
     <>
-      <div><strong>Question:</strong> {submittedQuery}</div>
-      <div><strong>Answer:</strong> {results.answer}</div>
-      <div><strong>Source:</strong> {results.file}</div>
+      <div className="chat-question"><strong>Question:</strong> {submittedQuery}</div>
+      <div className="chat-answer"><strong>Answer:</strong> <ReactMarkdown>{results.answer}</ReactMarkdown></div>
+      <div className="chat-source"><strong>Source:</strong> {results.file}</div>
     </>
   ) : (
     <div className="chat-placeholder">Select a ranked file and ask a question to see the answer.</div>
   )}
 </div>
+
 
           </div>
 

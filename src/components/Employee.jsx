@@ -15,12 +15,19 @@ export default function Employee() {
 
 
   const faqList = [
-    "What is the company's PTO policy?",
-    'How do I request sick leave?',
-    'Where can I find the employee benefits information?',
-    'What is the dress code?',
-    'How do I submit my timesheet?',
-  ];
+  "What is the company's PTO policy?",
+  "How do I request sick leave?",
+  "Where can I find the employee benefits information?",
+  "What is the dress code?",
+  "How do I submit my timesheet?",
+  "What are the working hours and break policies?",
+  "How do I report a workplace issue or concern?",
+  "What are the company’s policies on overtime pay?",
+  "What holidays does the company observe?",
+  "Where can I find the employee code of conduct?",
+  "How do I change my health insurance plan?",
+];
+
 
   useEffect(() => {
   axios.get(`${API_URL}/api/handbook_chat_history?user=guest`)

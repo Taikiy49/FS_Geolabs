@@ -82,20 +82,21 @@ def get_quick_view_sentences(file, query, db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # ✅ This line must select the text, not the chunk number
-    cursor.execute("SELECT text FROM chunks WHERE file = ?", (file,))
-    rows = cursor.fetchall()
+    # 🔁 Determine the correct column name
+    cursor.execute("PRAGMA table_info(chunks)")
+    columns = [row[1] for row in cursor.fetchall()]
+    column_name = "text" if "text" in columns else "chunk"
 
-    full_text = " ".join(row[0] for row in rows if isinstance(row[0], str))
+    cursor.execute(f"SELECT {column_name} FROM chunks WHERE file = ?", (file,))
+    rows = cursor.fetchall()
 
     if not rows:
         print(f"❌ No chunks found in DB for {file}")
         return ["This file has no readable chunks in the database."]
 
-    full_text = " ".join(row[0] for row in rows)
+    full_text = " ".join(row[0] for row in rows if isinstance(row[0], str))
     print(f"🧠 Feeding entire report: {file} — approx {len(full_text.split())} words")
 
-    # Gemini 1.5 can handle up to 1M tokens, so no need to split
     return [full_text]
 
 
