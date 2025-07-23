@@ -13,7 +13,7 @@ app.register_blueprint(admin_bp)
 CORS(app)
 
 DB_FILE = "chat_history.db"
-GEO_DB = "geolabs.db"
+GEO_DB = "reports.db"
 
 # Initialize chat history DB
 def init_db():

@@ -57,7 +57,6 @@ const AuthenticatedApp = () => {
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 };

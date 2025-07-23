@@ -7,10 +7,14 @@
   justify-content: center;
   align-items: center;
   padding: 17px;
-  background-color: #0b0c10;
   color: white;
+  height: 100%;
   box-sizing: border-box;
-  height: 100%; /* ensures it fills parent */
+ background: linear-gradient(135deg, #2c2f33, #202225);
+
+
+
+
 }
 
 
@@ -48,11 +52,12 @@
 }
 
 .homepage-card {
-  background: linear-gradient(135deg, #161b22, #1b1f27);
-  border: 1px solid #2c313a;
+  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  border: 1px solid #2e2e2e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+
   padding: 18px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
@@ -62,8 +67,8 @@
 .homepage-card:hover {
   cursor: pointer;
   transform: translateY(-2px);
-  border-color: #1e90ff;
-  box-shadow: 0 6px 16px rgba(30, 144, 255, 0.2);
+  border-color: #4285f4; /* Google Blue */
+  box-shadow: 0 8px 24px rgba(66, 133, 244, 0.2); /* Google Blue glow */
 }
 
 .homepage-card-header {
@@ -76,7 +81,7 @@
   margin-right: 12px;
   margin-top: -15px;
   font-size: 25px;
-  color: #1e90ff;
+  color: #4285f4;
 }
 
 .homepage-card h2 {
@@ -101,7 +106,7 @@
 }
 
 .homepage-link {
-  color: #1e90ff;
+  color: #4285f4;
   font-weight: bold;
   cursor: pointer;
   font-size: 13px;
@@ -111,5 +116,5 @@
 }
 
 .homepage-link:hover {
-  color: #63b3ed;
+  color: #82b1ff;
 }

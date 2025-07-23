@@ -101,7 +101,6 @@ setHistory(pairs);
   return (
     <div className="employee-container">
       <div className="employee-sidebar">
-        <h2 className="employee-sidebar-title">Chat History</h2>
         <div className="chat-history">
           {history.map((pair, i) => (
   <div
@@ -123,64 +122,66 @@ setHistory(pairs);
 
       <div className="employee-main">
 
-        <div className="faq-list">
-          {faqList.map((faq, i) => (
-            <button key={i} onClick={(e) => handleSubmit(e, faq)} className="faq-button">{faq}</button>
-          ))}
-        </div>
-        <div className="toggle-container">
-  <label className="toggle-switch">
+  <div className="employee-panel">
+    <div className="employee-faq-list">
+      {faqList.map((faq, i) => (
+        <div key={i} onClick={(e) => handleSubmit(e, faq)} className="employee-faq-button">{faq}</div>
+      ))}
+    </div>
+
+    <div className="employee-toggle-container">
+      <label className="employee-toggle-switch">
+        <input
+          type="checkbox"
+          checked={useCache}
+          onChange={() => setUseCache(!useCache)}
+        />
+        <span className="slider" />
+      </label>
+      <span className="employee-toggle-label-text">Use Cached Answers</span>
+    </div>
+  </div>
+
+  <div className="employee-panel results-panel">
+    {conversation.map((item, i) => {
+      if (item.role === 'user') {
+        const answer = conversation[i + 1];
+        return (
+          <React.Fragment key={i}>
+            <div className="chat-bubble user-bubble">
+              <ReactMarkdown>{item.text}</ReactMarkdown>
+            </div>
+            {answer && answer.role === 'assistant' && (
+              <div className="chat-bubble bot-bubble">
+                {answer.loading ? (
+                  <span className="loading-text">⏳ Thinking...</span>
+                ) : (
+                  <ReactMarkdown>{answer.text}</ReactMarkdown>
+                )}
+              </div>
+            )}
+          </React.Fragment>
+        );
+      }
+      return null;
+    })}
+  </div>
+
+  <form onSubmit={handleSubmit} className="employee-search-bar-bottom">
     <input
-      type="checkbox"
-      checked={useCache}
-      onChange={() => setUseCache(!useCache)}
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="Type your question about the handbook..."
+      className="employee-search-input"
     />
-    <span className="slider" />
-  </label>
-  <span className="toggle-label-text">Use Cached Answers</span>
+    <button type="submit" className="employee-search-button">
+      <FaPaperPlane />
+    </button>
+  </form>
+
 </div>
 
-
-        <div className="results-panel">
-          {conversation.map((item, i) => {
-            // Only render when item is a user message, followed by an assistant message
-            if (item.role === 'user') {
-              const answer = conversation[i + 1];
-              return (
-                <React.Fragment key={i}>
-                  <div className="chat-bubble user-bubble">
-                    <ReactMarkdown>{item.text}</ReactMarkdown>
-                  </div>
-                  {answer && answer.role === 'assistant' && (
-                    <div className="chat-bubble bot-bubble">
-                      {answer.loading ? (
-                        <span className="loading-text">⏳ Thinking...</span>
-                      ) : (
-                        <ReactMarkdown>{answer.text}</ReactMarkdown>
-                      )}
-                    </div>
-                  )}
-                </React.Fragment>
-              );
-            }
-            return null;
-          })}
-        </div>
-
-
-        <form onSubmit={handleSubmit} className="employee-search-bar-bottom">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type your question about the handbook..."
-            className="employee-search-input"
-          />
-          <button type="submit" className="employee-search-button">
-            <FaPaperPlane className="icon" />
-          </button>
-        </form>
-      </div>
     </div>
   );
 }

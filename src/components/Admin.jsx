@@ -12,6 +12,9 @@ export default function Admin() {
   const [message, setMessage] = useState('');
   const [dbStructure, setDbStructure] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [confirmDeleteMode, setConfirmDeleteMode] = useState(false);
+const [confirmationText, setConfirmationText] = useState('');
+
 
   useEffect(() => {
     const fetchDbs = async () => {
@@ -56,6 +59,8 @@ export default function Admin() {
     try {
       const res = await axios.post(`${API_URL}/api/inspect-db`, { db_name: db });
       setDbStructure({ db, ...res.data });
+      setConfirmationText('');
+
       setShowPopup(true);
     } catch (err) {
       console.error('❌ Failed to inspect DB:', err);
@@ -68,8 +73,7 @@ export default function Admin() {
   return (
     <div className="admin-wrapper">
       <div className="admin-left">
-        <h2 className="admin-title">Admin: Index Document</h2>
-
+      
         <div
           className="drop-zone"
           onDragOver={(e) => e.preventDefault()}
@@ -131,16 +135,40 @@ export default function Admin() {
       <div className="admin-right">
         <h3 className="existing-db-title">📂 Existing Databases</h3>
         <ul className="existing-db-list">
-          {existingDbs.map((db, index) => (
-            <li
-              key={index}
-              className="existing-db-item"
-              onClick={() => handleDbClick(db)}
-            >
-              {db}
-            </li>
-          ))}
-        </ul>
+  {existingDbs.map((db, index) => (
+    <li key={index} className="existing-db-item">
+      <span className="db-name" onClick={() => handleDbClick(db)}>
+        {db}
+      </span>
+      <button
+        className="delete-db-button"
+        onClick={async () => {
+          const confirmText = prompt(
+            `Type DELETE ${db} to confirm deletion:`
+          );
+          if (confirmText !== `DELETE ${db}`) {
+            alert('❌ Confirmation text does not match. Deletion cancelled.');
+            return;
+          }
+
+          try {
+            const res = await axios.post(`${API_URL}/api/delete-db`, {
+              db_name: db,
+              confirmation_text: confirmText,
+            });
+            alert(res.data.message);
+            setExistingDbs((prev) => prev.filter((d) => d !== db));
+          } catch (err) {
+            alert(err.response?.data?.error || '❌ Failed to delete.');
+          }
+        }}
+      >
+        Delete
+      </button>
+    </li>
+  ))}
+</ul>
+
       </div>
 
       {showPopup && dbStructure && (
@@ -162,8 +190,10 @@ export default function Admin() {
                           : cell
                       ))}</li>
                     ))}
+                    
                   </ul>
                 </div>
+                
               )
             )}
           </div>

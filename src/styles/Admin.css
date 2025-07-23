@@ -36,13 +36,40 @@
 }
 
 .existing-db-item {
-  background: #2a2a2a;
-  padding: 8px 12px;
-  margin-bottom: 6px;
-  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-bottom: 1px solid #333;
   font-size: 14px;
-  transition: background 0.2s;
+  cursor: default;
 }
+
+.db-name {
+  flex-grow: 1;
+  color: #eee;
+  cursor: pointer;
+}
+
+.db-name:hover {
+  text-decoration: underline;
+}
+
+.delete-db-button {
+  background-color: #d9534f;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin-left: 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-db-button:hover {
+  background-color: #c9302c;
+}
+
 
 .existing-db-item:hover {
   background-color: #3a3a3a;

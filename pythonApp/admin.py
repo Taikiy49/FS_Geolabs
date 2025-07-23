@@ -198,3 +198,25 @@ def inspect_db():
         import traceback
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
+    
+@admin_bp.route('/api/delete-db', methods=['POST'])
+def delete_db():
+    try:
+        data = request.get_json()
+        db_name = data.get('db_name')
+        confirmation_text = data.get('confirmation_text', '')
+        expected_confirmation = f"DELETE {db_name}"
+
+        if confirmation_text.strip() != expected_confirmation:
+            return jsonify({'error': 'Confirmation text does not match. Deletion aborted.'}), 400
+
+        db_path = os.path.join('uploads', db_name)
+        if not os.path.exists(db_path):
+            return jsonify({'error': 'Database not found'}), 404
+
+        os.remove(db_path)
+        return jsonify({'message': f"✅ {db_name} successfully deleted."})
+
+    except Exception as e:
+        print("❌ DB Deletion Error:", e)
+        return jsonify({'error': str(e)}), 500
