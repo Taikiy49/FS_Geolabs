@@ -262,3 +262,25 @@
 .employee-toggle-switch input:checked + .employee-slider::before {
   transform: translateX(17px);
 }
+
+
+.employee-db-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.employee-db-label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.employee-db-dropdown {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #1c1c1c;
+  color: white;
+}

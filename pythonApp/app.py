@@ -78,29 +78,6 @@ def rank_only():
         traceback.print_exc()
         return jsonify({"error": "Failed to rank documents."}), 500
 
-@app.route('/api/question', methods=['POST'])
-def answer_question():
-    try:
-        data = request.get_json()
-        query = data.get('query')
-        min_wo = int(data.get('min', 0))
-        max_wo = int(data.get('max', 99999))
-        user = data.get('user', 'guest')
-
-        ranked_chunks = rank_documents(query, GEO_DB, min_wo, max_wo, top_k=30)
-
-        return jsonify({
-            "ranked_files": [
-                {"file": doc["file"], "score": round(doc["score"], 1)}
-                for doc in ranked_chunks
-            ]
-        })
-
-    except Exception as e:
-        print("\u274C Backend Error:", str(e))
-        traceback.print_exc()
-        return jsonify({"error": "An error occurred processing your request."}), 500
-
 @app.route('/api/single_file_answer', methods=['POST'])
 def answer_from_single_file():
     try:
@@ -108,6 +85,7 @@ def answer_from_single_file():
         print("🔍 Incoming /api/single_file_answer payload:", data)
 
         query = data.get("query")
+        
         file = data.get("file")
         user = data.get("user", "guest")
 
@@ -137,17 +115,17 @@ def answer_from_single_file():
         traceback.print_exc()
         return jsonify({"error": f"Failed to answer from selected file. {str(e)}"}), 500
 
-@app.route('/api/handbook_chat_history', methods=['GET'])
-def get_handbook_chat_history():
+@app.route('/api/db_chat_history', methods=['GET'])
+def get_db_chat_history():
     user = request.args.get("user", "guest")
+
     try:
-        with sqlite3.connect(DB_FILE) as conn:
+        with sqlite3.connect(DB_FILE) as conn:  # Always use global DB_FILE
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT question, answer, sources, timestamp
                 FROM chat_history
                 WHERE user = ?
-                AND sources = 'EmployeeHandbook.txt'
                 ORDER BY id DESC
             """, (user,))
             rows = cursor.fetchall()
@@ -159,55 +137,70 @@ def get_handbook_chat_history():
 
         return jsonify(history)
     except Exception as e:
-        print("❌ Error in handbook chat history:", e)
+        print("❌ Error reading chat history from global DB:", e)
         return jsonify([])
-
 
 HANDBOOK_DB = "employee_handbook.db"
 
-@app.route('/api/handbook_question', methods=['POST'])
-def handbook_question():
+@app.route('/api/question', methods=['POST'])
+def handle_question():
     try:
         data = request.get_json()
         query = data.get('query', '').strip()
-        if not query:
-            return jsonify({"error": "Empty question."}), 400
-
+        db_name = data.get('db', '').strip()
         user = data.get('user', 'guest')
         use_cache = data.get('use_cache', True)
-        handbook_file = 'EmployeeHandbook.txt'
+        min_wo = int(data.get('min', 0))
+        max_wo = int(data.get('max', 99999))
 
-        # ✅ Only check cache if use_cache is enabled
+        if not query or not db_name:
+            return jsonify({"error": "Missing query or database name."}), 400
+
+        if db_name in ['chat_history.db', 'reports.db']:
+            return jsonify({"error": "Restricted database."}), 403
+
+        db_path = os.path.join("uploads", db_name)
+        if not os.path.exists(db_path):
+            return jsonify({"error": f"Database {db_name} not found."}), 404
+
+        # Load and rank chunks
+        # Skip ranking if it's the handbook database
+        if "handbook" in db_path:
+            ranked_chunks = rank_documents(query, db_path, top_k=30)
+        else:
+            ranked_chunks = rank_documents(query, db_path, min_wo, max_wo, top_k=30)
+
+        if not ranked_chunks:
+            return jsonify({'answer': 'No relevant documents found.'})
+
+        file = ranked_chunks[0]['file']
+        snippets = get_quick_view_sentences(file, query, db_path)
+
+        # Use cache if possible
         if use_cache:
             with sqlite3.connect(DB_FILE) as conn:
                 cursor = conn.cursor()
-                cursor.execute("""
-                    SELECT answer FROM chat_history
-                    WHERE user = ? AND sources = ? AND LOWER(question) = LOWER(?)
-                    ORDER BY id DESC LIMIT 1
-                """, (user, handbook_file, query))
+                cursor.execute("""SELECT answer FROM chat_history
+                                  WHERE user = ? AND sources = ? AND LOWER(question) = LOWER(?)
+                                  ORDER BY id DESC LIMIT 1""", (user, file, query))
                 cached = cursor.fetchone()
                 if cached:
                     print("⚡ Returning cached answer")
                     return jsonify({"answer": cached[0]})
 
+        # Generate new answer
+        answer = ask_gemini_single_file(query, file, snippets, user=user, use_cache=False)
 
-        # ❌ If no cached answer, call Gemini
-        snippets = get_quick_view_sentences(handbook_file, query, HANDBOOK_DB)
-        answer = ask_gemini_single_file(query, handbook_file, snippets)
-
-        # ✅ Save the new answer to DB
         with sqlite3.connect(DB_FILE) as conn:
-            conn.execute("""
-                INSERT INTO chat_history (user, question, answer, sources, timestamp)
-                VALUES (?, ?, ?, ?, ?)
-            """, (user, query, answer, handbook_file, datetime.now().isoformat()))
+            conn.execute("""INSERT INTO chat_history (user, question, answer, sources, timestamp)
+                            VALUES (?, ?, ?, ?, ?)""",
+                         (user, query, answer, file, datetime.now().isoformat()))
 
-        return jsonify({"answer": answer})
+        return jsonify({'answer': answer})
+
     except Exception as e:
-        import traceback
         traceback.print_exc()
-        return jsonify({"error": f"Failed to process handbook question: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to answer question: {str(e)}"}), 500
 
 @app.route('/api/files', methods=['GET'])
 def list_files():
@@ -224,15 +217,26 @@ def list_files():
 @app.route('/api/chat_history', methods=['GET'])
 def get_chat_history():
     user = request.args.get("user", "guest")
+    source = request.args.get("source", None)
+
     try:
         with sqlite3.connect(DB_FILE) as conn:
             cursor = conn.cursor()
-            cursor.execute("""
-                SELECT question, answer, sources, timestamp
-                FROM chat_history
-                WHERE user = ?
-                ORDER BY id DESC
-            """, (user,))
+            if source:
+                cursor.execute("""
+                    SELECT question, answer, sources, timestamp
+                    FROM chat_history
+                    WHERE user = ? AND sources = ?
+                    ORDER BY id DESC
+                """, (user, source))
+            else:
+                cursor.execute("""
+                    SELECT question, answer, sources, timestamp
+                    FROM chat_history
+                    WHERE user = ?
+                    ORDER BY id DESC
+                """, (user,))
+
             rows = cursor.fetchall()
 
         history = [{
@@ -264,6 +268,7 @@ def quick_view():
     
 if __name__ == '__main__':
     init_db()
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
 
 

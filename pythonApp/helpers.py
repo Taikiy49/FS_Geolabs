@@ -6,17 +6,16 @@ import math
 import heapq
 import requests
 import os
-from dotenv import load_dotenv  # ✅ import this
+from dotenv import load_dotenv
+
+from difflib import SequenceMatcher
+import google.generativeai as genai
 
 load_dotenv()
 
 MAUI_LOCATIONS = {"maui", "lahaina", "kahului", "kihei", "wailuku", "makawao", "kula", "pukalani", "upcountry"}
 GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # ✅ now this will work
-
-
-
-from difflib import SequenceMatcher
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 query_cache = {}  # key: (user, file, query), value: answer
 
@@ -33,78 +32,70 @@ def is_in_work_order_range(filename, min_wo, max_wo):
         return min_wo <= work_order <= max_wo
     return True
 
-def rank_documents(query, db_path, min_wo, max_wo, top_k=20):
+def rank_documents(query, db_path, min_wo=0, max_wo=99999, top_k=20):
     query_tokens = preprocess_query(query)
-    tf = defaultdict(Counter)
-    df = Counter()
 
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(DISTINCT file) FROM inverted_index")
-        total_docs = cursor.fetchone()[0]
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = {row[0] for row in cursor.fetchall()}
 
-        placeholders = ','.join('?' * len(query_tokens))
-        cursor.execute(f"SELECT keyword, file, chunk_id, term_freq FROM inverted_index WHERE keyword IN ({placeholders})", query_tokens)
-        for keyword, file, _, freq in cursor.fetchall():
-            if is_in_work_order_range(file, min_wo, max_wo):
-                tf[file][keyword] += freq
-                df[keyword] += 1
+        if "inverted_index" in tables:
+            index_table = "inverted_index"
+            chunk_table = "chunks"
+        elif "handbook_chunks" in tables:
+            index_table = chunk_table = "handbook_chunks"
+        elif "chunks" in tables:
+            index_table = chunk_table = "chunks"
+        else:
+            raise Exception("❌ No valid table found for ranking.")
 
-        cursor.execute("SELECT file, chunk FROM chunks")
-        chunks_by_file = defaultdict(list)
-        for file, chunk in cursor.fetchall():
-            chunks_by_file[file].append(chunk)
+        cursor.execute(f"PRAGMA table_info({chunk_table})")
+        columns = {col[1] for col in cursor.fetchall()}
 
-    tfidf_scores = []
-    for file, counts in tf.items():
-        score = sum(counts[t] * (math.log((total_docs + 1) / (df[t] + 1)) + 1) for t in query_tokens)
-        chunks = chunks_by_file[file][:3]
-        combined_text = "\n---\n".join(chunks)
+        file_col = 'file' if 'file' in columns else None
+        chunk_col = 'chunk' if 'chunk' in columns else 'text'
 
-        boost = 3 if any(loc in file.lower() for loc in MAUI_LOCATIONS) else 0
-        if any(loc in combined_text.lower() for loc in MAUI_LOCATIONS):
-            boost += 2
+        cursor.execute(f"SELECT {chunk_col} FROM {chunk_table}")
+        rows = cursor.fetchall()
+        all_chunks = [row[0] for row in rows if isinstance(row[0], str)]
 
-        tfidf_scores.append({
-            'file': file,
-            'chunk': combined_text,
-            'score': round(score + boost, 3)
-        })
+        if index_table != "inverted_index":
+            return [
+                {
+                    'file': f"Document {i+1}",
+                    'chunk': chunk,
+                    'score': 0.0
+                }
+                for i, chunk in enumerate(all_chunks[:top_k])
+            ]
 
-    top_docs = heapq.nlargest(top_k, tfidf_scores, key=lambda x: x['score'])
-    print("\nTop Ranked Files:")
-    for doc in top_docs:
-        print(f"- {doc['file']} (score: {doc['score']})")
+        # Add TF-IDF logic here only if inverted_index is present (you probably don't need it for handbook)
 
-    return top_docs
 
 def get_quick_view_sentences(file, query, db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # 🔁 Determine the correct column name
-    cursor.execute("PRAGMA table_info(chunks)")
-    columns = [row[1] for row in cursor.fetchall()]
-    column_name = "text" if "text" in columns else "chunk"
+    if "handbook" in db_path:
+        table = "handbook_chunks"
+        col = "chunk"
+    else:
+        table = "chunks"
+        col = "text"
 
-    cursor.execute(f"SELECT {column_name} FROM chunks WHERE file = ?", (file,))
+    cursor.execute(f"SELECT {col} FROM {table}")
     rows = cursor.fetchall()
 
-    if not rows:
-        print(f"❌ No chunks found in DB for {file}")
-        return ["This file has no readable chunks in the database."]
-
     full_text = " ".join(row[0] for row in rows if isinstance(row[0], str))
-    print(f"🧠 Feeding entire report: {file} — approx {len(full_text.split())} words")
+    print(f"🤖 Loaded {len(full_text.split())} words from {table}")
 
     return [full_text]
 
 
-import google.generativeai as genai
-
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
-model = genai.GenerativeModel("gemini-2.5-pro")  # ✅ You now get 1.5
+# Gemini model config
+genai.configure(api_key=GEMINI_API_KEY)
+model = genai.GenerativeModel("gemini-2.5-pro")
 
 def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=True):
     if not query:
@@ -114,21 +105,19 @@ def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=T
 
     cache_key = (user, file_name, query.strip().lower())
 
-    # ✅ Step 1: Check for cached similar query
     if use_cache:
         for (cached_user, cached_file, cached_query), cached_answer in query_cache.items():
             if cached_user == user and cached_file == file_name and is_similar(query, cached_query):
                 print(f"⚡ Cache hit for: '{query}' ≈ '{cached_query}'")
                 return cached_answer
 
-    # ✅ Step 2: Compose prompt and call Gemini
     prompt = f"""You are a helpful AI assistant. Please answer the user's question using the provided excerpt below.
 
 **Requirements:**
 - You do not need an introduction just go straight to the point!
 - Respond in **clear, readable Markdown**.
 - Use **bold headings**, bullet points, and spacing to organize content.
-- Bold any key phrases like "Work Order", "Policy", "Contact", "Deadline", or section names if mentioned.
+- Bold any key phrases like \"Work Order\", \"Policy\", \"Contact\", \"Deadline\", or section names if mentioned.
 - Keep paragraphs short and avoid large walls of text.
 
 ---
@@ -143,13 +132,11 @@ def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=T
 
 **Answer (in well-formatted Markdown):**
 """
-
     try:
         print("🧠 Gemini Prompt Preview:\n", prompt[:300])
         response = model.generate_content(prompt)
         answer = response.text.strip()
 
-        # ✅ Step 3: Cache the answer
         if use_cache:
             query_cache[cache_key] = answer
 
