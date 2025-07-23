@@ -214,6 +214,13 @@
   margin-bottom: 8px;
   overflow-y: auto;
 }
+/*
+this is the diference between the two different regions
+if this one does not work, we can see whcih ones have a differene betewween the two different regions
+what makes this one different is the fact that there are  alot of changes happening
+
+
+*/
 
 .chat-output-title {
   margin-bottom: 10px;
@@ -348,7 +355,7 @@
 
 .topk-dropdown-container {
   margin-left: auto;
-  display: flex;
+  display: flex; 
   align-items: center;
   gap: 6px;
 }

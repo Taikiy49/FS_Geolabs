@@ -27,11 +27,12 @@ function Header() {
         <Link to="/">Home</Link>
         <Link to="/reports">Reports</Link>
         <Link to="/employee">Employee Handbook</Link> {/* ✅ correct route here */}
+        <Link to="/retirement">Retirement</Link>
         <Link to="/admin">Admin</Link>
-        <a href="#contact">Tools</a>
-        <a href="#contact">Analytics</a>
         <a href="#contact">Coming</a>
         <a href="#contact">Coming</a>
+        <a href="#contact">Coming</a>
+
         <a href="#contact">Contact</a>
       </nav>
     </header>

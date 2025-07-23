@@ -69,10 +69,12 @@
 .homepage-card-header {
   display: flex;
   align-items: center;
+  line-height: 25px;
 }
 
 .homepage-icon {
   margin-right: 12px;
+  margin-top: -15px;
   font-size: 25px;
   color: #1e90ff;
 }
@@ -87,7 +89,7 @@
 .homepage-sublabel {
   font-size: 15px;
   color: #8b949e;
-  margin-top: -7px;
+  margin-top: -3px;
   font-weight: normal;
 }
 

@@ -6,8 +6,10 @@ import sqlite3
 import os
 import traceback
 from helpers import rank_documents, ask_gemini_single_file, get_quick_view_sentences
+from admin import admin_bp
 
 app = Flask(__name__)
+app.register_blueprint(admin_bp)
 CORS(app)
 
 DB_FILE = "chat_history.db"
@@ -259,7 +261,9 @@ def quick_view():
     except Exception as e:
         print("\u274C Quick view error:", str(e))
         return jsonify({"error": "Unable to generate quick view."}), 500
-
+    
 if __name__ == '__main__':
     init_db()
     app.run(host='0.0.0.0', port=5000)
+
+

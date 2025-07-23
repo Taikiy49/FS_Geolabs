@@ -1,0 +1,267 @@
+.admin-wrapper {
+  display: flex;
+  padding: 30px;
+  gap: 40px;
+  color: #f0f0f0;
+  min-height: 90vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-right {
+  width: 300px;
+  background-color: #1e1e1e;
+  border-left: 2px solid #333;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.existing-db-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #88c0d0;
+}
+
+.existing-db-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.existing-db-item {
+  background: #2a2a2a;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.existing-db-item:hover {
+  background-color: #3a3a3a;
+}
+
+.drop-zone {
+  background-color: #1e1e1e;
+  border: 2px dashed #555;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #aaa;
+  border-radius: 8px;
+}
+
+.admin-input,
+.admin-select {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #555;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.admin-radio-group label {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.admin-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.admin-button:hover {
+  background-color: #45a049;
+}
+
+.admin-message {
+  margin-top: 15px;
+  color: #00c853;
+  font-size: 14px;
+}
+
+
+/* Fullscreen dark blur background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centered popup box */
+.modal-content {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  padding: 30px 40px;
+  border-radius: 10px;
+  width: 70%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  animation: popIn 0.2s ease-in-out;
+}
+
+/* Close button (X) */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #fff;
+}
+
+/* Tree structure display */
+.db-tree {
+  margin-top: 10px;
+}
+
+.db-table-preview {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.db-table-preview strong {
+  font-size: 18px;
+  color: #88c0d0;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.db-table-preview div {
+  font-size: 14px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  color: #ccc;
+}
+
+.db-table-preview ul {
+  list-style: none;
+  margin-left: 15px;
+  padding-left: 0;
+}
+
+.db-table-preview li {
+  font-family: monospace;
+  font-size: 12px;
+  color: #bbb;
+  margin-bottom: 4px;
+  word-wrap: break-word;
+}
+
+/* Popup animation */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Popup Content */
+.popup-content {
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  color: #eee;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Close Button */
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.popup-close:hover {
+  color: white;
+}
+
+/* Table Preview Styling */
+.db-table-preview {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.db-table-preview strong {
+  font-size: 16px;
+  color: #88c0d0;
+}
+
+.db-table-preview ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 0;
+}
+
+.db-table-preview li {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #ddd;
+}
+

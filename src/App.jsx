@@ -7,6 +7,9 @@ import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import Reports from './components/Reports';
 import Employee from './components/Employee';
+import Retirement from './components/Retirement';
+import Admin from './components/Admin';
+
 import './App.css';
 
 const CustomLoading = () => (
@@ -50,6 +53,8 @@ const AuthenticatedApp = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/employee" element={<Employee />} />
+          <Route path="/retirement" element={<Retirement />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
       <Footer />
