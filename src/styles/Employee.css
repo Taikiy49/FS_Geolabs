@@ -29,9 +29,6 @@
   border: 1px solid #3a3a3a;
 
   color: #e0e0e0;
-  box-shadow:
-  0 2px 4px rgba(0, 0, 0, 0.6),
-  0 4px 8px rgba(66, 133, 244, 0.08); /* subtle Google Blue glow */
   padding: 5px 9px;
   font-size: 12px;
   cursor: pointer;
@@ -46,18 +43,13 @@
 
 
 .employee-history-item:hover {
+  color: white;
   cursor: pointer;
   transform: translateY(-1px);
   outline-color: #4285f4; /* Google Blue */
  box-shadow:
   0 4px 8px rgba(0, 0, 0, 0.5),
   0 10px 20px rgba(66, 133, 244, 0.12);
-}
-
-.employee-panel {
-  border-radius: 3px;
-  border-radius: 3px;
-  margin: 8px;
 }
 
 .employee-main {
@@ -74,6 +66,10 @@
   margin-bottom: 5px;
 }
 
+.employee-panel{
+  margin: 8px;
+}
+
 .employee-subtitle {
   font-size: 14px;
   color: #bbbbbb;
@@ -83,19 +79,19 @@
 .employee-faq-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 }
 
 .employee-faq-button {
   display: inline-block;        /* 👈 ensures it only grows with content */
   width: auto;                  /* 👈 don't force full width */
   white-space: nowrap;          /* 👈 prevent line breaks */
-  padding: 3px 10px;
+  padding: 5px 12px;
   font-size: 14px;
-  color: white;
+  color: #e0e0e0;
   background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
   border: 1px solid #2e2e2e;
-  border-radius: 3px;
+  border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -104,7 +100,7 @@
 .employee-faq-button:hover {
   background-color: #3a3a3a;
   border-color: #4285f4;
-  color: #fff;
+  color: white;
   box-shadow: 0 6px 12px rgba(66, 133, 244, 0.2);
 }
 
@@ -118,11 +114,10 @@
 .employee-search-bar-bottom {
   display: flex;
   margin-top: auto;
-  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-  border: 1px solid #2e2e2e;
+  background-color: #1f1f1f;
+  border-top: 1px solid #2e2e2e;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   padding: 10px;
-  border-radius: 6px;
   gap: 10px;
 }
 
@@ -131,15 +126,15 @@
   padding: 10px 12px;
   font-size: 14px;
   border-radius: 6px;
-  background-color: #1c1c1c;
-  border: 1px solid #333;
+  background: linear-gradient(135deg, #26292e, #2e3136);
+  border: 1px solid #3a3a3a;
   color: white;
 }
 
 .employee-search-button {
   background-color: #4285f4;
   color: white;
-  border: none;
+  border: 1px solid #3a3a3a;
   padding: 0 14px;
   border-radius: 6px;
   font-size: 15px;
@@ -154,51 +149,39 @@
 }
 
 
-.loading-text {
+.employee-loading-text {
   font-size: 12px;
   color: #aaa;
   font-style: italic;
   margin-top: 5px;
 }
 
-.results-panel {
+.employee-results-panel {
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-right: 5px;
 }
 
-.chat-bubble {
-  font-size: 12px;
-  justify-content: center;
-  word-wrap: break-word;
-}
-
-.user-bubble {
-  color: #ffffff;
+.employee-user-bubble {
+  color: white;
   font-size: 16px;
-  text-align: left;
-  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
 }
 
-.bot-bubble {
-  background-color: #1f1f1f;
-  color: #e0e0e0;
+.employee-bot-bubble {
   font-size: 14px;
-  padding: 2px 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2);
+  color: white;
 }
 
 /* Scrollbar styling */
-.chat-bubble::-webkit-scrollbar,
+.employee-chat-bubble::-webkit-scrollbar,
 .employee-sidebar::-webkit-scrollbar {
   width: 6px;
 }
 
-.chat-bubble::-webkit-scrollbar-thumb,
+.employee-chat-bubble::-webkit-scrollbar-thumb,
 .employee-sidebar::-webkit-scrollbar-thumb {
   background: #666;
   border-radius: 4px;
@@ -212,7 +195,7 @@
   background: #888;
 }
 
-.chat-history {
+.employee-chat-history {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #666 #1a1a1a;
@@ -248,7 +231,7 @@
   height: 0;
 }
 
-.slider {
+.employee-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -260,7 +243,8 @@
   border-radius: 34px;
 }
 
-.slider::before {
+
+.employee-slider::before {
   position: absolute;
   content: "";
   height: 12px;
@@ -271,10 +255,10 @@
   border-radius: 50%;
 }
 
-.employee-toggle-switch input:checked + .slider {
+.employee-toggle-switch input:checked + .employee-slider {
   background-color: #4285f4;
 }
 
-.employee-toggle-switch input:checked + .slider::before {
+.employee-toggle-switch input:checked + .employee-slider::before {
   transform: translateX(17px);
 }

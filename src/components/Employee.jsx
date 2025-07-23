@@ -101,7 +101,7 @@ setHistory(pairs);
   return (
     <div className="employee-container">
       <div className="employee-sidebar">
-        <div className="chat-history">
+        <div className="employee-chat-history">
           {history.map((pair, i) => (
   <div
     key={i}
@@ -136,25 +136,25 @@ setHistory(pairs);
           checked={useCache}
           onChange={() => setUseCache(!useCache)}
         />
-        <span className="slider" />
+        <span className="employee-slider" />
       </label>
       <span className="employee-toggle-label-text">Use Cached Answers</span>
     </div>
   </div>
 
-  <div className="employee-panel results-panel">
+  <div className="employee-results-panel">
     {conversation.map((item, i) => {
       if (item.role === 'user') {
         const answer = conversation[i + 1];
         return (
           <React.Fragment key={i}>
-            <div className="chat-bubble user-bubble">
+            <div className="employee-user-bubble">
               <ReactMarkdown>{item.text}</ReactMarkdown>
             </div>
             {answer && answer.role === 'assistant' && (
-              <div className="chat-bubble bot-bubble">
+              <div className="employee-chat-bubble bot-bubble">
                 {answer.loading ? (
-                  <span className="loading-text">⏳ Thinking...</span>
+                  <span className="employee-loading-text">⏳ Thinking...</span>
                 ) : (
                   <ReactMarkdown>{answer.text}</ReactMarkdown>
                 )}
