@@ -275,15 +275,28 @@
 .cc-db-select {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   margin-bottom: 8px;
   padding: 16px;
 }
 
-.cc-db-label {
-  font-size: 14px;
+.cc-db-label-group {
+  display: flex;
+  align-items: center;
+}
+
+.cc-db-icon {
+  font-size: 18px;
+  color: #4285f4;
+  margin-right: 8px;
+  margin-bottom: 1px;
+}
+
+.cc-db-label-text {
+  font-size: 15px;
   color: white;
 }
+
 
 .cc-db-dropdown {
   padding: 6px 10px;

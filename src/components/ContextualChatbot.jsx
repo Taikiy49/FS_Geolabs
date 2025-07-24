@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaPaperPlane } from 'react-icons/fa';
+import { FaPaperPlane, FaDatabase } from 'react-icons/fa';
 import '../styles/ContextualChatbot.css';
 import API_URL from '../config';
 import ReactMarkdown from 'react-markdown';
@@ -159,7 +159,11 @@ const faqMap = {
       <div className="cc-main">
         <div className="cc-panel">
           <div className="cc-db-select">
-            <label className="cc-db-label">Select Database:</label>
+            <div className="cc-db-label-group">
+              <FaDatabase className="cc-db-icon" />
+              <span className="cc-db-label-text">Select Database:</span>
+            </div>
+
             <select
               value={selectedDB}
               onChange={(e) => setSelectedDB(e.target.value)}
