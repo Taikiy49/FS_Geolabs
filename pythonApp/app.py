@@ -15,7 +15,6 @@ CORS(app)
 DB_FILE = "chat_history.db"
 GEO_DB = "reports.db"
 
-# Initialize chat history DB
 def init_db():
     if not os.path.exists(DB_FILE):
         with sqlite3.connect(DB_FILE) as conn:
@@ -26,9 +25,11 @@ def init_db():
                 question TEXT,
                 answer TEXT,
                 sources TEXT,
-                timestamp TEXT
+                timestamp TEXT,
+                db_name TEXT
             )
             """)
+
 
 @app.route('/api/rank_only', methods=['POST'])
 def rank_only():
@@ -56,14 +57,15 @@ def rank_only():
 
             if not already_cached:
                 conn.execute("""
-                    INSERT INTO chat_history (user, question, answer, sources, timestamp)
-                    VALUES (?, ?, ?, ?, ?)
+                    INSERT INTO chat_history (user, question, answer, sources, timestamp, db_name)
+                    VALUES (?, ?, ?, ?, ?, ?)
                 """, (
                     user,
                     query,
                     "[Ranking Only - No answer]",
                     ",".join(doc["file"] for doc in ranked),
-                    datetime.now().isoformat()
+                    datetime.now().isoformat(),
+                    "reports.db"  # or pass the actual db name if variable
                 ))
 
         return jsonify({
@@ -192,9 +194,12 @@ def handle_question():
         answer = ask_gemini_single_file(query, file, snippets, user=user, use_cache=False)
 
         with sqlite3.connect(DB_FILE) as conn:
-            conn.execute("""INSERT INTO chat_history (user, question, answer, sources, timestamp)
-                            VALUES (?, ?, ?, ?, ?)""",
-                         (user, query, answer, file, datetime.now().isoformat()))
+            conn.execute("""
+                INSERT INTO chat_history (user, question, answer, sources, timestamp, db_name)
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (user, query, answer, file, datetime.now().isoformat(), db_name))  # or pass db explicitly
+
+
 
         return jsonify({'answer': answer})
 
@@ -216,41 +221,25 @@ def list_files():
 
 @app.route('/api/chat_history', methods=['GET'])
 def get_chat_history():
-    user = request.args.get("user", "guest")
-    source = request.args.get("source", None)
+    user = request.args.get('user', 'guest')
+    db = request.args.get('db', '')
 
     try:
-        with sqlite3.connect(DB_FILE) as conn:
+        with sqlite3.connect("chat_history.db") as conn:
             cursor = conn.cursor()
-            if source:
-                cursor.execute("""
-                    SELECT question, answer, sources, timestamp
-                    FROM chat_history
-                    WHERE user = ? AND sources = ?
-                    ORDER BY id DESC
-                """, (user, source))
-            else:
-                cursor.execute("""
-                    SELECT question, answer, sources, timestamp
-                    FROM chat_history
-                    WHERE user = ?
-                    ORDER BY id DESC
-                """, (user,))
-
+            cursor.execute("""
+                SELECT question, answer FROM chat_history
+                WHERE user = ? AND db_name = ?
+                ORDER BY timestamp DESC
+                LIMIT 30
+            """, (user, db))
             rows = cursor.fetchall()
-
-        history = [{
-            "question": row[0],
-            "answer": row[1],
-            "sources": row[2].split(",") if row[2] else [],
-
-            "timestamp": row[3]
-        } for row in rows]
-
-        return jsonify(history)
+            history = [{"question": row[0], "answer": row[1]} for row in rows]
+            return jsonify(history)
     except Exception as e:
-        print("\u274C History Fetch Error:", str(e))
+        print("Error loading chat history:", e)
         return jsonify([])
+
 
 @app.route('/api/quick_view', methods=['POST'])
 def quick_view():

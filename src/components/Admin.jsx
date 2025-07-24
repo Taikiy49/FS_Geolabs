@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Admin.css';
 import API_URL from '../config';
+import { FaSpinner } from 'react-icons/fa';
+
 
 export default function Admin() {
   const [file, setFile] = useState(null);
@@ -14,6 +16,9 @@ export default function Admin() {
   const [showPopup, setShowPopup] = useState(false);
   const [confirmDeleteMode, setConfirmDeleteMode] = useState(false);
 const [confirmationText, setConfirmationText] = useState('');
+const [status, setStatus] = useState('');
+
+
 
 
   useEffect(() => {
@@ -36,24 +41,32 @@ const [confirmationText, setConfirmationText] = useState('');
   };
 
   const handleSubmit = async () => {
-    if (!file || !dbName) {
-      setMessage('❌ Please select a file and enter/select a DB name.');
-      return;
-    }
+  if (!file || !dbName) {
+    setMessage('❌ Please select a file and enter/select a DB name.');
+    return;
+  }
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('db_name', dbName);
-    formData.append('mode', mode);
+  setStatus('Starting file upload...');
+  setMessage('');
 
-    try {
-      const res = await axios.post(`${API_URL}/api/process-file`, formData);
-      setMessage(res.data.message);
-    } catch (err) {
-      console.error('❌ Error uploading file:', err);
-      setMessage('❌ Failed to process file.');
-    }
-  };
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('db_name', dbName);
+  formData.append('mode', mode);
+
+  try {
+    const uploadRes = await axios.post(`${API_URL}/api/process-file`, formData, {
+      onUploadProgress: () => setStatus('📄 Uploading PDF...'),
+    });
+
+    setStatus('');
+    setMessage(uploadRes.data.message);
+  } catch (err) {
+    console.error('❌ Error uploading file:', err);
+    setStatus('');
+    setMessage('❌ Failed to process file.');
+  }
+};
 
   const handleDbClick = async (db) => {
     try {
@@ -129,11 +142,19 @@ const [confirmationText, setConfirmationText] = useState('');
         </div>
 
         <button className="admin-button" onClick={handleSubmit}>Index File</button>
+        {status && (
+        <div className="admin-status">
+          <FaSpinner className="spinner" />
+          {status}
+        </div>
+        )}
+
         {message && <p className="admin-message">{message}</p>}
+        
       </div>
 
       <div className="admin-right">
-        <h3 className="existing-db-title">📂 Existing Databases</h3>
+        <h3 className="existing-db-title">Existing Databases</h3>
         <ul className="existing-db-list">
   {existingDbs.map((db, index) => (
     <li key={index} className="existing-db-item">

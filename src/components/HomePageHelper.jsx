@@ -15,7 +15,7 @@ const homepageCards = [
   icon: <FaRobot size={40} />,
   description: 'Chat with AI across various internal knowledge bases like the Employee Handbook, ESOP, or safety guides. Choose a specific document database and get fast, relevant answers tailored to that content.',
   linkText: 'Open Chatbot →',
-  link: '/employee',
+  link: '/contextualchatbot',
   },
 
   {

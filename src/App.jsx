@@ -5,7 +5,7 @@ import { InteractionType } from '@azure/msal-browser';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import Reports from './components/Reports';
-import Employee from './components/ContextualChatbot';
+import ContextualChatbot from './components/ContextualChatbot';
 import Admin from './components/Admin';
 
 import './App.css';
@@ -50,7 +50,7 @@ const AuthenticatedApp = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/reports" element={<Reports />} />
-          <Route path="/employee" element={<Employee />} />
+          <Route path="/contextualchatbot" element={<ContextualChatbot />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>

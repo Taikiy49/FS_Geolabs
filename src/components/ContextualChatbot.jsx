@@ -11,10 +11,13 @@ export default function ContextualChatbot() {
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [useCache, setUseCache] = useState(true);
-  const [selectedDB, setSelectedDB] = useState('handbook');
+  const [selectedDB, setSelectedDB] = useState('');
   const [availableDBs, setAvailableDBs] = useState([]);
 
-  const faqList = [
+  const [faqList, setFaqList] = useState([]);
+
+const faqMap = {
+  'employee_handbook.db': [
     "What is the company's PTO policy?",
     "How do I request sick leave?",
     "Where can I find the employee benefits information?",
@@ -25,8 +28,28 @@ export default function ContextualChatbot() {
     "What are the company’s policies on overtime pay?",
     "What holidays does the company observe?",
     "Where can I find the employee code of conduct?",
-    "How do I change my health insurance plan?",
-  ];
+    "How do I change my health insurance plan?"
+  ],
+  'esop.db': [
+    "What is the ESOP plan?",
+    "Who is eligible for the ESOP?",
+    "When do ESOP shares vest?",
+    "How is the ESOP payout calculated?",
+    "Can I cash out my ESOP early?",
+    "What happens to my ESOP when I leave the company?",
+    "Where can I read more about the ESOP rules?"
+  ],
+  '401k.db': [
+    "What is a 401(k) plan?",
+    "When can I start contributing to my 401(k)?",
+    "What is the company match for 401(k)?",
+    "How do I change my 401(k) contribution amount?",
+    "What investment options are available?",
+    "When can I withdraw from my 401(k)?",
+    "What happens to my 401(k) if I leave the company?"
+  ]
+};
+
 
   useEffect(() => {
     axios.get(`${API_URL}/api/list-dbs`)
@@ -41,6 +64,9 @@ export default function ContextualChatbot() {
       })
       .catch(() => setAvailableDBs([]));
   }, []);
+  useEffect(() => {
+  setFaqList(faqMap[selectedDB] || []);
+}, [selectedDB]);
 
   useEffect(() => {
     if (!selectedDB) return;
@@ -143,7 +169,19 @@ export default function ContextualChatbot() {
                 <option key={idx} value={db}>{db}</option>
               ))}
             </select>
+            <div className="cc-toggle-container">
+            <label className="cc-toggle-switch">
+              <input
+                type="checkbox"
+                checked={useCache}
+                onChange={() => setUseCache(!useCache)}
+              />
+              <span className="cc-slider" />
+            </label>
+            <span className="cc-toggle-label-text">Use Cached Answers</span>
           </div>
+          </div>
+          
 
           <div className="cc-faq-list">
             {faqList.map((faq, i) => (
@@ -157,17 +195,7 @@ export default function ContextualChatbot() {
             ))}
           </div>
 
-          <div className="cc-toggle-container">
-            <label className="cc-toggle-switch">
-              <input
-                type="checkbox"
-                checked={useCache}
-                onChange={() => setUseCache(!useCache)}
-              />
-              <span className="cc-slider" />
-            </label>
-            <span className="cc-toggle-label-text">Use Cached Answers</span>
-          </div>
+          
         </div>
 
         <div className="cc-results-panel">

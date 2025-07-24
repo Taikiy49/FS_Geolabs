@@ -3,11 +3,19 @@ import os
 import re
 import sqlite3
 import tempfile
-import fitz  # PyMuPDF
+import traceback
 from tqdm import tqdm
 from collections import defaultdict
 from sentence_transformers import SentenceTransformer
-import traceback
+
+import fitz  # PyMuPDF
+import nltk
+from nltk.tokenize import sent_tokenize
+from PIL import Image
+import pytesseract
+pytesseract.pytesseract.tesseract_cmd = r"C:\Users\tyamashita\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+
+import io
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -19,21 +27,38 @@ CHUNK_SIZE = 800
 OVERLAP = 200
 
 model = SentenceTransformer(MODEL_NAME)
+nltk.download('punkt')
 
-def extract_text_from_pdf(pdf_path):
+
+def extract_text_from_pdf_with_ocr_fallback(pdf_path):
     doc = fitz.open(pdf_path)
-    full_text = ""
-    for page in doc:
-        full_text += page.get_text()
+    full_text = []
+
+    for i, page in enumerate(doc):
+        page_text = page.get_text().strip()
+        if page_text:
+            print(f"✅ Page {i+1}: Found native text")
+            full_text.append(page_text)
+        else:
+            print(f"🔍 Page {i+1}: No text found, running OCR...")
+            try:
+                pix = page.get_pixmap(dpi=300)
+                img_data = pix.tobytes("ppm")
+                img = Image.open(io.BytesIO(img_data))
+                ocr_text = pytesseract.image_to_string(img).strip()
+                if ocr_text:
+                    print(f"✅ Page {i+1}: OCR extracted {len(ocr_text.split())} words")
+                else:
+                    print(f"⚠️ Page {i+1}: OCR failed or empty")
+                full_text.append(ocr_text)
+            except Exception as e:
+                print(f"❌ OCR error on page {i+1}: {e}")
+
     doc.close()
-    return full_text.strip()
+    return "\n\n".join([t for t in full_text if t.strip()])
 
-import nltk
-nltk.download('punkt')  # This is the sentence tokenizer
 
-from nltk.tokenize import sent_tokenize
-
-def chunk_text(text, chunk_size=800, overlap=200):
+def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
     sentences = sent_tokenize(text)
     chunks = []
     current_chunk = []
@@ -44,7 +69,6 @@ def chunk_text(text, chunk_size=800, overlap=200):
 
         if total_words >= chunk_size:
             chunks.append(' '.join(current_chunk))
-            # Overlap using last few sentences to approximate overlap
             overlap_words = 0
             new_chunk = []
             for s in reversed(current_chunk):
@@ -72,6 +96,7 @@ def create_chunks_table(conn):
     """)
     conn.commit()
 
+
 def create_general_chunks_table(conn):
     c = conn.cursor()
     c.execute("""
@@ -83,6 +108,7 @@ def create_general_chunks_table(conn):
     """)
     conn.commit()
 
+
 def insert_chunks_with_embeddings(conn, file_name, chunks, embeddings):
     c = conn.cursor()
     for i, (chunk, emb) in enumerate(zip(chunks, embeddings)):
@@ -91,6 +117,7 @@ def insert_chunks_with_embeddings(conn, file_name, chunks, embeddings):
             (file_name, i, chunk, emb.tobytes())
         )
     conn.commit()
+
 
 def insert_general_chunks(conn, chunks, embeddings):
     c = conn.cursor()
@@ -101,48 +128,52 @@ def insert_general_chunks(conn, chunks, embeddings):
         )
     conn.commit()
 
-def embed_to_db(input_pdf_path, db_path):
+
+def embed_to_db(input_pdf_path, db_path, track=print):
     file_name = os.path.basename(input_pdf_path)
-    print(f"\n📄 Loading PDF: {file_name}")
+    track(f"📄 Loading PDF: {file_name}")
 
     try:
-        text = extract_text_from_pdf(input_pdf_path)
+        track("🔍 Extracting text...")
+        text = extract_text_from_pdf_with_ocr_fallback(input_pdf_path)
         if not text.strip():
-            print(f"⚠️ No extractable text in: {file_name}")
+            track(f"⚠️ No extractable text in: {file_name}")
             return
     except Exception as e:
-        print(f"❌ Error reading PDF: {e}")
+        track(f"❌ Error reading PDF: {e}")
         return
 
-    print("✂️ Chunking text...")
+    track("✂️ Chunking text...")
     chunks = chunk_text(text)
-    print(f"✅ Created {len(chunks)} chunks")
+    track(f"✅ Created {len(chunks)} chunks")
+
     if not chunks:
-        print(f"⚠️ No chunks extracted from: {file_name}")
+        track(f"⚠️ No chunks extracted from: {file_name}")
         return
 
-    print("🧠 Embedding chunks...")
+    track("🧠 Embedding chunks...")
     try:
-        embeddings = model.encode(chunks, convert_to_tensor=False, show_progress_bar=True)
+        embeddings = model.encode(chunks, convert_to_tensor=False, show_progress_bar=False)
     except Exception as e:
-        print(f"❌ Embedding failed: {e}")
+        track(f"❌ Embedding failed: {e}")
         return
 
-    print("💾 Writing to database...")
+    track("💾 Writing to database...")
     try:
         conn = sqlite3.connect(db_path)
         create_chunks_table(conn)
         insert_chunks_with_embeddings(conn, file_name, chunks, embeddings)
         conn.close()
     except Exception as e:
-        print(f"❌ Database write failed: {e}")
+        track(f"❌ Database write failed: {e}")
         return
 
-    print(f"🎉 Done! Indexed {len(chunks)} chunks into '{db_path}'")
+    track(f"🎉 Done! Indexed {len(chunks)} chunks into '{db_path}'")
+
 
 def embed_to_general_db(input_pdf_path, db_path):
     print(f"📄 Loading PDF (general): {os.path.basename(input_pdf_path)}")
-    text = extract_text_from_pdf(input_pdf_path)
+    text = extract_text_from_pdf_with_ocr_fallback(input_pdf_path)
 
     if not text:
         print("⚠️ Skipped empty or unreadable PDF.")
@@ -167,6 +198,7 @@ def embed_to_general_db(input_pdf_path, db_path):
 
     print(f"🎉 Done! Indexed {len(chunks)} general chunks into '{db_path}'")
 
+
 @admin_bp.route('/api/process-file', methods=['POST'])
 def process_file():
     try:
@@ -184,18 +216,24 @@ def process_file():
         db_path = os.path.join(UPLOAD_FOLDER, db_name)
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+        steps = []
+
+        def track(msg):
+            print(msg)
+            steps.append(msg)
+
         if mode == 'general':
-            embed_to_general_db(tmp_path, db_path)
+            embed_to_general_db(tmp_path, db_path, track)
         else:
-            embed_to_db(tmp_path, db_path)
+            embed_to_db(tmp_path, db_path, track)
 
         os.remove(tmp_path)
-        return jsonify({'message': f"✅ File indexed into {db_name}!"})
-
+        return jsonify({'message': f"✅ File indexed into {db_name}!", 'steps': steps})
     except Exception as e:
         traceback.print_exc()
         print("❌ Error indexing file:", e)
         return jsonify({'message': '❌ Failed to process file.'}), 500
+
 
 @admin_bp.route('/api/list-dbs', methods=['GET'])
 def list_dbs():
@@ -204,6 +242,7 @@ def list_dbs():
         return jsonify({'dbs': dbs})
     except Exception as e:
         return jsonify({'dbs': [], 'error': str(e)}), 500
+
 
 @admin_bp.route('/api/inspect-db', methods=['POST'])
 def inspect_db():
@@ -250,6 +289,7 @@ def inspect_db():
     except Exception as e:
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
+
 
 @admin_bp.route('/api/delete-db', methods=['POST'])
 def delete_db():

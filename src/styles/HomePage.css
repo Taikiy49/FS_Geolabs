@@ -53,12 +53,14 @@
 
 .homepage-card {
   background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-  border: 1px solid #2e2e2e;
+    border: 1px solid #4f4f4f;
+
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
+  
 
   padding: 18px;
   border-radius: 12px;
-  transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
