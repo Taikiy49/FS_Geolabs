@@ -12,9 +12,6 @@
   box-sizing: border-box;
  background: linear-gradient(135deg, #2c2f33, #202225);
 
-
-
-
 }
 
 
@@ -25,6 +22,7 @@
   width: 100%;
   max-width: 98vw; /* allow more width for 4 cols */
   margin: auto;
+  min-height: 100%;
 }
 
 

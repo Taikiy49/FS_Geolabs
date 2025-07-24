@@ -22,26 +22,24 @@
 /* RIGHT SIDEBAR */
 .admin-right {
   width: 300px;
-  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-  border: 1px solid #2e2e2e;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+ background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  border: 1px solid #4f4f4f;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-  padding: 3px 18px;
+  padding: 3px 15px;
   box-sizing: border-box;
+  margin-top: 16px; margin-bottom: 16px;
 }
 
 .existing-db-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
   color: #a8d0ff;
 }
 
 .existing-db-list {
   list-style: none;
   padding: 0;
-  margin: 0;
-  max-height: 70vh;
   overflow-y: auto;
 }
 
@@ -49,8 +47,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 5px 8px;
+  font-size: 13px;
   border-radius: 6px;
   transition: background 0.2s ease;
   cursor: default;
@@ -86,8 +84,10 @@
 }
 
 .drop-zone {
+  
   background-color: #1e1e1e;
-  border: 2px dashed #555;
+  border: 2px dashed #4f4f4f;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
   padding: 40px;
   text-align: center;
   margin-bottom: 20px;
@@ -104,20 +104,21 @@
 
 .admin-input,
 .admin-select {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-  border: 1px solid #555;
+  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  border: 1px solid #4f4f4f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   padding: 12px;
   border-radius: 6px;
   font-size: 14px;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 15px;
+  color: white;
 }
 
 .admin-radio-group label {
-  margin-right: 20px;
-  font-size: 14px;
+  margin-right: 30px;
+  font-size: 15px;
   color: #ccc;
 }
 
@@ -131,6 +132,9 @@
   font-weight: bold;
   transition: background 0.3s;
   font-size: 14px;
+  width: 30%;
+  margin-top: 16px;
+  margin-left: auto;
 }
 
 .admin-button:hover {

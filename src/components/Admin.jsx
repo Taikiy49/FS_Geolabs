@@ -46,6 +46,11 @@ const [status, setStatus] = useState('');
     return;
   }
 
+  if (mode === 'new' && existingDbs.includes(dbName)) {
+    setMessage('❌ A database with this name already exists. Please choose a different name.');
+    return;
+  }
+
   setStatus('Starting file upload...');
   setMessage('');
 
@@ -67,6 +72,7 @@ const [status, setStatus] = useState('');
     setMessage('❌ Failed to process file.');
   }
 };
+
 
   const handleDbClick = async (db) => {
     try {

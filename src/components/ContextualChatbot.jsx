@@ -79,7 +79,7 @@ const faqMap = {
           question: row.question,
           answer: row.answer,
         }));
-        setHistory(pairs.reverse());
+        setHistory(pairs);
       })
       .catch(() => setHistory([]));
   }, [selectedDB]);
@@ -119,7 +119,7 @@ const faqMap = {
         question: row.question,
         answer: row.answer,
       }));
-      setHistory(pairs.reverse());
+      setHistory(pairs);
     } catch (err) {
       console.error("❌ Error:", err);
       setConversation(prev => {

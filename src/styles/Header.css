@@ -80,7 +80,9 @@
   text-decoration: none;
   font-size: 15px;
   transition: color 0.2s ease-in-out;
+  outline: none; /* 🚫 Removes the focus outline */
 }
+
 
 .header-nav a:hover {
   color: #82b1ff; /* Softer Google Blue on hover */
@@ -88,7 +90,5 @@
 
 
 .header-nav a.active {
-  color: #4285f4;
-  font-weight: bold;
-  border-bottom: 2px solid #4285f4;
+  color: white;
 }

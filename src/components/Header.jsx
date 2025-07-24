@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMsal } from '@azure/msal-react';
-import { Link } from 'react-router-dom'; // ✅ import Link
+import { NavLink } from 'react-router-dom';
+
 import '../styles/Header.css';
 
 function Header() {
@@ -24,16 +25,16 @@ function Header() {
         </div>
       </div>
       <nav className="header-nav">
-        <Link to="/">Home</Link>
-        <Link to="/filesystem">File System</Link>
-        <Link to="/contextualchatbot">Contextual Chatbot</Link> {/* ✅ correct route here */}
-        <Link to="/reports">Reports</Link>
-        <Link to="/admin">Admin</Link>
+        <NavLink to="/" end>Home</NavLink>
+        <NavLink to="/filesystem">File System</NavLink>
+        <NavLink to="/contextualchatbot">Contextual Chatbot</NavLink>
+        <NavLink to="/reports">Reports</NavLink>
+        <NavLink to="/admin">Admin</NavLink>
         <a href="#contact">Coming</a>
         <a href="#contact">Coming</a>
         <a href="#contact">Coming</a>
-
         <a href="#contact">Contact</a>
+
       </nav>
     </header>
   );
