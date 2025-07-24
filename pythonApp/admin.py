@@ -1,4 +1,3 @@
-# admin.py (same directory as app.py)
 from flask import Blueprint, request, jsonify
 import os
 import re
@@ -8,6 +7,7 @@ import fitz  # PyMuPDF
 from tqdm import tqdm
 from collections import defaultdict
 from sentence_transformers import SentenceTransformer
+import traceback
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -18,6 +18,8 @@ MODEL_NAME = "BAAI/bge-base-en-v1.5"
 CHUNK_SIZE = 800
 OVERLAP = 200
 
+model = SentenceTransformer(MODEL_NAME)
+
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
     full_text = ""
@@ -26,18 +28,39 @@ def extract_text_from_pdf(pdf_path):
     doc.close()
     return full_text.strip()
 
-def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
-    words = text.split()
+import nltk
+nltk.download('punkt')  # This is the sentence tokenizer
+
+from nltk.tokenize import sent_tokenize
+
+def chunk_text(text, chunk_size=800, overlap=200):
+    sentences = sent_tokenize(text)
     chunks = []
-    for i in range(0, len(words), chunk_size - overlap):
-        chunk = ' '.join(words[i:i + chunk_size])
-        chunks.append(chunk)
+    current_chunk = []
+
+    for sentence in sentences:
+        current_chunk.append(sentence)
+        total_words = sum(len(s.split()) for s in current_chunk)
+
+        if total_words >= chunk_size:
+            chunks.append(' '.join(current_chunk))
+            # Overlap using last few sentences to approximate overlap
+            overlap_words = 0
+            new_chunk = []
+            for s in reversed(current_chunk):
+                overlap_words += len(s.split())
+                new_chunk.insert(0, s)
+                if overlap_words >= overlap:
+                    break
+            current_chunk = new_chunk
+
+    if current_chunk:
+        chunks.append(' '.join(current_chunk))
+
     return chunks
 
-def tokenize(text):
-    return re.findall(r'\b\w+\b', text.lower())
 
-def create_tables_if_needed(conn):
+def create_chunks_table(conn):
     c = conn.cursor()
     c.execute("""
         CREATE TABLE IF NOT EXISTS chunks (
@@ -47,12 +70,15 @@ def create_tables_if_needed(conn):
             embedding BLOB
         )
     """)
+    conn.commit()
+
+def create_general_chunks_table(conn):
+    c = conn.cursor()
     c.execute("""
-        CREATE TABLE IF NOT EXISTS inverted_index (
-            keyword TEXT,
-            file TEXT,
-            chunk_id INTEGER,
-            term_freq INTEGER
+        CREATE TABLE IF NOT EXISTS general_chunks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            chunk TEXT,
+            embedding BLOB
         )
     """)
     conn.commit()
@@ -66,31 +92,60 @@ def insert_chunks_with_embeddings(conn, file_name, chunks, embeddings):
         )
     conn.commit()
 
-def build_inverted_index(chunks, file_name):
-    index = defaultdict(lambda: defaultdict(int))  # {keyword: {chunk_id: freq}}
-    for chunk_id, chunk in enumerate(chunks):
-        for token in tokenize(chunk):
-            index[token][chunk_id] += 1
-    return index
-
-def insert_inverted_index(conn, file_name, index):
+def insert_general_chunks(conn, chunks, embeddings):
     c = conn.cursor()
-    for keyword, chunk_dict in index.items():
-        for chunk_id, freq in chunk_dict.items():
-            c.execute(
-                "INSERT INTO inverted_index (keyword, file, chunk_id, term_freq) VALUES (?, ?, ?, ?)",
-                (keyword, file_name, chunk_id, freq)
-            )
+    for chunk, emb in zip(chunks, embeddings):
+        c.execute(
+            "INSERT INTO general_chunks (chunk, embedding) VALUES (?, ?)",
+            (chunk, emb.tobytes())
+        )
     conn.commit()
 
 def embed_to_db(input_pdf_path, db_path):
     file_name = os.path.basename(input_pdf_path)
+    print(f"\n📄 Loading PDF: {file_name}")
 
-    print(f"📄 Loading PDF: {file_name}")
+    try:
+        text = extract_text_from_pdf(input_pdf_path)
+        if not text.strip():
+            print(f"⚠️ No extractable text in: {file_name}")
+            return
+    except Exception as e:
+        print(f"❌ Error reading PDF: {e}")
+        return
+
+    print("✂️ Chunking text...")
+    chunks = chunk_text(text)
+    print(f"✅ Created {len(chunks)} chunks")
+    if not chunks:
+        print(f"⚠️ No chunks extracted from: {file_name}")
+        return
+
+    print("🧠 Embedding chunks...")
+    try:
+        embeddings = model.encode(chunks, convert_to_tensor=False, show_progress_bar=True)
+    except Exception as e:
+        print(f"❌ Embedding failed: {e}")
+        return
+
+    print("💾 Writing to database...")
+    try:
+        conn = sqlite3.connect(db_path)
+        create_chunks_table(conn)
+        insert_chunks_with_embeddings(conn, file_name, chunks, embeddings)
+        conn.close()
+    except Exception as e:
+        print(f"❌ Database write failed: {e}")
+        return
+
+    print(f"🎉 Done! Indexed {len(chunks)} chunks into '{db_path}'")
+
+def embed_to_general_db(input_pdf_path, db_path):
+    print(f"📄 Loading PDF (general): {os.path.basename(input_pdf_path)}")
     text = extract_text_from_pdf(input_pdf_path)
 
     if not text:
-        print(f"⚠️ Skipped empty or unreadable PDF: {file_name}")
+        print("⚠️ Skipped empty or unreadable PDF.")
         return
 
     print("✂️ Chunking text...")
@@ -98,24 +153,19 @@ def embed_to_db(input_pdf_path, db_path):
     print(f"✅ Created {len(chunks)} chunks")
 
     if not chunks:
-        print(f"⚠️ No chunks extracted from: {file_name}")
+        print("⚠️ No chunks extracted.")
         return
 
     print("🔢 Embedding...")
-    model = SentenceTransformer(MODEL_NAME)
     embeddings = model.encode(chunks, convert_to_tensor=False, show_progress_bar=True)
 
-    print("💾 Writing to database...")
+    print("💾 Writing to general_chunks table...")
     conn = sqlite3.connect(db_path)
-    create_tables_if_needed(conn)
-    insert_chunks_with_embeddings(conn, file_name, chunks, embeddings)
-
-    print("🧠 Building inverted index...")
-    index = build_inverted_index(chunks, file_name)
-    insert_inverted_index(conn, file_name, index)
-
+    create_general_chunks_table(conn)
+    insert_general_chunks(conn, chunks, embeddings)
     conn.close()
-    print(f"🎉 Done! Indexed {len(chunks)} chunks and keywords into '{db_path}'")
+
+    print(f"🎉 Done! Indexed {len(chunks)} general chunks into '{db_path}'")
 
 @admin_bp.route('/api/process-file', methods=['POST'])
 def process_file():
@@ -131,22 +181,26 @@ def process_file():
             file.save(tmp)
             tmp_path = tmp.name
 
-        db_path = os.path.join('uploads', db_name)
-        os.makedirs('uploads', exist_ok=True)
+        db_path = os.path.join(UPLOAD_FOLDER, db_name)
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-        embed_to_db(tmp_path, db_path)
+        if mode == 'general':
+            embed_to_general_db(tmp_path, db_path)
+        else:
+            embed_to_db(tmp_path, db_path)
 
         os.remove(tmp_path)
         return jsonify({'message': f"✅ File indexed into {db_name}!"})
 
     except Exception as e:
+        traceback.print_exc()
         print("❌ Error indexing file:", e)
         return jsonify({'message': '❌ Failed to process file.'}), 500
 
 @admin_bp.route('/api/list-dbs', methods=['GET'])
 def list_dbs():
     try:
-        dbs = [f for f in os.listdir('uploads') if f.endswith('.db')]
+        dbs = [f for f in os.listdir(UPLOAD_FOLDER) if f.endswith('.db')]
         return jsonify({'dbs': dbs})
     except Exception as e:
         return jsonify({'dbs': [], 'error': str(e)}), 500
@@ -156,7 +210,7 @@ def inspect_db():
     try:
         data = request.get_json()
         db_name = data.get('db_name')
-        db_path = os.path.join('uploads', db_name)
+        db_path = os.path.join(UPLOAD_FOLDER, db_name)
 
         if not os.path.exists(db_path):
             return jsonify({'error': 'Database not found'}), 404
@@ -194,11 +248,9 @@ def inspect_db():
         return jsonify(structure)
 
     except Exception as e:
-        print("❌ DB Inspect Error:", e)
-        import traceback
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
-    
+
 @admin_bp.route('/api/delete-db', methods=['POST'])
 def delete_db():
     try:
@@ -210,7 +262,7 @@ def delete_db():
         if confirmation_text.strip() != expected_confirmation:
             return jsonify({'error': 'Confirmation text does not match. Deletion aborted.'}), 400
 
-        db_path = os.path.join('uploads', db_name)
+        db_path = os.path.join(UPLOAD_FOLDER, db_name)
         if not os.path.exists(db_path):
             return jsonify({'error': 'Database not found'}), 404
 
@@ -218,5 +270,5 @@ def delete_db():
         return jsonify({'message': f"✅ {db_name} successfully deleted."})
 
     except Exception as e:
-        print("❌ DB Deletion Error:", e)
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500

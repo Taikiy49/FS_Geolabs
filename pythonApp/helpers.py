@@ -32,6 +32,11 @@ def is_in_work_order_range(filename, min_wo, max_wo):
         return min_wo <= work_order <= max_wo
     return True
 
+from sentence_transformers import SentenceTransformer
+import numpy as np
+
+embedding_model = SentenceTransformer("BAAI/bge-base-en-v1.5")
+
 def rank_documents(query, db_path, min_wo=0, max_wo=99999, top_k=20):
     query_tokens = preprocess_query(query)
 
@@ -40,58 +45,68 @@ def rank_documents(query, db_path, min_wo=0, max_wo=99999, top_k=20):
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
         tables = {row[0] for row in cursor.fetchall()}
 
-        if "inverted_index" in tables:
-            index_table = "inverted_index"
-            chunk_table = "chunks"
-        elif "handbook_chunks" in tables:
-            index_table = chunk_table = "handbook_chunks"
-        elif "chunks" in tables:
-            index_table = chunk_table = "chunks"
-        else:
-            raise Exception("❌ No valid table found for ranking.")
+        if db_path.endswith("reports.db") and "inverted_index" in tables:
+            # TODO: Use TF-IDF based ranking for reports.db
+            return []
 
-        cursor.execute(f"PRAGMA table_info({chunk_table})")
-        columns = {col[1] for col in cursor.fetchall()}
+        if "chunks" not in tables:
+            raise Exception("❌ 'chunks' table not found in database.")
 
-        file_col = 'file' if 'file' in columns else None
-        chunk_col = 'chunk' if 'chunk' in columns else 'text'
-
-        cursor.execute(f"SELECT {chunk_col} FROM {chunk_table}")
+        cursor.execute("SELECT file, chunk, text, embedding FROM chunks")
         rows = cursor.fetchall()
-        all_chunks = [row[0] for row in rows if isinstance(row[0], str)]
 
-        if index_table != "inverted_index":
-            return [
-                {
-                    'file': f"Document {i+1}",
-                    'chunk': chunk,
-                    'score': 0.0
-                }
-                for i, chunk in enumerate(all_chunks[:top_k])
-            ]
+        if not rows:
+            return []
 
-        # Add TF-IDF logic here only if inverted_index is present (you probably don't need it for handbook)
+        texts = []
+        embeddings = []
+        file_chunk_pairs = []
 
+        for file, chunk, text, emb_blob in rows:
+            if not is_in_work_order_range(file, min_wo, max_wo):
+                continue
+            texts.append(text)
+            embeddings.append(np.frombuffer(emb_blob, dtype=np.float32))
+            file_chunk_pairs.append((file, chunk))
+
+        if not embeddings:
+            return []
+
+        query_embedding = embedding_model.encode([query])[0]
+        scores = [np.dot(query_embedding, emb) / (np.linalg.norm(query_embedding) * np.linalg.norm(emb)) for emb in embeddings]
+
+        ranked = sorted(zip(file_chunk_pairs, texts, scores), key=lambda x: x[2], reverse=True)[:top_k]
+
+        return [
+            {
+                'file': file,
+                'chunk': chunk,
+                'score': round(score, 4),
+                'text': text
+            }
+            for (file, chunk), text, score in ranked
+        ]
 
 def get_quick_view_sentences(file, query, db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    if "handbook" in db_path:
-        table = "handbook_chunks"
-        col = "chunk"
-    else:
-        table = "chunks"
-        col = "text"
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    tables = {row[0] for row in cursor.fetchall()}
+    if "chunks" not in tables:
+        raise Exception("❌ 'chunks' table not found in database.")
 
-    cursor.execute(f"SELECT {col} FROM {table}")
+    cursor.execute("PRAGMA table_info(chunks)")
+    columns = {col[1] for col in cursor.fetchall()}
+    col = "text" if "text" in columns else "chunk"
+
+    cursor.execute(f"SELECT {col} FROM chunks WHERE file = ?", (file,))
     rows = cursor.fetchall()
 
     full_text = " ".join(row[0] for row in rows if isinstance(row[0], str))
-    print(f"🤖 Loaded {len(full_text.split())} words from {table}")
+    print(f"🤖 Loaded {len(full_text.split())} words from {file}")
 
     return [full_text]
-
 
 # Gemini model config
 genai.configure(api_key=GEMINI_API_KEY)

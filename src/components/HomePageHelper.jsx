@@ -1,4 +1,4 @@
-import { FaTools, FaBook, FaUserShield, FaEnvelope, FaEllipsisH, FaChartLine, FaFolderOpen } from 'react-icons/fa';
+import { FaTools, FaBook, FaUserShield, FaEnvelope, FaEllipsisH, FaChartLine, FaFolderOpen, FaHandsHelping, FaRobot } from 'react-icons/fa';
 
 const homepageCards = [
   {
@@ -10,6 +10,15 @@ const homepageCards = [
     link: '/file-system',
   },
   {
+  label: 'Contextual Chatbot',
+  sublabel: 'Interactive knowledge bases',
+  icon: <FaRobot size={40} />,
+  description: 'Chat with AI across various internal knowledge bases like the Employee Handbook, ESOP, or safety guides. Choose a specific document database and get fast, relevant answers tailored to that content.',
+  linkText: 'Open Chatbot →',
+  link: '/employee',
+  },
+
+  {
     label: 'Reports',
     sublabel: 'Project data',
     icon: <FaTools size={40} />,
@@ -17,22 +26,7 @@ const homepageCards = [
     linkText: 'View Reports →',
     link: '/reports',
   },
-  {
-    label: 'Employee Handbook',
-    sublabel: 'Company policies',
-    icon: <FaBook size={40} />,
-    description: 'Explore company policies, onboarding resources, and workplace FAQs through an interactive AI chatbot. Designed to help new and existing employees find answers instantly.',
-    linkText: 'Read Handbook →',
-    link: '/employee',
-  },
-  {
-    label: 'Retirement',
-    sublabel: 'Retirement savings',
-    icon: <FaChartLine size={40} />,
-    description: 'Get instant answers about your 401K and ESOP plans. Learn about employer matching, vesting schedules, eligibility, and more using an intelligent chatbot trained on HR documents.',
-    linkText: 'Ask Retirement →',
-    link: '/retirement',
-  },
+
   {
     label: 'Admin',
     sublabel: 'Management tools',
@@ -40,6 +34,14 @@ const homepageCards = [
     description: 'Access file management and system control tools restricted to administrators. Add or delete reports, update chat data, and manage users across the Geolabs platform securely.',
     linkText: 'Go to Admin →',
     link: '/admin',
+  },
+  {
+    label: 'More Coming...',
+    sublabel: 'Under development',
+    icon: <FaEllipsisH size={40} />,
+    description: 'Stay tuned for upcoming tools. We’re building more features to help automate tasks, centralize data, and improve your experience with the Geolabs platform.',
+    linkText: 'More Coming →',
+    link: '',
   },
   {
     label: 'More Coming...',

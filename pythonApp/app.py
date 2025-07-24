@@ -240,7 +240,7 @@ def get_chat_history():
             rows = cursor.fetchall()
 
         history = [{
-            "query": row[0],
+            "question": row[0],
             "answer": row[1],
             "sources": row[2].split(",") if row[2] else [],
 

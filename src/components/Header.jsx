@@ -25,9 +25,9 @@ function Header() {
       </div>
       <nav className="header-nav">
         <Link to="/">Home</Link>
+        <Link to="/filesystem">File System</Link>
+        <Link to="/contextualchatbot">Contextual Chatbot</Link> {/* ✅ correct route here */}
         <Link to="/reports">Reports</Link>
-        <Link to="/employee">Employee Handbook</Link> {/* ✅ correct route here */}
-        <Link to="/retirement">Retirement</Link>
         <Link to="/admin">Admin</Link>
         <a href="#contact">Coming</a>
         <a href="#contact">Coming</a>

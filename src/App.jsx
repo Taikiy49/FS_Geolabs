@@ -3,11 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import { MsalAuthenticationTemplate } from '@azure/msal-react';
 import { InteractionType } from '@azure/msal-browser';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import Reports from './components/Reports';
-import Employee from './components/Employee';
-import Retirement from './components/Retirement';
+import Employee from './components/ContextualChatbot';
 import Admin from './components/Admin';
 
 import './App.css';
@@ -53,7 +51,6 @@ const AuthenticatedApp = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/employee" element={<Employee />} />
-          <Route path="/retirement" element={<Retirement />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
