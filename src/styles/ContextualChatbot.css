@@ -4,7 +4,7 @@
 
   color: white;
   font-family: 'Segoe UI', sans-serif;
-  min-height: 100%;
+  height: 100%;
 }
 
 .cc-sidebar {
@@ -14,10 +14,15 @@
   border-right: 1px solid #4f4f4f;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
-  padding-top: 8px;
-  padding-bottom: 8px;
 }
 
+.cc-chat-history {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #666 #1a1a1a;
+  padding: 8px;
+  padding-bottom: 0px;
+}
 
 
 @media (max-width: 768px) {
@@ -44,8 +49,8 @@
   word-wrap: break-word;
   white-space: normal;
   outline: 1px solid #4f4f4f;
-  margin-left: 12px; margin-right: 12px; margin-top: 8px;
   border-radius: 6px;
+  margin-bottom: 8px;
 
 }
 
@@ -175,8 +180,9 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   margin-left: 16px; margin-right: 16px;
   border-radius: 6px;
-  margin-top: 8px; margin-bottom: 16px;
-  
+  margin-bottom: 16px;
+  height: 100%;
+  overflow-y: auto;
   
 }
 
@@ -195,12 +201,12 @@
 }
 
 /* Scrollbar styling */
-.cc-chat-bubble::-webkit-scrollbar,
+.cc-results-panel::-webkit-scrollbar,
 .cc-sidebar::-webkit-scrollbar {
   width: 6px;
 }
 
-.cc-chat-bubble::-webkit-scrollbar-thumb,
+.cc-results-panel::-webkit-scrollbar-thumb,
 .cc-sidebar::-webkit-scrollbar-thumb {
   background: #666;
   border-radius: 4px;
@@ -214,12 +220,6 @@
   background: #888;
 }
 
-.cc-chat-history {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #666 #1a1a1a;
-  height: 100%;
-}
 
 /* Toggle Switch */
 .cc-toggle-container {
