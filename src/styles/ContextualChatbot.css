@@ -19,6 +19,7 @@
 }
 
 
+
 @media (max-width: 768px) {
   .cc-sidebar {
     display: none !important;  /* ✅ Fully hide sidebar */
@@ -176,6 +177,7 @@
   border-radius: 6px;
   margin-top: 8px; margin-bottom: 16px;
   
+  
 }
 
 .cc-user-bubble {
@@ -189,6 +191,7 @@
   color: white;
   font-size: 13px;
   margin: 0 16px;
+  padding-bottom: 16px;
 }
 
 /* Scrollbar styling */
