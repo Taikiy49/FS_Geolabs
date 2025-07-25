@@ -255,9 +255,10 @@ def quick_view():
         print("\u274C Quick view error:", str(e))
         return jsonify({"error": "Unable to generate quick view."}), 500
     
+
+init_db()
 if __name__ == '__main__':
     init_db()
-    # app.run(host='0.0.0.0', port=5000)
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
 
