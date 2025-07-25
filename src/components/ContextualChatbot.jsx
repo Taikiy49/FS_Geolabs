@@ -212,7 +212,7 @@ const faqMap = {
                     <ReactMarkdown>{item.text}</ReactMarkdown>
                   </div>
                   {answer && answer.role === 'assistant' && (
-                    <div className="cc-chat-bubble cc-bot-bubble">
+                    <div className="cc-bot-bubble">
                       {answer.loading ? (
                         <span className="cc-loading-text">⏳ Thinking...</span>
                       ) : (

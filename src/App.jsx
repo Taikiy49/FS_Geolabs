@@ -45,18 +45,22 @@ const CustomError = ({ error }) => (
 const AuthenticatedApp = () => {
   return (
     <div className="app-container">
-      <Header />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/contextualchatbot" element={<ContextualChatbot />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </main>
+      <div className="responsive-wrapper">
+        <Header />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/contextualchatbot" element={<ContextualChatbot />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </main>
+      </div>
     </div>
   );
 };
+
+
 
 function App() {
   return (

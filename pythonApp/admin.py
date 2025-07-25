@@ -21,6 +21,24 @@ import io
 
 admin_bp = Blueprint('admin', __name__)
 
+# Ensure upload history table exists
+def ensure_upload_history_table():
+    try:
+        with sqlite3.connect("chat_history.db") as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS upload_history (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user TEXT,
+                    file TEXT,
+                    db_name TEXT,
+                    timestamp TEXT
+                )
+            """)
+    except Exception as e:
+        print("⚠️ Could not initialize upload_history table:", e)
+
+ensure_upload_history_table()
+
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -244,6 +262,21 @@ def process_file():
         else:
             embed_to_db(tmp_path, db_path, track)
 
+        # ✅ Log upload to chat_history.db
+        try:
+            with sqlite3.connect("chat_history.db") as conn:
+                conn.execute("""
+                    INSERT INTO upload_history (user, file, db_name, timestamp)
+                    VALUES (?, ?, ?, datetime('now', '-10 hours'))
+                """, (
+                    request.form.get("user", "guest"),
+                    file.filename,
+                    db_name
+                ))
+        except Exception as e:
+            print("⚠️ Failed to log upload:", e)
+
+
         os.remove(tmp_path)
         return jsonify({'message': f"✅ File indexed into {db_name}!", 'steps': steps})
     except Exception as e:
@@ -324,8 +357,77 @@ def delete_db():
             return jsonify({'error': 'Database not found'}), 404
 
         os.remove(db_path)
+        # ✅ Log deletion
+        try:
+            with sqlite3.connect("chat_history.db") as conn:
+                conn.execute("""
+                    INSERT INTO upload_history (user, file, db_name, timestamp)
+                    VALUES (?, ?, ?, datetime('now', '-10 hours'))
+                """, (
+                    "admin",
+                    "[DELETED]",
+                    db_name
+                ))
+        except Exception as e:
+            print("⚠️ Failed to log deletion:", e)
+
         return jsonify({'message': f"✅ {db_name} successfully deleted."})
 
     except Exception as e:
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
+
+
+@admin_bp.route('/api/list-files', methods=['POST'])
+def list_files_in_db():
+    try:
+        data = request.get_json()
+        db_name = data.get("db_name")
+        db_path = os.path.join(UPLOAD_FOLDER, db_name)
+
+        if not db_name or not os.path.exists(db_path):
+            return jsonify({"error": "Database not found"}), 404
+
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+
+        # You can switch to 'inverted_index' if using that table instead
+        cursor.execute("SELECT DISTINCT file FROM chunks")
+        files = [row[0] for row in cursor.fetchall()]
+        conn.close()
+
+        return jsonify({"files": files})
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to list files: {str(e)}"}), 500
+
+
+@admin_bp.route('/api/upload-history', methods=['GET'])
+def get_upload_history():
+    try:
+        conn = sqlite3.connect("chat_history.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT user, file, db_name, timestamp
+            FROM upload_history
+            ORDER BY timestamp DESC
+            LIMIT 50
+        """)
+        rows = cursor.fetchall()
+        conn.close()
+
+        history = [
+            {
+                "user": row[0],
+                "file": row[1],
+                "db": row[2],
+                "time": row[3]
+            }
+            for row in rows
+        ]
+
+        return jsonify(history)
+
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to retrieve upload history: {str(e)}"}), 500

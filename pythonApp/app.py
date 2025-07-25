@@ -29,6 +29,20 @@ def init_db():
                 db_name TEXT
             )
             """)
+    
+    # ✅ Add this even if DB file already exists
+    with sqlite3.connect(DB_FILE) as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS upload_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user TEXT,
+            file TEXT,
+            db_name TEXT,
+            timestamp TEXT
+        )
+        """)
+
+
 
 
 @app.route('/api/rank_only', methods=['POST'])
