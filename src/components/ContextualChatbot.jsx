@@ -113,7 +113,7 @@ const faqMap = {
       const histRes = await axios.get(`${API_URL}/api/chat_history`, {
         params: { user: "guest", db: selectedDB },
       });
-
+      
       const raw = histRes.data || [];
       const pairs = raw.map(row => ({
         question: row.question,
