@@ -6,7 +6,9 @@ import tempfile
 import traceback
 from tqdm import tqdm
 from collections import defaultdict
-from sentence_transformers import SentenceTransformer
+from transformers import AutoTokenizer, AutoModel
+import torch
+
 
 import fitz  # PyMuPDF
 import nltk
@@ -23,11 +25,22 @@ UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 MODEL_NAME = "BAAI/bge-base-en-v1.5"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+embedding_model = AutoModel.from_pretrained(MODEL_NAME)
+
+
 CHUNK_SIZE = 800
 OVERLAP = 200
-
-model = SentenceTransformer(MODEL_NAME)
 nltk.download('punkt')
+
+def compute_embeddings(text_chunks):
+    inputs = tokenizer(text_chunks, padding=True, truncation=True, return_tensors="pt")
+    with torch.no_grad():
+        outputs = embedding_model(**inputs)
+
+    # Mean Pooling
+    embeddings = outputs.last_hidden_state.mean(dim=1)
+    return embeddings.numpy()
 
 
 def extract_text_from_pdf_with_ocr_fallback(pdf_path):
@@ -153,7 +166,9 @@ def embed_to_db(input_pdf_path, db_path, track=print):
 
     track("🧠 Embedding chunks...")
     try:
-        embeddings = model.encode(chunks, convert_to_tensor=False, show_progress_bar=False)
+        embeddings = compute_embeddings(chunks)
+
+
     except Exception as e:
         track(f"❌ Embedding failed: {e}")
         return
@@ -188,7 +203,9 @@ def embed_to_general_db(input_pdf_path, db_path):
         return
 
     print("🔢 Embedding...")
-    embeddings = model.encode(chunks, convert_to_tensor=False, show_progress_bar=True)
+    embeddings = compute_embeddings(chunks)
+
+
 
     print("💾 Writing to general_chunks table...")
     conn = sqlite3.connect(db_path)

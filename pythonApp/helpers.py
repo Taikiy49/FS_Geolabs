@@ -7,11 +7,25 @@ import heapq
 import requests
 import os
 from dotenv import load_dotenv
+from transformers import AutoTokenizer, AutoModel
+import torch
 
 from difflib import SequenceMatcher
 import google.generativeai as genai
 
 load_dotenv()
+
+MODEL_NAME = "BAAI/bge-base-en-v1.5"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+embedding_model = AutoModel.from_pretrained(MODEL_NAME)
+
+def compute_embedding(text):
+    inputs = tokenizer([text], return_tensors="pt", padding=True, truncation=True)
+    with torch.no_grad():
+        outputs = embedding_model(**inputs)
+
+    return outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
+
 
 MAUI_LOCATIONS = {"maui", "lahaina", "kahului", "kihei", "wailuku", "makawao", "kula", "pukalani", "upcountry"}
 GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
@@ -32,10 +46,8 @@ def is_in_work_order_range(filename, min_wo, max_wo):
         return min_wo <= work_order <= max_wo
     return True
 
-from sentence_transformers import SentenceTransformer
 import numpy as np
 
-embedding_model = SentenceTransformer("BAAI/bge-base-en-v1.5")
 
 def rank_documents(query, db_path, min_wo=0, max_wo=99999, top_k=20):
     query_tokens = preprocess_query(query)
@@ -72,7 +84,8 @@ def rank_documents(query, db_path, min_wo=0, max_wo=99999, top_k=20):
         if not embeddings:
             return []
 
-        query_embedding = embedding_model.encode([query])[0]
+        query_embedding = compute_embedding(query)
+
         scores = [np.dot(query_embedding, emb) / (np.linalg.norm(query_embedding) * np.linalg.norm(emb)) for emb in embeddings]
 
         ranked = sorted(zip(file_chunk_pairs, texts, scores), key=lambda x: x[2], reverse=True)[:top_k]
@@ -110,7 +123,8 @@ def get_quick_view_sentences(file, query, db_path):
 
 # Gemini model config
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-2.5-pro")
+gemini_model = genai.GenerativeModel("gemini-2.5-pro")
+
 
 def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=True):
     if not query:
@@ -149,7 +163,7 @@ def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=T
 """
     try:
         print("🧠 Gemini Prompt Preview:\n", prompt[:300])
-        response = model.generate_content(prompt)
+        response = gemini_model.generate_content(prompt)
         answer = response.text.strip()
 
         if use_cache:
