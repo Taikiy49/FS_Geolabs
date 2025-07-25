@@ -28,7 +28,7 @@ function Header() {
         <NavLink to="/" end>Home</NavLink>
         <NavLink to="/filesystem">File System</NavLink>
         <NavLink to="/contextualchatbot">Contextual Chatbot</NavLink>
-        <NavLink to="/reports">Reports</NavLink>
+        <NavLink to="/">Reports</NavLink>
         <NavLink to="/admin">Admin</NavLink>
         <a href="#contact">Coming</a>
         <a href="#contact">Coming</a>

@@ -19,13 +19,14 @@ const homepageCards = [
   },
 
   {
-    label: 'Reports',
-    sublabel: 'Project data',
-    icon: <FaTools size={40} />,
-    description: 'Ask questions and retrieve information from over 8,000 engineering reports using AI-powered tools. Filter by work order, location, and keyword to explore detailed geotechnical data.',
-    linkText: 'View Reports →',
-    link: '/reports',
-  },
+  label: 'Reports',
+  sublabel: 'Under Construction',
+  icon: <FaTools size={40} />,
+  description: 'This feature is currently being updated. Please check back soon for access to over 8,000 searchable geotechnical reports and AI-assisted queries.',
+  linkText: 'Unavailable',
+  link: '',  // ✅ Disabled by setting to empty string or null
+  disabled: true  // Optional flag to help conditionally render styles or disable clicks
+},
 
   {
     label: 'Admin',

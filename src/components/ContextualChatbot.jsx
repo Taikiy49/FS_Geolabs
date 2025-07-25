@@ -69,20 +69,25 @@ const faqMap = {
 }, [selectedDB]);
 
   useEffect(() => {
-    if (!selectedDB) return;
-    axios.get(`${API_URL}/api/chat_history`, {
-      params: { user: "guest", db: selectedDB },
+  if (!selectedDB) return;
+
+  axios.get(`${API_URL}/api/chat_history`, {
+    params: { user: "guest", db: selectedDB },
+  })
+    .then((res) => {
+      const raw = res.data || [];
+      const pairs = raw.map(row => ({
+        question: row.question,
+        answer: row.answer,
+      }));
+      setHistory(pairs);
     })
-      .then((res) => {
-        const raw = res.data || [];
-        const pairs = raw.map(row => ({
-          question: row.question,
-          answer: row.answer,
-        }));
-        setHistory(pairs);
-      })
-      .catch(() => setHistory([]));
-  }, [selectedDB]);
+    .catch(() => setHistory([]));
+
+  // ✅ Clear conversation when database changes
+  setConversation([]);
+}, [selectedDB]);
+
 
   const handleSubmit = async (e, optionalQuery) => {
     e.preventDefault();

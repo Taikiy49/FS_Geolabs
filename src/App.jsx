@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { MsalAuthenticationTemplate } from '@azure/msal-react';
 import { InteractionType } from '@azure/msal-browser';
 import Header from './components/Header';
+import FileSystem from './components/FileSystem';
 import HomePage from './components/HomePage';
 import Reports from './components/Reports';
 import ContextualChatbot from './components/ContextualChatbot';
@@ -50,6 +51,7 @@ const AuthenticatedApp = () => {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/filesystem" element={<FileSystem />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/contextualchatbot" element={<ContextualChatbot />} />
             <Route path="/admin" element={<Admin />} />
