@@ -12,7 +12,14 @@ import torch
 
 import fitz  # PyMuPDF
 import nltk
-from nltk.tokenize import sent_tokenize
+from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
+
+punkt_param = PunktParameters()
+punkt_tokenizer = PunktSentenceTokenizer(punkt_param)
+
+def safe_sent_tokenize(text):
+    return punkt_tokenizer.tokenize(text)
+
 from PIL import Image
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\tyamashita\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
@@ -49,7 +56,11 @@ embedding_model = AutoModel.from_pretrained(MODEL_NAME)
 
 CHUNK_SIZE = 800
 OVERLAP = 200
-nltk.download('punkt')
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
 
 def compute_embeddings(text_chunks):
     inputs = tokenizer(text_chunks, padding=True, truncation=True, return_tensors="pt")
@@ -90,7 +101,8 @@ def extract_text_from_pdf_with_ocr_fallback(pdf_path):
 
 
 def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
-    sentences = sent_tokenize(text)
+    sentences = safe_sent_tokenize(text)
+
     chunks = []
     current_chunk = []
 
