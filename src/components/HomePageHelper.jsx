@@ -45,22 +45,6 @@ const homepageCards = [
     link: '',
   },
   {
-    label: 'More Coming...',
-    sublabel: 'Under development',
-    icon: <FaEllipsisH size={40} />,
-    description: 'Stay tuned for upcoming tools. We’re building more features to help automate tasks, centralize data, and improve your experience with the Geolabs platform.',
-    linkText: 'More Coming →',
-    link: '',
-  },
-  {
-    label: 'More Coming...',
-    sublabel: 'Under development',
-    icon: <FaEllipsisH size={40} />,
-    description: 'Stay tuned for upcoming tools. We’re building more features to help automate tasks, centralize data, and improve your experience with the Geolabs platform.',
-    linkText: 'More Coming →',
-    link: '',
-  },
-  {
     label: 'Contact',
     sublabel: 'Reach us',
     icon: <FaEnvelope size={40} />,

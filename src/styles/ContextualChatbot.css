@@ -7,6 +7,12 @@
   height: 100%;
 }
 
+.cc-db-readonly {
+  color: #ccc;
+  font-size: 13px;
+  margin-left: 10px;
+}
+
 .cc-sidebar {
   width: 180px;
   overflow-y: auto;
@@ -307,8 +313,6 @@
 .cc-db-icon {
   font-size: 18px;
   color: #4285f4;
-  margin-right: 8px;
-  margin-bottom: 1px;
 }
 
 .cc-db-label-text {

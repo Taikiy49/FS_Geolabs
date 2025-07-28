@@ -1,120 +1,144 @@
 /* HomePage.css */
 
 .homepage-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 17px;
-  color: white;
-  min-height: 100%;
+  padding: 4vh 5vw;
+  background-color: #0a0d12;
+  color: #e6eaf0;
+  min-height: 100vh;
   box-sizing: border-box;
- background: linear-gradient(135deg, #2c2f33, #202225);
-
+  font-family: 'Segoe UI', sans-serif;
 }
 
-
-.homepage-grid {
-  display: grid;
-  flex: 1;
-  gap: 15px; /* slightly tighter gaps */
-  width: 100%;
-  max-width: 98vw; /* allow more width for 4 cols */
-  margin: auto;
-  min-height: 100%;
+.homepage-greeting-card {
+  background: linear-gradient(135deg, #1c1f26, #101317);
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin-bottom: 28px;
+  border: 1px solid #2e333b;
 }
 
-
-@media (min-width: 1000px) {
-  .homepage-grid {
-    grid-template-columns: repeat(4, 1fr); /* <-- ensure 4 per row */
-  }
-
-  .homepage-card {
-    min-height: 34vh; /* taller cards at full screen */
-  }
+.homepage-greeting-card h1 {
+  font-size: 28px;
+  color: #f3f4f6;
+  margin: 0 0 6px 0;
 }
 
-
-@media (min-width: 600px) and (max-width: 999px) {
-  .homepage-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.homepage-greeting-card p {
+  font-size: 14px;
+  color: #a0a8b8;
+  margin: 0;
 }
 
-@media (max-width: 599px) {
-  .homepage-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-.homepage-card {
-  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-    border: 1px solid #4f4f4f;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
-  
-
-  padding: 18px;
-  border-radius: 12px;
+.homepage-header {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-}
-
-.homepage-card:hover {
-  cursor: pointer;
-  transform: translateY(-2px);
-  border-color: #4285f4; /* Google Blue */
-  box-shadow: 0 8px 24px rgba(66, 133, 244, 0.2); /* Google Blue glow */
-}
-
-.homepage-card-header {
-  display: flex;
   align-items: center;
-  line-height: 25px;
+  margin-bottom: 14px;
+}
+
+.homepage-subsection-title {
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.homepage-search {
+  width: 220px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #13161d;
+  color: #d1d5db;
+  border: 1px solid #2f333c;
+  font-size: 13px;
+}
+
+.homepage-search:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.homepage-tool-count {
+  font-size: 13px;
+  color: #8b949e;
+  margin-bottom: 12px;
+  text-align: right;
+}
+
+.homepage-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.homepage-row {
+  background: #12161c;
+  border: 1px solid #2a2f36;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.homepage-row:hover {
+  background-color: #1b1f26;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.homepage-row-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .homepage-icon {
-  margin-right: 12px;
-  margin-top: -15px;
-  font-size: 25px;
-  color: #4285f4;
+  font-size: 34px;
+  color: #3b82f6;
+  margin-top: 4px;
 }
 
-.homepage-card h2 {
-  font-size: 23px;
+.homepage-title {
   margin: 0;
-  color: #ffffff;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.homepage-badge {
+  background-color: #10b981;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  margin-left: 8px;
+  border-radius: 4px;
 }
 
 .homepage-sublabel {
-  font-size: 15px;
-  color: #8b949e;
-  margin-top: -3px;
-  font-weight: normal;
-}
-
-.homepage-card p {
-  font-size: 15px;
-  color: #d0d0d0;
-  flex-grow: 1;
-  font-weight: normal;
-}
-
-.homepage-link {
-  color: #4285f4;
-  font-weight: bold;
-  cursor: pointer;
+  margin: 4px 0;
   font-size: 13px;
-  transition: color 0.2s;
-  align-self: flex-start;
-  text-decoration: none;
+  color: #9ca3af;
 }
 
-.homepage-link:hover {
-  color: #82b1ff;
+.homepage-description {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.homepage-updated {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.homepage-footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  padding: 20px 0;
+  border-top: 1px solid #2f333a;
 }

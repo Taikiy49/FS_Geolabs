@@ -5,13 +5,12 @@ import '../styles/ContextualChatbot.css';
 import API_URL from '../config';
 import ReactMarkdown from 'react-markdown';
 
-export default function ContextualChatbot() {
+export default function ContextualChatbot({ selectedDB }) {
   const [conversation, setConversation] = useState([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [useCache, setUseCache] = useState(true);
-  const [selectedDB, setSelectedDB] = useState('');
   const [availableDBs, setAvailableDBs] = useState([]);
 
   const [faqList, setFaqList] = useState([]);
@@ -57,10 +56,6 @@ const faqMap = {
         const dbList = res.data.dbs || [];
         const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db');
         setAvailableDBs(filtered);
-
-        if (!filtered.includes(selectedDB)) {
-          setSelectedDB(filtered[0] || '');
-        }
       })
       .catch(() => setAvailableDBs([]));
   }, []);
@@ -166,18 +161,8 @@ const faqMap = {
           <div className="cc-db-select">
             <div className="cc-db-label-group">
               <FaDatabase className="cc-db-icon" />
-              <span className="cc-db-label-text">Select Database:</span>
+               <div className="cc-db-readonly">{selectedDB}</div>
             </div>
-
-            <select
-              value={selectedDB}
-              onChange={(e) => setSelectedDB(e.target.value)}
-              className="cc-db-dropdown"
-            >
-              {availableDBs.map((db, idx) => (
-                <option key={idx} value={db}>{db}</option>
-              ))}
-            </select>
             <div className="cc-toggle-container">
             <label className="cc-toggle-switch">
               <input
