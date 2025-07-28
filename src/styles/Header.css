@@ -1,26 +1,40 @@
+/* ---------- Header Container ---------- */
 .header {
-  background-color: #0d1117; /* ✅ GitHub dark */
+  background-color: #0d1117; /* GitHub dark base */
   border-bottom: 1px solid #30363d;
-  color: #c9d1d9; /* GitHub primary text */
+  color: #c9d1d9;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  height: 60px;
+  padding: 6px 20px;
   gap: 16px;
+  height: 40px;
+  flex-shrink: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-.header-logo {
-  height: 25px;
+/* ---------- Flex Alignment for All Children ---------- */
+.header * {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
+/* ---------- Logo ---------- */
+.header-logo {
+  height: 30px;
+  object-fit: contain;
+}
+
+/* ---------- Title ---------- */
 .header-title {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: bold;
+  letter-spacing: .2px;
   color: #ffffff;
 }
 
+/* ---------- Left, Center, Right Sections ---------- */
 .header-left {
   display: flex;
   align-items: center;
@@ -33,13 +47,21 @@
   justify-content: center;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ---------- Search Bar ---------- */
 .header-search {
+  height: 12px;
   width: 100%;
   max-width: 400px;
   padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid #30363d;
-  background-color: #161b22;
+  background-color: #161b22; /* Slightly lighter than header */
   color: #c9d1d9;
   font-size: 14px;
 }
@@ -48,25 +70,19 @@
   color: #8b949e;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Icons */
+/* ---------- Icons ---------- */
 .header-icon {
-  font-size: 16px;
+  font-size: 18px;
   color: #c9d1d9;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 
 .header-icon:hover {
   color: #ffffff;
 }
 
-/* Profile section */
+/* ---------- Profile Section ---------- */
 .header-profile-container {
   position: relative;
   display: flex;
@@ -76,8 +92,8 @@
 }
 
 .profile-pic {
-  height: 30px;
-  width: 30px;
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid #30363d;
@@ -93,7 +109,7 @@
   color: #8b949e;
 }
 
-/* Dropdown menu */
+/* ---------- Dropdown Menu ---------- */
 .profile-dropdown {
   position: absolute;
   top: 100%;
@@ -102,21 +118,22 @@
   background-color: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
-  min-width: 120px;
+  min-width: 140px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  flex-direction: column;
 }
 
 .dropdown-item {
   width: 100%;
-  text-align: left;
   padding: 8px 12px;
   background: none;
   border: none;
   color: #c9d1d9;
-  cursor: pointer;
   font-size: 14px;
-  transition: background 0.2s;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .dropdown-item:hover {

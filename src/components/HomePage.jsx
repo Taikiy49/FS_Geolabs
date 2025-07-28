@@ -1,9 +1,7 @@
-// HomePage.jsx
 import React from 'react';
 import '../styles/HomePage.css';
 import homepageCards from './HomePageHelper';
 import { useNavigate } from 'react-router-dom';
-import GitHubRepoWidget from './GitHubRepoWidget';
 import { useMsal } from '@azure/msal-react';
 
 const HomePage = () => {
@@ -28,22 +26,25 @@ const HomePage = () => {
     return `${diff === 0 ? 'Updated today' : `Updated ${diff} day${diff === 1 ? '' : 's'} ago`}`;
   };
 
+  const displayedCards = homepageCards.slice(0, 6); // ✅ only show first 3
+
   return (
     <div className="homepage-container">
-      <div className="homepage-greeting-card">
-        <h1>Welcome back, {userName}</h1>
-        <p>Let’s make today productive.</p>
-      </div>
+      <div className="homepage-top">
+        <div className="homepage-greeting-card">
+          <h1>Welcome back, {userName}</h1>
+          <p>Let’s make today productive.</p>
+        </div>
 
-      <div className="homepage-header">
-        <h2 className="homepage-subsection-title">🛠 Available Tools</h2>
-        <input className="homepage-search" placeholder="Search tools..." />
-      </div>
+        <div className="homepage-header">
+          <h2 className="homepage-subsection-title">Dashboard</h2>
+          <input className="homepage-search" placeholder="Search tools..." />
+        </div>
 
-      <p className="homepage-tool-count">Total tools: {homepageCards.length}</p>
+      </div>
 
       <div className="homepage-list">
-        {homepageCards.map((item, idx) => (
+        {displayedCards.map((item, idx) => (
           <div key={idx} className="homepage-row" onClick={() => handleClick(item.link)}>
             <div className="homepage-row-left">
               <div className="homepage-icon">{item.icon}</div>
@@ -53,15 +54,17 @@ const HomePage = () => {
                 </h2>
                 <p className="homepage-sublabel">{item.sublabel}</p>
                 <p className="homepage-description">{item.description}</p>
-                <p className="homepage-updated">{getDaysAgo(item.lastUpdated || '2024-10-01')}</p>
+                <p className="homepage-updated">
+                  {item.updated ? getDaysAgo(item.updated) : 'Updated recently'}
+                </p>
+                <div className="homepage-usage-bar">
+                  <div className="homepage-usage-fill" style={{ width: `${item.usage || 50}%` }} />
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
-
-      <GitHubRepoWidget username="Taikiy49" />
-
     </div>
   );
 };

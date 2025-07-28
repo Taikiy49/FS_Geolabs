@@ -138,6 +138,25 @@ const faqMap = {
   return (
     <div className="cc-container">
       <div className="cc-sidebar">
+        <div className="cc-db-row">
+  <div className="cc-db-label-group">
+    <FaDatabase className="cc-db-icon" />
+    <div className="cc-db-readonly">{selectedDB}</div>
+  </div>
+  <div className="cc-toggle-inline">
+    <label className="cc-toggle-switch">
+      <input
+        type="checkbox"
+        checked={useCache}
+        onChange={() => setUseCache(!useCache)}
+      />
+      <span className="cc-slider" />
+    </label>
+    <span className="cc-toggle-label-text">Cache</span>
+  </div>
+</div>
+
+          
         <div className="cc-chat-history">
           {history.map((pair, i) => (
             <div
@@ -158,24 +177,7 @@ const faqMap = {
 
       <div className="cc-main">
         <div className="cc-panel">
-          <div className="cc-db-select">
-            <div className="cc-db-label-group">
-              <FaDatabase className="cc-db-icon" />
-               <div className="cc-db-readonly">{selectedDB}</div>
-            </div>
-            <div className="cc-toggle-container">
-            <label className="cc-toggle-switch">
-              <input
-                type="checkbox"
-                checked={useCache}
-                onChange={() => setUseCache(!useCache)}
-              />
-              <span className="cc-slider" />
-            </label>
-            <span className="cc-toggle-label-text">Use Cached Answers</span>
-          </div>
-          </div>
-          
+
 
           <div className="cc-faq-list">
             {faqList.map((faq, i) => (
