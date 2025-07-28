@@ -53,8 +53,37 @@ const AuthenticatedApp = () => {
     // Handle history item click (optional)
   };
 
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+React.useEffect(() => {
+  const mainContent = document.querySelector('.main-content');
+  const handleScroll = () => {
+    const scrollTop = mainContent.scrollTop;
+    const scrollHeight = mainContent.scrollHeight;
+    const clientHeight = mainContent.clientHeight;
+    const scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    setScrollProgress(scrolled);
+  };
+
+  if (mainContent) {
+    mainContent.addEventListener('scroll', handleScroll);
+  }
+
+  return () => {
+    if (mainContent) {
+      mainContent.removeEventListener('scroll', handleScroll);
+    }
+  };
+}, []);
+
+
   return (
     <div className="app-layout">
+      <div
+  className="global-progress-bar"
+  style={{ width: `${scrollProgress}%` }}
+/>
+
       <Header />
       <div className="app-body">
         <Sidebar

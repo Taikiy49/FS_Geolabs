@@ -62,7 +62,6 @@ const HomePage = () => {
 
       <GitHubRepoWidget username="Taikiy49" />
 
-      <footer className="homepage-footer">© 2025 Geolabs Software</footer>
     </div>
   );
 };
