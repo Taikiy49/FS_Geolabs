@@ -3,10 +3,12 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
 import sqlite3
+from ocr import extract_work_orders_from_image
 import os
 import traceback
 from helpers import rank_documents, ask_gemini_single_file, get_quick_view_sentences
 from admin import admin_bp
+import boto3
 
 app = Flask(__name__)
 app.register_blueprint(admin_bp)
@@ -269,6 +271,43 @@ def quick_view():
         print("\u274C Quick view error:", str(e))
         return jsonify({"error": "Unable to generate quick view."}), 500
     
+from ocr import extract_work_orders_from_image
+
+@app.route('/api/ocr-upload', methods=['POST'])
+def ocr_work_orders():
+    try:
+        if 'image' not in request.files:
+            return jsonify({"error": "No image uploaded."}), 400
+
+        image_file = request.files['image']
+        extracted_text = extract_work_orders_from_image(image_file)
+        return jsonify({
+            "recognized_work_orders": extracted_text
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Gemini image processing failed: {str(e)}"}), 500
+
+@app.route('/api/list-s3-files', methods=['GET'])
+def list_s3_files():
+    s3 = boto3.client('s3')
+    bucket_name = 'geolabs-reports'
+    response = s3.list_objects_v2(Bucket=bucket_name)
+    files = []
+
+    for obj in response.get('Contents', []):
+        key = obj['Key']
+        url = s3.generate_presigned_url(
+            ClientMethod='get_object',
+            Params={'Bucket': bucket_name, 'Key': key},
+            ExpiresIn=3600  # URL valid for 1 hour
+        )
+        files.append({'name': key, 'url': url})
+
+    return jsonify({'files': files})
+
 
 init_db()
 if __name__ == '__main__':

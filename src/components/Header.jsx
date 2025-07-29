@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useMsal } from '@azure/msal-react';
 import { FaPlus, FaBell, FaQuestionCircle, FaChevronDown } from 'react-icons/fa';
 import '../styles/Header.css';
+import { Link } from 'react-router-dom';
+
 import { FaUserCircle } from 'react-icons/fa';
 // then replace FaQuestionCircle with FaUserCircle
 
@@ -46,10 +48,10 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="header-left">
+      <Link to="/" className="header-left" style={{ textDecoration: 'none' }}>
         <img src="/geolabs.png" alt="Geolabs Logo" className="header-logo" />
         <span className="header-title">Geolabs, Inc.</span>
-      </div>
+      </Link>
 
       <div className="header-center">
         <input type="text" className="header-search" placeholder="Search..." />

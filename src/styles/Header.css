@@ -8,7 +8,9 @@
   justify-content: space-between;
   padding: 6px 20px;
   gap: 16px;
-  height: 40px;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
   flex-shrink: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -22,17 +24,19 @@
 
 /* ---------- Logo ---------- */
 .header-logo {
-  height: 30px;
+  height: 36px;
   object-fit: contain;
 }
 
 /* ---------- Title ---------- */
 .header-title {
-  font-size: 18px;
-  font-weight: bold;
-  letter-spacing: .2px;
-  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: 700; /* true bold */
+  color: rgb(250, 250, 250);
 }
+
+
 
 /* ---------- Left, Center, Right Sections ---------- */
 .header-left {
@@ -54,15 +58,15 @@
 }
 
 .profile-icon{
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 /* ---------- Icons ---------- */
 .header-icon {
-  font-size: 18px;
+  font-size: 20px;
   color: #c9d1d9;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -70,15 +74,77 @@
 
 .header-search {
   width: 100%;
-  max-width: 400px;
-  padding: 6px 12px;
+  max-width: 300px;
+  padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid #2a2d31;
-  background-color: #0d1117;
-  color: white;
+  border: 1px solid #30363d;
+  background-color: #161b22; /* lighter than base, matches GitHub input */
+  color: #c9d1d9;
+  height: 16px;
+  min-height: 16px;
+  max-height: 16px;
   font-size: 14px;
   outline: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease;
 }
+
+
+.header-search:focus {
+  border-color: #58a6ff; /* GitHub blue highlight */
+}
+
+@media (max-width: 500px) {
+  .header-search {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .header {
+    padding: 4px 12px;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    gap: 12px;
+  }
+
+  .header-logo {
+    height: 28px;
+  }
+
+  .header-title {
+    font-size: 16px;
+  }
+
+  .header-icon {
+    font-size: 16px;
+  }
+
+  .profile-icon,
+  .profile-pic {
+    height: 28px;
+    width: 28px;
+  }
+
+  .profile-name {
+    font-size: 12px;
+  }
+
+  .dropdown-icon {
+    font-size: 10px;
+  }
+
+  .dropdown-item {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+
+.header-right > .header-icon:last-of-type {
+  margin-right: 20px; /* or adjust to taste */
+}
+
 .header-icon:hover {
   color: #ffffff;
 }

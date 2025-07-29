@@ -1,8 +1,6 @@
 .homepage-container {
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  height: 100%; /* Add this to allow full-height stretch */
   padding: 16px;
 }
 
@@ -12,48 +10,50 @@
 
 .homepage-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   height: 100%;
 }
 
-@media (max-width: 1000px) {
-  .homepage-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .homepage-list {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
 .homepage-greeting-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
   background: linear-gradient(135deg, #161b22, #0d1117);
-  padding: 15px 20px;
+  padding: 5px 15px;
   border-radius: 10px;
-  border: 1px solid #30363d;
+   border: 1px solid #30363d;
   margin-bottom: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.homepage-greeting-card h1 {
-  font-size: 24px;
+.homepage-greeting-left h1 {
+  font-size: 22px;
   color: #f0f6fc;
   margin: 0 0 6px 0;
 }
 
-.homepage-greeting-card p {
+.homepage-greeting-left p {
   font-size: 14px;
   color: #8b949e;
   margin: 0;
 }
 
+.homepage-greeting-right {
+  font-size: 14px;
+  color: #8b949e;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+
 .homepage-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .homepage-subsection-title {
@@ -63,14 +63,29 @@
 }
 
 .homepage-search {
-  width: 220px;
   padding: 8px 12px;
   border-radius: 6px;
   background-color: #0d1117;
   color: #c9d1d9;
   border: 1px solid #30363d;
-  font-size: 13px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.3s ease;
 }
+
+@media (max-width: 768px) {
+  .homepage-search {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 500px) {
+  .homepage-search {
+    display: none;
+  }
+}
+
 
 .homepage-search:focus {
   outline: none;
@@ -88,15 +103,17 @@
   border: 1px solid #30363d;
   border-radius: 10px;
   padding: 20px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+  overflow-x: hidden; /* ✅ no horizontal overflow */
 }
 
 .homepage-row:hover {
-  background-color: #21262d;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* Remove hover effect entirely */
+  background-color: #161b22;
+  transform: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .homepage-row-left {
@@ -118,14 +135,6 @@
   color: #f0f6fc;
 }
 
-.homepage-badge {
-  background-color: #238636;
-  color: #ffffff;
-  font-size: 10px;
-  margin-left: 8px;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
 
 .homepage-sublabel {
   margin: 4px 0;
@@ -143,4 +152,82 @@
   margin-top: 10px;
   font-size: 12px;
   color: #6e7681;
+}
+
+.homepage-subpages {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-left: 2px;
+  width: 100%;              /* ✅ match parent width */
+  box-sizing: border-box;   /* ✅ include padding in size */
+}
+
+/* Hide scrollbar (optional) */
+.homepage-subpages::-webkit-scrollbar {
+  display: none;
+}
+.homepage-subpages {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 768px) {
+  .homepage-subpages {
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .homepage-subpage-link {
+    flex: 1 1 calc(33.33% - 12px); /* fit 3 per row with 12px gap */
+    min-width: 0;
+  }
+}
+
+
+
+
+.homepage-subpage-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: #1c2128;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  min-width: 200px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex: 1 1 200px; /* ✅ allow flexibility */
+  width: 100%; /* ✅ prevent overflow */
+  box-sizing: border-box;
+}
+
+.homepage-subpage-link:hover {
+  background-color: #2d333b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.subpage-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.subpage-info strong {
+  font-size: 14px;
+  color: #f0f6fc;
+}
+
+.subpage-description {
+  margin-top: 4px;
+  color: #8b949e;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 260px;
 }

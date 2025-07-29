@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/HomePage.css';
-import homepageCards from './HomePageHelper';
+import homepageCards from './HomePageCards';
 import { useNavigate } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 
@@ -10,14 +10,9 @@ const HomePage = () => {
   const fullName = accounts[0]?.name || 'User';
   const userName = fullName.split(' ')[0];
 
-  const handleClick = (link) => {
-    if (!link) return;
-    if (link.startsWith('/')) {
-      navigate(link);
-    } else {
-      const target = document.querySelector(link);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleClick = (link, disabled) => {
+    if (!link || disabled) return;
+    navigate(link);
   };
 
   const getDaysAgo = (dateStr) => {
@@ -26,26 +21,35 @@ const HomePage = () => {
     return `${diff === 0 ? 'Updated today' : `Updated ${diff} day${diff === 1 ? '' : 's'} ago`}`;
   };
 
-  const displayedCards = homepageCards.slice(0, 6); // ✅ only show first 3
-
   return (
     <div className="homepage-container">
       <div className="homepage-top">
         <div className="homepage-greeting-card">
-          <h1>Welcome back, {userName}</h1>
-          <p>Let’s make today productive.</p>
-        </div>
+  <div className="homepage-greeting-left">
+    <h1>Welcome back, {userName}</h1>
+    <p>Let’s make today productive.</p>
+  </div>
+  <div className="homepage-greeting-right">
+    <span>{new Date().toLocaleDateString()}</span>
+    <span>{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+  </div>
+</div>
+
+
 
         <div className="homepage-header">
           <h2 className="homepage-subsection-title">Dashboard</h2>
           <input className="homepage-search" placeholder="Search tools..." />
         </div>
-
       </div>
 
       <div className="homepage-list">
-        {displayedCards.map((item, idx) => (
-          <div key={idx} className="homepage-row" onClick={() => handleClick(item.link)}>
+        {homepageCards.map((item, idx) => (
+          <div
+            key={idx}
+            className={`homepage-row ${item.disabled ? 'homepage-row-disabled' : ''}`}
+            style={{ cursor: item.disabled ? 'not-allowed' : 'pointer', opacity: item.disabled ? 0.5 : 1 }}
+          >
             <div className="homepage-row-left">
               <div className="homepage-icon">{item.icon}</div>
               <div>
@@ -57,9 +61,24 @@ const HomePage = () => {
                 <p className="homepage-updated">
                   {item.updated ? getDaysAgo(item.updated) : 'Updated recently'}
                 </p>
-                <div className="homepage-usage-bar">
-                  <div className="homepage-usage-fill" style={{ width: `${item.usage || 50}%` }} />
-                </div>
+
+                {item.subpages && (
+                  <div className="homepage-subpages">
+                    {item.subpages.map((sub, i) => (
+                      <div
+                        key={i}
+                        className="homepage-subpage-link"
+                        onClick={() => handleClick(sub.path)}
+                      >
+                        <div className="subpage-icon">{sub.icon}</div>
+                        <div className="subpage-info">
+                          <strong>{sub.name}</strong>
+                          <p className="subpage-description">{sub.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
