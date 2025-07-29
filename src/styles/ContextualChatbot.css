@@ -1,11 +1,20 @@
 .cc-container {
   display: flex;
-
+  overflow: hidden;
   color: white;
   font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
+  box-sizing: border-box; 
   height: 100%;
-  
+  min-height: 0; /* ✅ allows flex children to shrink */
+  padding: 16px;
+}
+
+.cc-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0; /* ✅ critical for scroll to work */
 }
 
 .cc-db-readonly {
@@ -17,7 +26,9 @@
 
 .cc-sidebar {
   width: 180px;
+  height: 100%;
 }
+
 .cc-db-row {
   display: flex;
   align-items: center;
@@ -33,14 +44,17 @@
   gap: 4px;
 }
 
-
 .cc-chat-history {
-  height: 100%;
+  flex: 1;
   overflow-y: auto;
+  min-height: 0;
+  height: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
   scrollbar-width: thin;
   scrollbar-color: #666 #1a1a1a;
-  padding-top: 5px; padding-bottom: 5px;
 }
+
 
 @media (max-width: 768px) {
   .cc-sidebar {
@@ -84,13 +98,6 @@
 }
 
 
-.cc-main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-  
-}
 
 
 .cc-title {
@@ -102,7 +109,6 @@
 
 .cc-panel {
   flex-wrap: wrap;
-  margin-bottom: 12px;
 }
 
 
@@ -148,7 +154,6 @@
 
 .cc-search-bar {
   display: flex;
-  margin-bottom: 10px;
 }
 
 .cc-search-bar-bottom {
@@ -156,7 +161,6 @@
   margin-top: auto;
   gap: 10px;
   justify-content: center;
-  margin-bottom: 15px;
 }
 
 .cc-search-input {
@@ -209,16 +213,12 @@
   font-style: italic;
   margin-top: 5px;
 }
-
 .cc-results-panel {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px; margin-right: 10px;
-  border-radius: 6px;
-  margin-bottom: 12px;
-  height: 100%;
+  flex: 1;
   overflow-y: auto;
+  border-radius: 6px;
 }
+
 
 .cc-user-bubble {
   color: white;

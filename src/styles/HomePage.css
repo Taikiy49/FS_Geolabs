@@ -3,6 +3,7 @@
   flex-direction: column;
   box-sizing: border-box;
   height: 100%; /* Add this to allow full-height stretch */
+  padding: 16px;
 }
 
 .homepage-top {
