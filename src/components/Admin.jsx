@@ -6,7 +6,7 @@ import API_URL from '../config';
 import { FaSpinner } from 'react-icons/fa';
 
 export default function Admin() {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [dbName, setDbName] = useState('');
   const [mode, setMode] = useState('new');
   const [existingDbs, setExistingDbs] = useState([]);
@@ -18,6 +18,8 @@ export default function Admin() {
   const [dbFiles, setDbFiles] = useState({});
   const [dbStructure, setDbStructure] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [rawTitle, setRawTitle] = useState('');
+
 
   useEffect(() => {
     const fetchDbs = async () => {
@@ -43,27 +45,35 @@ export default function Admin() {
   }, []);
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    if (e.dataTransfer.files.length > 0) {
-      setFile(e.dataTransfer.files[0]);
-    }
-  };
+  e.preventDefault();
+  const dropped = Array.from(e.dataTransfer.files);
+  const pdfs = dropped.filter(f => f.name.toLowerCase().endsWith('.pdf'));
+  setFiles(prev => [...prev, ...pdfs]);
+};
+
+const handleRemoveFile = (index) => {
+  setFiles(prev => prev.filter((_, i) => i !== index));
+};
+
+
+
 
   const handleSubmit = async () => {
-    if (!file || !dbName) {
-      setMessage('❌ Please select a file and enter/select a DB name.');
-      return;
-    }
+  if (files.length === 0 || !dbName) {
+    setMessage('❌ Please select file(s) and enter/select a DB name.');
+    return;
+  }
 
-    if (mode === 'new' && existingDbs.includes(dbName)) {
-      setMessage('❌ A database with this name already exists. Please choose a different name.');
-      return;
-    }
+  if (mode === 'new' && existingDbs.includes(dbName)) {
+    setMessage('❌ A database with this name already exists. Please choose a different name.');
+    return;
+  }
 
-    setStatus('Starting file upload...');
-    setMessage('');
-    setSteps([]);
+  setSteps([]);
+  setStatus('Uploading files...');
+  setMessage('');
 
+  for (let file of files) {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('db_name', dbName);
@@ -72,17 +82,55 @@ export default function Admin() {
 
     try {
       const res = await axios.post(`${API_URL}/api/process-file`, formData, {
-        onUploadProgress: () => setStatus('📄 Uploading PDF...'),
+        onUploadProgress: () => setStatus(`📄 Uploading ${file.name}...`)
       });
-      setStatus('');
-      setMessage(res.data.message);
-      setSteps(res.data.steps || []);
+      setSteps(prev => [...prev, ...res.data.steps || []]);
     } catch (err) {
-      console.error('❌ Error uploading file:', err);
-      setStatus('');
-      setMessage('❌ Failed to process file.');
+      console.error(`❌ Error uploading ${file.name}:`, err);
     }
-  };
+  }
+
+  setStatus('');
+  setMessage('✅ All files processed.');
+};
+
+// Group uploadHistory entries
+const groupUploads = (history) => {
+  const groups = [];
+  let currentGroup = [];
+  
+  for (let i = 0; i < history.length; i++) {
+    const entry = history[i];
+    const prev = history[i - 1];
+
+    const entryTime = new Date(entry.time).getTime();
+    const prevTime = prev ? new Date(prev.time).getTime() : 0;
+    const timeDiff = (entryTime - prevTime) / 60000; // in minutes
+
+    const sameDb = !prev || entry.db === prev.db;
+    const within10 = !prev || timeDiff <= 10;
+
+    if (i === 0 || (sameDb && within10)) {
+      currentGroup.push(entry);
+    } else {
+      groups.push(currentGroup);
+      currentGroup = [entry];
+    }
+  }
+  if (currentGroup.length) groups.push(currentGroup);
+
+  return groups;
+};
+
+const groupedHistory = groupUploads(uploadHistory);
+
+  const formatDbName = (filename) => {
+  return filename
+    .replace(/\.db$/, '')      // remove .db
+    .replace(/_/g, ' ')        // replace _ with space
+    .replace(/\b\w/g, c => c.toUpperCase()); // capitalize each word
+};
+
 
   const toggleDbFiles = async (db) => {
     const isOpen = expandedDbs[db];
@@ -114,35 +162,82 @@ export default function Admin() {
   return (
     <div className="admin-wrapper">
       <div className="admin-history-panel">
-        <h3 className="existing-db-title">Upload History</h3>
+        <div className="existing-db-title">Upload History</div>
         <ul className="upload-history-list">
-          {uploadHistory.map((entry, index) => (
-            <li key={index} className="upload-history-item">
-              <div><strong>{entry.user}</strong> added <em>{entry.file}</em></div>
-              <div>→ <span className="upload-db-name">{entry.db}</span></div>
-              <div className="upload-time">{new Date(entry.time).toLocaleString()}</div>
-            </li>
-          ))}
-        </ul>
+  {groupedHistory.map((group, i) => (
+    <li key={i} className="upload-history-group">
+      <div>
+        <strong>{group[0].user}</strong> added <em>{group.length} file(s)</em>
+        → <span className="upload-db-name">{formatDbName(group[0].db)}</span>
+      </div>
+      <ul className="upload-history-sublist">
+        {group.map((entry, j) => (
+          <li key={j}>
+            <em>{entry.file}</em> — <span className="upload-time">{new Date(entry.time).toLocaleString()}</span>
+          </li>
+        ))}
+      </ul>
+    </li>
+  ))}
+</ul>
+
       </div>
 
       <div className="admin-left">
         <div
-          className="drop-zone"
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={handleDrop}
-        >
-          {file ? file.name : 'Drag & drop a .pdf file here'}
-        </div>
+  className="drop-zone"
+  onDragOver={(e) => e.preventDefault()}
+  onDrop={handleDrop}
+  onClick={() => document.getElementById('fileInput').click()}
+>
+  {files.length > 0 ? (
+    files.map((f, i) => (
+      <div key={i} className="selected-file">
+        {f.name}
+        <button onClick={(e) => { e.stopPropagation(); handleRemoveFile(i); }}>✕</button>
+      </div>
+    ))
+  ) : (
+    'Click or drag & drop one or more .pdf files here'
+  )}
+  <input
+    type="file"
+    id="fileInput"
+    multiple
+    accept=".pdf"
+    style={{ display: 'none' }}
+    onChange={(e) => {
+      const selected = Array.from(e.target.files);
+      const pdfs = selected.filter(f => f.name.toLowerCase().endsWith('.pdf'));
+      setFiles(prev => [...prev, ...pdfs]);
+    }}
+  />
+</div>
+
 
         <input
-          type="text"
-          value={dbName}
-          onChange={(e) => setDbName(e.target.value)}
-          placeholder="Enter DB name (e.g. mydata.db)"
-          className="admin-input"
-          disabled={mode === 'append'}
-        />
+  type="text"
+  value={rawTitle}
+  onChange={(e) => {
+    const input = e.target.value;
+    setRawTitle(input);
+
+    const formatted = input
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+
+    setDbName(formatted ? formatted + '.db' : '');
+  }}
+  placeholder="Enter a title like 'Employee Handbook'"
+  className="admin-input"
+  disabled={mode === 'append'}
+/>
+
+
+
+
 
         {mode === 'append' && (
           <div className="admin-select-group">
@@ -154,7 +249,8 @@ export default function Admin() {
             >
               <option value="">-- Select a DB --</option>
               {existingDbs.map((db, i) => (
-                <option key={i} value={db}>{db}</option>
+                <option key={i} value={db}>{formatDbName(db)}</option>
+
               ))}
             </select>
           </div>
@@ -186,19 +282,20 @@ export default function Admin() {
       </div>
 
       <div className="admin-right">
-        <h3 className="existing-db-title">Existing Databases</h3>
-        <ul className="existing-db-list">
+        <div className="existing-db-title">Existing Databases</div>
+        <div className="existing-db-list">
           {existingDbs.map((db, index) => (
-            <li key={index} className="existing-db-item">
-              <div className="db-top-row">
-                <div className="db-name-group">
-                  <span className="db-name" onClick={() => toggleDbFiles(db)}>
-                    {db} {expandedDbs[db] ? '▲' : '▼'}
-                  </span>
-                  <span className="db-inspect" onClick={() => handleDbClick(db)}>
-                    [View Schema]
-                  </span>
-                </div>
+  <div key={index} className="existing-db-item">
+    <div className="db-top-row">
+      <div className="db-name-group">
+        <span className="db-name" onClick={() => toggleDbFiles(db)}>
+          {formatDbName(db)} {expandedDbs[db] ? '▲' : '▼'}
+        </span>
+        <span className="db-inspect" onClick={() => handleDbClick(db)}>
+          [View Schema]
+        </span>
+      </div>
+
                 <button className="delete-db-button" onClick={async () => {
                   const confirmText = prompt(`Type DELETE ${db} to confirm deletion:`);
                   if (confirmText !== `DELETE ${db}`) {
@@ -226,9 +323,9 @@ export default function Admin() {
                   ))}
                 </ul>
               )}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
 
       {showPopup && dbStructure && (

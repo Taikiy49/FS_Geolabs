@@ -78,8 +78,8 @@
   border-radius: 6px;
   color: #c9d1d9;
   font-size: 13px;
-  padding: 5px 10px;
-  margin: 6px 10px;
+  padding: 5px 8px;
+  margin-bottom: 8px; margin-left: 2px; margin-right: 2px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
@@ -143,11 +143,29 @@
   text-overflow: ellipsis;
 }
 
+.cc-tooltip {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+
 .cc-faq-button:hover {
   background-color: #21262d;
   color: #ffffff;
   box-shadow: 0 0 8px rgba(47, 129, 247, 0.5);
   cursor: pointer;
+  border-color: #2f81f7;
+}
+.cc-faq-button.active {
+  background-color: #2f81f7;
+  color: white;
   border-color: #2f81f7;
 }
 
@@ -162,6 +180,16 @@
   gap: 10px;
   justify-content: center;
 }
+
+.cc-status {
+  font-size: 13px;
+  color: #58a6ff;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+
+
 
 .cc-search-input {
   background-color: #0d1117;

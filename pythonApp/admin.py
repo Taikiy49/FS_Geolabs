@@ -256,9 +256,10 @@ def process_file():
         if not file or not db_name:
             return jsonify({'message': 'Missing file or database name'}), 400
 
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-            file.save(tmp)
-            tmp_path = tmp.name
+        original_filename = file.filename
+        tmp_path = os.path.join(UPLOAD_FOLDER, original_filename)
+        file.save(tmp_path)
+
 
         db_path = os.path.join(UPLOAD_FOLDER, db_name)
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
