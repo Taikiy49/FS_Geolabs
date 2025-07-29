@@ -50,24 +50,14 @@
 .header-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* ---------- Search Bar ---------- */
-.header-search {
-  height: 22px;
-  width: 100%;
-  max-width: 400px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid #30363d;
-  background-color: #161b22; /* Slightly lighter than header */
-  color: #c9d1d9;
-  font-size: 14px;
-}
-
-.header-search::placeholder {
-  color: #8b949e;
+.profile-icon{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 /* ---------- Icons ---------- */
@@ -78,6 +68,17 @@
   transition: color 0.2s ease;
 }
 
+.header-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #2a2d31;
+  background-color: #0d1117;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
 .header-icon:hover {
   color: #ffffff;
 }

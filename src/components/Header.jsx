@@ -2,17 +2,47 @@ import React, { useEffect, useState } from 'react';
 import { useMsal } from '@azure/msal-react';
 import { FaPlus, FaBell, FaQuestionCircle, FaChevronDown } from 'react-icons/fa';
 import '../styles/Header.css';
+import { FaUserCircle } from 'react-icons/fa';
+// then replace FaQuestionCircle with FaUserCircle
+
 
 function Header() {
   const { instance, accounts } = useMsal();
   const user = accounts[0];
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState('/default-profile.png');
 
   const handleLogout = () => {
     instance.logoutRedirect({ postLogoutRedirectUri: '/' });
   };
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  useEffect(() => {
+    const fetchProfilePhoto = async () => {
+      try {
+        const response = await instance.acquireTokenSilent({
+          scopes: ['User.Read'],
+          account: user,
+        });
+
+        const res = await fetch('https://graph.microsoft.com/v1.0/me/photo/$value', {
+          headers: {
+            Authorization: `Bearer ${response.accessToken}`,
+          },
+        });
+
+        if (res.ok) {
+          const blob = await res.blob();
+          setProfilePic(URL.createObjectURL(blob));
+        }
+      } catch (err) {
+        console.error('❌ Failed to load Microsoft profile picture:', err);
+      }
+    };
+
+    if (user) fetchProfilePhoto();
+  }, [instance, user]);
 
   return (
     <header className="header">
@@ -31,7 +61,14 @@ function Header() {
         <FaQuestionCircle className="header-icon" />
 
         <div className="header-profile-container" onClick={toggleDropdown}>
-          <img src="/default-profile.png" alt="Profile" className="profile-pic" />
+          {profilePic === '/default-profile.png' ? (
+  <div className="profile-icon-wrapper">
+    <FaUserCircle className="profile-icon" />
+  </div>
+) : (
+  <img src={profilePic} alt="Profile" className="profile-pic" />
+)}
+
           <span className="profile-name">{user?.username || 'User'}</span>
           <FaChevronDown className="dropdown-icon" />
           {dropdownOpen && (
