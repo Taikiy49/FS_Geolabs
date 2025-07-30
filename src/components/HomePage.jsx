@@ -38,7 +38,7 @@ const HomePage = () => {
 
 
         <div className="homepage-header">
-          <h2 className="homepage-subsection-title">Dashboard</h2>
+          <h2 className="homepage-subsection-title">Home</h2>
           <input className="homepage-search" placeholder="Search tools..." />
         </div>
       </div>

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { MsalAuthenticationTemplate } from '@azure/msal-react';
 import { InteractionType } from '@azure/msal-browser';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -13,6 +16,20 @@ import DBAdmin from './components/DBAdmin';
 import S3Admin from './components/S3Admin';
 import OCRLookUp from './components/OCRLookup';
 import Contacts from './components/Contacts';
+import S3Viewer from './components/S3Viewer';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+      mainContent.scrollTo({ top: 0, behavior: 'instant' }); // or 'smooth'
+    }
+  }, [pathname]);
+
+  return null;
+}
 
 const CustomLoading = () => (
   <div className="main-content" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
@@ -36,6 +53,7 @@ const AuthenticatedApp = () => {
       <div className="app-body">
         <Sidebar selectedDB={selectedDB} setSelectedDB={setSelectedDB} />
         <main className="main-content">
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/ask-ai" element={<AskAI selectedDB={selectedDB} />} />
@@ -44,6 +62,7 @@ const AuthenticatedApp = () => {
             <Route path="/file-viewer" element={<FileViewer />} />
             <Route path="/s3-admin" element={<S3Admin />} />
             <Route path="/ocr-lookup" element={<OCRLookUp />} />
+            <Route path="/s3-viewer" element={<S3Viewer />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
         </main>

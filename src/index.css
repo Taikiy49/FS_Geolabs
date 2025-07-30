@@ -28,6 +28,7 @@ html, body, #root {
   height: 100%;
   scrollbar-width: thin;
   scrollbar-color: #4b5563 #101317;
+  background-color: #0d1117; /* base */
 }
 
 /* Optional: smooth scrolling */

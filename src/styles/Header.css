@@ -1,6 +1,6 @@
 /* ---------- Header Container ---------- */
 .header {
-  background-color: #0d1117; /* GitHub dark base */
+  background-color: #010409;
   border-bottom: 1px solid #30363d;
   color: #c9d1d9;
   display: flex;
@@ -8,9 +8,9 @@
   justify-content: space-between;
   padding: 6px 20px;
   gap: 16px;
-  height: 56px;
-  min-height: 56px;
-  max-height: 56px;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
   flex-shrink: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -24,14 +24,14 @@
 
 /* ---------- Logo ---------- */
 .header-logo {
-  height: 36px;
+  height: 32px;
   object-fit: contain;
 }
 
 /* ---------- Title ---------- */
 .header-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700; /* true bold */
   color: rgb(250, 250, 250);
 }
@@ -77,12 +77,13 @@
   max-width: 300px;
   padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid #30363d;
+  border: 1px solid #30363d; /* GitHub standard */
+
   background-color: #161b22; /* lighter than base, matches GitHub input */
   color: #c9d1d9;
-  height: 16px;
-  min-height: 16px;
-  max-height: 16px;
+  height: 13px;
+  min-height: 13px;
+  max-height: 13px;
   font-size: 14px;
   outline: none;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);

@@ -2,7 +2,8 @@
   width: 225px;
   min-width: 225px;  /* ✅ Prevent shrinking */
   max-width: 225px;  /* ✅ Prevent growing */
-  background-color: #0d1117; /* GitHub dark */
+  background-color: #0d1117;
+
   color: #c9d1d9;
   border-right: 1px solid #30363d;
   display: flex;
@@ -18,7 +19,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 20px;
+  padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -32,7 +33,7 @@
 
 .sidebar-link-icon {
   font-size: 16px;
-  color: #58a6ff;
+  color: #2f81f7;
 }
 
 .sidebar-link-chevron {

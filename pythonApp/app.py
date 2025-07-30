@@ -290,23 +290,32 @@ def ocr_work_orders():
         traceback.print_exc()
         return jsonify({"error": f"Gemini image processing failed: {str(e)}"}), 500
 
-@app.route('/api/list-s3-files', methods=['GET'])
+
+@app.route('/api/s3-files')
 def list_s3_files():
-    s3 = boto3.client('s3')
-    bucket_name = 'geolabs-reports'
-    response = s3.list_objects_v2(Bucket=bucket_name)
-    files = []
+    try:
+        s3 = boto3.client('s3')
+        BUCKET_NAME = 'geolabs-reports'
+        response = s3.list_objects_v2(Bucket=BUCKET_NAME)
 
-    for obj in response.get('Contents', []):
-        key = obj['Key']
-        url = s3.generate_presigned_url(
-            ClientMethod='get_object',
-            Params={'Bucket': bucket_name, 'Key': key},
-            ExpiresIn=3600  # URL valid for 1 hour
-        )
-        files.append({'name': key, 'url': url})
+        files = []
+        for obj in response.get('Contents', []):
+            key = obj['Key']
+            # ✅ generate temporary signed URL for downloading
+            url = s3.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': BUCKET_NAME, 'Key': key},
+                ExpiresIn=3600  # valid for 1 hour
+            )
+            files.append({
+                'Key': key,
+                'url': url
+            })
 
-    return jsonify({'files': files})
+        return jsonify({'files': files})
+    except Exception as e:
+        print('❌ S3 List Error:', e)
+        return jsonify({'error': str(e)}), 500
 
 
 init_db()
