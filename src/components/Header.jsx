@@ -3,7 +3,12 @@ import { FaPlus, FaBell, FaUserCircle, FaChevronDown } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import '../styles/Header.css';
 
+import { useMsal } from '@azure/msal-react';
+
 function Header() {
+  const { accounts } = useMsal();
+const userEmail = accounts[0]?.username || 'guest';
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
@@ -32,7 +37,7 @@ function Header() {
           <div className="profile-icon-wrapper">
             <FaUserCircle className="profile-icon" />
           </div>
-          <span className="profile-name">User</span>
+          <span className="profile-email">{userEmail}</span> 
           <FaChevronDown className="dropdown-icon" />
           {dropdownOpen && (
             <div className="profile-dropdown">
