@@ -163,36 +163,44 @@ const groupedHistory = groupUploads(uploadHistory);
     <div className="admin-wrapper">
   {/* Top section: Upload box and controls */}
   <div className="admin-upload-top">
-    <div
-      className="drop-zone"
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={handleDrop}
-      onClick={() => document.getElementById('fileInput').click()}
-    >
-      {files.length > 0 ? (
-        files.map((f, i) => (
-          <div key={i} className="selected-file">
-            {f.name}
-            <button onClick={(e) => { e.stopPropagation(); handleRemoveFile(i); }}>✕</button>
-          </div>
-        ))
-      ) : (
-        'Click or drag & drop one or more .pdf files here'
-      )}
-      <input
-        type="file"
-        id="fileInput"
-        multiple
-        accept=".pdf"
-        style={{ display: 'none' }}
-        onChange={(e) => {
-          const selected = Array.from(e.target.files);
-          const pdfs = selected.filter(f => f.name.toLowerCase().endsWith('.pdf'));
-          setFiles(prev => [...prev, ...pdfs]);
-        }}
-      />
-    </div>
+  <div
+  className="drop-zone"
+  onDragOver={(e) => e.preventDefault()}
+  onDrop={handleDrop}
+  onClick={() => document.getElementById('fileInput').click()}
+>
+  {files.length > 0 ? (
+    files.map((f, i) => (
+      <div key={i} className="selected-file">
+        {f.name}
+        <button onClick={(e) => { e.stopPropagation(); handleRemoveFile(i); }}>✕</button>
+      </div>
+    ))
+  ) : (
+    <span className="drop-zone-text">
+      Click or drag & drop one or more .pdf files here
+    </span>
+  )}
 
+    <input
+      type="file"
+      id="fileInput"
+      multiple
+      accept=".pdf"
+      style={{ display: 'none' }}
+      onChange={(e) => {
+        const selected = Array.from(e.target.files);
+        const pdfs = selected.filter(f => f.name.toLowerCase().endsWith('.pdf'));
+        setFiles(prev => [...prev, ...pdfs]);
+      }}
+    />
+  </div>
+
+  {/* ✅ Wrap all other controls in a container */}
+  <div className="upload-form-controls">
+    {mode === 'new' ? (
+  <>
+    <div className="upload-form-group-label">Title:</div>
     <input
       type="text"
       value={rawTitle}
@@ -204,29 +212,31 @@ const groupedHistory = groupUploads(uploadHistory);
       }}
       placeholder="Enter a title like 'Employee Handbook'"
       className="admin-input"
-      disabled={mode === 'append'}
     />
+  </>
+) : (
+  <>
+    <div className="upload-form-group-label">Select:</div>
+    <select className="admin-select" onChange={(e) => setDbName(e.target.value)} value={dbName}>
+      <option value="">-- Select a DB --</option>
+      {existingDbs
+        .filter(db => db !== 'chat_history.db')
+        .map((db, i) => (
+          <option key={i} value={db}>{formatDbName(db)}</option>
+        ))}
+    </select>
+  </>
+)}
 
-    {mode === 'append' && (
-      <div className="admin-select-group">
-        <label>Select Existing DB:</label>
-        <select className="admin-select" onChange={(e) => setDbName(e.target.value)} value={dbName}>
-          <option value="">-- Select a DB --</option>
-          {existingDbs.map((db, i) => (
-            <option key={i} value={db}>{formatDbName(db)}</option>
-          ))}
-        </select>
-      </div>
-    )}
 
     <div className="admin-radio-group">
       <label>
         <input type="radio" value="new" checked={mode === 'new'} onChange={() => setMode('new')} />
-        Create New DB
+        Create New Database
       </label>
       <label>
         <input type="radio" value="append" checked={mode === 'append'} onChange={() => setMode('append')} />
-        Append to Existing DB
+        Add to Existing Database
       </label>
     </div>
 
@@ -242,8 +252,10 @@ const groupedHistory = groupUploads(uploadHistory);
         <span>🛈 Status will appear here after you upload and index a file.</span>
       )}
     </div>
+
     {message && <p className="admin-message">{message}</p>}
   </div>
+</div>
 
   {/* Bottom section: side-by-side panels */}
   <div className="admin-bottom-panels">
@@ -273,7 +285,7 @@ const groupedHistory = groupUploads(uploadHistory);
     <div className="admin-right">
       <div className="existing-db-title">Existing Databases</div>
       <div className="existing-db-list">
-        {existingDbs.map((db, index) => (
+        {existingDbs.filter(db => db !== 'chat_history.db').map((db, index) => (
           <div key={index} className="existing-db-item">
             <div className="db-top-row">
               <div className="db-name-group">

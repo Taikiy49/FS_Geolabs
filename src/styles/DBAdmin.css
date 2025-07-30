@@ -1,9 +1,20 @@
 .admin-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
   overflow: hidden;
   gap: 16px;
+  padding: 16px;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.admin-radio-group {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: white;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
@@ -12,11 +23,10 @@
   .admin-history-panel {
     width: 100%;
     max-width: none;
-  }.admin-button {
-  background-color: #2f81f7;
-  color: white;
+  }
+  
+.admin-button {
   border: none;
-  padding: 10px 18px;
   border-radius: 6px;
   font-weight: bold;
   font-size: 14px;
@@ -34,10 +44,12 @@
 }
 
 .admin-upload-top {
+  display: flex;
   background-color: #12161c;
   border-radius: 8px;
   border: 1px solid #30363d;
   padding: 8px;
+  gap: 16px;
 }
 
 
@@ -62,8 +74,22 @@
   background-color: #12161c;
   border-radius: 8px;
   border: 1px solid #30363d;
-  padding: 8px;
   box-sizing: border-box;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.upload-form-controls {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.upload-form-group-label{
+  font-size: 14px;
+  color: #a8d0ff;
+  font-weight: bold;
 }
 
 /* === Form Fields === */
@@ -76,22 +102,56 @@
   font-size: 14px;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 12px;
   color: #c9d1d9;
+  height: 30px;
+}
+
+.admin-select {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: white;
+  outline: none;
+  appearance: none;
+  transition: border-color 0.2s ease;
+}
+
+.admin-select:hover {
+  border-color: #666;
+  cursor: pointer;
+}
+
+.admin-select:focus {
+  border-color: #58a6ff;
+
 }
 
 /* === Drop Zone === */
 .drop-zone {
-  background-color: #161b22;
+  min-width: 115px;
+  width: 70%;
+  display: flex;
+background-color: #0d1117;
   border: 2px dashed #30363d;
-  padding: 40px;
+  padding: 20px;
   text-align: center;
-  margin-bottom: 20px;
   border-radius: 8px;
   font-size: 14px;
   color: #8b949e;
   transition: border-color 0.2s ease;
+  justify-content: center;
 }
+
+.drop-zone-text {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 
 .drop-zone:hover {
   border-color: #2f81f7;
@@ -101,17 +161,17 @@
 /* === Buttons === */
 .admin-button {
   background-color: #2f81f7;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
-  padding: 10px 18px;
+  padding: 5px 8px;
   border-radius: 6px;
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s;
-  width: 30%;
-  margin: 0 auto;
-  margin-top: 16px;
+  width: 90px;
+  margin-top: 8px;
+  margin-left: auto; 
 }
 
 .admin-button:hover {
@@ -122,9 +182,9 @@
   background-color: #da3633;
   border: none;
   color: white;
-  padding: 6px 12px;
+  padding: 5px 12px;
   font-size: 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -157,8 +217,8 @@
 }
 
 .admin-status {
-  margin-top: 16px;
-  font-size: 14px;
+  font-size: 12px;
+  margin-top: 8px;
   color: #58a6ff;
 }
 
@@ -167,13 +227,11 @@
   font-size: 15px;
   font-weight: bold;
   color: #a8d0ff;
-  margin-bottom: 8px;
   text-align: center;
 }
 
 .existing-db-item {
-  padding: 6px 10px;
-  margin-bottom: 10px;
+  padding: 8px 16px;
   transition: background-color 0.2s;
   border-bottom: 1px solid #30363d;
 }
@@ -184,6 +242,7 @@
 
 .db-name {
   font-weight: bold;
+  font-size: 12px;
   color: #c9d1d9;
   cursor: pointer;
 }
@@ -312,6 +371,7 @@
   overflow-y: auto;
   white-space: nowrap;
   overflow-x: hidden;
+  font-size: 12px;
 }
 
 .db-file-item {
@@ -327,17 +387,13 @@
 
 
 .admin-history-panel {
-  flex: 1;background-color: #12161c;
-  border-radius: 8px;
-  border: 1px solid #30363d;
-  padding: 8px;
-  overflow-y: auto;
+  flex: 1;
   background-color: #12161c;
   border-radius: 8px;
   border: 1px solid #30363d;
   padding: 8px;
+  overflow-y: auto;
   box-sizing: border-box;
-  scrollbar-gutter: stable both-edges;
 }
 
 .upload-history-list {
@@ -354,7 +410,7 @@
 
 .upload-history-group {
   margin-bottom: 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   box-shadow: 0 2px 8px rgba(1, 4, 9, 0.4);
 }
 
