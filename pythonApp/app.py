@@ -318,8 +318,34 @@ def list_s3_files():
         return jsonify({'error': str(e)}), 500
 
 
-init_db()
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+@app.route('/api/lookup-work-orders', methods=['POST'])
+def lookup_work_orders():
+    try:
+        data = request.get_json()
+        work_orders = data.get('work_orders', [])
+        s3 = boto3.client('s3')
+        bucket_name = 'geolabs-reports'  # ✅ your real bucket name
 
+        matches = []
+        for wo in work_orders:
+            # Search for files with the work order prefix (e.g., "12345")
+            response = s3.list_objects_v2(Bucket=bucket_name, Prefix=wo)
+
+            if 'Contents' in response and response['Contents']:
+                # Return the first match found
+                key = response['Contents'][0]['Key']
+                matches.append({'work_order': wo, 'project_name': key})
+            else:
+                matches.append({'work_order': wo, 'project_name': '❓ Not Found'})
+
+        return jsonify({"matches": matches})
+    except Exception as e:
+        print("❌ lookup-work-orders error:", str(e))
+        return jsonify({"error": "Failed to look up work orders in S3"}), 500
+
+print("🔧 Starting app...")
+init_db()
+print("✅ Ready to run Flask")
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
 

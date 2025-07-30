@@ -131,7 +131,7 @@ export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
       )}
 
       {/* Contacts Section */}
-      <div className="sidebar-link" onClick={() => window.location.href = '/contacts'}>
+      <div className="sidebar-link" onClick={() => window.location.href = '/'}>
         <FaEnvelope className="sidebar-link-icon" /> Contacts
       </div>
 
