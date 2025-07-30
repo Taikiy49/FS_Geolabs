@@ -1,0 +1,164 @@
+.ocr-uploader-wrapper {
+  color: #c9d1d9;
+  width: 100%;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  padding: 16px;
+}
+
+.ocr-uploader-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #a8d0ff;
+}
+
+.ocr-uploader-input {
+  background-color: #161b22;
+  border: 2px dashed #30363d;
+  color: #c9d1d9;
+  padding: 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ocr-uploader-input:hover {
+  background-color: #1c2128;
+  border-color: #58a6ff;
+  color: #58a6ff;
+}
+
+.ocr-uploader-label {
+  display: block;
+  font-size: 14px;
+  color: #8b949e;
+  min-width: 20px;
+}
+
+.ocr-uploader-input-hidden {
+  display: none;
+}
+.ocr-upload-button {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: #21262d;
+  color: #c9d1d9;
+  font-size: 14px;
+  padding: 5px 10px;
+  font-weight: 500;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
+
+.ocr-upload-button:hover {
+  background-color: #30363d;
+  border-color: #8b949e;
+}
+
+.ocr-upload-button:active {
+  background-color: #1f6feb;
+  border-color: #1f6feb;
+  color: white;
+}
+
+.ocr-upload-filename {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #b8b8b8;
+}
+
+.ocr-uploader-button {
+  background-color: #238636;
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(20, 255, 100, 0.1);
+}
+
+.ocr-uploader-button:hover {
+  background-color: #2ea043;
+}
+
+.ocr-uploader-button:active {
+  background-color: #196c2e;
+}
+
+.ocr-uploader-error {
+  color: #f85149;
+  font-size: 14px;
+}
+
+.ocr-uploader-spinner {
+  font-size: 14px;
+  color: #58a6ff;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+.ocr-uploader-edit-section {
+  border-top: 1px solid #30363d;
+}
+
+.ocr-uploader-edit-title {
+  font-size: 16px;
+  color: #79c0ff;
+  font-weight: 600;
+  margin-top: 8px; margin-bottom: 8px;
+}
+
+.ocr-uploader-input-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.ocr-uploader-input-field label {
+  font-size: 13px;
+  color: #8b949e;
+  min-width: 110px; /* fixes shifting - adjust as needed */
+  text-align: right;
+}
+
+.ocr-uploader-input-field input {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 6px 10px;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 1px 2px rgba(1, 4, 9, 0.3);
+}
+
+.ocr-uploader-input-field input:hover {
+  border-color: #79c0ff;
+}
+
+.ocr-uploader-input-field input:focus {
+  outline: none;
+  border-color: #1f6feb;
+  box-shadow: 0 0 0 2px rgba(31, 111, 235, 0.4); /* glow like GitHub focus ring */
+  background-color: #161b22;
+}
+
+
+.ocr-uploader-results h3 {
+  font-size: 16px;
+  color: #3fb950;
+}
+
+.ocr-uploader-result-item {
+  border-radius: 6px;
+  font-size: 14px;
+  color: #c9d1d9;
+}
