@@ -14,13 +14,15 @@ app = Flask(__name__)
 app.register_blueprint(admin_bp)
 CORS(app)
 
-DB_FILE = "chat_history.db"
-GEO_DB = "reports.db"
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_FILE = os.path.join(BASE_DIR, "uploads", "chat_history.db")
+GEO_DB = os.path.join(BASE_DIR, "uploads", "reports.db")
 
 def init_db():
-    if not os.path.exists(DB_FILE):
-        with sqlite3.connect(DB_FILE) as conn:
-            conn.execute("""
+    os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
+
+    with sqlite3.connect(DB_FILE) as conn:
+        conn.execute("""
             CREATE TABLE IF NOT EXISTS chat_history (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user TEXT,
@@ -30,19 +32,18 @@ def init_db():
                 timestamp TEXT,
                 db_name TEXT
             )
-            """)
-    
-    # ✅ Add this even if DB file already exists
-    with sqlite3.connect(DB_FILE) as conn:
-        conn.execute("""
-        CREATE TABLE IF NOT EXISTS upload_history (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user TEXT,
-            file TEXT,
-            db_name TEXT,
-            timestamp TEXT
-        )
         """)
+
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS upload_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user TEXT,
+                file TEXT,
+                db_name TEXT,
+                timestamp TEXT
+            )
+        """)
+
 
 
 
@@ -174,7 +175,7 @@ def handle_question():
         if not query or not db_name:
             return jsonify({"error": "Missing query or database name."}), 400
 
-        if db_name in ['chat_history.db', 'reports.db']:
+        if db_name in [DB_FILE, 'reports.db']:
             return jsonify({"error": "Restricted database."}), 403
 
         db_path = os.path.join("uploads", db_name)
@@ -241,7 +242,7 @@ def get_chat_history():
     db = request.args.get('db', '')
 
     try:
-        with sqlite3.connect("chat_history.db") as conn:
+        with sqlite3.connect(DB_FILE) as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT question, answer FROM chat_history

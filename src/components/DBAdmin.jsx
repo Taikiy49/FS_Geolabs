@@ -161,197 +161,188 @@ const groupedHistory = groupUploads(uploadHistory);
 
   return (
     <div className="admin-wrapper">
-      <div className="admin-history-panel">
-        <div className="existing-db-title">Upload History</div>
-        <ul className="upload-history-list">
-  {groupedHistory.map((group, i) => (
-    <li key={i} className="upload-history-group">
-      <div>
-        <strong>{group[0].user}</strong> added <em>{group.length} file(s)</em>
-        → <span className="upload-db-name">{formatDbName(group[0].db)}</span>
+  {/* Top section: Upload box and controls */}
+  <div className="admin-upload-top">
+    <div
+      className="drop-zone"
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={handleDrop}
+      onClick={() => document.getElementById('fileInput').click()}
+    >
+      {files.length > 0 ? (
+        files.map((f, i) => (
+          <div key={i} className="selected-file">
+            {f.name}
+            <button onClick={(e) => { e.stopPropagation(); handleRemoveFile(i); }}>✕</button>
+          </div>
+        ))
+      ) : (
+        'Click or drag & drop one or more .pdf files here'
+      )}
+      <input
+        type="file"
+        id="fileInput"
+        multiple
+        accept=".pdf"
+        style={{ display: 'none' }}
+        onChange={(e) => {
+          const selected = Array.from(e.target.files);
+          const pdfs = selected.filter(f => f.name.toLowerCase().endsWith('.pdf'));
+          setFiles(prev => [...prev, ...pdfs]);
+        }}
+      />
+    </div>
+
+    <input
+      type="text"
+      value={rawTitle}
+      onChange={(e) => {
+        const input = e.target.value;
+        setRawTitle(input);
+        const formatted = input.toLowerCase().trim().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        setDbName(formatted ? formatted + '.db' : '');
+      }}
+      placeholder="Enter a title like 'Employee Handbook'"
+      className="admin-input"
+      disabled={mode === 'append'}
+    />
+
+    {mode === 'append' && (
+      <div className="admin-select-group">
+        <label>Select Existing DB:</label>
+        <select className="admin-select" onChange={(e) => setDbName(e.target.value)} value={dbName}>
+          <option value="">-- Select a DB --</option>
+          {existingDbs.map((db, i) => (
+            <option key={i} value={db}>{formatDbName(db)}</option>
+          ))}
+        </select>
       </div>
-      <ul className="upload-history-sublist">
-        {group.map((entry, j) => (
-          <li key={j}>
-            <em>{entry.file}</em> — <span className="upload-time">{new Date(entry.time).toLocaleString()}</span>
+    )}
+
+    <div className="admin-radio-group">
+      <label>
+        <input type="radio" value="new" checked={mode === 'new'} onChange={() => setMode('new')} />
+        Create New DB
+      </label>
+      <label>
+        <input type="radio" value="append" checked={mode === 'append'} onChange={() => setMode('append')} />
+        Append to Existing DB
+      </label>
+    </div>
+
+    <button className="admin-button" onClick={handleSubmit}>Index File</button>
+
+    <div className={`admin-status ${status ? '' : 'admin-status-placeholder'}`}>
+      {status ? (
+        <>
+          <FaSpinner className="spinner" />
+          {status}
+        </>
+      ) : (
+        <span>🛈 Status will appear here after you upload and index a file.</span>
+      )}
+    </div>
+    {message && <p className="admin-message">{message}</p>}
+  </div>
+
+  {/* Bottom section: side-by-side panels */}
+  <div className="admin-bottom-panels">
+    {/* Left: Upload history */}
+    <div className="admin-history-panel">
+      <div className="existing-db-title">Upload History</div>
+      <ul className="upload-history-list">
+        {groupedHistory.map((group, i) => (
+          <li key={i} className="upload-history-group">
+            <div>
+              <strong>{group[0].user}</strong> added <em>{group.length} file(s)</em>
+              → <span className="upload-db-name">{formatDbName(group[0].db)}</span>
+            </div>
+            <ul className="upload-history-sublist">
+              {group.map((entry, j) => (
+                <li key={j}>
+                  <em>{entry.file}</em> — <span className="upload-time">{new Date(entry.time).toLocaleString()}</span>
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
-    </li>
-  ))}
-</ul>
+    </div>
 
-      </div>
-
-      <div className="admin-left">
-        <div
-  className="drop-zone"
-  onDragOver={(e) => e.preventDefault()}
-  onDrop={handleDrop}
-  onClick={() => document.getElementById('fileInput').click()}
->
-  {files.length > 0 ? (
-    files.map((f, i) => (
-      <div key={i} className="selected-file">
-        {f.name}
-        <button onClick={(e) => { e.stopPropagation(); handleRemoveFile(i); }}>✕</button>
-      </div>
-    ))
-  ) : (
-    'Click or drag & drop one or more .pdf files here'
-  )}
-  <input
-    type="file"
-    id="fileInput"
-    multiple
-    accept=".pdf"
-    style={{ display: 'none' }}
-    onChange={(e) => {
-      const selected = Array.from(e.target.files);
-      const pdfs = selected.filter(f => f.name.toLowerCase().endsWith('.pdf'));
-      setFiles(prev => [...prev, ...pdfs]);
-    }}
-  />
-</div>
-
-
-        <input
-  type="text"
-  value={rawTitle}
-  onChange={(e) => {
-    const input = e.target.value;
-    setRawTitle(input);
-
-    const formatted = input
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, '_')
-      .replace(/[^a-z0-9_]/g, '');
-
-    setDbName(formatted ? formatted + '.db' : '');
-  }}
-  placeholder="Enter a title like 'Employee Handbook'"
-  className="admin-input"
-  disabled={mode === 'append'}
-/>
-
-
-
-
-
-        {mode === 'append' && (
-          <div className="admin-select-group">
-            <label>Select Existing DB:</label>
-            <select
-              className="admin-select"
-              onChange={(e) => setDbName(e.target.value)}
-              value={dbName}
-            >
-              <option value="">-- Select a DB --</option>
-              {existingDbs.map((db, i) => (
-                <option key={i} value={db}>{formatDbName(db)}</option>
-
-              ))}
-            </select>
-          </div>
-        )}
-
-        <div className="admin-radio-group">
-          <label>
-            <input type="radio" value="new" checked={mode === 'new'} onChange={() => setMode('new')} />
-            Create New DB
-          </label>
-          <label>
-            <input type="radio" value="append" checked={mode === 'append'} onChange={() => setMode('append')} />
-            Append to Existing DB
-          </label>
-        </div>
-
-        <button className="admin-button" onClick={handleSubmit}>Index File</button>
-        <div className={`admin-status ${status ? '' : 'admin-status-placeholder'}`}>
-          {status ? (
-            <>
-              <FaSpinner className="spinner" />
-              {status}
-            </>
-          ) : (
-            <span>🛈 Status will appear here after you upload and index a file.</span>
-          )}
-        </div>
-        {message && <p className="admin-message">{message}</p>}
-      </div>
-
-      <div className="admin-right">
-        <div className="existing-db-title">Existing Databases</div>
-        <div className="existing-db-list">
-          {existingDbs.map((db, index) => (
-  <div key={index} className="existing-db-item">
-    <div className="db-top-row">
-      <div className="db-name-group">
-        <span className="db-name" onClick={() => toggleDbFiles(db)}>
-          {formatDbName(db)} {expandedDbs[db] ? '▲' : '▼'}
-        </span>
-        <span className="db-inspect" onClick={() => handleDbClick(db)}>
-          [View Schema]
-        </span>
-      </div>
-
-                <button className="delete-db-button" onClick={async () => {
-                  const confirmText = prompt(`Type DELETE ${db} to confirm deletion:`);
-                  if (confirmText !== `DELETE ${db}`) {
-                    alert('❌ Confirmation text does not match. Deletion cancelled.');
-                    return;
-                  }
-                  try {
-                    const res = await axios.post(`${API_URL}/api/delete-db`, {
-                      db_name: db,
-                      confirmation_text: confirmText,
-                    });
-                    alert(res.data.message);
-                    setExistingDbs(prev => prev.filter(d => d !== db));
-                  } catch (err) {
-                    alert(err.response?.data?.error || '❌ Failed to delete.');
-                  }
-                }}>
-                  Delete
-                </button>
+    {/* Right: Existing DB list */}
+    <div className="admin-right">
+      <div className="existing-db-title">Existing Databases</div>
+      <div className="existing-db-list">
+        {existingDbs.map((db, index) => (
+          <div key={index} className="existing-db-item">
+            <div className="db-top-row">
+              <div className="db-name-group">
+                <span className="db-name" onClick={() => toggleDbFiles(db)}>
+                  {formatDbName(db)} {expandedDbs[db] ? '▲' : '▼'}
+                </span>
+                <span className="db-inspect" onClick={() => handleDbClick(db)}>
+                  [View Schema]
+                </span>
               </div>
-              {expandedDbs[db] && dbFiles[db] && (
-                <ul className="db-files-list">
-                  {dbFiles[db].map((file, i) => (
-                    <li key={i} className="db-file-item">{file}</li>
-                  ))}
-                </ul>
-              )}
+              <button className="delete-db-button" onClick={async () => {
+                const confirmText = prompt(`Type DELETE ${db} to confirm deletion:`);
+                if (confirmText !== `DELETE ${db}`) {
+                  alert('❌ Confirmation text does not match. Deletion cancelled.');
+                  return;
+                }
+                try {
+                  const res = await axios.post(`${API_URL}/api/delete-db`, {
+                    db_name: db,
+                    confirmation_text: confirmText,
+                  });
+                  alert(res.data.message);
+                  setExistingDbs(prev => prev.filter(d => d !== db));
+                } catch (err) {
+                  alert(err.response?.data?.error || '❌ Failed to delete.');
+                }
+              }}>
+                Delete
+              </button>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {showPopup && dbStructure && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <button className="popup-close" onClick={closePopup}>✕</button>
-            <h4>📊 Structure of {dbStructure.db}</h4>
-            {Object.entries(dbStructure).map(([table, info]) =>
-              table === 'db' ? null : (
-                <div key={table} className="db-table-preview">
-                  <strong>{table}</strong>
-                  <div>Columns: {info.columns.join(', ')}</div>
-                  <div>Sample Rows:</div>
-                  <ul>
-                    {info.sample_rows.map((row, i) => (
-                      <li key={i}>{JSON.stringify(row.map(cell =>
-                        typeof cell === 'string' && cell.length > 50 ? cell.slice(0, 50) + '...' : cell
-                      ))}</li>
-                    ))}
-                  </ul>
-                </div>
-              )
+            {expandedDbs[db] && dbFiles[db] && (
+              <ul className="db-files-list">
+                {dbFiles[db].map((file, i) => (
+                  <li key={i} className="db-file-item">{file}</li>
+                ))}
+              </ul>
             )}
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
+  </div>
+
+  {/* DB Schema popup */}
+  {showPopup && dbStructure && (
+    <div className="popup-overlay">
+      <div className="popup-content">
+        <button className="popup-close" onClick={closePopup}>✕</button>
+        <h4>📊 Structure of {dbStructure.db}</h4>
+        {Object.entries(dbStructure).map(([table, info]) =>
+          table === 'db' ? null : (
+            <div key={table} className="db-table-preview">
+              <strong>{table}</strong>
+              <div>Columns: {info.columns.join(', ')}</div>
+              <div>Sample Rows:</div>
+              <ul>
+                {info.sample_rows.map((row, i) => (
+                  <li key={i}>{JSON.stringify(row.map(cell =>
+                    typeof cell === 'string' && cell.length > 50 ? cell.slice(0, 50) + '...' : cell
+                  ))}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  )}
+</div>
+
   );
 }

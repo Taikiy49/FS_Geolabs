@@ -10,8 +10,7 @@ export default function ContextualChatbot({ selectedDB }) {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
-  const [useCache, setUseCache] = useState(true);
-  const [availableDBs, setAvailableDBs] = useState([]);
+  const [useCache, setUseCache] = useState(true);  const [availableDBs, setAvailableDBs] = useState([]);
   const [faqList, setFaqList] = useState([]);
 
   const faqMap = {

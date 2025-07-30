@@ -8,9 +8,7 @@ from tqdm import tqdm
 from collections import defaultdict
 from transformers import AutoTokenizer, AutoModel
 import torch
-
-
-import fitz  # PyMuPDF
+import fitz  
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
@@ -25,13 +23,16 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\tyamashita\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 
 import io
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_FILE = os.path.join(BASE_DIR, "uploads", "chat_history.db")
+
 
 admin_bp = Blueprint('admin', __name__)
 
 # Ensure upload history table exists
 def ensure_upload_history_table():
     try:
-        with sqlite3.connect("chat_history.db") as conn:
+        with sqlite3.connect(DB_FILE) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS upload_history (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,7 +53,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 MODEL_NAME = "BAAI/bge-base-en-v1.5"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 embedding_model = AutoModel.from_pretrained(MODEL_NAME)
-
 
 CHUNK_SIZE = 800
 OVERLAP = 200
@@ -275,9 +275,8 @@ def process_file():
         else:
             embed_to_db(tmp_path, db_path, track)
 
-        # ✅ Log upload to chat_history.db
         try:
-            with sqlite3.connect("chat_history.db") as conn:
+            with sqlite3.connect(DB_FILE) as conn:
                 conn.execute("""
                     INSERT INTO upload_history (user, file, db_name, timestamp)
                     VALUES (?, ?, ?, datetime('now', '-10 hours'))
@@ -372,7 +371,7 @@ def delete_db():
         os.remove(db_path)
         # ✅ Log deletion
         try:
-            with sqlite3.connect("chat_history.db") as conn:
+            with sqlite3.connect(DB_FILE) as conn:
                 conn.execute("""
                     INSERT INTO upload_history (user, file, db_name, timestamp)
                     VALUES (?, ?, ?, datetime('now', '-10 hours'))
@@ -418,7 +417,7 @@ def list_files_in_db():
 @admin_bp.route('/api/upload-history', methods=['GET'])
 def get_upload_history():
     try:
-        conn = sqlite3.connect("chat_history.db")
+        conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
         cursor.execute("""
             SELECT user, file, db_name, timestamp
