@@ -319,100 +319,34 @@ def list_s3_files():
         return jsonify({'error': str(e)}), 500
 
 
-PR_DB = os.path.join(BASE_DIR, "uploads", "pr_data.db")
-TABLE_NAME = "pr_data"
-
-@app.route("/api/lookup-work-orders", methods=["POST"])
+@app.route('/api/lookup-work-orders', methods=['POST'])
 def lookup_work_orders():
-    data = request.get_json()
-    work_orders = data.get("work_orders", [])
-
     try:
-        conn = sqlite3.connect(PR_DB)
-        cursor = conn.cursor()
-        result = []
+        data = request.get_json()
+        work_orders = data.get('work_orders', [])
+        s3 = boto3.client('s3')
+        bucket_name = 'geolabs-reports'  # ✅ your real bucket name
 
+        matches = []
         for wo in work_orders:
-            original_wo = wo.strip()
-            formatted_wo = None
-            base_wo = original_wo
+            # Search for files with the work order prefix (e.g., "12345")
+            response = s3.list_objects_v2(Bucket=bucket_name, Prefix=wo)
 
-            # Normalize like 8482-00A -> 8482-00(A)
-            if len(original_wo) >= 3 and original_wo[-1].isalpha():
-                base = original_wo[:-1]
-                letter = original_wo[-1]
-                formatted_wo = f"{base}({letter})"
-            elif '-' not in original_wo and len(original_wo) == 4:
-                # For 4-digit WOs like '8210', try to find the lowest matching '8210-XX'
-                cursor.execute(f"""
-                    SELECT WO, Client, Location, PR, Date
-                    FROM {TABLE_NAME}
-                    WHERE WO LIKE ? COLLATE NOCASE
-                    ORDER BY WO ASC
-                """, (f"{original_wo}-%",))
-                row = cursor.fetchone()
-                if row:
-                    result.append({
-                        "work_order": original_wo,
-                        "project_wo": row[0],
-                        "client": row[1],
-                        "location": row[2],
-                        "pr": row[3],
-                        "date": row[4]
-                    })
-                    continue  # Skip remaining steps
-
-            if formatted_wo:
-                print(f"🔍 Trying formatted WO: '{formatted_wo}'")
-                cursor.execute(f"""
-                    SELECT WO, Client, Location, PR, Date
-                    FROM {TABLE_NAME}
-                    WHERE WO LIKE ? COLLATE NOCASE
-                    LIMIT 1
-                """, (f"{formatted_wo}%",))
-                row = cursor.fetchone()
+            if 'Contents' in response and response['Contents']:
+                # Return the first match found
+                key = response['Contents'][0]['Key']
+                matches.append({'work_order': wo, 'project_name': key})
             else:
-                print(f"🔍 Trying original WO: '{original_wo}'")
-                cursor.execute(f"""
-                    SELECT WO, Client, Location, PR, Date
-                    FROM {TABLE_NAME}
-                    WHERE WO LIKE ? COLLATE NOCASE
-                    LIMIT 1
-                """, (f"{original_wo}%",))
-                row = cursor.fetchone()
+                matches.append({'work_order': wo, 'project_name': '❓ Not Found'})
 
-            if row:
-                result.append({
-                    "work_order": original_wo,
-                    "project_wo": row[0],
-                    "client": row[1],
-                    "location": row[2],
-                    "pr": row[3],
-                    "date": row[4]
-                })
-            else:
-                result.append({
-                    "work_order": original_wo,
-                    "project_wo": "Not Found",
-                    "client": "Not Found",
-                    "location": "Not Found",
-                    "pr": "Not Found",
-                    "date": "Not Found"
-                })
-
-
-
-
-        conn.close()
-        return jsonify({"matches": result})
-
+        return jsonify({"matches": matches})
     except Exception as e:
-        print("❌ Error in lookup_work_orders:", str(e))
-        return jsonify({"error": str(e)}), 500
+        print("❌ lookup-work-orders error:", str(e))
+        return jsonify({"error": "Failed to look up work orders in S3"}), 500
 
 print("🔧 Starting app...")
 init_db()
 print("✅ Ready to run Flask")
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
 

@@ -19,29 +19,23 @@ def extract_work_orders_from_image(image_path_or_file):
     - str: Bullet list of extracted work orders or error message
     """
     prompt = """
-    You are an expert document analyzer.
+You are an expert document analyzer.
 
-    Extract all valid work order numbers from the image. A valid work order follows these formats:
-    - 4 digits (e.g., 8292)
-    - 4 digits + dash + 2 digits (e.g., 8292-05)
-    - Optional 1 uppercase letter at the end (e.g., 8292-05B)
-    - Optional parentheses with 1 uppercase letter only after a dashed format (e.g., 8292-05(S))
+Please extract all **work order numbers** from the image. The numbers follow this exact format:
+- 4-digit number
+- A dash "-"
+- Followed by exactly 2 digits
+- Optionally followed by 1 uppercase letter (no space)
 
-    ❌ Do NOT include:
-    - Explanations
-    - Introductions like "Here is the list..."
-    - Any extra commentary
+Examples:
+- 8292-05
+- 4822-08B
+- 1234-00
+- 8910-24Z
 
-    ✅ Just output a clean bullet list, like:
-    - 8292
-    - 8292-05
-    - 8292-05B
-    - 8292-05(S)
-
-    Output **only** the bullet list. Nothing else.
-    """
-
-
+Only include values that match this pattern.
+Return the output as a **clean bullet list**, nothing else.
+"""
 
     try:
         # Handle file path or uploaded file object
