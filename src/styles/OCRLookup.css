@@ -143,6 +143,12 @@
   color: #8b949e;
 }
 
+
+.ocr-uploader-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .ocr-sort-bar select {
   background-color: #0d1117;
   color: #c9d1d9;
@@ -214,19 +220,29 @@
 }
 
 .ocr-uploader-button {
-  background-color: #1f6feb;
+  background-color: #1f6feb; /* GitHub primary blue */
   width: 250px;
   margin: 0 auto;
-  padding: 5px 10px;
+  padding: 8px 14px;
   color: #ffffff;
-  border: none;
+  border: 1px solid #1f6feb;
   font-weight: 600;
   border-radius: 6px;
   font-size: 14px;
-  margin-bottom: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 6px rgba(20, 255, 100, 0.1);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(31, 111, 235, 0.25);
+  margin-top: 8px;
+}
+
+.ocr-uploader-button:hover {
+  background-color: #1158c7; /* darker blue on hover */
+  border-color: #1158c7;
+}
+
+.ocr-uploader-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 139, 253, 0.4); /* GitHub-style focus ring */
 }
 
 
@@ -286,3 +302,142 @@
   background-color: #161b22;
 }
 
+
+.ocr-uploader-spinner {
+  color: #79c0ff;
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  height: 24px;
+}
+
+.ocr-uploader-spinner .dot-1,
+.ocr-uploader-spinner .dot-2,
+.ocr-uploader-spinner .dot-3 {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  font-weight: bold;
+}
+
+.ocr-uploader-spinner .dot-2 {
+  animation-delay: 0.2s;
+}
+.ocr-uploader-spinner .dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+
+.ocr-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 50px); /* fill screen minus header if applicable */
+  text-align: center;
+  gap: 12px;
+}
+
+.ocr-upload-another {
+  padding: 6px 12px;
+  background-color: #1f6feb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s ease;
+}
+
+.ocr-upload-another:hover {
+  background-color: #1158c7;
+}
+
+
+
+.ocr-edit-header-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.ocr-edit-title {
+  font-size: 16px;
+  color: #79c0ff;
+  font-weight: 600;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 4px;
+}
+
+.ocr-edit-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ocr-upload-another-center {
+  flex: 1;
+  display: flex;
+}
+
+.ocr-sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ocr-sort-controls label {
+  font-size: 13px;
+  color: #8b949e;
+}
+
+.ocr-sort-controls select {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+
+
+/* General icon style */
+.ocr-icon {
+  color: #58a6ff; /* GitHub-style blue */
+  font-size: 18px;
+  vertical-align: middle;
+  transition: color 0.2s ease;
+}
+
+/* Slightly larger icons (e.g., headers/buttons) */
+.ocr-icon-large {
+  color: #58a6ff;
+  font-size: 22px;
+  vertical-align: middle;
+}
+
+/* Hover effect for clickable icons */
+.ocr-icon-clickable:hover {
+  color: #79c0ff;
+  cursor: pointer;
+}

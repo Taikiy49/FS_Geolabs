@@ -6,8 +6,7 @@ import win32com.client
 # === Paths ===
 xls_path = os.path.abspath(r"U:\Project Status\PR Data Base 6-25.xls")
 xlsx_path = os.path.abspath("temp_converted.xlsx")
-db_path = os.path.abspath("pr_data.db")
-csv_path = os.path.abspath("pr_data_export.csv")
+db_path = os.path.abspath("uploads/pr_data.db")
 table_name = "pr_data"
 
 # === If DB already exists, just load it ===
@@ -51,11 +50,11 @@ try:
         while len(sheet_df.columns) < 6:
             sheet_df[f"extra_{len(sheet_df.columns)}"] = None
 
-        sheet_df.columns = ["Date", "Client", "Location", "PR", "WO_E", "WO_F"]
+        sheet_df.columns = ["Date", "Client", "Project", "PR", "WO_E", "WO_F"]
         sheet_df["WO"] = sheet_df["WO_E"].combine_first(sheet_df["WO_F"])
         sheet_df.dropna(how='all', inplace=True)
         sheet_df["Date"] = pd.to_datetime(sheet_df["Date"], errors="coerce").dt.date
-        final_df = sheet_df[["Date", "Client", "Location", "PR", "WO"]]
+        final_df = sheet_df[["Date", "Client", "Project", "PR", "WO"]]
         all_rows.append(final_df)
 
     df = pd.concat(all_rows, ignore_index=True)

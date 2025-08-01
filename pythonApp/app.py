@@ -345,7 +345,7 @@ def lookup_work_orders():
             elif '-' not in original_wo and len(original_wo) == 4:
                 # For 4-digit WOs like '8210', try to find the lowest matching '8210-XX'
                 cursor.execute(f"""
-                    SELECT WO, Client, Location, PR, Date
+                    SELECT WO, Client, Project, PR, Date
                     FROM {TABLE_NAME}
                     WHERE WO LIKE ? COLLATE NOCASE
                     ORDER BY WO ASC
@@ -356,7 +356,7 @@ def lookup_work_orders():
                         "work_order": original_wo,
                         "project_wo": row[0],
                         "client": row[1],
-                        "location": row[2],
+                        "project": row[2],
                         "pr": row[3],
                         "date": row[4]
                     })
@@ -365,7 +365,7 @@ def lookup_work_orders():
             if formatted_wo:
                 print(f"🔍 Trying formatted WO: '{formatted_wo}'")
                 cursor.execute(f"""
-                    SELECT WO, Client, Location, PR, Date
+                    SELECT WO, Client, Project, PR, Date
                     FROM {TABLE_NAME}
                     WHERE WO LIKE ? COLLATE NOCASE
                     LIMIT 1
@@ -374,7 +374,7 @@ def lookup_work_orders():
             else:
                 print(f"🔍 Trying original WO: '{original_wo}'")
                 cursor.execute(f"""
-                    SELECT WO, Client, Location, PR, Date
+                    SELECT WO, Client, Project, PR, Date
                     FROM {TABLE_NAME}
                     WHERE WO LIKE ? COLLATE NOCASE
                     LIMIT 1
@@ -386,7 +386,7 @@ def lookup_work_orders():
                     "work_order": original_wo,
                     "project_wo": row[0],
                     "client": row[1],
-                    "location": row[2],
+                    "project": row[2],
                     "pr": row[3],
                     "date": row[4]
                 })
@@ -395,7 +395,7 @@ def lookup_work_orders():
                     "work_order": original_wo,
                     "project_wo": "Not Found",
                     "client": "Not Found",
-                    "location": "Not Found",
+                    "project": "Not Found",
                     "pr": "Not Found",
                     "date": "Not Found"
                 })
