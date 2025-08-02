@@ -31,6 +31,8 @@ function ScrollToTop() {
   return null;
 }
 
+
+
 const CustomLoading = () => (
   <div className="main-content" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
     <h2>Loading...</h2>
@@ -56,7 +58,8 @@ const AuthenticatedApp = () => {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/ask-ai" element={<AskAI selectedDB={selectedDB} />} />
+            <Route path="/ask-ai" element={<AskAI selectedDB={selectedDB} setSelectedDB={setSelectedDB} />} />
+
             <Route path="/db-viewer" element={<DBViewer />} />
             <Route path="/db-admin" element={<DBAdmin />} />
             <Route path="/file-viewer" element={<FileViewer />} />

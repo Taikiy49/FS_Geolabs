@@ -258,6 +258,24 @@ def get_chat_history():
         return jsonify([])
 
 
+@app.route('/api/delete-history', methods=['DELETE'])
+def delete_history():
+    data = request.get_json()
+    user = data.get('user')
+    db_name = data.get('db')
+    question = data.get('question')
+
+    if not all([user, db_name, question]):
+        return jsonify({'error': 'Missing parameters'}), 400
+
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM chat_history WHERE user=? AND db_name=? AND question=?", (user, db_name, question))
+        conn.commit()
+
+    return jsonify({'status': 'success'}), 200
+
+
 @app.route('/api/quick_view', methods=['POST'])
 def quick_view():
     data = request.get_json()

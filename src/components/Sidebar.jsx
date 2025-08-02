@@ -16,25 +16,32 @@ import {
 import API_URL from '../config';
 import '../styles/Sidebar.css';
 
-export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
-  const [dropdowns, setDropdowns] = useState({
-    document: false,
-    askAI: false,
-    project: false,
-  });
-  
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+
+export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
+  const [dropdowns, setDropdowns] = useState({ document: false, askAI: false, project: false });
   const [dbs, setDbs] = useState([]);
   const [history, setHistory] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
+  const isMobile = useIsMobile(); // ✅ Call this at the top, never conditionally
 
-
+  // ✅ These run no matter what
   useEffect(() => {
     axios.get(`${API_URL}/api/list-dbs`)
       .then(res => {
-        const filtered = res.data.dbs.filter(db =>
-          !['chat_history.db', 'reports.db'].includes(db)
-        );
+        const filtered = res.data.dbs.filter(db => !['chat_history.db', 'reports.db'].includes(db));
         setDbs(filtered);
         if (!filtered.includes(selectedDB)) {
           setSelectedDB(filtered[0] || '');
@@ -69,85 +76,84 @@ export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
     </div>
   );
 
+  // ✅ Now we return null only AFTER all hooks have run
+  if (isMobile) return null;
+
   return (
-    <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-  <div className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
-  {collapsed ? <FaBars /> : <FaTimes />}
-</div>
+  <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <div className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
+      {collapsed ? <FaBars /> : <FaTimes />}
+    </div>
 
+    {!collapsed && sidebarLink('Home', <FaHome className="sidebar-link-icon" />, '/')}
 
-    <div className="sidebar">
-      {sidebarLink('Home', <FaHome className="sidebar-link-icon" />, '/')}
+    {!collapsed && (
+      <>
+        <div className="sidebar-link" onClick={() => toggleDropdown('document')}>
+          <FaRobot className="sidebar-link-icon" />
+          <span>Document Databases</span>
+          <FaChevronDown className={`sidebar-link-chevron ${dropdowns.document ? 'rotate' : ''}`} />
+        </div>
 
-      {/* Document Databases Section */}
-      <div className="sidebar-link" onClick={() => toggleDropdown('document')}>
-        <FaRobot className="sidebar-link-icon" />
-        <span>Document Databases</span>
-        <FaChevronDown className={`sidebar-link-chevron ${dropdowns.chatbot ? 'rotate' : ''}`} />
-
-      </div>
-      {dropdowns.document && (
-        <div className="sidebar-dropdown">
-          <div className="sidebar-dropdown-item" onClick={() => toggleDropdown('askAI')}>
-            <FaRobot className="sidebar-icon-mini" /> Ask AI
-            <FaChevronDown className={`sidebar-link-chevron ${dropdowns.chatbot ? 'rotate' : ''}`} />
-
-          </div>
-          {dropdowns.askAI && (
-            <div className="sidebar-subdropdown">
-              {dbs.map((db, idx) => (
-                <div
-                  key={idx}
-                  className={`sidebar-dropdown-item ${db === selectedDB ? 'active' : ''}`}
-                  onClick={() => {
-                    setSelectedDB(db);
-                    if (window.location.pathname !== '/ask-ai') {
-                      window.location.href = '/ask-ai';
-                    }
-                  }}
-                >
-                  {db}
-                </div>
-              ))}
+        {dropdowns.document && (
+          <div className="sidebar-dropdown">
+            <div className="sidebar-dropdown-item" onClick={() => toggleDropdown('askAI')}>
+              <FaRobot className="sidebar-icon-mini" /> Ask AI
+              <FaChevronDown className={`sidebar-link-chevron ${dropdowns.askAI ? 'rotate' : ''}`} />
             </div>
-          )}
-          <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/db-viewer'}>
-            <FaDatabase className="sidebar-icon-mini" /> DB Viewer
+            {dropdowns.askAI && (
+              <div className="sidebar-subdropdown">
+                {dbs.map((db, idx) => (
+                  <div
+                    key={idx}
+                    className={`sidebar-dropdown-item ${db === selectedDB ? 'active' : ''}`}
+                    onClick={() => {
+                      setSelectedDB(db);
+                      if (window.location.pathname !== '/ask-ai') {
+                        window.location.href = '/ask-ai';
+                      }
+                    }}
+                  >
+                    {db}
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/db-viewer'}>
+              <FaDatabase className="sidebar-icon-mini" /> DB Viewer
+            </div>
+            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/db-admin'}>
+              <FaCogs className="sidebar-icon-mini" /> DB Admin
+            </div>
           </div>
-          <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/db-admin'}>
-            <FaCogs className="sidebar-icon-mini" /> DB Admin
-          </div>
+        )}
+
+        <div className="sidebar-link" onClick={() => toggleDropdown('project')}>
+          <FaTools className="sidebar-link-icon" />
+          <span>Project Finder</span>
+          <FaChevronDown className={`sidebar-link-chevron ${dropdowns.project ? 'rotate' : ''}`} />
         </div>
-      )}
 
-      {/* Project Finder Section */}
-      <div className="sidebar-link" onClick={() => toggleDropdown('project')}>
-        <FaTools className="sidebar-link-icon" />
-        <span>Project Finder</span>
-        <FaChevronDown className={`sidebar-link-chevron ${dropdowns.chatbot ? 'rotate' : ''}`} />
+        {dropdowns.project && (
+          <div className="sidebar-dropdown">
+            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/file-viewer'}>
+              <FaEye className="sidebar-icon-mini" /> File Viewer
+            </div>
+            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/s3-admin'}>
+              <FaCogs className="sidebar-icon-mini" /> S3 Admin
+            </div>
+            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/ocr-lookup'}>
+              <FaHandsHelping className="sidebar-icon-mini" /> OCR Lookup
+            </div>
+          </div>
+        )}
 
-      </div>
-      {dropdowns.project && (
-        <div className="sidebar-dropdown">
-          <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/file-viewer'}>
-            <FaEye className="sidebar-icon-mini" /> File Viewer
-          </div>
-          <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/s3-admin'}>
-            <FaCogs className="sidebar-icon-mini" /> S3 Admin
-          </div>
-          <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/ocr-lookup'}>
-            <FaHandsHelping className="sidebar-icon-mini" /> OCR Lookup
-          </div>
+         <div className="sidebar-link" onClick={() => window.location.href = '/'}>
+          <FaEnvelope className="sidebar-link-icon" /> Contacts
         </div>
-      )}
-
-      {/* Contacts Section */}
-      <div className="sidebar-link" onClick={() => window.location.href = '/'}>
-        <FaEnvelope className="sidebar-link-icon" /> Contacts
-      </div>
-
-     
-    </div>
-    </div>
-  );
-}
+      </>
+    )}
+  </div>
+); 
+} 
+  

@@ -5,7 +5,9 @@ import '../styles/AskAI.css';
 import API_URL from '../config';
 import ReactMarkdown from 'react-markdown';
 
-export default function ContextualChatbot({ selectedDB }) {
+export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
+
   const [conversation, setConversation] = useState([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -134,40 +136,40 @@ export default function ContextualChatbot({ selectedDB }) {
   return (
     <div className="cc-container">
       <div className="cc-sidebar">
-        <div className="cc-db-row">
-          <div className="cc-db-label-group">
-            <FaDatabase className="cc-db-icon" />
-            <div className="cc-db-readonly">{selectedDB}</div>
-          </div>
-          <div className="cc-toggle-inline">
-            <label className="cc-toggle-switch">
-              <input
-                type="checkbox"
-                checked={useCache}
-                onChange={() => setUseCache(!useCache)}
-              />
-              <span className="cc-slider" />
-            </label>
-            <span className="cc-toggle-label-text">Cache</span>
-          </div>
-        </div>
 
         {history.length > 0 && (
   <div className="cc-chat-history">
     <div className="cc-sidebar-title">Recent Questions</div>
     {history.map((pair, i) => (
       <div
-        key={i}
-        className="cc-history-item"
-        onClick={() =>
-          setConversation([
-            { role: 'user', text: pair.question },
-            { role: 'assistant', text: pair.answer },
-          ])
-        }
-      >
-        {pair.question}
-      </div>
+  key={i}
+  className="cc-history-item"
+  onClick={() =>
+    setConversation([
+      { role: 'user', text: pair.question },
+      { role: 'assistant', text: pair.answer },
+    ])
+  }
+  onContextMenu={(e) => {
+    e.preventDefault();
+    if (window.confirm('🗑️ Delete this chat history item?')) {
+      axios.delete(`${API_URL}/api/delete-history`, {
+        data: {
+          user: 'guest',
+          db: selectedDB,
+          question: pair.question,
+        },
+      })
+      .then(() => {
+        setHistory((prev) => prev.filter((_, j) => j !== i));
+      })
+      .catch((err) => console.error('❌ Failed to delete:', err));
+    }
+  }}
+>
+  {pair.question}
+</div>
+
     ))}
   </div>
 )}
@@ -177,15 +179,25 @@ export default function ContextualChatbot({ selectedDB }) {
       <div className="cc-main">
         <div className="cc-panel">
           <div className="cc-faq-list">
-            {faqList.map((faq, i) => (
-              <div
-                key={i}
-                onClick={(e) => handleSubmit(e, faq)}
-                className="cc-faq-button"
-              >
-                {faq}
-              </div>
-            ))}
+            {(showAllFaqs ? faqList : faqList.slice(0, 6)).map((faq, i) => (
+  <div
+    key={i}
+    onClick={(e) => handleSubmit(e, faq)}
+    className="cc-faq-button"
+  >
+    {faq}
+  </div>
+))}
+
+{faqList.length > 6 && (
+  <div
+    onClick={() => setShowAllFaqs(!showAllFaqs)}
+    className="cc-faq-button cc-faq-toggle"
+  >
+    {showAllFaqs ? 'Show Less ▲' : 'Show More ▼'}
+  </div>
+)}
+
           </div>
         </div>
 
@@ -214,18 +226,66 @@ export default function ContextualChatbot({ selectedDB }) {
           })}
         </div>
 
-        <form onSubmit={handleSubmit} className="cc-search-bar-bottom">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={`Ask something from ${selectedDB}...`}
-            className="cc-search-input"
-          />
-          <button type="submit" className="cc-search-button" disabled={loading}>
-            <FaPaperPlane />
-          </button>
-        </form>
+        <div className="cc-search-bar-bottom">
+  <div className="cc-bottom-controls">
+  <div className="cc-db-label-group">
+  <div
+    className="cc-db-icon-toggle"
+    onClick={(e) => {
+      e.preventDefault();
+      const dropdown = document.getElementById('cc-db-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }}
+  >
+    <FaDatabase className="cc-db-icon" />
+    <button className="cc-db-toggle-button">▲</button>
+  </div>
+  <div className="cc-db-readonly">{selectedDB}</div>
+
+  <div id="cc-db-dropdown" className="cc-db-dropdown-panel">
+    {availableDBs.map((db, i) => (
+      <div
+        key={i}
+        className="cc-db-dropdown-item"
+        onClick={() => {
+          setSelectedDB(db);
+          document.getElementById('cc-db-dropdown').style.display = 'none';
+        }}
+      >
+        {db}
+      </div>
+    ))}
+  </div>
+</div>
+
+
+    <div className="cc-toggle-inline">
+      <label className="cc-toggle-switch">
+        <input
+          type="checkbox"
+          checked={useCache}
+          onChange={() => setUseCache(!useCache)}
+        />
+        <span className="cc-slider" />
+      </label>
+      <span className="cc-toggle-label-text">Cache</span>
+    </div>
+  </div>
+
+  <form onSubmit={handleSubmit} style={{ display: 'flex', flex: 1 }}>
+    <input
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder={`Ask something from ${selectedDB}...`}
+      className="cc-search-input"
+    />
+    <button type="submit" className="cc-search-button" disabled={loading}>
+      <FaPaperPlane />
+    </button>
+  </form>
+</div>
+
       </div>
     </div>
   );
