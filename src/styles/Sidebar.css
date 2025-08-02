@@ -1,17 +1,25 @@
 .sidebar {
-  width: 225px;
-  min-width: 225px;  /* ✅ Prevent shrinking */
-  max-width: 225px;  /* ✅ Prevent growing */
+  width: 210px;
+  min-width: 210px;
+  max-width: 210px;
+  transition: all 0.3s ease;
   background-color: #0d1117;
-
   color: #c9d1d9;
   border-right: 1px solid #30363d;
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-y: auto;
+  overflow-x: hidden; /* ✅ Prevent horizontal scroll */
   scrollbar-width: thin;
   scrollbar-color: #4b5563 #101317;
+}
+
+
+.sidebar.collapsed {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
 }
 
 
@@ -103,4 +111,30 @@
 .sidebar-history-item:hover {
   background-color: #2f81f7;
   color: #ffffff;
+}
+
+.sidebar-toggle {
+  cursor: pointer;
+  background-color: #161b22;
+  color: #58a6ff;
+  padding: 8px;
+  text-align: center;
+  font-size: 18px;
+  border-bottom: 1px solid #30363d;
+}
+
+.sidebar.collapsed .sidebar-link span,
+.sidebar.collapsed .sidebar-dropdown-item,
+.sidebar.collapsed .sidebar-dropdown,
+.sidebar.collapsed .sidebar-subdropdown,
+.sidebar.collapsed .sidebar-chat-history,
+.sidebar.collapsed .sidebar-history-item,
+.sidebar.collapsed .upload-time {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-link,
+.sidebar.collapsed .sidebar-dropdown-item {
+  justify-content: center;
+  padding: 10px 0;
 }

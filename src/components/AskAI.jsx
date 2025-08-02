@@ -152,22 +152,26 @@ export default function ContextualChatbot({ selectedDB }) {
           </div>
         </div>
 
-        <div className="cc-chat-history">
-          {history.map((pair, i) => (
-            <div
-              key={i}
-              className="cc-history-item"
-              onClick={() =>
-                setConversation([
-                  { role: 'user', text: pair.question },
-                  { role: 'assistant', text: pair.answer },
-                ])
-              }
-            >
-              {pair.question}
-            </div>
-          ))}
-        </div>
+        {history.length > 0 && (
+  <div className="cc-chat-history">
+    <div className="cc-sidebar-title">Recent Questions</div>
+    {history.map((pair, i) => (
+      <div
+        key={i}
+        className="cc-history-item"
+        onClick={() =>
+          setConversation([
+            { role: 'user', text: pair.question },
+            { role: 'assistant', text: pair.answer },
+          ])
+        }
+      >
+        {pair.question}
+      </div>
+    ))}
+  </div>
+)}
+
       </div>
 
       <div className="cc-main">

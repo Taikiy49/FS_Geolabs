@@ -409,6 +409,33 @@ def lookup_work_orders():
     except Exception as e:
         print("❌ Error in lookup_work_orders:", str(e))
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route('/api/s3-db-pdfs')
+def list_s3_db_pdfs():
+    try:
+        s3 = boto3.client('s3')
+        BUCKET_NAME = 'geolabs-db-pdfs'
+        response = s3.list_objects_v2(Bucket=BUCKET_NAME)
+
+        files = []
+        for obj in response.get('Contents', []):
+            key = obj['Key']
+            url = s3.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': BUCKET_NAME, 'Key': key},
+                ExpiresIn=3600  # 1 hour
+            )
+            files.append({
+                'Key': key,
+                'url': url
+            })
+
+        return jsonify({'files': files})
+    except Exception as e:
+        print('❌ S3 DB PDF List Error:', e)
+        return jsonify({'error': str(e)}), 500
+
 
 print("🔧 Starting app...")
 init_db()

@@ -19,6 +19,10 @@ export default function Admin() {
   const [dbStructure, setDbStructure] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [rawTitle, setRawTitle] = useState('');
+  const [activePdfUrl, setActivePdfUrl] = useState('');
+  const [s3PdfUrls, setS3PdfUrls] = useState({});
+
+
 
 
   useEffect(() => {
@@ -42,6 +46,21 @@ export default function Admin() {
 
     fetchDbs();
     fetchUploadHistory();
+
+    const fetchS3PdfUrls = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/api/s3-db-pdfs`);
+      const urlMap = {};
+      for (const { Key, url } of res.data.files) {
+        urlMap[Key] = url;
+      }
+      setS3PdfUrls(urlMap);
+    } catch (err) {
+      console.error('❌ Failed to load S3 signed URLs:', err);
+    }
+  };
+
+  fetchS3PdfUrls();
   }, []);
 
   const handleDrop = (e) => {
@@ -220,7 +239,7 @@ const groupedHistory = groupUploads(uploadHistory);
     <select className="admin-select" onChange={(e) => setDbName(e.target.value)} value={dbName}>
       <option value="">-- Select a DB --</option>
       {existingDbs
-        .filter(db => db !== 'chat_history.db')
+        .filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'pr_data.db')
         .map((db, i) => (
           <option key={i} value={db}>{formatDbName(db)}</option>
         ))}
@@ -285,7 +304,7 @@ const groupedHistory = groupUploads(uploadHistory);
     <div className="admin-right">
       <div className="existing-db-title">Existing Databases</div>
       <div className="existing-db-list">
-        {existingDbs.filter(db => db !== 'chat_history.db').map((db, index) => (
+        {existingDbs.filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'pr_data.db').map((db, index) => (
           <div key={index} className="existing-db-item">
             <div className="db-top-row">
               <div className="db-name-group">
@@ -316,13 +335,31 @@ const groupedHistory = groupUploads(uploadHistory);
                 Delete
               </button>
             </div>
-            {expandedDbs[db] && dbFiles[db] && (
-              <ul className="db-files-list">
-                {dbFiles[db].map((file, i) => (
-                  <li key={i} className="db-file-item">{file}</li>
-                ))}
-              </ul>
-            )}
+           {expandedDbs[db] && dbFiles[db] && (
+  <div className="db-files-list">
+    {dbFiles[db].map((file, i) => (
+      <div key={i} className="db-file-item">
+        <span
+          className="db-file-link"
+          onClick={() => {
+            const key = `${db}/${file}`;
+const signedUrl = s3PdfUrls[key];
+if (signedUrl) {
+  setActivePdfUrl(signedUrl);
+} else {
+  alert('❌ Signed URL not found for this file.');
+}
+
+          }}
+        >
+          {file}
+        </span>
+      </div>
+    ))}
+  </div>
+)}
+
+
           </div>
         ))}
       </div>
@@ -354,7 +391,30 @@ const groupedHistory = groupUploads(uploadHistory);
       </div>
     </div>
   )}
+  {activePdfUrl && (
+  <div
+    className="popup-overlay"
+    onClick={() => setActivePdfUrl('')}
+  >
+    <div
+      className="popup-content pdf-viewer-popup"
+      onClick={(e) => e.stopPropagation()} // prevent overlay click
+    >
+      <button className="popup-close" onClick={() => setActivePdfUrl('')}>✕</button>
+      <iframe
+        src={activePdfUrl}
+        title="PDF Viewer"
+        width="100%"
+        height="600px"
+        style={{ border: 'none' }}
+      />
+    </div>
+  </div>
+)}
+
+
 </div>
+
 
   );
 }

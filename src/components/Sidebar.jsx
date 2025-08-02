@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
+  FaBars,
+  FaTimes,
   FaChevronDown,
   FaRobot,
   FaTools,
@@ -20,9 +22,12 @@ export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
     askAI: false,
     project: false,
   });
+  
 
   const [dbs, setDbs] = useState([]);
   const [history, setHistory] = useState([]);
+  const [collapsed, setCollapsed] = useState(false);
+
 
   useEffect(() => {
     axios.get(`${API_URL}/api/list-dbs`)
@@ -65,6 +70,12 @@ export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
   );
 
   return (
+    <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+  <div className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
+  {collapsed ? <FaBars /> : <FaTimes />}
+</div>
+
+
     <div className="sidebar">
       {sidebarLink('Home', <FaHome className="sidebar-link-icon" />, '/')}
 
@@ -135,20 +146,8 @@ export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
         <FaEnvelope className="sidebar-link-icon" /> Contacts
       </div>
 
-      {/* Chat History (if on Ask AI) */}
-      {window.location.pathname === '/ask-ai' && history.length > 0 && (
-        <div className="sidebar-chat-history">
-          {history.map((pair, idx) => (
-            <div
-              key={idx}
-              className="sidebar-history-item"
-              onClick={() => onHistoryClick && onHistoryClick(pair)}
-            >
-              {pair.question}
-            </div>
-          ))}
-        </div>
-      )}
+     
+    </div>
     </div>
   );
 }

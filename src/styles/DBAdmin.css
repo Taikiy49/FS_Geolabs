@@ -8,6 +8,31 @@
   min-height: 0;
   box-sizing: border-box;
 }
+.db-file-link {
+  color: #58a6ff;
+  text-decoration: none; /* 🚫 No underline */
+  font-weight: 500;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  display: inline-block;
+}
+
+.db-file-link:hover {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.pdf-viewer-popup {
+  max-width: 90%;
+  max-height: 90%;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px #000;
+  overflow: auto;
+}
+
+
 
 .admin-radio-group {
   display: flex;
@@ -134,16 +159,23 @@
   min-width: 115px;
   width: 70%;
   display: flex;
-background-color: #0d1117;
+  flex-direction: column;
+  justify-content: flex-start; /* 🧭 Aligns content to the top */
+  background-color: #0d1117;
   border: 2px dashed #30363d;
-  padding: 20px;
+  padding: 8px;
   text-align: center;
   border-radius: 8px;
   font-size: 14px;
   color: #8b949e;
   transition: border-color 0.2s ease;
-  justify-content: center;
+  overflow-y: auto; /* ✅ Scroll vertically if needed */
+  overflow-x: hidden;
+  height: 200px; /* ✅ Fixed height */
+  box-sizing: border-box;
+  gap: 4px;
 }
+
 
 .drop-zone-text {
   font-size: 14px;
@@ -297,14 +329,15 @@ background-color: #0d1117;
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* === Popups === */
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(13, 17, 23, 0.85);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(13, 17, 23, 0.6);
+  backdrop-filter: blur(6px); /* 💡 This adds the blur */
+  -webkit-backdrop-filter: blur(6px); /* Safari support */
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -312,16 +345,32 @@ background-color: #0d1117;
   animation: fadeIn 0.3s ease-in-out;
 }
 
+.pdf-viewer-popup {
+  position: relative;
+  max-width: 95vw;
+  max-height: 90vh;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+  border: none; /* 🚫 No border */
+}
+
+
 .popup-content {
-  background-color: #161b22;
+  background-color: transparent;
   padding: 24px;
-  border-radius: 8px;
-  border: 1px solid #30363d;
+  border: none;
   color: #c9d1d9;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: none;
 }
+
+
 
 .popup-close {
   position: absolute;
@@ -454,11 +503,10 @@ background-color: #0d1117;
   align-items: center;
   background: #1f2937;
   color: #c9d1d9;
-  padding: 4px 8px;
-  margin: 4px 0;
+  padding: 2px 4px;
   border: 1px solid #2d3748;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .selected-file button {

@@ -11,6 +11,25 @@ import torch
 import fitz  
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
+import boto3
+
+s3 = boto3.client("s3")
+S3_BUCKET = "geolabs-db-pdfs"
+
+def upload_pdf_to_s3(local_path, db_name, file_name):
+    s3_key = f"{db_name}/{file_name}"
+    try:
+        s3.upload_file(
+            Filename=local_path,
+            Bucket=S3_BUCKET,
+            Key=s3_key,
+            ExtraArgs={"ContentType": "application/pdf"}
+        )
+        print(f"✅ Uploaded to S3: {s3_key}")
+        return f"https://{S3_BUCKET}.s3.amazonaws.com/{s3_key}"
+    except Exception as e:
+        print(f"❌ S3 upload failed: {e}")
+        return None
 
 punkt_param = PunktParameters()
 punkt_tokenizer = PunktSentenceTokenizer(punkt_param)
@@ -259,12 +278,19 @@ def process_file():
         original_filename = file.filename
         tmp_path = os.path.join(UPLOAD_FOLDER, original_filename)
         file.save(tmp_path)
+        steps = []
+
+        s3_url = upload_pdf_to_s3(tmp_path, db_name, original_filename)
+        if s3_url:
+            steps.append(f"☁️ Uploaded to S3: {s3_url}")
+        else:
+            steps.append(f"⚠️ Failed to upload to S3")
+
 
 
         db_path = os.path.join(UPLOAD_FOLDER, db_name)
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-        steps = []
 
         def track(msg):
             print(msg)

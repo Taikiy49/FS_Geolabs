@@ -45,14 +45,12 @@
 }
 
 .cc-chat-history {
-  flex: 1;
+  padding: 12px 8px;
+  margin-top: 6px;
   overflow-y: auto;
-  min-height: 0;
-  height: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  border-top: 1px solid #30363d;
   scrollbar-width: thin;
-  scrollbar-color: #666 #1a1a1a;
+  scrollbar-color: #4b5563 #101317;
 }
 
 
@@ -70,31 +68,37 @@
 
 }
 
+.cc-sidebar-title {
+  font-size: 14px;
+  color: #8b949e;
+  padding: 4px 6px 10px;
+  font-weight: 600;
+  text-align: center;
+}
 
 .cc-history-item {
-  background: linear-gradient(135deg, #161b22, #0d1117);
+  background: #161b22;
   border: 1px solid #30363d;
-  border-left: 4px solid #2f81f7;  /* 🔵 GitHub blue accent bar */
+  border-left: 4px solid #2f81f7;
   border-radius: 6px;
   color: #c9d1d9;
   font-size: 13px;
-  padding: 5px 8px;
-  margin-bottom: 8px; margin-left: 2px; margin-right: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 4px 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
-  white-space: normal;
-  word-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
+
 .cc-history-item:hover {
-  background: #21262d;
-  border-color: #2f81f7;
-  box-shadow:
-    0 2px 4px rgba(47, 129, 247, 0.3),
-    0 6px 12px rgba(0, 0, 0, 0.4);
-  transform: scale(1.015);
+  background-color: #21262d;
   color: #ffffff;
+  transform: scale(1.02);
+  border-left-color: #388bfd;
 }
 
 
