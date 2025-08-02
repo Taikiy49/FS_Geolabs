@@ -358,8 +358,6 @@
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
   border: none; /* 🚫 No border */
 }
-
-
 .popup-content {
   background-color: transparent;
   padding: 24px;
