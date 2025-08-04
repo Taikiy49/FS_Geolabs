@@ -126,7 +126,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 gemini_model = genai.GenerativeModel("gemini-2.5-pro")
 
 
-def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=True):
+def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=True, use_web=False):
     if not query:
         return "No query provided."
     if not snippets:
@@ -143,11 +143,17 @@ def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=T
     prompt = f"""You are a helpful AI assistant. Please answer the user's question using the provided excerpt below.
 
 **Requirements:**
-- You do not need an introduction just go straight to the point!
+- You do not need an introduction; just go straight to the point.
 - Respond in **clear, readable Markdown**.
 - Use **bold headings**, bullet points, and spacing to organize content.
-- Bold any key phrases like \"Work Order\", \"Policy\", \"Contact\", \"Deadline\", or section names if mentioned.
+- Bold any key phrases like "Work Order", "Policy", "Contact", "Deadline", or section names if mentioned.
 - Keep paragraphs short and avoid large walls of text.
+"""
+
+    if use_web:
+        prompt += "- You may also include relevant general knowledge if helpful.\n"
+
+    prompt += f"""
 
 ---
 
@@ -161,6 +167,7 @@ def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=T
 
 **Answer (in well-formatted Markdown):**
 """
+
     try:
         print("🧠 Gemini Prompt Preview:\n", prompt[:300])
         response = gemini_model.generate_content(prompt)
@@ -176,3 +183,4 @@ def ask_gemini_single_file(query, file_name, snippets, user='guest', use_cache=T
         print("❌ Gemini SDK error:")
         traceback.print_exc()
         return f"Gemini SDK error: {str(e)}"
+

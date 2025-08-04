@@ -1,159 +1,90 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {
-  FaBars,
-  FaTimes,
-  FaChevronDown,
-  FaRobot,
-  FaTools,
-  FaDatabase,
-  FaCogs,
-  FaEye,
-  FaHandsHelping,
-  FaEnvelope,
-  FaHome,
+  FaBars, FaTimes, FaChevronDown, FaRobot, FaDatabase, FaCogs, FaComments,
+  FaTable, FaUpload, FaSearch, FaFolderOpen, FaCloudUploadAlt, FaFileAlt,
+  FaEnvelopeOpenText, FaHome
 } from 'react-icons/fa';
 import API_URL from '../config';
 import '../styles/Sidebar.css';
 
-
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
-
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [breakpoint]);
-
   return isMobile;
 }
 
+export default function Sidebar({ collapsed, setCollapsed }) {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const isMobile = useIsMobile();
+  const [dropdowns, setDropdowns] = useState({ doc: true, proj: true });
 
-export default function Sidebar({ selectedDB, setSelectedDB, onHistoryClick }) {
-  const [dropdowns, setDropdowns] = useState({ document: false, askAI: false, project: false });
-  const [dbs, setDbs] = useState([]);
-  const [history, setHistory] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
-  const isMobile = useIsMobile(); // ✅ Call this at the top, never conditionally
-
-  // ✅ These run no matter what
-  useEffect(() => {
-    axios.get(`${API_URL}/api/list-dbs`)
-      .then(res => {
-        const filtered = res.data.dbs.filter(db => !['chat_history.db', 'reports.db'].includes(db));
-        setDbs(filtered);
-        if (!filtered.includes(selectedDB)) {
-          setSelectedDB(filtered[0] || '');
-        }
-      })
-      .catch(() => setDbs([]));
-  }, [selectedDB, setSelectedDB]);
-
-  useEffect(() => {
-    if (!selectedDB) return;
-    axios.get(`${API_URL}/api/chat_history`, {
-      params: { user: 'guest', db: selectedDB },
-    })
-      .then(res => {
-        const raw = res.data || [];
-        const pairs = raw.map(row => ({
-          question: row.question,
-          answer: row.answer,
-        }));
-        setHistory(pairs);
-      })
-      .catch(() => setHistory([]));
-  }, [selectedDB]);
+  const sidebarLink = (label, icon, path) => (
+    <div className="sidebar-link" onClick={() => window.location.href = path}>
+      {icon}
+      {!collapsed && <span>{label}</span>}
+    </div>
+  );
 
   const toggleDropdown = (key) => {
     setDropdowns(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const sidebarLink = (label, icon, path) => (
-    <div className="sidebar-link" onClick={() => window.location.href = path}>
-      {icon} {label}
-    </div>
-  );
-
-  // ✅ Now we return null only AFTER all hooks have run
   if (isMobile) return null;
 
   return (
-  <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-    <div className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
-      {collapsed ? <FaBars /> : <FaTimes />}
+    <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+      <div className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
+        {collapsed ? <FaBars /> : <FaTimes />}
+      </div>
+
+      {/* Home (only if not collapsed) */}
+      {!collapsed && sidebarLink('Home', <FaHome className="sidebar-link-icon" />, '/')}
+
+      {/* Document Databases Group */}
+      <div className="sidebar-link" onClick={() => toggleDropdown('doc')}>
+        <FaDatabase className="sidebar-link-icon" />
+        {!collapsed && <span>Document Databases</span>}
+        {!collapsed && (
+          <FaChevronDown
+            className={`sidebar-link-chevron ${dropdowns.doc ? 'rotate' : ''}`}
+          />
+        )}
+      </div>
+      {dropdowns.doc && !collapsed && (
+        <div className="sidebar-dropdown">
+          {sidebarLink('Ask AI', <FaComments className="sidebar-icon-mini" />, '/ask-ai')}
+          {sidebarLink('DB Viewer', <FaTable className="sidebar-icon-mini" />, '/db-viewer')}
+          {sidebarLink('DB Admin', <FaUpload className="sidebar-icon-mini" />, '/db-admin')}
+        </div>
+      )}
+
+      {/* Project Finder Group */}
+      <div className="sidebar-link" onClick={() => toggleDropdown('proj')}>
+        <FaFolderOpen className="sidebar-link-icon" />
+        {!collapsed && <span>Project Finder</span>}
+        {!collapsed && (
+          <FaChevronDown
+            className={`sidebar-link-chevron ${dropdowns.proj ? 'rotate' : ''}`}
+          />
+        )}
+      </div>
+      {dropdowns.proj && !collapsed && (
+        <div className="sidebar-dropdown">
+          {sidebarLink('S3 Viewer', <FaFileAlt className="sidebar-icon-mini" />, '/s3-viewer')}
+          {sidebarLink('S3 Admin', <FaCloudUploadAlt className="sidebar-icon-mini" />, '/s3-admin')}
+          {sidebarLink('OCR Lookup', <FaSearch className="sidebar-icon-mini" />, '/ocr-lookup')}
+        </div>
+      )}
+
+      {/* Contacts */}
+      {sidebarLink('Contacts', <FaEnvelopeOpenText className="sidebar-link-icon" />, '/contacts')}
     </div>
-
-    {!collapsed && sidebarLink('Home', <FaHome className="sidebar-link-icon" />, '/')}
-
-    {!collapsed && (
-      <>
-        <div className="sidebar-link" onClick={() => toggleDropdown('document')}>
-          <FaRobot className="sidebar-link-icon" />
-          <span>Document Databases</span>
-          <FaChevronDown className={`sidebar-link-chevron ${dropdowns.document ? 'rotate' : ''}`} />
-        </div>
-
-        {dropdowns.document && (
-          <div className="sidebar-dropdown">
-            <div className="sidebar-dropdown-item" onClick={() => toggleDropdown('askAI')}>
-              <FaRobot className="sidebar-icon-mini" /> Ask AI
-              <FaChevronDown className={`sidebar-link-chevron ${dropdowns.askAI ? 'rotate' : ''}`} />
-            </div>
-            {dropdowns.askAI && (
-              <div className="sidebar-subdropdown">
-                {dbs.map((db, idx) => (
-                  <div
-                    key={idx}
-                    className={`sidebar-dropdown-item ${db === selectedDB ? 'active' : ''}`}
-                    onClick={() => {
-                      setSelectedDB(db);
-                      if (window.location.pathname !== '/ask-ai') {
-                        window.location.href = '/ask-ai';
-                      }
-                    }}
-                  >
-                    {db}
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/db-viewer'}>
-              <FaDatabase className="sidebar-icon-mini" /> DB Viewer
-            </div>
-            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/db-admin'}>
-              <FaCogs className="sidebar-icon-mini" /> DB Admin
-            </div>
-          </div>
-        )}
-
-        <div className="sidebar-link" onClick={() => toggleDropdown('project')}>
-          <FaTools className="sidebar-link-icon" />
-          <span>Project Finder</span>
-          <FaChevronDown className={`sidebar-link-chevron ${dropdowns.project ? 'rotate' : ''}`} />
-        </div>
-
-        {dropdowns.project && (
-          <div className="sidebar-dropdown">
-            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/file-viewer'}>
-              <FaEye className="sidebar-icon-mini" /> File Viewer
-            </div>
-            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/s3-admin'}>
-              <FaCogs className="sidebar-icon-mini" /> S3 Admin
-            </div>
-            <div className="sidebar-dropdown-item" onClick={() => window.location.href = '/ocr-lookup'}>
-              <FaHandsHelping className="sidebar-icon-mini" /> OCR Lookup
-            </div>
-          </div>
-        )}
-
-         <div className="sidebar-link" onClick={() => window.location.href = '/'}>
-          <FaEnvelope className="sidebar-link-icon" /> Contacts
-        </div>
-      </>
-    )}
-  </div>
-); 
-} 
-  
+  );
+}

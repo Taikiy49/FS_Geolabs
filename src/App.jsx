@@ -48,18 +48,32 @@ const CustomError = ({ error }) => (
 
 const AuthenticatedApp = () => {
   const [selectedDB, setSelectedDB] = useState('');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // ✅ add this
 
   return (
     <div className="app-container">
       <Header />
       <div className="app-body">
-        <Sidebar selectedDB={selectedDB} setSelectedDB={setSelectedDB} />
+        <Sidebar
+          selectedDB={selectedDB}
+          setSelectedDB={setSelectedDB}
+          collapsed={sidebarCollapsed}
+          setCollapsed={setSidebarCollapsed}
+        />
         <main className="main-content">
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/ask-ai" element={<AskAI selectedDB={selectedDB} setSelectedDB={setSelectedDB} />} />
-
+            <Route
+              path="/ask-ai"
+              element={
+                <AskAI
+                  selectedDB={selectedDB}
+                  setSelectedDB={setSelectedDB}
+                  sidebarCollapsed={sidebarCollapsed} // ✅ pass it here
+                />
+              }
+            />
             <Route path="/db-viewer" element={<DBViewer />} />
             <Route path="/db-admin" element={<DBAdmin />} />
             <Route path="/file-viewer" element={<FileViewer />} />
@@ -68,11 +82,14 @@ const AuthenticatedApp = () => {
             <Route path="/s3-viewer" element={<S3Viewer />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
+
+       
         </main>
       </div>
     </div>
   );
 };
+
 
 export default function App() {
   return (

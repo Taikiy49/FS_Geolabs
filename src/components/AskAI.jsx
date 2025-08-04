@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaPaperPlane, FaDatabase } from 'react-icons/fa';
+import { FaPaperPlane, FaDatabase, FaGlobe, FaBolt} from 'react-icons/fa';
 import '../styles/AskAI.css';
 import API_URL from '../config';
 import ReactMarkdown from 'react-markdown';
 
-export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
-  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
+export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCollapsed }) {
+
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
+  const [useWeb, setUseWeb] = useState(false);
+  const [useCache, setUseCache] = useState(true);
   const [conversation, setConversation] = useState([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
-  const [useCache, setUseCache] = useState(true);  const [availableDBs, setAvailableDBs] = useState([]);
+  const [availableDBs, setAvailableDBs] = useState([]);
   const [faqList, setFaqList] = useState([]);
+  const handleDeleteHistory = (indexToDelete) => {
+  setHistory(prev => prev.filter((_, i) => i !== indexToDelete));
+  // Optional: also delete from backend/db if needed
+};
 
+  
   const faqMap = {
     'employee_handbook.db': [
       "What is the company's PTO policy?",
@@ -58,6 +68,17 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
       })
       .catch(() => setAvailableDBs([]));
   }, []);
+  useEffect(() => {
+  const handleLoad = (e) => {
+    const { question, answer } = e.detail;
+    setConversation([
+      { role: 'user', text: question },
+      { role: 'assistant', text: answer },
+    ]);
+  };
+  window.addEventListener('loadChatHistory', handleLoad);
+  return () => window.removeEventListener('loadChatHistory', handleLoad);
+}, []);
 
   useEffect(() => {
     setFaqList(faqMap[selectedDB] || []);
@@ -65,7 +86,6 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
 
   useEffect(() => {
     if (!selectedDB) return;
-
     axios.get(`${API_URL}/api/chat_history`, {
       params: { user: "guest", db: selectedDB },
     })
@@ -81,6 +101,14 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
 
     setConversation([]);
   }, [selectedDB]);
+  const handleHistoryClick = (index) => {
+  const selected = history[index];
+  if (selected) {
+    setQuery(selected.question);
+    // Optionally re-run the query
+    // or scroll to that conversation in the chat
+  }
+};
 
   const handleSubmit = async (e, optionalQuery) => {
     e.preventDefault();
@@ -99,6 +127,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
         query: inputQuery,
         user: "guest",
         use_cache: useCache,
+        use_web: useWeb,
         db: selectedDB,
       });
 
@@ -132,161 +161,130 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB }) {
       setLoading(false);
     }
   };
-
-  return (
-    <div className="cc-container">
-      <div className="cc-sidebar">
-
-        {history.length > 0 && (
-  <div className="cc-chat-history">
-    <div className="cc-sidebar-title">Recent Questions</div>
-    {history.map((pair, i) => (
-      <div
-  key={i}
-  className="cc-history-item"
-  onClick={() =>
-    setConversation([
-      { role: 'user', text: pair.question },
-      { role: 'assistant', text: pair.answer },
-    ])
-  }
-  onContextMenu={(e) => {
-    e.preventDefault();
-    if (window.confirm('🗑️ Delete this chat history item?')) {
-      axios.delete(`${API_URL}/api/delete-history`, {
-        data: {
-          user: 'guest',
-          db: selectedDB,
-          question: pair.question,
-        },
-      })
-      .then(() => {
-        setHistory((prev) => prev.filter((_, j) => j !== i));
-      })
-      .catch((err) => console.error('❌ Failed to delete:', err));
-    }
-  }}
->
-  {pair.question}
-</div>
-
-    ))}
-  </div>
-)}
-
-      </div>
-
-      <div className="cc-main">
-        <div className="cc-panel">
+ return (
+  <div className="cc-container">
+    <div className="cc-main">
+      <div className="cc-results-wrapper">
+        {/* Left Chat Panel */}
+        <div className="cc-chat-panel">
+          {/* FAQ List on Top */}
           <div className="cc-faq-list">
             {(showAllFaqs ? faqList : faqList.slice(0, 6)).map((faq, i) => (
-  <div
-    key={i}
-    onClick={(e) => handleSubmit(e, faq)}
-    className="cc-faq-button"
-  >
-    {faq}
-  </div>
-))}
+              <div key={i} onClick={(e) => handleSubmit(e, faq)} className="cc-faq-button">
+                {faq}
+              </div>
+            ))}
+            {faqList.length > 6 && (
+              <div onClick={() => setShowAllFaqs(!showAllFaqs)} className="cc-faq-button cc-faq-toggle">
+                {showAllFaqs ? 'Show Less ▲' : 'Show More ▼'}
+              </div>
+            )}
+          </div>
 
-{faqList.length > 6 && (
-  <div
-    onClick={() => setShowAllFaqs(!showAllFaqs)}
-    className="cc-faq-button cc-faq-toggle"
-  >
-    {showAllFaqs ? 'Show Less ▲' : 'Show More ▼'}
-  </div>
-)}
+          {/* Chat Bubbles */}
+          <div className="cc-chat-scroll">
+            {conversation.map((item, i) => {
+              if (item.role === 'user') {
+                const answer = conversation[i + 1];
+                return (
+                  <React.Fragment key={i}>
+                    <div className="cc-user-bubble">
+                      <ReactMarkdown>{item.text}</ReactMarkdown>
+                    </div>
+                    {answer && answer.role === 'assistant' && (
+                      <div className="cc-bot-bubble">
+                        {answer.loading ? (
+                          <span className="cc-loading-text">⏳ Thinking...</span>
+                        ) : (
+                          <ReactMarkdown>{answer.text}</ReactMarkdown>
+                        )}
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              }
+              return null;
+            })}
+          </div>
 
+          {/* Bottom Search + Toggles */}
+          <div className="cc-search-bar-bottom">
+            <div className="cc-bottom-controls">
+              <div className="cc-toggle-inline">
+                <div className="cc-toggle-icons">
+                  <div
+                    className={`cc-icon-toggle ${useWeb ? 'active' : ''}`}
+                    onClick={() => setUseWeb(!useWeb)}
+                    title="Allow General Web Knowledge"
+                  >
+                    <FaGlobe className="cc-icon-symbol" />
+                    <div className="cc-icon-label">Web</div>
+                  </div>
+                  <div
+                    className={`cc-icon-toggle ${useCache ? 'active' : ''}`}
+                    onClick={() => setUseCache(!useCache)}
+                    title="Use Cached Answers"
+                  >
+                    <FaBolt className="cc-icon-symbol" />
+                    <div className="cc-icon-label">Cache</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flex: 1, width: '100%' }}>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={`Ask something from ${selectedDB}...`}
+                className="cc-search-input"
+              />
+              <button type="submit" className="cc-search-button" disabled={loading}>
+                <FaPaperPlane />
+              </button>
+            </form>
           </div>
         </div>
 
-        <div className="cc-results-panel">
-          {conversation.map((item, i) => {
-            if (item.role === 'user') {
-              const answer = conversation[i + 1];
-              return (
-                <React.Fragment key={i}>
-                  <div className="cc-user-bubble">
-                    <ReactMarkdown>{item.text}</ReactMarkdown>
-                  </div>
-                  {answer && answer.role === 'assistant' && (
-                    <div className="cc-bot-bubble">
-                      {answer.loading ? (
-                        <span className="cc-loading-text">⏳ Thinking...</span>
-                      ) : (
-                        <ReactMarkdown>{answer.text}</ReactMarkdown>
-                      )}
-                    </div>
-                  )}
-                </React.Fragment>
-              );
-            }
-            return null;
-          })}
-        </div>
+        {/* Right History + DB Selector Panel */}
+        <div className="cc-history-panel">
+          {/* DB Selector at Top with Icon */}
+          <div className="cc-db-header">
+            <FaDatabase className="cc-db-icon" />
+            <select
+              value={selectedDB}
+              onChange={(e) => setSelectedDB(e.target.value)}
+            >
+              <option value="">Select a DB</option>
+              {availableDBs.map((db, i) => (
+                <option key={i} value={db}>{db}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="cc-search-bar-bottom">
-  <div className="cc-bottom-controls">
-  <div className="cc-db-label-group">
+          {/* History */}
+          {history.map((item, index) => (
   <div
-    className="cc-db-icon-toggle"
-    onClick={(e) => {
-      e.preventDefault();
-      const dropdown = document.getElementById('cc-db-dropdown');
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }}
+    key={index}
+    className="cc-history-item"
+    onClick={() => handleHistoryClick(index)}
+    onContextMenu={(e) => {
+  e.preventDefault();
+  const confirmDelete = window.confirm("🗑️ Are you sure you want to delete this question from history?");
+  if (confirmDelete) {
+    handleDeleteHistory(index);
+  }
+}}
+
   >
-    <FaDatabase className="cc-db-icon" />
-    <button className="cc-db-toggle-button">▲</button>
+    {item.question}
   </div>
-  <div className="cc-db-readonly">{selectedDB}</div>
+))}
 
-  <div id="cc-db-dropdown" className="cc-db-dropdown-panel">
-    {availableDBs.map((db, i) => (
-      <div
-        key={i}
-        className="cc-db-dropdown-item"
-        onClick={() => {
-          setSelectedDB(db);
-          document.getElementById('cc-db-dropdown').style.display = 'none';
-        }}
-      >
-        {db}
-      </div>
-    ))}
-  </div>
-</div>
-
-
-    <div className="cc-toggle-inline">
-      <label className="cc-toggle-switch">
-        <input
-          type="checkbox"
-          checked={useCache}
-          onChange={() => setUseCache(!useCache)}
-        />
-        <span className="cc-slider" />
-      </label>
-      <span className="cc-toggle-label-text">Cache</span>
-    </div>
-  </div>
-
-  <form onSubmit={handleSubmit} style={{ display: 'flex', flex: 1 }}>
-    <input
-      type="text"
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-      placeholder={`Ask something from ${selectedDB}...`}
-      className="cc-search-input"
-    />
-    <button type="submit" className="cc-search-button" disabled={loading}>
-      <FaPaperPlane />
-    </button>
-  </form>
-</div>
-
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

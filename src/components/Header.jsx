@@ -24,9 +24,7 @@ const userEmail = accounts[0]?.username || 'guest';
         <span className="header-title">Geolabs, Inc.</span>
       </Link>
 
-      <div className="header-center">
-        <input type="text" className="header-search" placeholder="Search..." />
-      </div>
+
 
       <div className="header-right">
         <FaPlus className="header-icon" />

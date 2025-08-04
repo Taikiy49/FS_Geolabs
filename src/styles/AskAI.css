@@ -9,14 +9,12 @@
 }
 
 .cc-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-  min-height: 0; /* ✅ critical for scroll to work */
-  padding: 16px;
+  height: 100%;
+  min-height: 0; /* ✅ allows it to shrink properly */
 }
-
 .cc-db-readonly {
   font-size: 12px;
   max-width: 120px;
@@ -90,7 +88,6 @@
   
    color: #c9d1d9;
   font-size: 11px;
-  margin-bottom: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
@@ -117,7 +114,12 @@
 }
 
 .cc-panel {
-  flex-wrap: wrap;
+  width: 20%;
+  min-width: 220px;
+  background-color: #0d1117;
+  padding: 12px;
+  border-right: 1px solid #30363d;
+  overflow-y: auto;
 }
 
 
@@ -149,7 +151,7 @@
   border: 1px solid #30363d;
   border-radius: 20px;
   padding: 4px 8px;
-  font-size: 11px;
+  font-size: 12px;
   box-shadow: 0 0 0 1px #21262d inset;
   transition: all 0.2s ease;
   max-width: 100%;
@@ -189,15 +191,12 @@
 .cc-search-bar {
   display: flex;
 }
-
 .cc-search-bar-bottom {
   display: flex;
-  margin-top: auto;
-  gap: 30px;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 8px;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  height: 35px;
 }
 
 .cc-status {
@@ -211,6 +210,9 @@
 
 
 .cc-search-input {
+  flex: 1;
+  min-width: 200px;
+  max-width: 100%;
   background-color: #0d1117;
   border: 1px solid #30363d;
   color: #c9d1d9;
@@ -218,10 +220,9 @@
   border-radius: 6px 0 0 6px;
   font-size: 12px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-shadow: inset 0 0 4px #161b22;
-  width: 40vw;
 }
+
 
 .cc-search-input:focus {
   border-color: #2f81f7;
@@ -229,6 +230,7 @@
 }
 
 .cc-search-button {
+  flex-shrink: 0;
   background-color: #2f81f7;
   border: 1px solid #2f81f7;
   color: white;
@@ -238,8 +240,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease, transform 0.1s ease;
 }
+
 
 .cc-search-button:hover {
   background-color: #388bfd;
@@ -262,9 +264,20 @@
 }
 .cc-results-panel {
   flex: 1;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  position: relative;
+  min-height: 0; /* ✅ critical */
 }
 
+
+.cc-results-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
 
 .cc-user-bubble {
   color: white;
@@ -275,7 +288,7 @@
 .cc-bottom-controls {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 }
 
 .cc-db-readonly {
@@ -414,41 +427,44 @@
   padding-top: 6px;
 }
 
-.cc-toggle-switch {
-  position: relative;
-  width: 30px;       /* smaller width */
-  height: 16px;      /* smaller height */
+.cc-toggle-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.cc-toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.cc-slider {
-  position: absolute;
+.cc-icon-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  opacity: 0.4;
+  transition: all 0.2s ease;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #444c56;
-  transition: 0.3s;
-  border-radius: 20px;
+  border-radius: 6px;
+  user-select: none;
 }
 
-.cc-slider::before {
-  position: absolute;
-  content: "";
-  height: 13px;         /* smaller circle */
-  width: 13px;
-  left: 2px;
-  bottom: 1.5px;
-  background-color: white;
-  transition: 0.3s;
-  border-radius: 50%;
+.cc-icon-toggle:hover {
+  opacity: 0.7;
 }
+
+.cc-icon-toggle.active {
+  opacity: 1;
+  color: #2f81f7;
+}
+
+.cc-icon-symbol {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.cc-icon-label {
+  font-size: 12px;
+}
+
+
 
 .cc-toggle-switch input:checked + .cc-slider::before {
   transform: translateX(13px); /* slide just enough to the end */
@@ -479,4 +495,128 @@
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
   background-color: #1c1c1c;
   color: white;
+}
+
+.cc-results-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  position: relative;
+}
+
+.cc-db-header {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #0d1117;
+  border-bottom: 1px solid #30363d;
+  font-size: 14px;
+  color: #c9d1d9;
+}
+
+.cc-db-icon {
+  font-size: 16px;
+  color: #58a6ff;
+}
+
+.cc-db-header select {
+  background-color: #0d1117;
+  color: white;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 4px 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 8px;
+  width: 150px;
+}
+
+
+.cc-db-header select:hover {
+  border-color: #58a6ff;
+}
+
+.cc-db-header select:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+.cc-chat-scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.cc-chat-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+
+.cc-history-panel {
+  height: 100%;
+  background-color: #0d1117;
+  border-left: 1px solid #30363d;
+  overflow-y: auto;
+  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 #101317;
+  width: 200px;
+}
+.cc-history-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cc-history-panel::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+.cc-history-panel::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.cc-history-panel::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+
+.cc-history-item {
+ display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #161b22;
+  color: #c9d1d9;
+}
+
+.cc-history-item:hover {
+  background-color: #1f2937;
+  color: #fff;
+}
+#cc-db-dropdown {
+  display: block !important;
+  position: relative;
+  transform: none;
+  left: 0;
+  bottom: auto;
 }

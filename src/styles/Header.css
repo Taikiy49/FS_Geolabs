@@ -143,7 +143,7 @@
 
 
 .header-right > .header-icon:last-of-type {
-  margin-right: 20px; /* or adjust to taste */
+  margin-right: 30px; /* or adjust to taste */
 }
 
 .header-icon:hover {
@@ -155,7 +155,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
 }
 

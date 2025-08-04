@@ -1,0 +1,132 @@
+/* S3Admin.css */
+
+.s3-admin-wrapper {
+  padding: 20px;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.s3-admin-upload-section {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.s3-admin-drop-zone {
+  border: 2px dashed #58a6ff;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: #101317;
+  color: #8b949e;
+}
+
+.s3-admin-drop-zone:hover {
+  background-color: #161b22;
+}
+
+.s3-admin-drop-zone-text {
+  font-size: 14px;
+  color: #8b949e;
+}
+
+.s3-admin-selected-file {
+  background-color: #21262d;
+  padding: 6px 12px;
+  margin: 5px 0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #c9d1d9;
+}
+
+.s3-admin-button {
+  background-color: #238636;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.s3-admin-button:disabled {
+  background-color: #2ea04388;
+  cursor: not-allowed;
+}
+
+.s3-admin-status {
+  margin-top: 10px;
+  color: #58a6ff;
+  font-size: 14px;
+}
+
+.s3-admin-file-list {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.s3-admin-section-title {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #c9d1d9;
+}
+
+.s3-admin-file-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #30363d;
+}
+
+.s3-admin-file-link {
+  color: #58a6ff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.s3-admin-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.s3-admin-popup-content {
+  background-color: #0d1117;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.s3-admin-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #c9d1d9;
+  font-size: 18px;
+  cursor: pointer;
+}

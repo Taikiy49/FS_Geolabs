@@ -164,13 +164,15 @@ HANDBOOK_DB = "employee_handbook.db"
 @app.route('/api/question', methods=['POST'])
 def handle_question():
     try:
-        data = request.get_json()
+        data = request.get_json()  # ✅ Moved here first
         query = data.get('query', '').strip()
         db_name = data.get('db', '').strip()
         user = data.get('user', 'guest')
         use_cache = data.get('use_cache', True)
+        use_web = data.get('use_web', False)  # ✅ Now safe to access
         min_wo = int(data.get('min', 0))
         max_wo = int(data.get('max', 99999))
+        print(f"🌐 Web access: {use_web} | Cache: {use_cache} | DB: {db_name}")
 
         if not query or not db_name:
             return jsonify({"error": "Missing query or database name."}), 400
@@ -182,12 +184,11 @@ def handle_question():
         if not os.path.exists(db_path):
             return jsonify({"error": f"Database {db_name} not found."}), 404
 
-        # Load and rank chunks
-        # Skip ranking if it's the handbook database
-        if "handbook" in db_path:
-            ranked_chunks = rank_documents(query, db_path, top_k=30)
-        else:
-            ranked_chunks = rank_documents(query, db_path, min_wo, max_wo, top_k=30)
+        ranked_chunks = (
+            rank_documents(query, db_path, top_k=30)
+            if "handbook" in db_path else
+            rank_documents(query, db_path, min_wo, max_wo, top_k=30)
+        )
 
         if not ranked_chunks:
             return jsonify({'answer': 'No relevant documents found.'})
@@ -195,7 +196,6 @@ def handle_question():
         file = ranked_chunks[0]['file']
         snippets = get_quick_view_sentences(file, query, db_path)
 
-        # Use cache if possible
         if use_cache:
             with sqlite3.connect(DB_FILE) as conn:
                 cursor = conn.cursor()
@@ -207,16 +207,13 @@ def handle_question():
                     print("⚡ Returning cached answer")
                     return jsonify({"answer": cached[0]})
 
-        # Generate new answer
-        answer = ask_gemini_single_file(query, file, snippets, user=user, use_cache=False)
+        answer = ask_gemini_single_file(query, file, snippets, user=user, use_cache=False, use_web=use_web)
 
         with sqlite3.connect(DB_FILE) as conn:
             conn.execute("""
                 INSERT INTO chat_history (user, question, answer, sources, timestamp, db_name)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (user, query, answer, file, datetime.now().isoformat(), db_name))  # or pass db explicitly
-
-
+            """, (user, query, answer, file, datetime.now().isoformat(), db_name))
 
         return jsonify({'answer': answer})
 
