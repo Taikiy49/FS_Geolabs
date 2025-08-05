@@ -25,30 +25,33 @@ export default function S3Viewer() {
   }, []);
 
   return (
-    <div className="s3-viewer-container">
-      <h1 className="s3-title">S3 Bucket Files</h1>
-      {loading ? (
-        <p className="s3-status">Loading files...</p>
-      ) : error ? (
-        <p className="s3-error">{error}</p>
-      ) : (
-        <ul className="s3-file-list">
-          {files.map((file, idx) => {
-            const displayName = file.Key?.split('/').pop() || 'Unnamed File';
-            return (
-              <li key={idx} className="s3-file-item" onClick={() => setPreviewUrl(file.url)}>
-                <FaCloudDownloadAlt className="s3-icon" />
-                <span className="s3-filename">{displayName}</span>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+    <div className="s3-viewer-wrapper">
+      <div className="s3-viewer-panel">
+        <h2 className="s3-viewer-title">S3 Bucket Files</h2>
+
+        {loading ? (
+          <p className="s3-viewer-status">Loading files...</p>
+        ) : error ? (
+          <p className="s3-viewer-status">{error}</p>
+        ) : (
+          <ul className="s3-viewer-list">
+            {files.map((file, idx) => {
+              const displayName = file.Key?.split('/').pop() || 'Unnamed File';
+              return (
+                <li key={idx} className="s3-viewer-item" onClick={() => setPreviewUrl(file.url)}>
+                  <FaCloudDownloadAlt className="s3-viewer-icon" />
+                  <span className="s3-viewer-filename">{displayName}</span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
 
       {previewUrl && (
-        <div className="s3-modal-overlay" onClick={() => setPreviewUrl(null)}>
-          <div className="s3-modal-content" onClick={e => e.stopPropagation()}>
-            <iframe src={previewUrl} title="File Preview" className="s3-preview-frame" />
+        <div className="s3-viewer-popup-overlay" onClick={() => setPreviewUrl(null)}>
+          <div className="s3-viewer-popup-content" onClick={e => e.stopPropagation()}>
+            <iframe src={previewUrl} title="File Preview" className="s3-viewer-frame" />
           </div>
         </div>
       )}

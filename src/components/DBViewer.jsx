@@ -11,20 +11,40 @@ export default function FileSystem() {
   const [dbStructure, setDbStructure] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activePdfUrl, setActivePdfUrl] = useState('');
+const [s3PdfUrls, setS3PdfUrls] = useState({});
+
+  
+
 
   useEffect(() => {
-    const fetchDbs = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/api/list-dbs`);
-        const filtered = res.data.dbs?.filter(db => db !== 'chat_history.db') || [];
-        setExistingDbs(filtered);
-      } catch (err) {
-        console.error('❌ Failed to fetch DB list:', err);
-      }
-    };
+  const fetchDbs = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/api/list-dbs`);
+      const filtered = res.data.dbs?.filter(db => db !== 'chat_history.db') || [];
+      setExistingDbs(filtered);
+    } catch (err) {
+      console.error('❌ Failed to fetch DB list:', err);
+    }
+  };
 
-    fetchDbs();
-  }, []);
+  const fetchS3PdfUrls = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/api/s3-db-pdfs`);
+      const urlMap = {};
+      for (const { Key, url } of res.data.files) {
+        urlMap[Key] = url;
+      }
+      setS3PdfUrls(urlMap);
+    } catch (err) {
+      console.error('❌ Failed to load S3 signed URLs:', err);
+    }
+  };
+
+  fetchDbs();
+  fetchS3PdfUrls();
+}, []);
+
 
   const toggleDbFiles = async (db) => {
     const isOpen = expandedDbs[db];
@@ -58,35 +78,51 @@ export default function FileSystem() {
   );
 
   return (
-    <div className="filesystem-wrapper">
-      <div className="filesystem-panel">
-        <h3 className="existing-db-title">Available Databases</h3>
+    <div className="db-viewer-wrapper">
+      <div className="db-viewer-panel">
+        <div className="db-viewer-title">Available Databases</div>
         <input
           type="text"
-          className="filesystem-search"
+          className="db-viewer-search"
           placeholder="Search databases..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <ul className="existing-db-list">
+        <ul className="db-viewer-list">
           {filteredDbs.map((db, index) => (
-            <li key={index} className="existing-db-item">
-              <div className="db-top-row">
-                <div className="db-name-group">
-                  <span className="db-name" onClick={() => toggleDbFiles(db)}>
+            <li key={index} className="db-viewer-item">
+              <div className="db-viewer-row">
+                <div className="db-viewer-name-group">
+                  <span className="db-viewer-name" onClick={() => toggleDbFiles(db)}>
                     {db} {expandedDbs[db] ? '▲' : '▼'}
                   </span>
-                  <span className="db-inspect" onClick={() => handleDbClick(db)}>
+                  <span className="db-viewer-inspect" onClick={() => handleDbClick(db)}>
                     [View Schema]
                   </span>
                 </div>
               </div>
               {expandedDbs[db] && dbFiles[db] && (
-                <ul className="db-files-list">
-                  {dbFiles[db].map((file, i) => (
-                    <li key={i} className="db-file-item">{file}</li>
-                  ))}
-                </ul>
+                <ul className="db-viewer-file-list">
+  {dbFiles[db].map((file, i) => (
+    <li key={i} className="db-viewer-file-item">
+      <span
+        className="db-file-link"
+        onClick={() => {
+          const key = `${db}/${file}`;
+          const signedUrl = s3PdfUrls[key];
+          if (signedUrl) {
+            setActivePdfUrl(signedUrl);
+          } else {
+            alert('❌ Signed URL not found for this file.');
+          }
+        }}
+      >
+        {file}
+      </span>
+    </li>
+  ))}
+</ul>
+
               )}
             </li>
           ))}
@@ -94,13 +130,13 @@ export default function FileSystem() {
       </div>
 
       {showPopup && dbStructure && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <button className="popup-close" onClick={closePopup}>✕</button>
+        <div className="db-viewer-popup-overlay">
+          <div className="db-viewer-popup-content">
+            <button className="db-viewer-popup-close" onClick={closePopup}>✕</button>
             <h4>📊 Structure of {dbStructure.db}</h4>
             {Object.entries(dbStructure).map(([table, info]) =>
               table === 'db' ? null : (
-                <div key={table} className="db-table-preview">
+                <div key={table} className="db-viewer-table-preview">
                   <strong>{table}</strong>
                   <div>Columns: {info.columns.join(', ')}</div>
                   <div>Sample Rows:</div>
@@ -117,6 +153,28 @@ export default function FileSystem() {
           </div>
         </div>
       )}
+      {activePdfUrl && (
+  <div
+    className="popup-overlay"
+    onClick={() => setActivePdfUrl('')}
+  >
+    <div
+      className="popup-content pdf-viewer-popup"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button className="popup-close" onClick={() => setActivePdfUrl('')}>✕</button>
+      <iframe
+        src={activePdfUrl}
+        title="PDF Viewer"
+        width="100%"
+        height="600px"
+        style={{ border: 'none' }}
+      />
     </div>
+  </div>
+)}
+
+    </div>
+    
   );
 }

@@ -346,6 +346,7 @@ const groupedHistory = groupUploads(uploadHistory);
 const signedUrl = s3PdfUrls[key];
 if (signedUrl) {
   setActivePdfUrl(signedUrl);
+
 } else {
   alert('❌ Signed URL not found for this file.');
 }

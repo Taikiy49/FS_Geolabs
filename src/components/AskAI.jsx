@@ -101,14 +101,17 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
 
     setConversation([]);
   }, [selectedDB]);
-  const handleHistoryClick = (index) => {
+ const handleHistoryClick = (index) => {
   const selected = history[index];
   if (selected) {
-    setQuery(selected.question);
-    // Optionally re-run the query
-    // or scroll to that conversation in the chat
+    setConversation([
+      { role: 'user', text: selected.question },
+      { role: 'assistant', text: selected.answer }
+    ]);
+    setQuery(''); // optional: clear input box
   }
 };
+
 
   const handleSubmit = async (e, optionalQuery) => {
     e.preventDefault();
@@ -169,7 +172,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
         <div className="cc-chat-panel">
           {/* FAQ List on Top */}
           <div className="cc-faq-list">
-            {(showAllFaqs ? faqList : faqList.slice(0, 6)).map((faq, i) => (
+            {(showAllFaqs ? faqList : faqList.slice(0, 4)).map((faq, i) => (
               <div key={i} onClick={(e) => handleSubmit(e, faq)} className="cc-faq-button">
                 {faq}
               </div>

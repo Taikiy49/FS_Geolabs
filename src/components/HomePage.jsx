@@ -52,12 +52,16 @@ const HomePage = () => {
       style={{ cursor: item.disabled ? 'not-allowed' : 'pointer', opacity: item.disabled ? 0.5 : 1 }}
     >
       <div className="homepage-row-left">
-        <div className="homepage-icon">{item.icon}</div>
+        <div className='homepage-row-header'>
+          <div className="homepage-icon">{item.icon}</div>
+          <div>
+          <div className="homepage-title">
+              {item.label} {item.tag && <span className="homepage-badge">{item.tag}</span>}
+            </div>
+            <div className="homepage-sublabel">{item.sublabel}</div>
+          </div>
+          </div>
         <div>
-          <h2 className="homepage-title">
-            {item.label} {item.tag && <span className="homepage-badge">{item.tag}</span>}
-          </h2>
-          <p className="homepage-sublabel">{item.sublabel}</p>
           <p className="homepage-description">{item.description}</p>
           <p className="homepage-updated">
             {item.updated ? getDaysAgo(item.updated) : 'Updated recently'}
