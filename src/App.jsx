@@ -17,6 +17,7 @@ import S3Admin from './components/S3Admin';
 import OCRLookUp from './components/OCRLookup';
 import Contacts from './components/Contacts';
 import S3Viewer from './components/S3Viewer';
+import DisclaimerModal from './components/DisclaimerModal';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -48,7 +49,12 @@ const CustomError = ({ error }) => (
 
 const AuthenticatedApp = () => {
   const [selectedDB, setSelectedDB] = useState('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // ✅ add this
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [userAcceptedDisclaimer, setUserAcceptedDisclaimer] = useState(false);
+
+  const location = useLocation();
+
+  const showingAskAI = location.pathname === '/ask-ai';
 
   return (
     <div className="app-container">
@@ -62,16 +68,28 @@ const AuthenticatedApp = () => {
         />
         <main className="main-content">
           <ScrollToTop />
+
+          {showingAskAI && !userAcceptedDisclaimer && (
+            <DisclaimerModal
+              onContinue={() => setUserAcceptedDisclaimer(true)}
+              onCancel={() => window.history.back()}
+            />
+          )}
+
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
               path="/ask-ai"
               element={
-                <AskAI
-                  selectedDB={selectedDB}
-                  setSelectedDB={setSelectedDB}
-                  sidebarCollapsed={sidebarCollapsed} // ✅ pass it here
-                />
+                userAcceptedDisclaimer ? (
+                  <AskAI
+                    selectedDB={selectedDB}
+                    setSelectedDB={setSelectedDB}
+                    sidebarCollapsed={sidebarCollapsed}
+                  />
+                ) : (
+                  <div /> // Empty placeholder until modal handled
+                )
               }
             />
             <Route path="/db-viewer" element={<DBViewer />} />
@@ -82,13 +100,12 @@ const AuthenticatedApp = () => {
             <Route path="/s3-viewer" element={<S3Viewer />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
-
-       
         </main>
       </div>
     </div>
   );
 };
+
 
 
 export default function App() {

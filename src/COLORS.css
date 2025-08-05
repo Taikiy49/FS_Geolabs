@@ -9,12 +9,11 @@
 ssh -i Galena4pileus.pem ec2-user@13.56.211.75
 
 --- MAKE SURE TO MOVE reports.db before running below! ---
-scp -i Galena4pileus.pem -r "C:/Users/tyamashita/Desktop/FS_Geolabs/pythonApp" ec2-user@13.56.211.75:/home/ec2-user/
+scp -i Galena4pileus.pem -r FS_Geolabs/pythonApp" ec2-user@13.56.211.75:/home/ec2-user/
 tmux ls 
 tmux new -s [servername]
 
 tmux attach -t [servername]
-gunicorn -w 4 -b 0.0.0.0:8000 app:app
-
+gunicorn -w 4 -b 0.0.0.0:5000 app:app
 
 */
