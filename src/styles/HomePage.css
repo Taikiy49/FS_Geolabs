@@ -7,12 +7,24 @@
 .homepage-top {
   flex-shrink: 0;
 }
+.homepage-contact-wrapper {
+  margin-top: 16px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 .homepage-list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* ⬅️ tighter layout */
   gap: 16px;
-  height: 100%;
+  width: 100%;
+  margin: 0 auto;     /* ⬅️ center the grid */
+  box-sizing: border-box;
 }
+
+
 
 .homepage-greeting-card {
   display: flex;
@@ -74,12 +86,22 @@
   transition: all 0.3s ease;
   height: 14px; min-height: 14px; max-height: 14px;
 }
-
+@media (min-width: 769px) {
+  .homepage-subpage-link {
+    flex: 1 1 calc(50% - 12px); /* 👉 two per row with gap */
+  }
+}
 @media (max-width: 768px) {
   .homepage-search {
     max-width: 250px;
   }
 }
+@media (min-width: 768px) {
+  .homepage-list > .homepage-row:nth-child(3) {
+    grid-column: 1 / -1; /* spans full width */
+  }
+}
+
 
 @media (max-width: 500px) {
   .homepage-search {
@@ -150,15 +172,13 @@
 }
 
 .homepage-subpages {
-  margin-top: 14px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 0; /* ✅ remove padding-left: 2px */
+  flex-direction: column;  /* 👈 vertical stack */
+  gap: 12px;
   width: 100%;
-  justify-content: flex-start; /* ✅ align to the far left */
-  box-sizing: border-box;
+  margin-top: 12px;
 }
+
 
 
 /* Hide scrollbar (optional) */
@@ -179,8 +199,7 @@
   }
 
   .homepage-subpage-link {
-    flex: 1 1 calc(33.33% - 12px); /* fit 3 per row with 12px gap */
-    min-width: 0;
+    flex: 1 1 100%; /* 👈 one per row */
   }
 }
 
@@ -200,7 +219,6 @@
   border: 1px solid #30363d;
   min-width: 200px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  flex: 1 1 200px; /* ✅ allow flexibility */
   width: 100%; /* ✅ prevent overflow */
   box-sizing: border-box;
 }

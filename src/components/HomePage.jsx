@@ -44,46 +44,75 @@ const HomePage = () => {
       </div>
 
       <div className="homepage-list">
-        {homepageCards.map((item, idx) => (
-          <div
-            key={idx}
-            className={`homepage-row ${item.disabled ? 'homepage-row-disabled' : ''}`}
-            style={{ cursor: item.disabled ? 'not-allowed' : 'pointer', opacity: item.disabled ? 0.5 : 1 }}
-          >
-            <div className="homepage-row-left">
-              <div className="homepage-icon">{item.icon}</div>
-              <div>
-                <h2 className="homepage-title">
-                  {item.label} {item.tag && <span className="homepage-badge">{item.tag}</span>}
-                </h2>
-                <p className="homepage-sublabel">{item.sublabel}</p>
-                <p className="homepage-description">{item.description}</p>
-                <p className="homepage-updated">
-                  {item.updated ? getDaysAgo(item.updated) : 'Updated recently'}
-                </p>
-
-                {item.subpages && (
-                  <div className="homepage-subpages">
-                    {item.subpages.map((sub, i) => (
-                      <div
-                        key={i}
-                        className="homepage-subpage-link"
-                        onClick={() => handleClick(sub.path)}
-                      >
-                        <div className="subpage-icon">{sub.icon}</div>
-                        <div className="subpage-info">
-                          <strong>{sub.name}</strong>
-                          <p className="subpage-description">{sub.description}</p>
-                        </div>
-                      </div>
-                    ))}
+  {/* Top two cards only */}
+  {homepageCards.slice(0, 2).map((item, idx) => (
+    <div
+      key={idx}
+      className={`homepage-row ${item.disabled ? 'homepage-row-disabled' : ''}`}
+      style={{ cursor: item.disabled ? 'not-allowed' : 'pointer', opacity: item.disabled ? 0.5 : 1 }}
+    >
+      <div className="homepage-row-left">
+        <div className="homepage-icon">{item.icon}</div>
+        <div>
+          <h2 className="homepage-title">
+            {item.label} {item.tag && <span className="homepage-badge">{item.tag}</span>}
+          </h2>
+          <p className="homepage-sublabel">{item.sublabel}</p>
+          <p className="homepage-description">{item.description}</p>
+          <p className="homepage-updated">
+            {item.updated ? getDaysAgo(item.updated) : 'Updated recently'}
+          </p>
+          {item.subpages && (
+            <div className="homepage-subpages">
+              {item.subpages.map((sub, i) => (
+                <div
+                  key={i}
+                  className="homepage-subpage-link"
+                  onClick={() => handleClick(sub.path)}
+                >
+                  <div className="subpage-icon">{sub.icon}</div>
+                  <div className="subpage-info">
+                    <strong>{sub.name}</strong>
+                    <p className="subpage-description">{sub.description}</p>
                   </div>
-                )}
-              </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
+          )}
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+
+{/* Contact section separate so it doesn't flow into grid */}
+<div className="homepage-contact-wrapper">
+  {homepageCards[2] && (
+    <div
+      className={`homepage-row ${homepageCards[2].disabled ? 'homepage-row-disabled' : ''}`}
+      style={{
+        cursor: homepageCards[2].disabled ? 'not-allowed' : 'pointer',
+        opacity: homepageCards[2].disabled ? 0.5 : 1,
+      }}
+    >
+      <div className="homepage-row-left">
+        <div className="homepage-icon">{homepageCards[2].icon}</div>
+        <div>
+          <h2 className="homepage-title">
+            {homepageCards[2].label}{' '}
+            {homepageCards[2].tag && <span className="homepage-badge">{homepageCards[2].tag}</span>}
+          </h2>
+          <p className="homepage-sublabel">{homepageCards[2].sublabel}</p>
+          <p className="homepage-description">{homepageCards[2].description}</p>
+          <p className="homepage-updated">
+            {homepageCards[2].updated ? getDaysAgo(homepageCards[2].updated) : 'Updated recently'}
+          </p>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
     </div>
   );
 };
