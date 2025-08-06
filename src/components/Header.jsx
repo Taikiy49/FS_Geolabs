@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import '../styles/Header.css';
 
 import { useMsal } from '@azure/msal-react';
+import { InteractionType } from '@azure/msal-browser';
+
 
 function Header() {
   const { accounts } = useMsal();
@@ -13,9 +15,12 @@ const userEmail = accounts[0]?.username || 'guest';
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
-  const handleLogout = () => {
-    window.location.href = '/'; // basic redirect (or customize)
-  };
+const { instance } = useMsal();
+
+const handleLogout = () => {
+  instance.logoutRedirect(); // or logoutPopup()
+};
+
 
   return (
     <header className="header">
