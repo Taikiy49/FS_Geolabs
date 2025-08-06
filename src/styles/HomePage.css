@@ -35,7 +35,7 @@
   padding: 15px 20px;
   border-radius: 8px;
    border: 1px solid #30363d;
-  margin-bottom: 10px;
+  margin-top: 8px; margin-bottom: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -165,6 +165,7 @@
 }
 
 
+
 .homepage-sublabel {
   font-size: 13px;
   color: #8b949e;
@@ -215,16 +216,21 @@
   }
 }
 
-
-
+.homepage-subpage-link-header{
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
 
 .homepage-subpage-link {
   display: flex;
+  flex-direction: column;
+  
   align-items: flex-start;
-  gap: 10px;
-  background-color: #161b22;
-  padding: 10px 12px;
-  border-radius: 8px;
+    background-color: #0b0f14;
+
+  padding: 8px;
+  border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
   color: #c9d1d9;
@@ -234,6 +240,27 @@
   width: 100%; /* ✅ prevent overflow */
   box-sizing: border-box;
 }
+@media (min-width: 769px) {
+  .homepage-subpages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .homepage-subpage-link {
+    flex: 1 1 calc(50% - 8px); /* default: 2 per row */
+    min-width: 0;
+    box-sizing: border-box;
+    height: auto;
+  }
+
+  .homepage-subpage-link:nth-child(1) {
+    flex: 1 1 100%; /* top row: full width */
+  }
+}
+
+
+
 
 .homepage-subpage-link:hover {
   background-color: #13171c;
@@ -246,14 +273,12 @@
 }
 
 .subpage-info strong {
-  font-size: 14px;
+  font-size: 12px;
   color: #f0f6fc;
 }
 
 .subpage-description {
-  margin-top: 4px;
   color: #8b949e;
   font-size: 12px;
-  line-height: 1.5;
-  max-width: 260px;
+  margin-top: 4px;
 }

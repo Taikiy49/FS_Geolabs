@@ -63,7 +63,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
     axios.get(`${API_URL}/api/list-dbs`)
       .then(res => {
         const dbList = res.data.dbs || [];
-        const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db');
+        const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'pr_data.db');
         setAvailableDBs(filtered);
       })
       .catch(() => setAvailableDBs([]));

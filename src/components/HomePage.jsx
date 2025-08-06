@@ -74,11 +74,15 @@ const HomePage = () => {
                   className="homepage-subpage-link"
                   onClick={() => handleClick(sub.path)}
                 >
-                  <div className="subpage-icon">{sub.icon}</div>
-                  <div className="subpage-info">
-                    <strong>{sub.name}</strong>
-                    <p className="subpage-description">{sub.description}</p>
-                  </div>
+                  <div className='homepage-subpage-link-header'>
+                    <div className="subpage-icon">{sub.icon}</div>
+            
+                    <div className="subpage-info">
+                      <strong>{sub.name}</strong>
+                    </div>
+                    </div>
+                    <div className="subpage-description">{sub.description}</div>
+                
                 </div>
               ))}
             </div>
