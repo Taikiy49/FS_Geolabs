@@ -51,6 +51,13 @@ const homepageCards = [
       'Easily search and retrieve geotechnical reports from Geolabs’ archive using advanced filters, OCR-enhanced lookup, and AI ranking. This toolset supports field engineers, drafters, and office staff by streamlining project data discovery from S3 buckets and scanned documents. Designed for high performance, instant viewing, and secure access to technical records.',
     subpages: [
       {
+        name: 'OCR Lookup',
+        icon: <FaSearch />,
+        path: '/ocr-lookup',
+        description:
+          'Extract work order numbers and project info from scanned or handwritten reports using AI-powered OCR. Great for digitizing legacy files.',
+      },
+      {
         name: 'S3 Viewer',
         icon: <FaFileAlt />,
         path: '/s3-viewer',
@@ -64,13 +71,7 @@ const homepageCards = [
         description:
           'Manage the file system directly from your browser. Upload new reports, organize folders, and maintain S3 storage used for project archives.',
       },
-      {
-        name: 'OCR Lookup',
-        icon: <FaSearch />,
-        path: '/ocr-lookup',
-        description:
-          'Extract work order numbers and project info from scanned or handwritten reports using AI-powered OCR. Great for digitizing legacy files.',
-      },
+    
     ],
   },
   {
