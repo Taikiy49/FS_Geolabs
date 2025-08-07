@@ -71,6 +71,14 @@ const homepageCards = [
         description:
           'Manage the file system directly from your browser. Upload new reports, organize folders, and maintain S3 storage used for project archives.',
       },
+      {
+        name: 'Admin',
+        icon: <FaCloudUploadAlt />,
+        path: '/admin',
+        description:
+          'Manage the file system directly from your browser. Upload new reports, organize folders, and maintain S3 storage used for project archives.',
+      },
+      
     
     ],
   },

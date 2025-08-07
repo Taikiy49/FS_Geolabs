@@ -4,9 +4,13 @@ import { FaPaperPlane, FaDatabase, FaGlobe, FaBolt} from 'react-icons/fa';
 import '../styles/AskAI.css';
 import API_URL from '../config';
 import ReactMarkdown from 'react-markdown';
+import { useMsal } from "@azure/msal-react";
+
 
 
 export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCollapsed }) {
+  const { accounts } = useMsal();
+  const userEmail = accounts[0]?.username || 'guest';
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -63,7 +67,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
     axios.get(`${API_URL}/api/list-dbs`)
       .then(res => {
         const dbList = res.data.dbs || [];
-        const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'pr_data.db');
+        const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'user_roles.db' && db !== 'pr_data.db');
         setAvailableDBs(filtered);
       })
       .catch(() => setAvailableDBs([]));
@@ -87,7 +91,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
   useEffect(() => {
     if (!selectedDB) return;
     axios.get(`${API_URL}/api/chat_history`, {
-      params: { user: "guest", db: selectedDB },
+      params: { user: userEmail, db: selectedDB },
     })
       .then((res) => {
         const raw = res.data || [];
@@ -128,7 +132,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
     try {
       const res = await axios.post(`${API_URL}/api/question`, {
         query: inputQuery,
-        user: "guest",
+        user: userEmail,
         use_cache: useCache,
         use_web: useWeb,
         db: selectedDB,
@@ -141,7 +145,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
       });
 
       const histRes = await axios.get(`${API_URL}/api/chat_history`, {
-        params: { user: "guest", db: selectedDB },
+        params: { user: userEmail, db: selectedDB },
       });
 
       const raw = histRes.data || [];

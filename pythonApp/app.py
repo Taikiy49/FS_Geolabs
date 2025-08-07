@@ -19,30 +19,29 @@ DB_FILE = os.path.join(BASE_DIR, "uploads", "chat_history.db")
 GEO_DB = os.path.join(BASE_DIR, "uploads", "reports.db")
 
 def init_db():
-    os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
-
-    with sqlite3.connect(DB_FILE) as conn:
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS chat_history (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user TEXT,
-                question TEXT,
-                answer TEXT,
-                sources TEXT,
-                timestamp TEXT,
-                db_name TEXT
-            )
-        """)
-
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS upload_history (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user TEXT,
-                file TEXT,
-                db_name TEXT,
-                timestamp TEXT
-            )
-        """)
+    if not os.path.exists(DB_FILE):
+        os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
+        with sqlite3.connect(DB_FILE) as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS chat_history (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user TEXT,
+                    question TEXT,
+                    answer TEXT,
+                    sources TEXT,
+                    timestamp TEXT,
+                    db_name TEXT
+                )
+            """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS upload_history (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user TEXT,
+                    file TEXT,
+                    db_name TEXT,
+                    timestamp TEXT
+                )
+            """)
 
 
 
@@ -254,6 +253,25 @@ def get_chat_history():
         print("Error loading chat history:", e)
         return jsonify([])
 
+@app.route("/api/delete-user", methods=["POST"])
+def delete_user():
+    data = request.get_json()
+    email = data.get("email")
+
+    if not email:
+        return jsonify({"error": "Missing email"}), 400
+
+    # Protect super owner from deletion
+    if email == "tyamashita@geolabs.net":
+        return jsonify({"error": "Cannot delete the Super Owner"}), 403
+
+
+    with sqlite3.connect(USER_DB) as conn:
+        conn.execute("DELETE FROM users WHERE email = ?", (email,))
+        conn.commit()
+
+    return jsonify({"status": "deleted"})
+
 
 @app.route('/api/delete-history', methods=['DELETE'])
 def delete_history():
@@ -451,9 +469,68 @@ def list_s3_db_pdfs():
         print('❌ S3 DB PDF List Error:', e)
         return jsonify({'error': str(e)}), 500
 
+USER_DB = os.path.join(BASE_DIR, "uploads", "users.db")
+
+def init_users_db():
+    os.makedirs(os.path.dirname(USER_DB), exist_ok=True)
+    with sqlite3.connect(USER_DB) as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                email TEXT PRIMARY KEY,
+                role TEXT
+            )
+        """)
+
+
+@app.route("/api/register-user", methods=["POST"])
+def register_user():
+    data = request.get_json()
+    email = data.get("email")
+
+    if not email:
+        return jsonify({"error": "Missing email"}), 400
+
+    with sqlite3.connect(USER_DB) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+        if cursor.fetchone() is None:
+            cursor.execute("INSERT INTO users (email, role) VALUES (?, ?)", (email, "User"))
+            conn.commit()
+
+    return jsonify({"status": "ok"})
+
+
+@app.route("/api/users", methods=["GET"])
+def get_users():
+    with sqlite3.connect(USER_DB) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT email, role FROM users")
+        rows = cursor.fetchall()
+    users = [{"email": email, "role": role} for email, role in rows]
+    return jsonify(users)
+
+
+@app.route("/api/update-role", methods=["POST"])
+def update_role():
+    data = request.get_json()
+    email = data.get("email")
+    role = data.get("role")
+
+    if not email or not role:
+        return jsonify({"error": "Missing email or role"}), 400
+
+    with sqlite3.connect(USER_DB) as conn:
+        conn.execute("UPDATE users SET role = ? WHERE email = ?", (role, email))
+        conn.commit()
+
+    return jsonify({"status": "updated"})
+
+
+
 
 print("🔧 Starting app...")
 init_db()
+init_users_db()
 print("✅ Ready to run Flask")
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
