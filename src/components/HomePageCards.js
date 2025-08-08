@@ -1,15 +1,14 @@
 import {
-  FaRobot,
   FaDatabase,
-  FaCogs,
   FaComments,
   FaTable,
   FaUpload,
-  FaSearch,
   FaFolderOpen,
-  FaCloudUploadAlt,
+  FaSearch,
   FaFileAlt,
+  FaCloudUploadAlt,
   FaEnvelopeOpenText,
+  FaCogs
 } from 'react-icons/fa';
 
 const homepageCards = [
@@ -35,11 +34,11 @@ const homepageCards = [
           'View and explore the contents of internal document databases. Ideal for read-only access during audits, training, or policy reviews.',
       },
       {
-        name: 'DB Admin',
+        name: 'DB Editor',
         icon: <FaUpload />,
         path: '/db-admin',
         description:
-          'Upload new documents, extract and embed content, and manage database indexing. Only available to authorized users with administrative permissions.',
+          'Upload new documents, extract and embed content, and manage database indexing. Only available to authorized users with editing permissions.',
       },
     ],
   },
@@ -62,25 +61,24 @@ const homepageCards = [
         icon: <FaFileAlt />,
         path: '/s3-viewer',
         description:
-          'Browse and search through thousands of engineering reports stored on S3. Supports instant PDF loading and includes metadata preview for quick context.',
+          'Browse and search through thousands of engineering reports stored on S3. Supports instant PDF loading and includes metadata preview.',
       },
       {
-        name: 'S3 Admin',
+        name: 'S3 Editor',
         icon: <FaCloudUploadAlt />,
         path: '/s3-admin',
         description:
           'Manage the file system directly from your browser. Upload new reports, organize folders, and maintain S3 storage used for project archives.',
       },
-      {
-        name: 'Admin',
-        icon: <FaCloudUploadAlt />,
-        path: '/admin',
-        description:
-          'Manage the file system directly from your browser. Upload new reports, organize folders, and maintain S3 storage used for project archives.',
-      },
-      
-    
     ],
+  },
+  {
+    label: 'Admin',
+    sublabel: 'System Management',
+    icon: <FaCogs size={40} />,
+    description:
+      'View and manage user roles, monitor connected users, and configure system settings. Owners and Admins can assign permissions and control access across Geolabs tools.',
+    path: '/admin',
   },
   {
     label: 'Contacts',
@@ -88,10 +86,8 @@ const homepageCards = [
     icon: <FaEnvelopeOpenText size={40} />,
     description:
       'Need assistance? Reach out to Geolabs support for help with tools, document access, or technical questions. This section will soon include direct department contacts, help desk hours, and ticket submission options.',
-    link: '',
     disabled: false,
   },
 ];
-
 
 export default homepageCards;

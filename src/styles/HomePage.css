@@ -35,24 +35,23 @@
   padding: 15px 20px;
   border-radius: 8px;
    border: 1px solid #30363d;
-  margin-top: 8px; margin-bottom: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .homepage-greeting-left h1 {
-  font-size: 22px;
+  font-size: 17px;
   color: #f0f6fc;
   margin: 0 0 6px 0;
 }
 
 .homepage-greeting-left p {
-  font-size: 14px;
+  font-size: 12px;
   color: #8b949e;
   margin: 0;
 }
 
 .homepage-greeting-right {
-  font-size: 14px;
+  font-size: 11px;
   color: #8b949e;
   text-align: right;
   display: flex;
@@ -69,22 +68,21 @@
 }
 
 .homepage-subsection-title {
-  font-size: 20px;
+  font-size: 15px;
   color: #f0f6fc;
   font-weight: 600;
 }
 
 .homepage-search {
-  padding: 6px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
   background-color: #0b0f14;
   color: #c9d1d9;
   border: 1px solid #30363d;
-  font-size: 14px;
+  font-size: 10px;
   width: 100%;
   max-width: 400px;
   transition: all 0.3s ease;
-  height: 14px; min-height: 14px; max-height: 14px;
 }
 @media (min-width: 769px) {
   .homepage-subpages {
@@ -132,7 +130,7 @@
   background-color: #12161c;
   border: 1px solid #30363d;
   border-radius: 8px;
-  padding: 20px;
+  padding: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   width: 100%;
   box-sizing: border-box; /* Include padding in width */
@@ -152,14 +150,12 @@
 }
 
 .homepage-icon {
-  font-size: 34px;
   color: #2f81f7;
-  margin-top: 4px;
 }
 
 .homepage-title {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #f0f6fc;
 }
@@ -167,13 +163,13 @@
 
 
 .homepage-sublabel {
-  font-size: 13px;
+  font-size: 12px;
   color: #8b949e;
 }
 
 .homepage-description {
   margin-top: 6px;
-  font-size: 14px;
+  font-size: 11px;
   color: #c9d1d9;
 }
 
@@ -231,7 +227,7 @@
 
   padding: 8px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
   color: #c9d1d9;
   border: 1px solid #30363d;
@@ -273,12 +269,12 @@
 }
 
 .subpage-info strong {
-  font-size: 12px;
+  font-size: 11px;
   color: #f0f6fc;
 }
 
 .subpage-description {
   color: #8b949e;
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 4px;
 }
