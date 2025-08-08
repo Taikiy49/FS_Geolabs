@@ -44,7 +44,7 @@ const handleLogout = () => {
           <FaChevronDown className="dropdown-icon" />
           {dropdownOpen && (
             <div className="profile-dropdown">
-              <button className="dropdown-item" onClick={handleLogout}>Logout</button>
+              <div className="dropdown-item" onClick={handleLogout}>Logout</div>
             </div>
           )}
         </div>

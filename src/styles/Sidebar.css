@@ -1,7 +1,7 @@
 .sidebar {
-  width: 210px;
-  min-width: 210px;
-  max-width: 210px;
+  width: 165px;
+  min-width: 165px;
+  max-width: 165px;
   transition: all 0.3s ease;
   background-color: #0d1117;
   color: #c9d1d9;
@@ -39,9 +39,9 @@
 .sidebar-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 5px 10px;
-  font-size: 14px;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   border-bottom: 1px solid #161b22;
@@ -53,7 +53,7 @@
 }
 
 .sidebar-link-icon {
-  font-size: 16px;
+  font-size: 12px;
   color: #2f81f7;
 }
 
@@ -67,15 +67,14 @@
 }
 
 .sidebar-dropdown {
-  padding: 0;
-  margin: 0;
+   margin-left: 8px;
 }
 
 .sidebar-dropdown-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 8px;
+  font-size: 12px;
   padding: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -107,9 +106,9 @@
   cursor: pointer;
   background-color: #161b22;
   color: #58a6ff;
-  padding: 8px;
+  padding: 4px 8px;
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
   border-bottom: 1px solid #30363d;
 }
 

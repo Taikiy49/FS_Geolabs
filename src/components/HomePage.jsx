@@ -60,10 +60,10 @@ const HomePage = () => {
                 </div>
               </div>
               <div>
-                <p className="homepage-description">{item.description}</p>
-                <p className="homepage-updated">
+                <div className="homepage-description">{item.description}</div>
+                <div className="homepage-updated">
                   {item.updated ? getDaysAgo(item.updated) : 'Updated recently'}
-                </p>
+                </div>
                 {item.subpages && (
                   <div className="homepage-subpages">
                     {item.subpages.map((sub, i) => (
@@ -75,7 +75,7 @@ const HomePage = () => {
                         <div className='homepage-subpage-link-header'>
                           <div className="subpage-icon">{sub.icon}</div>
                           <div className="subpage-info">
-                            <strong>{sub.name}</strong>
+                            {sub.name}
                           </div>
                         </div>
                         <div className="subpage-description">{sub.description}</div>
@@ -101,44 +101,51 @@ const HomePage = () => {
             onClick={() => handleClick(homepageCards[2].path, homepageCards[2].disabled)}
           >
             <div className="homepage-row-left">
-              <div className="homepage-icon">{homepageCards[2].icon}</div>
-              <div>
-                <h2 className="homepage-title">
-                  {homepageCards[2].label}{' '}
-                  {homepageCards[2].tag && <span className="homepage-badge">{homepageCards[2].tag}</span>}
-                </h2>
-                <p className="homepage-sublabel">{homepageCards[2].sublabel}</p>
-                <p className="homepage-description">{homepageCards[2].description}</p>
-              </div>
-            </div>
+  <div className="homepage-row-header">
+    <div className="homepage-icon">{homepageCards[2].icon}</div>
+    <div>
+      <div className="homepage-title">
+        {homepageCards[2].label}{' '}
+        {homepageCards[2].tag && <span className="homepage-badge">{homepageCards[2].tag}</span>}
+      </div>
+      <div className="homepage-sublabel">{homepageCards[2].sublabel}</div>
+    </div>
+  </div>
+  <div className="homepage-description">{homepageCards[2].description}</div>
+</div>
+
           </div>
         )}
       </div>
 
       {/* Contact Section */}
-      <div className="homepage-contact-wrapper">
-        {homepageCards[3] && (
-          <div
-            className={`homepage-row ${homepageCards[3].disabled ? 'homepage-row-disabled' : ''}`}
-            style={{
-              cursor: homepageCards[3].disabled ? 'not-allowed' : 'pointer',
-              opacity: homepageCards[3].disabled ? 0.5 : 1,
-            }}
-          >
-            <div className="homepage-row-left">
-              <div className="homepage-icon">{homepageCards[3].icon}</div>
-              <div>
-                <h2 className="homepage-title">
-                  {homepageCards[3].label}{' '}
-                  {homepageCards[3].tag && <span className="homepage-badge">{homepageCards[3].tag}</span>}
-                </h2>
-                <p className="homepage-sublabel">{homepageCards[3].sublabel}</p>
-                <p className="homepage-description">{homepageCards[3].description}</p>
-              </div>
+{/* Contact Section */}
+<div className="homepage-contact-wrapper">
+  {homepageCards[3] && (
+    <div
+      className={`homepage-row ${homepageCards[3].disabled ? 'homepage-row-disabled' : ''}`}
+      style={{
+        cursor: homepageCards[3].disabled ? 'not-allowed' : 'pointer',
+        opacity: homepageCards[3].disabled ? 0.5 : 1,
+      }}
+      onClick={() => handleClick(homepageCards[3].path, homepageCards[3].disabled)}
+    >
+      <div className="homepage-row-left">
+        <div className="homepage-row-header">
+          <div className="homepage-icon">{homepageCards[3].icon}</div>
+          <div>
+            <div className="homepage-title">
+              {homepageCards[3].label}{' '}
+              {homepageCards[3].tag && <span className="homepage-badge">{homepageCards[3].tag}</span>}
             </div>
+            <div className="homepage-sublabel">{homepageCards[3].sublabel}</div>
           </div>
-        )}
+        </div>
+        <div className="homepage-description">{homepageCards[3].description}</div>
       </div>
+    </div>
+  )}
+</div>
 
     </div>
   );
