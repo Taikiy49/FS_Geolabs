@@ -108,7 +108,7 @@
 
 .cc-title {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 600;
   color: #ffffff;
   margin-bottom: 5px;
 }
@@ -151,7 +151,7 @@
   border: 1px solid #30363d;
   border-radius: 20px;
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: 10px;
   box-shadow: 0 0 0 1px #21262d inset;
   transition: all 0.2s ease;
   max-width: 100%;
@@ -197,6 +197,8 @@
   gap: 8px;
   justify-content: center;
   align-items: center;
+  padding: 0px 16px;
+  margin-bottom: 4px;
 }
 
 .cc-status {
@@ -216,12 +218,18 @@
   background-color: #0d1117;
   border: 1px solid #30363d;
   color: #c9d1d9;
-  padding: 8px 10px;
+  padding: 4px 8px;
   border-radius: 6px 0 0 6px;
-  font-size: 12px;
+  font-size: 10px;
   outline: none;
   box-shadow: inset 0 0 4px #161b22;
+
+  /* ✅ Force consistent height */
+  height: 25px;          /* tweak to match your button */
+  line-height: 1.2;      /* avoids extra vertical space */
+  box-sizing: border-box; /* ensures padding fits inside */
 }
+
 
 
 .cc-search-input:focus {
@@ -234,12 +242,13 @@
   background-color: #2f81f7;
   border: 1px solid #2f81f7;
   color: white;
-  padding: 8px 14px;
+  padding: 0 12px;       /* remove vertical padding so height is from .cc-search-input */
   border-radius: 0 6px 6px 0;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 25px;          /* same as input */
 }
 
 
@@ -257,7 +266,7 @@
 
 
 .cc-loading-text {
-  font-size: 12px;
+  font-size: 10px;
   color: #aaa;
   font-style: italic;
   margin-top: 5px;
@@ -281,14 +290,14 @@
 
 .cc-user-bubble {
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   font-weight: bold;
 }
 .cc-bottom-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .cc-db-readonly {
@@ -369,7 +378,7 @@
 }
 
 .cc-faq-toggle {
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   cursor: pointer;
   color: var(--primary-color); /* or whatever fits your design */
@@ -392,8 +401,8 @@
 
 .cc-bot-bubble {
   color: white;
-  font-size: 11px;
-  margin: 0 16px;
+  font-size: 10px;
+  margin: 0 4px;
   padding-bottom: 8px;
 }
 
@@ -432,6 +441,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+
 }
 
 .cc-icon-toggle {
@@ -456,11 +466,11 @@
 }
 
 .cc-icon-symbol {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .cc-icon-label {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 
@@ -507,7 +517,7 @@
 .cc-db-header {
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 4px;
   background-color: #0d1117;
   border-bottom: 1px solid #30363d;
   font-size: 14px;
@@ -515,7 +525,7 @@
 }
 
 .cc-db-icon {
-  font-size: 16px;
+  font-size: 14px;
   color: #58a6ff;
 }
 
@@ -533,8 +543,8 @@
   background-position: right 10px center;
   background-size: 16px;
   cursor: pointer;
-  font-size: 13px;
-  margin-left: 8px;
+  font-size: 10px;
+  margin-left: 4px;
   width: 150px;
 }
 
@@ -551,6 +561,7 @@
 .cc-chat-scroll {
   flex: 1;
   overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .cc-chat-panel {
@@ -561,7 +572,7 @@
   min-height: 0;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 16px;
+  padding: 8px;
 }
 
 
@@ -576,7 +587,7 @@
   font-size: 12px;
   scrollbar-width: thin;
   scrollbar-color: #4b5563 #101317;
-  width: 200px;
+  width: 160px;
 }
 .cc-history-panel::-webkit-scrollbar {
   width: 6px;
@@ -600,8 +611,8 @@
  display: flex;
   align-items: center;
   gap: 10px;
-  padding: 5px 10px;
-  font-size: 12px;
+  padding: 4px 8px;
+  font-size: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   border-bottom: 1px solid #161b22;

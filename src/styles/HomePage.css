@@ -18,7 +18,7 @@
 .homepage-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* ⬅️ tighter layout */
-  gap: 16px;
+  gap: 8px;
   width: 100%;
   margin: 0 auto;     /* ⬅️ center the grid */
   box-sizing: border-box;

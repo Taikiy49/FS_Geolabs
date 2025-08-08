@@ -201,7 +201,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
                     {answer && answer.role === 'assistant' && (
                       <div className="cc-bot-bubble">
                         {answer.loading ? (
-                          <span className="cc-loading-text">⏳ Thinking...</span>
+                          <span className="cc-loading-text">Thinking...</span>
                         ) : (
                           <ReactMarkdown>{answer.text}</ReactMarkdown>
                         )}
@@ -213,8 +213,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
               return null;
             })}
           </div>
-
-          {/* Bottom Search + Toggles */}
+          {/* Bottom Search + no ciuz like why is  */}
           <div className="cc-search-bar-bottom">
             <div className="cc-bottom-controls">
               <div className="cc-toggle-inline">
