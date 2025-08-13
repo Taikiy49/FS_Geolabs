@@ -16,7 +16,6 @@ import S3Admin from './components/S3Admin';
 import OCRLookUp from './components/OCRLookup';
 import Contacts from './components/Contacts';
 import S3Viewer from './components/S3Viewer';
-import DisclaimerModal from './components/DisclaimerModal';
 import Admin from './components/Admin';
 
 function ScrollToTop() {
@@ -46,7 +45,6 @@ const CustomError = ({ error }) => (
 const AuthenticatedApp = () => {
   const [selectedDB, setSelectedDB] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [userAcceptedDisclaimer, setUserAcceptedDisclaimer] = useState(false);
 
   const { accounts } = useMsal();
   const userEmail = accounts[0]?.username || 'guest';
@@ -72,27 +70,21 @@ const AuthenticatedApp = () => {
         />
         <main className="main-content">
           <ScrollToTop />
-          {showingAskAI && !userAcceptedDisclaimer && (
-            <DisclaimerModal
-              onContinue={() => setUserAcceptedDisclaimer(true)}
-              onCancel={() => window.history.back()}
-            />
-          )}
+  
 
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
-              path="/ask-ai"
-              element={
-                userAcceptedDisclaimer ? (
-                  <AskAI
-                    selectedDB={selectedDB}
-                    setSelectedDB={setSelectedDB}
-                    sidebarCollapsed={sidebarCollapsed}
-                  />
-                ) : <div />
-              }
-            />
+  path="/ask-ai"
+  element={
+    <AskAI
+      selectedDB={selectedDB}
+      setSelectedDB={setSelectedDB}
+    />
+  }
+/>
+
+
             <Route path="/db-viewer" element={<DBViewer />} />
             <Route path="/db-admin" element={<DBAdmin />} />
             <Route path="/file-viewer" element={<FileViewer />} />

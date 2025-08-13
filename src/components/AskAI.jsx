@@ -67,7 +67,7 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
     axios.get(`${API_URL}/api/list-dbs`)
       .then(res => {
         const dbList = res.data.dbs || [];
-        const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'user_roles.db' && db !== 'pr_data.db');
+        const filtered = dbList.filter(db => db !== 'chat_history.db' && db !== 'reports.db' && db !== 'user_roles.db' && db !== 'pr_data.db' && db !== 'users.db');
         setAvailableDBs(filtered);
       })
       .catch(() => setAvailableDBs([]));
@@ -257,17 +257,24 @@ export default function ContextualChatbot({ selectedDB, setSelectedDB, sidebarCo
         <div className="cc-history-panel">
           {/* DB Selector at Top with Icon */}
           <div className="cc-db-header">
-            <FaDatabase className="cc-db-icon" />
-            <select
-              value={selectedDB}
-              onChange={(e) => setSelectedDB(e.target.value)}
-            >
-              <option value="">Select a DB</option>
-              {availableDBs.map((db, i) => (
-                <option key={i} value={db}>{db}</option>
-              ))}
-            </select>
-          </div>
+  <FaDatabase className="cc-db-icon" />
+  <select
+    value={selectedDB}
+    onChange={(e) => setSelectedDB(e.target.value)}
+  >
+    <option value="">Select a DB</option>
+    {availableDBs.map((db, i) => (
+      <option key={i} value={db}>
+  {db
+    .replace(/\.db$/, '')       // remove .db
+    .replace(/_/g, ' ')         // replace underscores with spaces
+    .replace(/\b\w/g, c => c.toUpperCase())} {/* capitalize each word */}
+</option>
+
+    ))}
+  </select>
+</div>
+
 
           {/* History */}
           {history.map((item, index) => (
