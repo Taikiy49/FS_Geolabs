@@ -1,90 +1,152 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+// src/components/Sidebar.jsx
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
-  FaBars, FaTimes, FaChevronDown, FaRobot, FaDatabase, FaCogs, FaComments,
-  FaTable, FaUpload, FaSearch, FaFolderOpen, FaCloudUploadAlt, FaFileAlt,
-  FaEnvelopeOpenText, FaHome
-} from 'react-icons/fa';
-import API_URL from '../config';
-import '../styles/Sidebar.css';
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+  FaRobot,
+  FaDatabase,
+  FaCogs,
+  FaTable,
+  FaFolderOpen,
+  FaCloudUploadAlt,
+  FaCloud,
+  FaSearch,
+  FaHome,
+  FaUserShield,
+  FaAddressBook,
+  FaBoxOpen,
+} from "react-icons/fa";
+import "../styles/Sidebar.css";
 
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const onResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, [breakpoint]);
   return isMobile;
 }
 
 export default function Sidebar({ collapsed, setCollapsed }) {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [dropdowns, setDropdowns] = useState({ doc: true, proj: true });
 
-  const sidebarLink = (label, icon, path) => (
-    <div className="sidebar-link" onClick={() => window.location.href = path}>
-      {icon}
-      {!collapsed && <span>{label}</span>}
-    </div>
-  );
+  const toggleDropdown = (key) =>
+    setDropdowns((d) => ({ ...d, [key]: !d[key] }));
 
-  const toggleDropdown = (key) => {
-    setDropdowns(prev => ({ ...prev, [key]: !prev[key] }));
-  };
+  const Item = ({ to, icon: Icon, label }) => (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `sidebar-link ${isActive ? "active" : ""}`
+      }
+      onClick={(e) => {
+        e.preventDefault();
+        navigate(to);
+      }}
+      title={label}
+    >
+      <Icon className="sidebar-link-icon" />
+      {!collapsed && <span>{label}</span>}
+    </NavLink>
+  );
 
   if (isMobile) return null;
 
   return (
-    <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-      <div className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
+    <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+      <button
+        className="sidebar-toggle"
+        onClick={() => setCollapsed(!collapsed)}
+        aria-label={collapsed ? "Open sidebar" : "Collapse sidebar"}
+      >
         {collapsed ? <FaBars /> : <FaTimes />}
-      </div>
+      </button>
 
-      {/* Home (only if not collapsed) */}
-      {!collapsed && sidebarLink('Home', <FaHome className="sidebar-link-icon" />, '/')}
+      {/* Home */}
+      {!collapsed && (
+        <Item to="/" icon={FaHome} label="Home" key="home" />
+      )}
 
-      {/* Document Databases Group */}
-      <div className="sidebar-link" onClick={() => toggleDropdown('doc')}>
+      {/* Document Databases */}
+      <button
+        className="sidebar-link"
+        onClick={() => toggleDropdown("doc")}
+        aria-expanded={dropdowns.doc}
+        aria-controls="doc-group"
+      >
         <FaDatabase className="sidebar-link-icon" />
         {!collapsed && <span>Document Databases</span>}
         {!collapsed && (
           <FaChevronDown
-            className={`sidebar-link-chevron ${dropdowns.doc ? 'rotate' : ''}`}
+            className={`sidebar-link-chevron ${
+              dropdowns.doc ? "rotate" : ""
+            }`}
           />
         )}
-      </div>
+      </button>
       {dropdowns.doc && !collapsed && (
-        <div className="sidebar-dropdown">
-          {sidebarLink('Ask AI', <FaComments className="sidebar-icon-mini" />, '/ask-ai')}
-          {sidebarLink('DB Viewer', <FaTable className="sidebar-icon-mini" />, '/db-viewer')}
-          {sidebarLink('DB Admin', <FaUpload className="sidebar-icon-mini" />, '/db-admin')}
+        <div className="sidebar-dropdown" id="doc-group">
+          {/* Ask AI = Robot */}
+          <Item to="/ask-ai" icon={FaRobot} label="Ask AI" />
+          {/* DB Viewer = Table */}
+          <Item to="/db-viewer" icon={FaTable} label="DB Viewer" />
+          {/* DB Admin = Cogs */}
+          <Item to="/db-admin" icon={FaCogs} label="DB Admin" />
         </div>
       )}
 
-      {/* Project Finder Group */}
-      <div className="sidebar-link" onClick={() => toggleDropdown('proj')}>
+      {/* Project Finder */}
+      <button
+        className="sidebar-link"
+        onClick={() => toggleDropdown("proj")}
+        aria-expanded={dropdowns.proj}
+        aria-controls="proj-group"
+      >
         <FaFolderOpen className="sidebar-link-icon" />
         {!collapsed && <span>Project Finder</span>}
         {!collapsed && (
           <FaChevronDown
-            className={`sidebar-link-chevron ${dropdowns.proj ? 'rotate' : ''}`}
+            className={`sidebar-link-chevron ${
+              dropdowns.proj ? "rotate" : ""
+            }`}
           />
         )}
-      </div>
+      </button>
       {dropdowns.proj && !collapsed && (
-        <div className="sidebar-dropdown">
-          {sidebarLink('S3 Viewer', <FaFileAlt className="sidebar-icon-mini" />, '/s3-viewer')}
-          {sidebarLink('S3 Admin', <FaCloudUploadAlt className="sidebar-icon-mini" />, '/s3-admin')}
-          {sidebarLink('OCR Lookup', <FaSearch className="sidebar-icon-mini" />, '/ocr-lookup')}
+        <div className="sidebar-dropdown" id="proj-group">
+          {/* S3 Viewer = Cloud (view/download) */}
+          <Item to="/s3-viewer" icon={FaCloud} label="S3 Viewer" />
+          {/* S3 Admin = Cloud Upload */}
+          <Item to="/s3-admin" icon={FaCloudUploadAlt} label="S3 Admin" />
+          {/* OCR Lookup = Search */}
+          <Item to="/ocr-lookup" icon={FaSearch} label="OCR Lookup" />
         </div>
       )}
 
-      {/* Contacts */}
-      {sidebarLink('Contacts', <FaEnvelopeOpenText className="sidebar-link-icon" />, '/contacts')}
-    </div>
+      {/* Core Box Inventory = Box/Open Box; also FIXED route path */}
+      <Item
+        to="/core-inventory-box"
+        icon={FaBoxOpen}
+        label="Core Box Inventory"
+        key="core-box"
+      />
+
+      {/* Admin = Shield */}
+      <Item to="/admin" icon={FaUserShield} label="Admin" key="admin" />
+
+      {/* Contacts = Address Book */}
+      <Item
+        to="/contacts"
+        icon={FaAddressBook}
+        label="Contacts"
+        key="contacts"
+      />
+    </aside>
   );
 }

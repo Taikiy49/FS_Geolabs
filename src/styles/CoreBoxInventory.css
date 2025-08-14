@@ -1,0 +1,130 @@
+/* src/styles/CoreBoxInventory.css */
+.cbi-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0d1117;
+  color: #c9d1d9;
+  font-size: 10px;            /* base text size */
+  line-height: 1.2;
+}
+
+/* Top bar */
+.cbi-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;                   /* smaller gap */
+  padding: 6px 8px;           /* smaller padding */
+  border-bottom: 1px solid #30363d;
+}
+
+.cbi-filters,
+.cbi-meta {
+  display: flex;
+  gap: 6px;                   /* smaller gap */
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Inputs & selects */
+.cbi-input,
+.cbi-select {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 2px 6px;           /* smaller padding */
+  border-radius: 4px;         /* tighter radius */
+  font-size: 10px;            /* small size */
+  height: 22px;               /* smaller height */
+}
+
+.cbi-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;                   /* smaller gap */
+  font-size: 10px;
+}
+
+/* Buttons */
+.cbi-btn {
+  background: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 4px;         /* tighter radius */
+  padding: 2px 6px;           /* smaller padding */
+  height: 22px;               /* smaller height */
+  font-size: 10px;
+  cursor: pointer;
+}
+.cbi-btn:hover { border-color: #58a6ff; }
+.cbi-btn-ghost { background: transparent; }
+
+/* Table */
+.cbi-table-wrap {
+  flex: 1;
+  overflow: auto;
+}
+
+.cbi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;            /* table body text */
+}
+
+.cbi-th {
+  position: sticky;
+  top: 0;
+  background: #0d1117;
+  border-bottom: 1px solid #30363d;
+  text-align: left;
+  padding: 6px;               /* smaller padding */
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 12px;            /* largest allowed */
+}
+
+.cbi-table td {
+  border-bottom: 1px solid #161b22;
+  padding: 6px;               /* smaller padding */
+  vertical-align: top;
+  max-width: 340px;           /* a bit tighter */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mono cells */
+.cbi-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+.cbi-expired { color: #ff9b9b; }
+
+.cbi-empty {
+  text-align: center;
+  padding: 12px;              /* smaller padding */
+  color: #8b949e;
+  font-size: 10px;
+}
+
+/* Pager */
+.cbi-pager {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  padding: 6px 0 8px;         /* smaller padding */
+  border-top: 1px solid #30363d;
+}
+
+.cbi-page { font-size: 10px; }
+
+/* Badges */
+.cbi-badge {
+  padding: 1px 5px;           /* smaller padding */
+  border-radius: 999px;
+  font-size: 10px;            /* small size */
+  border: 1px solid transparent;
+}
+.cbi-badge-ok { background: #132a13; border-color: #1f6f1f; color: #9fd39f; }
+.cbi-badge-danger { background: #2a1212; border-color: #7a2e2e; color: #ffb3b3; }
+.cbi-badge-neutral { background: #161b22; border-color: #30363d; color: #c9d1d9; }

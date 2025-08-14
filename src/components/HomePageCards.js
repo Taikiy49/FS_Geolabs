@@ -12,80 +12,104 @@ import {
 } from 'react-icons/fa';
 
 const homepageCards = [
+  // 0 — Document Databases (category)
   {
     label: 'Document Databases',
     sublabel: 'Docs & AI Assistant',
+    tag: 'AI',
+    updated: '2025-08-10',
     icon: <FaDatabase size={40} />,
     description:
-      'Access and manage Geolabs’ internal knowledge base through a suite of tools designed for efficiency and accuracy. Leverage Gemini-powered AI to ask questions about employee handbooks, retirement plans, or custom databases. Navigate, upload, and administer structured document databases in a secure environment with real-time indexing and role-based access.',
+      'Access Geolabs’ internal knowledge base. Ask questions with AI, browse structured DBs, and manage indexing with role-based access.',
     subpages: [
       {
         name: 'Ask AI',
         icon: <FaComments />,
         path: '/ask-ai',
         description:
-          'Chat with an AI assistant trained on internal documents such as employee handbooks and HR policies. Get accurate, citation-backed answers instantly using natural language.',
+          'Chat with an AI assistant trained on internal docs. Get concise, citation-ready answers.',
       },
       {
         name: 'DB Viewer',
         icon: <FaTable />,
         path: '/db-viewer',
         description:
-          'View and explore the contents of internal document databases. Ideal for read-only access during audits, training, or policy reviews.',
+          'Explore database contents quickly for audits, onboarding, or policy reviews.',
       },
       {
-        name: 'DB Editor',
+        name: 'DB Admin',
         icon: <FaUpload />,
         path: '/db-admin',
         description:
-          'Upload new documents, extract and embed content, and manage database indexing. Only available to authorized users with editing permissions.',
+          'Upload PDFs, auto-extract & embed content, and manage indexes (authorized users).',
       },
     ],
   },
+
+  // 1 — Project Finder (category)
   {
     label: 'Project Finder',
     sublabel: 'Geotechnical Reports',
+    tag: 'New',
+    updated: '2025-08-12',
     icon: <FaFolderOpen size={40} />,
     description:
-      'Easily search and retrieve geotechnical reports from Geolabs’ archive using advanced filters, OCR-enhanced lookup, and AI ranking. This toolset supports field engineers, drafters, and office staff by streamlining project data discovery from S3 buckets and scanned documents. Designed for high performance, instant viewing, and secure access to technical records.',
+      'Search and retrieve geotechnical reports with OCR-enhanced lookup, S3 browsing, and instant PDF viewing.',
     subpages: [
       {
         name: 'OCR Lookup',
         icon: <FaSearch />,
         path: '/ocr-lookup',
         description:
-          'Extract work order numbers and project info from scanned or handwritten reports using AI-powered OCR. Great for digitizing legacy files.',
+          'Extract work orders and project info from scanned/handwritten documents.',
       },
       {
         name: 'S3 Viewer',
         icon: <FaFileAlt />,
         path: '/s3-viewer',
         description:
-          'Browse and search through thousands of engineering reports stored on S3. Supports instant PDF loading and includes metadata preview.',
+          'Browse thousands of reports stored on S3. Quick preview and metadata at a glance.',
       },
       {
         name: 'S3 Editor',
         icon: <FaCloudUploadAlt />,
         path: '/s3-admin',
         description:
-          'Manage the file system directly from your browser. Upload new reports, organize folders, and maintain S3 storage used for project archives.',
+          'Upload and organize S3 report archives directly in your browser (permissions required).',
+      },
+      {
+        name: 'Core Box Inventory',
+        icon: <FaCogs />,
+        path: '/core-box-inventory',
+        description:
+          'Track physical core boxes: filters, aging, and status (expired/active).',
       },
     ],
   },
+
+  // 2 — Admin (rendered by your “Admin Section” block)
   {
     label: 'Admin',
     sublabel: 'System Management',
+    tag: 'Admin',
+    updated: '2025-08-13',
     icon: <FaCogs size={40} />,
     description:
-      'View and manage user roles, monitor connected users, and configure system settings. Owners and Admins can assign permissions and control access across Geolabs tools.',
+      'Manage user roles, monitor activity, and configure system settings. Owners/Admins only.',
     path: '/admin',
+    disabled: false,
   },
+
+  // 3 — Contacts (rendered by your “Contact Section” block)
   {
     label: 'Contacts',
-    sublabel: 'Support Info',
+    sublabel: 'People & Teams',
+    tag: 'Directory',
+    updated: '2025-08-11',
     icon: <FaEnvelopeOpenText size={40} />,
     description:
-      'Need assistance? Reach out to Geolabs support for help with tools, document access, or technical questions. This section will soon include direct department contacts, help desk hours, and ticket submission options.',
+      'Company directory + your Outlook contacts: search, copy phones/emails, export CSV.',
+    path: '/contacts',
     disabled: false,
   },
 ];

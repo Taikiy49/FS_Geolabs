@@ -17,6 +17,7 @@ import OCRLookUp from './components/OCRLookup';
 import Contacts from './components/Contacts';
 import S3Viewer from './components/S3Viewer';
 import Admin from './components/Admin';
+import CoreBoxInventory from './components/CoreBoxInventory';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -92,6 +93,9 @@ const AuthenticatedApp = () => {
             <Route path="/ocr-lookup" element={<OCRLookUp />} />
             <Route path="/s3-viewer" element={<S3Viewer />} />
             <Route path="/contacts" element={<Contacts />} />
+
+            <Route path="/core-box-inventory" element={<CoreBoxInventory />} />
+
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>

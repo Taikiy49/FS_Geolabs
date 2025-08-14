@@ -8,10 +8,12 @@ import os
 import traceback
 from helpers import rank_documents, ask_gemini_single_file, get_quick_view_sentences
 from admin import admin_bp
+from core_box_inventory import corebox_bp
 import boto3
 
 app = Flask(__name__)
 app.register_blueprint(admin_bp)
+app.register_blueprint(corebox_bp)
 CORS(app)
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))

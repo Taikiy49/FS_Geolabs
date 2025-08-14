@@ -1,57 +1,378 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import '../styles/S3Viewer.css';
-import { FaCloudDownloadAlt } from 'react-icons/fa';
-import API_URL from '../config';
+// src/components/S3Viewer.jsx
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import {
+  FaCloudDownloadAlt,
+  FaExternalLinkAlt,
+  FaCopy,
+  FaSync,
+  FaTimes,
+  FaFolder,
+  FaSearch
+} from "react-icons/fa";
+import API_URL from "../config";
+import "../styles/S3Viewer.css";
+
+const pageSizes = [10, 25, 50, 100];
+
+function extOf(key = "") {
+  const name = key.split("/").pop() || "";
+  const i = name.lastIndexOf(".");
+  return i >= 0 ? name.slice(i + 1).toLowerCase() : "";
+}
+function folderOf(key = "") {
+  const parts = key.split("/");
+  return parts.length > 1 ? parts.slice(0, parts.length - 1).join("/") : "(root)";
+}
+function isPreviewableImage(ext) {
+  return ["png", "jpg", "jpeg", "webp", "gif"].includes(ext);
+}
 
 export default function S3Viewer() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewMeta, setPreviewMeta] = useState({ name: "", ext: "" });
+
+  // filters/sort/paging
+  const [q, setQ] = useState("");
+  const [folder, setFolder] = useState("");
+  const [ext, setExt] = useState("");
+  const [sortBy, setSortBy] = useState("name"); // name | folder | ext
+  const [sortDir, setSortDir] = useState("ASC");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
+
+  // selection
+  const [selected, setSelected] = useState(new Set());
+  const [copiedKey, setCopiedKey] = useState("");
+
+  const fetchFiles = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const res = await axios.get(`${API_URL}/api/s3-files`);
+      const list = (res.data.files || []).map((f) => {
+        const name = (f.Key || "").split("/").pop() || "Unnamed";
+        const fldr = folderOf(f.Key || "");
+        const e = extOf(f.Key || "");
+        return { key: f.Key, url: f.url, name, folder: fldr, ext: e };
+      });
+      setFiles(list);
+      setSelected(new Set());
+      setPage(1);
+    } catch (e) {
+      setError("Failed to fetch files.");
+      setFiles([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchFiles = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/s3-files`);
-        setFiles(response.data.files || []);
-      } catch (err) {
-        setError('Failed to fetch files.');
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchFiles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <div className="s3-viewer-wrapper">
-      <div className="s3-viewer-panel">
-        <h2 className="s3-viewer-title">S3 Bucket Files</h2>
+  const folders = useMemo(() => {
+    const s = new Set(files.map((f) => f.folder));
+    return Array.from(s).sort((a, b) => a.localeCompare(b));
+  }, [files]);
 
+  const extensions = useMemo(() => {
+    const s = new Set(files.map((f) => f.ext).filter(Boolean));
+    return Array.from(s).sort((a, b) => a.localeCompare(b));
+  }, [files]);
+
+  const filtered = useMemo(() => {
+    let out = files;
+    if (q.trim()) {
+      const needle = q.toLowerCase();
+      out = out.filter(
+        (f) =>
+          f.name.toLowerCase().includes(needle) ||
+          f.key.toLowerCase().includes(needle) ||
+          f.folder.toLowerCase().includes(needle)
+      );
+    }
+    if (folder) out = out.filter((f) => f.folder === folder);
+    if (ext) out = out.filter((f) => f.ext === ext);
+    return out;
+  }, [files, q, folder, ext]);
+
+  const sorted = useMemo(() => {
+    const arr = [...filtered];
+    const cmp = (a, b, field) => a[field].localeCompare(b[field]);
+    arr.sort((a, b) => {
+      const res = sortBy === "folder" ? cmp(a, b, "folder")
+        : sortBy === "ext" ? cmp(a, b, "ext")
+        : cmp(a, b, "name");
+      return sortDir === "ASC" ? res : -res;
+    });
+    return arr;
+  }, [filtered, sortBy, sortDir]);
+
+  const total = sorted.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const paged = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return sorted.slice(start, start + pageSize);
+  }, [sorted, page, pageSize]);
+
+  const toggleSort = (field) => {
+    if (sortBy === field) {
+      setSortDir((d) => (d === "ASC" ? "DESC" : "ASC"));
+    } else {
+      setSortBy(field);
+      setSortDir("ASC");
+    }
+    setPage(1);
+  };
+
+  const toggleSelect = (key) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  const selectAllOnPage = (checked) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (checked) paged.forEach((f) => next.add(f.key));
+      else paged.forEach((f) => next.delete(f.key));
+      return next;
+    });
+  };
+
+  const clearAll = () => setSelected(new Set());
+
+  const copyUrl = async (url, key) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(""), 1200);
+    } catch {}
+  };
+
+  const bulkCopy = async () => {
+    const urls = files.filter((f) => selected.has(f.key)).map((f) => f.url).join("\n");
+    if (!urls) return;
+    try {
+      await navigator.clipboard.writeText(urls);
+      setCopiedKey("@bulk");
+      setTimeout(() => setCopiedKey(""), 1200);
+    } catch {}
+  };
+
+  const bulkOpen = () => {
+    const sels = files.filter((f) => selected.has(f.key)).slice(0, 10); // safety cap
+    sels.forEach((f) => window.open(f.url, "_blank", "noopener,noreferrer"));
+  };
+
+  const openPreview = (f) => {
+    setPreviewMeta({ name: f.name, ext: f.ext });
+    setPreviewUrl(f.url);
+  };
+
+  const resetFilters = () => {
+    setQ("");
+    setFolder("");
+    setExt("");
+    setSortBy("name");
+    setSortDir("ASC");
+    setPage(1);
+    setPageSize(25);
+  };
+
+  return (
+    <div className="s3v-wrap">
+      <div className="s3v-topbar">
+        <div className="s3v-filters">
+          <div className="s3v-search">
+            <FaSearch className="s3v-search-icon" />
+            <input
+              className="s3v-input"
+              placeholder="Search name / key / folder…"
+              value={q}
+              onChange={(e) => {
+                setQ(e.target.value);
+                setPage(1);
+              }}
+            />
+          </div>
+
+          <select
+            className="s3v-select"
+            value={folder}
+            onChange={(e) => {
+              setFolder(e.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="">Folder: All</option>
+            {folders.map((f) => (
+              <option key={f} value={f}>{f}</option>
+            ))}
+          </select>
+
+          <select
+            className="s3v-select"
+            value={ext}
+            onChange={(e) => {
+              setExt(e.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="">Type: All</option>
+            {extensions.map((e) => (
+              <option key={e} value={e}>{e.toUpperCase()}</option>
+            ))}
+          </select>
+
+          <button className="s3v-btn" onClick={resetFilters}>Reset</button>
+        </div>
+
+        <div className="s3v-meta">
+          <span>{total} files</span>
+          <button className="s3v-btn" onClick={fetchFiles} title="Refresh">
+            <FaSync className="s3v-ic" /> Refresh
+          </button>
+          <select
+            className="s3v-select"
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+              setPage(1);
+            }}
+          >
+            {pageSizes.map((n) => (
+              <option key={n} value={n}>{n}/page</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="s3v-actions">
+        <label className="s3v-checkrow">
+          <input
+            type="checkbox"
+            checked={paged.every((f) => selected.has(f.key)) && paged.length > 0}
+            onChange={(e) => selectAllOnPage(e.target.checked)}
+          />
+          <span>Select page</span>
+        </label>
+        <button className="s3v-btn" onClick={bulkCopy} disabled={selected.size === 0}>
+          <FaCopy className="s3v-ic" /> Copy URLs
+        </button>
+        <button className="s3v-btn" onClick={bulkOpen} disabled={selected.size === 0}>
+          <FaExternalLinkAlt className="s3v-ic" /> Open (max 10)
+        </button>
+        {selected.size > 0 && (
+          <button className="s3v-btn s3v-btn-ghost" onClick={clearAll}>
+            Clear ({selected.size})
+          </button>
+        )}
+        {copiedKey === "@bulk" && <span className="s3v-copied">Copied!</span>}
+      </div>
+
+      <div className="s3v-table-wrap">
         {loading ? (
-          <p className="s3-viewer-status">Loading files...</p>
+          <div className="s3v-empty">Loading…</div>
         ) : error ? (
-          <p className="s3-viewer-status">{error}</p>
+          <div className="s3v-empty">{error}</div>
+        ) : total === 0 ? (
+          <div className="s3v-empty">No files.</div>
         ) : (
-          <ul className="s3-viewer-list">
-            {files.map((file, idx) => {
-              const displayName = file.Key?.split('/').pop() || 'Unnamed File';
-              return (
-                <li key={idx} className="s3-viewer-item" onClick={() => setPreviewUrl(file.url)}>
-                  <FaCloudDownloadAlt className="s3-viewer-icon" />
-                  <span className="s3-viewer-filename">{displayName}</span>
-                </li>
-              );
-            })}
-          </ul>
+          <table className="s3v-table">
+            <thead>
+              <tr>
+                <th className="s3v-th s3v-th-check"></th>
+                <th className="s3v-th" onClick={() => toggleSort("name")}>
+                  Name {sortBy === "name" ? (sortDir === "ASC" ? "▲" : "▼") : ""}
+                </th>
+                <th className="s3v-th" onClick={() => toggleSort("folder")}>
+                  Folder {sortBy === "folder" ? (sortDir === "ASC" ? "▲" : "▼") : ""}
+                </th>
+                <th className="s3v-th" onClick={() => toggleSort("ext")}>
+                  Type {sortBy === "ext" ? (sortDir === "ASC" ? "▲" : "▼") : ""}
+                </th>
+                <th className="s3v-th s3v-th-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paged.map((f) => (
+                <tr key={f.key}>
+                  <td className="s3v-td-check">
+                    <input
+                      type="checkbox"
+                      checked={selected.has(f.key)}
+                      onChange={() => toggleSelect(f.key)}
+                    />
+                  </td>
+                  <td title={f.key}>
+                    <div className="s3v-name">
+                      <FaFolder className="s3v-ic" />
+                      <span className="s3v-ellipsis">{f.name}</span>
+                    </div>
+                  </td>
+                  <td className="s3v-ellipsis" title={f.folder}>{f.folder}</td>
+                  <td className="s3v-type">{f.ext ? f.ext.toUpperCase() : "-"}</td>
+                  <td className="s3v-actions-cell">
+                    <button className="s3v-iconbtn" title="Preview" onClick={() => openPreview(f)}>
+                      👁
+                    </button>
+                    <a className="s3v-iconbtn" href={f.url} target="_blank" rel="noreferrer" title="Open">
+                      <FaExternalLinkAlt />
+                    </a>
+                    <a className="s3v-iconbtn" href={f.url} download={f.name} title="Download">
+                      <FaCloudDownloadAlt />
+                    </a>
+                    <button
+                      className="s3v-iconbtn"
+                      title="Copy URL"
+                      onClick={() => copyUrl(f.url, f.key)}
+                    >
+                      <FaCopy />
+                    </button>
+                    {copiedKey === f.key && <span className="s3v-copied-inline">Copied</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
 
+      <div className="s3v-pager">
+        <button className="s3v-btn" onClick={() => setPage(1)} disabled={page === 1}>⏮</button>
+        <button className="s3v-btn" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>◀</button>
+        <span className="s3v-page">{page} / {totalPages}</span>
+        <button className="s3v-btn" onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages}>▶</button>
+        <button className="s3v-btn" onClick={() => setPage(totalPages)} disabled={page === totalPages}>⏭</button>
+      </div>
+
       {previewUrl && (
-        <div className="s3-viewer-popup-overlay" onClick={() => setPreviewUrl(null)}>
-          <div className="s3-viewer-popup-content" onClick={e => e.stopPropagation()}>
-            <iframe src={previewUrl} title="File Preview" className="s3-viewer-frame" />
+        <div className="s3v-modal" onClick={() => setPreviewUrl(null)}>
+          <div className="s3v-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="s3v-modal-head">
+              <div className="s3v-title">{previewMeta.name}</div>
+              <button className="s3v-iconbtn" onClick={() => setPreviewUrl(null)} title="Close">
+                <FaTimes />
+              </button>
+            </div>
+            <div className="s3v-modal-body">
+              {previewMeta.ext === "pdf" ? (
+                <iframe className="s3v-frame" src={previewUrl} title="Preview" />
+              ) : isPreviewableImage(previewMeta.ext) ? (
+                <img className="s3v-img" src={previewUrl} alt={previewMeta.name} />
+              ) : (
+                <div className="s3v-empty">No inline preview for .{previewMeta.ext}. Use Open/Download.</div>
+              )}
+            </div>
           </div>
         </div>
       )}
