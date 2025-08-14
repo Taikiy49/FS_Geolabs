@@ -1,158 +1,442 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import '../styles/Admin.css';
 import API_URL from '../config';
 import { useMsal } from '@azure/msal-react';
+import {
+  FaSyncAlt,
+  FaPlus,
+  FaTrashAlt,
+  FaDownload,
+  FaSearch,
+  FaLock,
+  FaCheckCircle,
+} from 'react-icons/fa';
 
 export default function Admin() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const { accounts } = useMsal();
   const currentUserEmail = accounts[0]?.username || '';
   const SUPER_OWNER_EMAIL = 'tyamashita@geolabs.net';
 
-  // Sort users: Owner > Admin > User
-  const rolePriority = { 'Owner': 0, 'Admin': 1, 'User': 2 };
-  const sortedUsers = [...users].sort((a, b) => {
-    const priorityA = rolePriority[a.role] ?? 99;
-    const priorityB = rolePriority[b.role] ?? 99;
-    return priorityA - priorityB;
-  });
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // UI state
+  const [search, setSearch] = useState('');
+  const [roleFilter, setRoleFilter] = useState('All'); // All | User | Admin | Owner
+  const [sortBy, setSortBy] = useState('role'); // 'email' | 'role'
+  const [sortDir, setSortDir] = useState('asc'); // 'asc' | 'desc'
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
+  const [selected, setSelected] = useState({}); // {email: true}
+  const [newEmail, setNewEmail] = useState('');
+  const [busy, setBusy] = useState(false); // blocks bulk ops
+  const [statusMsg, setStatusMsg] = useState('');
+
+  const rolePriority = { Owner: 0, Admin: 1, User: 2 };
 
   const fetchUsers = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(`${API_URL}/api/users`);
-      setUsers(res.data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
+      setUsers(res.data || []);
+    } catch (e) {
+      console.error('Error fetching users:', e);
     } finally {
       setLoading(false);
     }
-  };
-
-  const updateRole = async (email, role) => {
-    if (email === SUPER_OWNER_EMAIL && currentUserEmail !== SUPER_OWNER_EMAIL) {
-      alert("You can't modify the Super Owner.");
-      return;
-    }
-
-    try {
-      await axios.post(`${API_URL}/api/update-role`, { email, role });
-      setUsers(users.map(u => (u.email === email ? { ...u, role } : u)));
-    } catch (error) {
-      console.error('Error updating role:', error);
-      alert(error.response?.data?.error || 'Failed to update role.');
-    }
-  };
-
-  const deleteUser = async (email) => {
-    if (email === SUPER_OWNER_EMAIL) {
-      alert("You cannot delete the Super Owner.");
-      return;
-    }
-    if (email === currentUserEmail) {
-      alert("You cannot delete yourself.");
-      return;
-    }
-
-    if (!window.confirm(`Are you sure you want to delete ${email}?`)) return;
-
-    try {
-      await axios.post(`${API_URL}/api/delete-user`, { email });
-      setUsers(users.filter(u => u.email !== email));
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      alert(error.response?.data?.error || 'Failed to delete user.');
-    }
-  };
-
-  const isOwner = currentUserEmail === SUPER_OWNER_EMAIL ||
-    users.find(u => u.email === currentUserEmail)?.role === 'Owner';
-
-  const isEditable = (targetEmail, targetRole) => {
-    if (currentUserEmail === SUPER_OWNER_EMAIL) return true; // Super Owner can do anything
-    if (targetEmail === SUPER_OWNER_EMAIL) return false; // Nobody can edit Super Owner
-    if (!isOwner) return false; // Must be an Owner
-    if (targetEmail === currentUserEmail) return false; // Can't edit yourself
-    return targetRole === 'User' || targetRole === 'Admin';
-  };
-
-  const getOptionsForTarget = (targetEmail, targetRole) => {
-    if (currentUserEmail === SUPER_OWNER_EMAIL) {
-      return ['User', 'Admin', 'Owner'];
-    }
-    if (targetRole === 'User' || targetRole === 'Admin') {
-      return ['User', 'Admin'];
-    }
-    return ['Owner']; // locked
   };
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  if (loading) return <div className="main-content"><p>Loading users...</p></div>;
+  const currentUserRole =
+    (users.find(u => u.email === currentUserEmail)?.role) || 'User';
+
+  const isOwner =
+    currentUserEmail === SUPER_OWNER_EMAIL || currentUserRole === 'Owner';
+
+  const canEdit = (targetEmail, targetRole) => {
+    if (currentUserEmail === SUPER_OWNER_EMAIL) return true;           // Super owner can edit all
+    if (targetEmail === SUPER_OWNER_EMAIL) return false;               // No one can edit super owner
+    if (!isOwner) return false;                                        // Must be Owner to edit
+    if (targetEmail === currentUserEmail) return false;                // Can't edit yourself
+    return targetRole === 'User' || targetRole === 'Admin';            // Can't edit other Owners
+  };
+
+  const canDelete = (targetEmail, targetRole) => {
+    if (targetEmail === SUPER_OWNER_EMAIL) return false;
+    if (targetEmail === currentUserEmail) return false;
+    if (!isOwner && currentUserEmail !== SUPER_OWNER_EMAIL) return false;
+    // Only delete Users/Admins. Owners require super owner – disallow to be safe.
+    return targetRole === 'User' || targetRole === 'Admin';
+  };
+
+  const optionsFor = (targetEmail, targetRole) => {
+    if (currentUserEmail === SUPER_OWNER_EMAIL) return ['User', 'Admin', 'Owner'];
+    if (targetRole === 'User' || targetRole === 'Admin') return ['User', 'Admin'];
+    return [targetRole]; // locked
+  };
+
+  const updateRole = async (email, role) => {
+    try {
+      await axios.post(`${API_URL}/api/update-role`, { email, role });
+      setUsers(prev => prev.map(u => (u.email === email ? { ...u, role } : u)));
+    } catch (e) {
+      console.error('Error updating role:', e);
+      alert(e.response?.data?.error || 'Failed to update role.');
+    }
+  };
+
+  const deleteUser = async (email) => {
+    try {
+      await axios.post(`${API_URL}/api/delete-user`, { email });
+      setUsers(prev => prev.filter(u => u.email !== email));
+    } catch (e) {
+      console.error('Error deleting user:', e);
+      alert(e.response?.data?.error || 'Failed to delete user.');
+    }
+  };
+
+  const addUser = async () => {
+    const email = newEmail.trim();
+    if (!email) return;
+    try {
+      await axios.post(`${API_URL}/api/register-user`, { email });
+      setNewEmail('');
+      setStatusMsg(`Invited/registered: ${email}`);
+      fetchUsers();
+    } catch (e) {
+      console.error('Error registering user:', e);
+      alert(e.response?.data?.error || 'Failed to register user.');
+    }
+  };
+
+  // Derived views
+  const filtered = useMemo(() => {
+    const t = search.trim().toLowerCase();
+    return (users || []).filter(u => {
+      if (roleFilter !== 'All' && u.role !== roleFilter) return false;
+      if (!t) return true;
+      return `${u.email} ${u.role}`.toLowerCase().includes(t);
+    });
+  }, [users, roleFilter, search]);
+
+  const sorted = useMemo(() => {
+    const rows = [...filtered];
+    rows.sort((a, b) => {
+      let va, vb;
+      if (sortBy === 'role') {
+        va = rolePriority[a.role] ?? 99;
+        vb = rolePriority[b.role] ?? 99;
+      } else {
+        va = (a.email || '').toLowerCase();
+        vb = (b.email || '').toLowerCase();
+      }
+      if (va < vb) return sortDir === 'asc' ? -1 : 1;
+      if (va > vb) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    return rows;
+  }, [filtered, sortBy, sortDir]);
+
+  const total = sorted.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const pageRows = useMemo(
+    () => sorted.slice((page - 1) * pageSize, page * pageSize),
+    [sorted, page, pageSize]
+  );
+
+  // Selection
+  const toggleSelect = (email) =>
+    setSelected(prev => ({ ...prev, [email]: !prev[email] }));
+
+  const pageSelectableEmails = pageRows
+    .filter(u => canEdit(u.email, u.role) || canDelete(u.email, u.role))
+    .map(u => u.email);
+
+  const allPageSelected =
+    pageSelectableEmails.length > 0 &&
+    pageSelectableEmails.every(e => selected[e]);
+
+  const toggleSelectAll = () => {
+    setSelected(prev => {
+      const next = { ...prev };
+      if (allPageSelected) {
+        pageSelectableEmails.forEach(e => { delete next[e]; });
+      } else {
+        pageSelectableEmails.forEach(e => { next[e] = true; });
+      }
+      return next;
+    });
+  };
+
+  const selectedUsers = sorted.filter(u => selected[u.email]);
+  const selectedCount = selectedUsers.length;
+
+  // Bulk ops
+  const bulkSetRole = async (role) => {
+    if (!selectedCount) return;
+    if (!window.confirm(`Change role to ${role} for ${selectedCount} selected user(s)?`)) return;
+    setBusy(true);
+    try {
+      for (const u of selectedUsers) {
+        if (canEdit(u.email, u.role)) {
+          // safe-guard: don't let non-super owners assign Owner
+          if (role === 'Owner' && currentUserEmail !== SUPER_OWNER_EMAIL) continue;
+          // same role? skip
+          if (u.role === role) continue;
+          // do it
+          // eslint-disable-next-line no-await-in-loop
+          await updateRole(u.email, role);
+        }
+      }
+      setStatusMsg(`Bulk updated role to ${role}.`);
+      setSelected({});
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const bulkDelete = async () => {
+    if (!selectedCount) return;
+    if (!window.confirm(`Delete ${selectedCount} selected user(s)? This cannot be undone.`)) return;
+    setBusy(true);
+    try {
+      for (const u of selectedUsers) {
+        if (canDelete(u.email, u.role)) {
+          // eslint-disable-next-line no-await-in-loop
+          await deleteUser(u.email);
+        }
+      }
+      setStatusMsg(`Bulk delete complete.`);
+      setSelected({});
+      fetchUsers();
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const exportCSV = () => {
+    const rows = sorted.map(u => ({ email: u.email, role: u.role }));
+    const header = 'email,role';
+    const csv = header + '\n' + rows.map(r => `${r.email},${r.role}`).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'users.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const onSort = (key) => {
+    if (sortBy === key) {
+      setSortDir(d => (d === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortBy(key);
+      setSortDir('asc');
+    }
+  };
+
+  const roleCounts = useMemo(() => {
+    const out = { Owner: 0, Admin: 0, User: 0 };
+    (users || []).forEach(u => { if (out[u.role] !== undefined) out[u.role]++; });
+    return out;
+  }, [users]);
+
+  if (loading) {
+    return (
+      <div className="admin-wrap">
+        <div className="admin-topbar">Loading users…</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="admin-container">
-      <table className="admin-user-table">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Current Role</th>
-            <th>Change Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedUsers.map(user => {
-            const isSelf = user.email === currentUserEmail;
-            const editable = isEditable(user.email, user.role);
+    <div className="admin-wrap">
+      {/* Top controls */}
+      <div className="admin-topbar">
+        <div className="admin-left">
+          <div className="admin-heading">Admin</div>
 
-            return (
-              <tr key={user.email} className={
-  user.role === 'Owner' ? 'owner-row' :
-  user.role === 'Admin' ? 'admin-row' :
-  'user-row'
-}>
+          <div className="admin-stats">
+            <span className="pill owner">Owners: {roleCounts.Owner}</span>
+            <span className="pill admin">Admins: {roleCounts.Admin}</span>
+            <span className="pill user">Users: {roleCounts.User}</span>
+          </div>
 
-                <td>
-                  {user.email}
-                  {isSelf && <span style={{ color: 'green', marginLeft: 6 }}>(you)</span>}
-                </td>
-                <td>{user.role}</td>
-                <td>
-                  {editable ? (
-                    <select
-                      value={user.role}
-                      onChange={(e) => updateRole(user.email, e.target.value)}
-                    >
-                      {getOptionsForTarget(user.email, user.role).map(role => (
-                        <option key={role} value={role}>{role}</option>
-                      ))}
-                    </select>
-                  ) : (
-                    <span style={{ color: '#888' }}>Locked</span>
-                  )}
-                </td>
-                <td>
-                  {user.email !== SUPER_OWNER_EMAIL && !isSelf ? (
-                    <button
-                      onClick={() => deleteUser(user.email)}
-                      style={{ color: 'red', cursor: 'pointer' }}
-                    >
-                      Delete
-                    </button>
-                  ) : (
-                    <span style={{ color: '#888' }}>Locked</span>
-                  )}
-                </td>
+          <button className="btn" onClick={fetchUsers} title="Refresh">
+            <FaSyncAlt /><span>Refresh</span>
+          </button>
+
+          <button className="btn" onClick={exportCSV} title="Export CSV">
+            <FaDownload /><span>Export</span>
+          </button>
+        </div>
+
+        <div className="admin-right">
+          <div className="inline">
+            <FaSearch className="mini" />
+            <input
+              className="input"
+              placeholder="Search email/role…"
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+            />
+          </div>
+
+          <select
+            className="select"
+            value={roleFilter}
+            onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
+            title="Filter by role"
+          >
+            <option>All</option>
+            <option>User</option>
+            <option>Admin</option>
+            <option>Owner</option>
+          </select>
+
+          <div className="inline add">
+            <input
+              className="input"
+              placeholder="Add/register email…"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+            />
+            <button className="btn" onClick={addUser} title="Register user">
+              <FaPlus /><span>Add</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bulk bar */}
+      <div className="admin-bulkbar">
+        <span>{selectedCount} selected</span>
+        <div className="sep" />
+        <button className="btn ghost" disabled={!selectedCount || busy} onClick={() => bulkSetRole('User')}>→ User</button>
+        <button className="btn ghost" disabled={!selectedCount || busy} onClick={() => bulkSetRole('Admin')}>→ Admin</button>
+        <button className="btn ghost" disabled={!selectedCount || busy || currentUserEmail !== SUPER_OWNER_EMAIL} title={currentUserEmail === SUPER_OWNER_EMAIL ? '' : 'Super owner only'} onClick={() => bulkSetRole('Owner')}>→ Owner</button>
+        <div className="sep" />
+        <button className="btn danger" disabled={!selectedCount || busy} onClick={bulkDelete}>
+          <FaTrashAlt /><span>Delete</span>
+        </button>
+
+        {!!statusMsg && (
+          <span className="status"><FaCheckCircle className="mini ok" /> {statusMsg}</span>
+        )}
+      </div>
+
+      {/* Table */}
+      <div className="admin-tablewrap">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th className="check">
+                <input
+                  type="checkbox"
+                  checked={allPageSelected}
+                  onChange={toggleSelectAll}
+                  title="Select page"
+                />
+              </th>
+              <th onClick={() => onSort('email')} className="th sort">
+                Email{sortBy === 'email' ? (sortDir === 'asc' ? ' ▲' : ' ▼') : ''}
+              </th>
+              <th onClick={() => onSort('role')} className="th sort">
+                Role{sortBy === 'role' ? (sortDir === 'asc' ? ' ▲' : ' ▼') : ''}
+              </th>
+              <th>Change Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pageRows.map(u => {
+              const isSelf = u.email === currentUserEmail;
+              const editable = canEdit(u.email, u.role);
+              const deletable = canDelete(u.email, u.role);
+              const locked = !editable && !deletable;
+
+              return (
+                <tr key={u.email} className={`row ${u.role.toLowerCase()}-row`}>
+                  <td className="check">
+                    {(editable || deletable) ? (
+                      <input
+                        type="checkbox"
+                        checked={!!selected[u.email]}
+                        onChange={() => toggleSelect(u.email)}
+                      />
+                    ) : (
+                      <FaLock className="mini muted" title="Locked" />
+                    )}
+                  </td>
+                  <td className="email">
+                    {u.email}
+                    {isSelf && <span className="you">(you)</span>}
+                  </td>
+                  <td>
+                    <span className={`badge ${u.role.toLowerCase()}`}>{u.role}</span>
+                  </td>
+                  <td>
+                    {editable ? (
+                      <select
+                        className="select"
+                        value={u.role}
+                        onChange={(e) => updateRole(u.email, e.target.value)}
+                      >
+                        {optionsFor(u.email, u.role).map(r => (
+                          <option key={r} value={r}>{r}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <span className="muted">{locked ? 'Locked' : u.role}</span>
+                    )}
+                  </td>
+                  <td>
+                    {deletable ? (
+                      <button
+                        className="btn danger"
+                        onClick={() => {
+                          if (window.confirm(`Delete ${u.email}?`)) deleteUser(u.email);
+                        }}
+                      >
+                        <FaTrashAlt /><span>Delete</span>
+                      </button>
+                    ) : (
+                      <span className="muted">—</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+            {pageRows.length === 0 && (
+              <tr>
+                <td className="empty" colSpan={5}>No results.</td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pager */}
+      <div className="admin-pager">
+        <button className="btn" onClick={() => setPage(1)} disabled={page === 1}>⏮</button>
+        <button className="btn" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>◀</button>
+        <span className="page">{page} / {totalPages}</span>
+        <button className="btn" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>▶</button>
+        <button className="btn" onClick={() => setPage(totalPages)} disabled={page === totalPages}>⏭</button>
+
+        <select
+          className="select right"
+          value={pageSize}
+          onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1); }}
+        >
+          {[25, 50, 100, 200].map(n => <option key={n} value={n}>{n}/page</option>)}
+        </select>
+      </div>
     </div>
   );
 }

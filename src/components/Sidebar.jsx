@@ -131,7 +131,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
 
       {/* Core Box Inventory = Box/Open Box; also FIXED route path */}
       <Item
-        to="/core-inventory-box"
+        to="/core-box-inventory"
         icon={FaBoxOpen}
         label="Core Box Inventory"
         key="core-box"
