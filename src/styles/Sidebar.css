@@ -40,6 +40,10 @@
   max-width: 40px;
 }
 
+button{
+  border: none;
+}
+
 /* Toggle button (12px = most important) */
 .sidebar-toggle {
   cursor: pointer;

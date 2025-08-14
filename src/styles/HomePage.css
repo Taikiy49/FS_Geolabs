@@ -29,7 +29,7 @@
   align-items: center;
   background: var(--card-bg);
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid var(--card-br);
   box-shadow: 0 2px 8px rgba(0,0,0,.25);
   margin-bottom: var(--pd-6);
@@ -73,14 +73,16 @@
 }
 .homepage-search {
   padding: var(--pd-4) var(--pd-6);
-  border-radius: 6px;
+  border-radius: 4px;
   background: #0b0f14;
   color: #c9d1d9;
   border: 1px solid var(--card-br);
   font-size: var(--fs-10);
   width: 100%;
-  max-width: 280px;
+  min-width: 250px;
+  max-width: 250px;
   transition: border-color .2s ease, box-shadow .2s ease;
+  
 }
 .homepage-search:focus {
   outline: none;
@@ -190,7 +192,7 @@
   gap: var(--pd-4);
   background: #0b0f14;
   padding: var(--pd-6);
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: var(--fs-10);
   color: #c9d1d9;
   border: 1px solid var(--card-br);
