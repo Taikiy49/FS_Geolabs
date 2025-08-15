@@ -240,3 +240,273 @@
   display: flex; align-items: center; justify-content: space-between;
 }
 .cbi-history-meta { display: flex; gap: 6px; align-items: center; }
+
+
+/* === EDITING ROW STABILITY & ALIGNMENT === */
+
+/* Prevent column jitter */
+.cbi-table {
+  table-layout: fixed; /* keeps column widths stable while editing */
+}
+
+/* While editing, let controls breathe inside the row */
+tr.cbi-editing td {
+  overflow: visible;        /* allow dropdowns/calendar to overflow cell */
+  white-space: normal;      /* long text won't force super-wide cells */
+  background: #10151b;      /* subtle tone so edit row stands out */
+}
+
+/* Inputs/selects inside cells fill the cell cleanly */
+.cbi-input-inline,
+.cbi-select-inline {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;             /* avoid overflow from intrinsic width */
+}
+
+/* Date inputs can get cramped; ensure minimum tap target */
+.cbi-input-inline[type="date"] {
+  min-width: 140px;
+}
+
+/* Keep the action buttons tidy when editing or not */
+.cbi-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Make the inline icon buttons line up better in tight rows */
+.cbi-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === HISTORY DRAWER UX: BACKDROP + CLOSE BUTTON === */
+
+/* Dim background when drawer is open (click to close) */
+.cbi-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 890; /* below the drawer (900) and modal (1000) */
+}
+
+/* Keep drawer header sticky so Close/Refresh stay visible */
+.cbi-history-head {
+  position: sticky;
+  top: 0;
+  background: #0d1117;
+  padding-bottom: 6px;
+  z-index: 1;
+}
+
+/* Close button visual (reuses your button tokens) */
+.cbi-history-close {
+  background: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 2px 6px;
+  height: 22px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.cbi-history-close:hover { border-color: #58a6ff; }
+
+/* Optional: when drawer is open, keep main scrollbars from hiding under it */
+.cbi-wrap.drawer-open .cbi-table-wrap {
+  padding-right: 340px; /* same as drawer width */
+}
+
+
+/* === EDITING ROW: no jitter, inputs fill cell, date pickers visible === */
+.cbi-table { table-layout: fixed; }  /* stable column widths */
+
+tr.cbi-editing td {
+  overflow: visible;         /* show dropdowns/calendars */
+  white-space: normal;       /* long text wraps while editing */
+  background: #10151b;       /* subtle highlight for edit row */
+}
+
+.cbi-input-inline,
+.cbi-select-inline {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.cbi-input-inline[type="date"] { min-width: 140px; }
+
+.cbi-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.cbi-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === HISTORY DRAWER: respect sidebar & easy closing === */
+
+/* Backdrop should NOT cover the sidebar; start after it */
+.cbi-backdrop {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);      /* <- key line */
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 890;                /* below drawer (900), modal (1000) */
+}
+
+/* Drawer width adapts to remaining viewport (with sidebar) */
+.cbi-history {
+  width: min(340px, calc(100vw - var(--sidebar-w)));
+}
+
+/* When drawer open, keep main content from hiding under it */
+.cbi-wrap.drawer-open .cbi-table-wrap {
+  padding-right: min(340px, calc(100vw - var(--sidebar-w)));
+}
+
+/* Keep drawer header controls (Refresh/Close) visible while scrolling */
+.cbi-history-head {
+  position: sticky;
+  top: 0;
+  background: #0d1117;
+  padding-bottom: 6px;
+  z-index: 1;
+}
+
+.cbi-history-close {
+  background: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 2px 6px;
+  height: 22px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.cbi-history-close:hover { border-color: #58a6ff; }
+
+
+/* === EDITING ROW: no jitter, inputs fill cell, date pickers visible === */
+.cbi-table { table-layout: fixed; }  /* stable column widths */
+
+tr.cbi-editing td {
+  overflow: visible;         /* show dropdowns/calendars */
+  white-space: normal;       /* long text wraps while editing */
+  background: #10151b;       /* subtle highlight for edit row */
+}
+
+.cbi-input-inline,
+.cbi-select-inline {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.cbi-input-inline[type="date"] { min-width: 140px; }
+
+.cbi-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.cbi-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === HISTORY DRAWER: respect sidebar & easy closing === */
+
+/* Backdrop should NOT cover the sidebar; start after it */
+.cbi-backdrop {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);      /* <- key line */
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 890;                /* below drawer (900), modal (1000) */
+}
+
+/* Drawer width adapts to remaining viewport (with sidebar) */
+.cbi-history {
+  width: min(340px, calc(100vw - var(--sidebar-w)));
+}
+
+/* When drawer open, keep main content from hiding under it */
+.cbi-wrap.drawer-open .cbi-table-wrap {
+  padding-right: min(340px, calc(100vw - var(--sidebar-w)));
+}
+
+/* Keep drawer header controls (Refresh/Close) visible while scrolling */
+.cbi-history-head {
+  position: sticky;
+  top: 0;
+  background: #0d1117;
+  padding-bottom: 6px;
+  z-index: 1;
+}
+
+.cbi-history-close {
+  background: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 2px 6px;
+  height: 22px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.cbi-history-close:hover { border-color: #58a6ff; }
+
+
+/* === Dense table spacing (compact) === */
+.cbi-th {
+  padding: 4px 6px;          /* was 6px */
+}
+
+.cbi-table td {
+  padding: 4px 6px;          /* was 6px */
+  line-height: 1.1;          /* a touch tighter */
+}
+
+/* Inline editors inside cells */
+.cbi-input-inline,
+.cbi-select-inline {
+  height: 18px;              /* was 20px */
+  padding: 1px 4px;          /* was 2px 6px */
+}
+
+.cbi-input-inline[type="date"] {
+  min-width: 120px;          /* was 140px to save space */
+}
+
+/* Action buttons inside the table */
+.cbi-actions {
+  gap: 2px;                  /* was 4px */
+}
+
+.cbi-iconbtn {
+  height: 18px;              /* was 20px */
+  padding: 0 4px;            /* was 0 6px */
+  margin-right: 2px;         /* was 4px */
+}
+
+/* Badges inside cells */
+.cbi-badge {
+  padding: 0 4px;            /* was 1px 5px */
+}

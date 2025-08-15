@@ -48,7 +48,12 @@ export default function Sidebar({ collapsed, setCollapsed, variant = "sb--slate"
   );
 
   const [dropdowns, setDropdowns] = useState({ doc: true, proj: true });
-
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-sidebar",
+      collapsed ? "collapsed" : "expanded"
+    );
+  }, [collapsed]);
   // Keep groups open if a child route is active
   useEffect(() => {
     setDropdowns((d) => ({

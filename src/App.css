@@ -9,3 +9,6 @@
   z-index: 9999;
   transition: width 0.2s ease-out;
 }
+
+:root { --sidebar-w: 170px; }          /* expanded width (matches your CSS) */
+:root[data-sidebar="collapsed"] { --sidebar-w: 40px; } /* collapsed width */

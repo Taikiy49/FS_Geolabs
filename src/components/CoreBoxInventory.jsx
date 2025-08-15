@@ -1,4 +1,3 @@
-// src/components/CoreBoxInventory.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import API_URL from "../config";
@@ -35,7 +34,6 @@ const emptyDraft = {
   island: "",
   year: ""
 };
-
 
 export default function CoreBoxInventory() {
   const [rows, setRows] = useState([]);
@@ -79,6 +77,28 @@ export default function CoreBoxInventory() {
     () => Math.max(1, Math.ceil(count / pageSize)),
     [count, pageSize]
   );
+
+  // lock body scroll whenever a blocking UI is open
+  useEffect(() => {
+    const lock = confirming || historyOpen;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = lock ? "hidden" : prev || "";
+    return () => { document.body.style.overflow = prev || ""; };
+  }, [confirming, historyOpen]);
+
+  // global ESC handler: close edit/new/history/modal
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        if (confirming) setConfirming(null);
+        else if (historyOpen) setHistoryOpen(false);
+        else if (editingId != null) { setEditingId(null); setEditDraft(emptyDraft); }
+        else if (showNew) { setShowNew(false); setDraft(emptyDraft); }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [confirming, historyOpen, editingId, showNew]);
 
   const fetchOptions = async () => {
     try {
@@ -188,7 +208,7 @@ export default function CoreBoxInventory() {
       return;
     }
     try {
-      const res = await axios.post(`${API_URL}/api/core-boxes`, draft);
+      await axios.post(`${API_URL}/api/core-boxes`, draft);
       setShowNew(false);
       setDraft(emptyDraft);
       setToastTimed("✅ Added", null, null);
@@ -256,7 +276,6 @@ export default function CoreBoxInventory() {
     if (!selected.size) return;
     if (!window.confirm(`Delete ${selected.size} selected item(s)?\nOnly records marked "Dump" will be removed.`)) return;
 
-    // do serially to keep change_ids for last undo (simple)
     try {
       let lastChangeId = null;
       for (const id of selected) {
@@ -281,7 +300,6 @@ export default function CoreBoxInventory() {
     const ok = window.confirm(`Mark "${r.work_order}" as Dump and remove from list?`);
     if (!ok) return;
     try {
-      // first update keep_or_dump, then delete
       await axios.put(`${API_URL}/api/core-boxes/${r.id}`, { keep_or_dump: "Dump" });
       const res = await axios.delete(`${API_URL}/api/core-boxes/${r.id}`);
       const changeId = res.data?.change_id;
@@ -339,7 +357,7 @@ export default function CoreBoxInventory() {
   );
 
   return (
-    <div className="cbi-wrap">
+    <div className={`cbi-wrap ${historyOpen ? "drawer-open" : ""}`}>
       <div className="cbi-topbar">
         <div className="cbi-filters">
           <input
@@ -626,6 +644,9 @@ export default function CoreBoxInventory() {
         <button className="cbi-btn" onClick={() => setPage(totalPages)} disabled={page === totalPages}>⏭</button>
       </div>
 
+      {/* Backdrop for history drawer (click to close) */}
+      {historyOpen && <div className="cbi-backdrop" onClick={() => setHistoryOpen(false)} />}
+
       {/* Confirm delete modal */}
       {confirming && (
         <div className="cbi-modal">
@@ -658,9 +679,12 @@ export default function CoreBoxInventory() {
         <div className="cbi-history">
           <div className="cbi-history-head">
             <div className="cbi-history-title">Change History</div>
-            <button className="cbi-btn cbi-btn-ghost" onClick={fetchChanges} disabled={changesLoading}>
-              {changesLoading ? "Loading…" : "Refresh"}
-            </button>
+            <div className="cbi-history-actions">
+              <button className="cbi-btn cbi-btn-ghost" onClick={fetchChanges} disabled={changesLoading}>
+                {changesLoading ? "Loading…" : "Refresh"}
+              </button>
+              <button className="cbi-btn" onClick={() => setHistoryOpen(false)}>Close</button>
+            </div>
           </div>
           <div className="cbi-history-list">
             {changes.length === 0 && <div className="cbi-empty">No changes recorded.</div>}
