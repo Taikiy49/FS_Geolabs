@@ -180,9 +180,6 @@ const HomePage = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="homepage-tool-count" title="Visible items">
-              {resultsCount}
-            </div>
           </div>
         </div>
       </div>

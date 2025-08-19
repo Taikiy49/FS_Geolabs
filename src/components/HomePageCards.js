@@ -37,7 +37,7 @@ const homepageCards = [
           'Explore database contents quickly for audits, onboarding, or policy reviews.',
       },
       {
-        name: 'DB Admin',
+        name: 'DB Editor',
         icon: <FaUpload />,
         path: '/db-admin',
         description:
@@ -85,7 +85,18 @@ const homepageCards = [
           'Track physical core boxes: filters, aging, and status (expired/active).',
       },
     ],
-  },
+  },  
+ {
+  label: 'Reports Binder',
+  sublabel: 'OCR Log & Edits',
+  tag: 'Data',
+  updated: '2025-08-13',
+  icon: <FaTable size={40} />,
+  description:
+    'Browse & edit rows extracted from PDFs (reports_binder.db). Filter by WO, initials, billing, dates; export CSV.',
+  path: '/reports-binder',
+  disabled: false,
+},
 
   // 2 — Admin (rendered by your “Admin Section” block)
   {

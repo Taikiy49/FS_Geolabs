@@ -26,6 +26,11 @@ const SCOPES_DIR = [
 ];
 const SCOPES_ME = ["User.Read", "Contacts.Read"];
 
+// ✅ Geolabs-only allowlist / keywords
+const ALLOWED_EMAIL_DOMAINS = ["geolabs.net", "geolabs-software.com"];
+const COMPANY_KEYWORDS = ["geolabs"];
+
+// ---- helpers ----
 function useGraphToken(scopes) {
   const { instance, accounts } = useMsal();
   const account = accounts?.[0];
@@ -47,7 +52,6 @@ function useGraphToken(scopes) {
 function normalizeDirUser(u) {
   return {
     id: u.id,
-    source: "Directory",
     name: u.displayName || "",
     email: u.mail || u.userPrincipalName || "",
     mobile: u.mobilePhone || "",
@@ -55,7 +59,6 @@ function normalizeDirUser(u) {
     title: u.jobTitle || "",
     department: u.department || "",
     office: u.officeLocation || "",
-    company: u.companyName || "", // not always present on /users
   };
 }
 
@@ -73,18 +76,30 @@ function normalizeMeContact(c) {
     title: c.jobTitle || "",
     department: c.department || "",
     office: c.officeLocation || "",
-    company: c.companyName || "",
   };
 }
 
 function toCSV(rows, cols) {
   const escape = (v) =>
-    `"${String(v ?? "").replaceAll('"', '""').replace(/\r?\n/g, " ")}"`;
+    `"${String(v ?? "").replaceAll('"', '""').replace(/\r?\n/g, " ") }"`;
   const header = cols.map((c) => escape(c.label)).join(",");
   const lines = rows
     .map((r) => cols.map((c) => escape(r[c.key])).join(","))
     .join("\n");
   return `${header}\n${lines}`;
+}
+
+/** ✅ Return true if row is Geolabs-related */
+function isGeolabsRow(row) {
+  if (!row) return false;
+  const email = (row.email || "").toLowerCase();
+  const company = (row.company || "").toLowerCase();
+  const domain = email.includes("@") ? email.split("@").pop() : "";
+
+  if (domain && ALLOWED_EMAIL_DOMAINS.includes(domain)) return true;
+  if (COMPANY_KEYWORDS.some((k) => company.includes(k))) return true;
+
+  return false;
 }
 
 export default function Contacts() {
@@ -115,7 +130,6 @@ export default function Contacts() {
     title: true,
     department: true,
     office: true,
-    company: true,
     source: true,
   });
 
@@ -127,8 +141,6 @@ export default function Contacts() {
     { key: "title", label: "Title", sortable: true },
     { key: "department", label: "Department", sortable: true },
     { key: "office", label: "Office", sortable: true },
-    { key: "company", label: "Company", sortable: true },
-    { key: "source", label: "Source", sortable: true },
   ];
 
   const toggleCol = (k) =>
@@ -144,7 +156,8 @@ export default function Contacts() {
       const token = await getTokenDir();
       const url =
         reset || !nextLinkDirRef.current
-          ? `${GRAPH}/users?$select=id,displayName,mail,userPrincipalName,mobilePhone,businessPhones,jobTitle,department,officeLocation,companyName&$top=${PAGE_SIZE}`
+          // limit to Members (exclude Guests)
+          ? `${GRAPH}/users?$select=id,displayName,mail,userPrincipalName,mobilePhone,businessPhones,jobTitle,department,officeLocation,companyName&$filter=userType eq 'Member'&$top=${PAGE_SIZE}`
           : nextLinkDirRef.current;
 
       const res = await fetch(url, {
@@ -201,6 +214,8 @@ export default function Contacts() {
       fetchMeContacts(true);
     } else {
       // Both
+      nextLinkDirRef.current = null;
+      nextLinkMeRef.current = null;
       Promise.all([fetchDirectory(true), fetchMeContacts(true)]).catch(() => {});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -218,16 +233,17 @@ export default function Contacts() {
     }
     for (const r of dirContacts) {
       const key = (r.email || r.name).toLowerCase();
-      // Directory takes precedence
-      map.set(key, r);
+      map.set(key, r); // Directory precedence
     }
     return [...map.values()];
   }, [source, dirContacts, meContacts]);
 
+  // ✅ Geolabs-only filter + text search
   const filtered = useMemo(() => {
+    const base = allRows.filter(isGeolabsRow);
     const t = search.trim().toLowerCase();
-    if (!t) return allRows;
-    return allRows.filter((r) =>
+    if (!t) return base;
+    return base.filter((r) =>
       [
         r.name,
         r.email,
@@ -292,246 +308,239 @@ export default function Contacts() {
   const canLoadMoreMe = source !== "Directory" && !!nextLinkMeRef.current;
 
   return (
-    <div className="ct-wrap">
-      <div className="ct-topbar">
-        <div className="ct-left">
-          <div className="ct-heading">Contacts</div>
-
-          <select
-            className="ct-select"
-            value={source}
-            onChange={(e) => setSource(e.target.value)}
-            title="Data source"
-          >
-            <option>Directory</option>
-            <option>My Contacts</option>
-            <option>Both</option>
-          </select>
-
-          <div className="ct-controls">
-            <button
-              className="ct-btn"
-              onClick={() => {
-                if (source === "Directory") fetchDirectory(true);
-                else if (source === "My Contacts") fetchMeContacts(true);
-                else {
-                  nextLinkDirRef.current = null;
-                  nextLinkMeRef.current = null;
-                  Promise.all([fetchDirectory(true), fetchMeContacts(true)]).catch(() => {});
-                }
-              }}
-              title="Refresh"
-              disabled={loading}
-            >
-              <FaSyncAlt />
-              <span>Refresh</span>
-            </button>
-
-            <button className="ct-btn" onClick={exportCSV} title="Export CSV">
-              <FaCloudDownloadAlt />
-              <span>Export</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="ct-right">
-          <input
-            className="ct-input"
-            placeholder="Search name, email, phone, title…"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              resetPaging();
-            }}
-          />
-
-          <div className="ct-colmenu">
-            <FaFilter className="ct-colicon" />
-            <div className="ct-colpanel">
-              {COLUMNS.map((c) => (
-                <label key={c.key} className="ct-colrow">
-                  <input
-                    type="checkbox"
-                    checked={!!visibleCols[c.key]}
-                    onChange={() => toggleCol(c.key)}
-                  />
-                  <span>{c.label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="ct-meta">
-        <span>{total} results</span>
-        <div className="ct-loadmore">
-          {canLoadMoreDir && (
-            <button
-              className="ct-btn ghost"
-              onClick={() => fetchDirectory(false)}
-              disabled={loading}
-              title="Load more directory"
-            >
-              Load more directory
-            </button>
-          )}
-          {canLoadMoreMe && (
-            <button
-              className="ct-btn ghost"
-              onClick={() => fetchMeContacts(false)}
-              disabled={loading}
-              title="Load more personal contacts"
-            >
-              Load more personal
-            </button>
-          )}
-        </div>
-      </div>
-
-      <div className="ct-tablewrap">
-        <table className="ct-table">
-          <thead>
-            <tr>
-              {COLUMNS.filter((c) => visibleCols[c.key]).map((c) => (
-                <th
-                  key={c.key}
-                  onClick={c.sortable ? () => onSort(c.key) : undefined}
-                  className={`ct-th ${c.sortable ? "sortable" : ""}`}
-                >
-                  {c.label}
-                  {sortBy === c.key ? (sortDir === "asc" ? " ▲" : " ▼") : ""}
-                </th>
-              ))}
-              <th className="ct-th">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pageRows.map((r) => (
-              <tr key={`${r.source}-${r.id}`}>
-                {visibleCols.name && (
-                  <td>
-                    <div className="ct-namecell">
-                      <FaUserTie className="ct-miniicon" />
-                      <span title={r.name}>{r.name}</span>
-                    </div>
-                  </td>
-                )}
-                {visibleCols.email && (
-                  <td className="ct-mono" title={r.email}>
-                    {r.email}
-                  </td>
-                )}
-                {visibleCols.mobile && (
-                  <td>
-                    <div className="ct-flex">
-                      <FaPhone className="ct-miniicon" />
-                      <span className="ct-nowrap" title={r.mobile}>
-                        {r.mobile}
-                      </span>
-                    </div>
-                  </td>
-                )}
-                {visibleCols.business && (
-                  <td className="ct-nowrap" title={r.business}>
-                    {r.business}
-                  </td>
-                )}
-                {visibleCols.title && <td title={r.title}>{r.title}</td>}
-                {visibleCols.department && (
-                  <td title={r.department}>{r.department}</td>
-                )}
-                {visibleCols.office && (
-                  <td>
-                    <div className="ct-flex">
-                      <FaBuilding className="ct-miniicon" />
-                      <span title={r.office}>{r.office}</span>
-                    </div>
-                  </td>
-                )}
-                {visibleCols.company && <td title={r.company}>{r.company}</td>}
-                {visibleCols.source && <td className="ct-pill">{r.source}</td>}
-                <td className="ct-actions">
-                  {r.email && (
-                    <button
-                      className="ct-iconbtn"
-                      onClick={() => copy(r.email)}
-                      title="Copy email"
-                    >
-                      <FaEnvelope />
-                    </button>
-                  )}
-                  {(r.mobile || r.business) && (
-                    <button
-                      className="ct-iconbtn"
-                      onClick={() => copy(r.mobile || r.business)}
-                      title="Copy phone"
-                    >
-                      <FaCopy />
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-            {pageRows.length === 0 && (
-              <tr>
-                <td className="ct-empty" colSpan={COLUMNS.length + 1}>
-                  {loading ? "Loading…" : "No results."}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="ct-pager">
-        <button
-          className="ct-btn"
-          onClick={() => setPage(1)}
-          disabled={page === 1}
-        >
-          ⏮
-        </button>
-        <button
-          className="ct-btn"
-          onClick={() => setPage((p) => Math.max(1, p - 1))}
-          disabled={page === 1}
-        >
-          ◀
-        </button>
-        <span className="ct-page">
-          {page} / {totalPages}
-        </span>
-        <button
-          className="ct-btn"
-          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-          disabled={page === totalPages}
-        >
-          ▶
-        </button>
-        <button
-          className="ct-btn"
-          onClick={() => setPage(totalPages)}
-          disabled={page === totalPages}
-        >
-          ⏭
-        </button>
+  <div className="ct-wrap">
+    <div className="ct-topbar">
+      <div className="ct-left">
+        <div className="ct-heading">Contacts</div>
 
         <select
-          className="ct-select right"
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-            setPage(1);
-          }}
+          className="ct-select"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+          title="Data source"
         >
-          {[25, 50, 100, 200].map((n) => (
-            <option key={n} value={n}>
-              {n}/page
-            </option>
-          ))}
+          <option>My Contacts</option>
+          <option>Both</option>
         </select>
+
+        <div className="ct-controls">
+          <button
+            className="ct-btn"
+            onClick={() => {
+              if (source === "Directory") fetchDirectory(true);
+              else if (source === "My Contacts") fetchMeContacts(true);
+              else {
+                nextLinkDirRef.current = null;
+                nextLinkMeRef.current = null;
+                Promise.all([fetchDirectory(true), fetchMeContacts(true)]).catch(() => {});
+              }
+            }}
+            title="Refresh"
+            disabled={loading}
+          >
+            <FaSyncAlt />
+            <span>Refresh</span>
+          </button>
+
+          <button className="ct-btn" onClick={exportCSV} title="Export CSV">
+            <FaCloudDownloadAlt />
+            <span>Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="ct-right">
+        <input
+          className="ct-input"
+          placeholder="Search name, email, phone, title…"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            resetPaging();
+          }}
+        />
+
+        <div className="ct-colmenu">
+          <FaFilter className="ct-colicon" />
+          <div className="ct-colpanel">
+            {COLUMNS.map((c) => (
+              <label key={c.key} className="ct-colrow">
+                <input
+                  type="checkbox"
+                  checked={!!visibleCols[c.key]}
+                  onChange={() => toggleCol(c.key)}
+                />
+                <span>{c.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
-  );
+
+    <div className="ct-meta">
+      <span>{total} results</span>
+      <div className="ct-loadmore">
+        {canLoadMoreDir && (
+          <button
+            className="ct-btn ghost"
+            onClick={() => fetchDirectory(false)}
+            disabled={loading}
+            title="Load more directory"
+          >
+            Load more directory
+          </button>
+        )}
+        {canLoadMoreMe && (
+          <button
+            className="ct-btn ghost"
+            onClick={() => fetchMeContacts(false)}
+            disabled={loading}
+            title="Load more personal contacts"
+          >
+            Load more personal
+          </button>
+        )}
+      </div>
+    </div>
+
+    <div className="ct-tablewrap">
+      <table className="ct-table">
+        <thead>
+          <tr>
+            {COLUMNS.filter((c) => visibleCols[c.key]).map((c) => (
+              <th
+                key={c.key}
+                onClick={c.sortable ? () => onSort(c.key) : undefined}
+                className={`ct-th ${c.sortable ? "sortable" : ""} ct-col-${c.key}`}
+              >
+                {c.label}
+                {sortBy === c.key ? (sortDir === "asc" ? " ▲" : " ▼") : ""}
+              </th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {pageRows.map((r) => (
+            <tr key={`${r.source || "Directory"}-${r.id}`}>
+              {visibleCols.name && (
+                <td className="ct-col-name">
+                  <div className="ct-namecell">
+                    <FaUserTie className="ct-miniicon" />
+                    <span title={r.name}>{r.name}</span>
+                  </div>
+                </td>
+              )}
+
+              {visibleCols.email && (
+                <td className="ct-col-email ct-mono" title={r.email}>
+                  
+                  {r.email}
+                </td>
+              )}
+
+              {visibleCols.mobile && (
+                <td className="ct-col-mobile">
+                  <div className="ct-flex">
+                    <FaPhone className="ct-miniicon" />
+                    <span className="ct-nowrap" title={r.mobile}>
+                      {r.mobile}
+                    </span>
+                  </div>
+                </td>
+              )}
+
+              {visibleCols.business && (
+                <td className="ct-col-business ct-nowrap" title={r.business}>
+                   <FaPhone className="ct-miniicon" />
+                  {r.business}
+                </td>
+              )}
+
+              {visibleCols.title && (
+                <td className="ct-col-title" title={r.title}>
+                  {r.title}
+                </td>
+              )}
+
+              {visibleCols.department && (
+                <td className="ct-col-department" title={r.department}>
+                  {r.department}
+                </td>
+              )}
+
+              {visibleCols.office && (
+                <td className="ct-col-office">
+                  <div className="ct-flex">
+                    <FaBuilding className="ct-miniicon" />
+                    <span title={r.office}>{r.office}</span>
+                  </div>
+                </td>
+              )}
+
+            </tr>
+          ))}
+
+          {pageRows.length === 0 && (
+            <tr>
+              <td className="ct-empty" colSpan={COLUMNS.length + 1}>
+                {loading ? "Loading…" : "No results."}
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+
+    <div className="ct-pager">
+      <button
+        className="ct-btn"
+        onClick={() => setPage(1)}
+        disabled={page === 1}
+      >
+        ⏮
+      </button>
+      <button
+        className="ct-btn"
+        onClick={() => setPage((p) => Math.max(1, p - 1))}
+        disabled={page === 1}
+      >
+        ◀
+      </button>
+      <span className="ct-page">
+        {page} / {totalPages}
+      </span>
+      <button
+        className="ct-btn"
+        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+        disabled={page === totalPages}
+      >
+        ▶
+      </button>
+      <button
+        className="ct-btn"
+        onClick={() => setPage(totalPages)}
+        disabled={page === totalPages}
+      >
+        ⏭
+      </button>
+
+      <select
+        className="ct-select right"
+        value={pageSize}
+        onChange={(e) => {
+          setPageSize(Number(e.target.value));
+          setPage(1);
+        }}
+      >
+        {[25, 50, 100, 200].map((n) => (
+          <option key={n} value={n}>
+            {n}/page
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
+);
 }

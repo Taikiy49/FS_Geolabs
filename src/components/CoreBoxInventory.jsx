@@ -447,7 +447,7 @@ export default function CoreBoxInventory() {
             <option value="Keep">Keep</option>
             <option value="Dump">Dump</option>
             <option value="Save">Save</option>
-          </select>
+          </select> 
           <input className="cbi-input" placeholder="Island" value={draft.island} onChange={e=>setDraft({...draft, island:e.target.value})}/>
           <input className="cbi-input" placeholder="Year" value={draft.year} onChange={e=>setDraft({...draft, year:e.target.value})}/>
           <button className="cbi-btn" onClick={saveNew}>Save</button>

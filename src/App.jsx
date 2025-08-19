@@ -18,6 +18,7 @@ import Contacts from './components/Contacts';
 import S3Viewer from './components/S3Viewer';
 import Admin from './components/Admin';
 import CoreBoxInventory from './components/CoreBoxInventory';
+import ReportsBinder from './components/ReportsBinder';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -95,6 +96,7 @@ const AuthenticatedApp = () => {
             <Route path="/contacts" element={<Contacts />} />
 
             <Route path="/core-box-inventory" element={<CoreBoxInventory />} />
+             <Route path="/reports-binder" element={<ReportsBinder />} />
 
             <Route path="/admin" element={<Admin />} />
           </Routes>

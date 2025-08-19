@@ -1,10 +1,8 @@
-/* Ultra-compact: 10px everywhere; 12px for main heading & table headers.
-   Paddings, gaps, and control heights reduced across the board. */
+/* Ultra-compact responsive styles */
 .ct-wrap {
   --fs-10: 10px;
   --fs-12: 12px;
 
-  /* Smaller spacing scale */
   --pd-2: 1px;
   --pd-4: 2px;
   --pd-6: 4px;
@@ -12,10 +10,13 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
+  max-width: 100%;
   background: #0d1117;
   color: #c9d1d9;
   font-size: var(--fs-10);
   line-height: 1.25;
+  overflow: hidden; /* no horizontal scroll on wrapper */
 }
 
 /* Topbar */
@@ -26,6 +27,7 @@
   gap: var(--pd-4);
   padding: var(--pd-4) var(--pd-6);
   border-bottom: 1px solid #30363d;
+  flex-wrap: wrap;
 }
 
 .ct-left,
@@ -33,6 +35,8 @@
   display: flex;
   align-items: center;
   gap: var(--pd-4);
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .ct-heading {
@@ -41,7 +45,7 @@
   color: #f0f6fc;
 }
 
-/* Inputs & selects tighter */
+/* Inputs & selects */
 .ct-select {
   background: #0d1117;
   color: #c9d1d9;
@@ -50,6 +54,7 @@
   font-size: var(--fs-10);
   height: 20px;
   padding: var(--pd-2) var(--pd-4);
+  max-width: 100%;
 }
 .ct-select.right { margin-left: auto; }
 
@@ -61,7 +66,9 @@
   padding: var(--pd-4);
   font-size: var(--fs-10);
   height: 20px;
-  min-width: 200px;
+  min-width: 160px;
+  max-width: 100%;
+  flex: 1;
 }
 .ct-input:focus {
   outline: none;
@@ -69,11 +76,12 @@
   box-shadow: 0 0 4px rgba(47,129,247,.25);
 }
 
-/* Buttons tighter */
+/* Buttons */
 .ct-controls {
   display: inline-flex;
   align-items: center;
   gap: var(--pd-4);
+  flex-wrap: wrap;
 }
 
 .ct-btn {
@@ -88,11 +96,12 @@
   align-items: center;
   gap: var(--pd-2);
   cursor: pointer;
+  white-space: nowrap;
 }
 .ct-btn:hover { border-color: #58a6ff; }
 .ct-btn.ghost { background: transparent; }
 
-/* Column menu ultra-compact */
+/* Column menu */
 .ct-colmenu {
   position: relative;
   display: inline-flex;
@@ -127,7 +136,7 @@
 }
 .ct-colrow input { transform: translateY(1px); }
 
-/* Meta row tighter */
+/* Meta row */
 .ct-meta {
   display: flex;
   align-items: center;
@@ -136,43 +145,67 @@
   gap: var(--pd-4);
   color: #8b949e;
   border-bottom: 1px solid #30363d;
+  flex-wrap: wrap;
 }
-.ct-loadmore { display: inline-flex; gap: var(--pd-2); }
+.ct-loadmore { display: inline-flex; gap: var(--pd-2); flex-wrap: wrap; }
 
 /* Table */
 .ct-tablewrap {
   flex: 1;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden; /* no sideways scroll */
+  width: 100%;
+  max-width: 100%;
 }
 
+/* Table always full width */
 .ct-table {
   width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: var(--fs-10);
+  table-layout: fixed; /* ensures columns divide space evenly */
 }
 
-/* Headers keep 12px font, but smaller padding */
+/* Headers and cells take equal width */
+.ct-th,
+.ct-table td {
+  width: auto;
+  max-width: none;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Force each visible column to share width equally */
+.ct-table th,
+.ct-table td {
+  flex: 1;
+}
+
+
+/* Headers */
 .ct-th {
   position: sticky;
   top: 0;
   background: #0d1117;
   border-bottom: 1px solid #30363d;
   text-align: left;
-  padding: var(--pd-6);          /* 4px */
+  padding: var(--pd-6);
   font-size: var(--fs-12);
-  white-space: nowrap;
+  word-wrap: break-word;
 }
 .ct-th.sortable { cursor: pointer; }
 
-/* Cells with minimal padding */
+/* Cells */
 .ct-table td {
   border-bottom: 1px solid #161b22;
-  padding: var(--pd-4);          /* 2px */
+  padding: var(--pd-4);
   vertical-align: top;
-  max-width: 260px;
+  max-width: 220px;
+  word-wrap: break-word;
+  white-space: normal; /* wrap text instead of forcing one line */
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .ct-empty {
@@ -181,15 +214,15 @@
   padding: 8px;
 }
 
-/* Cells */
 .ct-namecell,
 .ct-flex {
   display: inline-flex;
   align-items: center;
-  gap: var(--pd-2);
+  gap: 4px;
+  min-width: 0;
 }
 .ct-miniicon {
-  font-size: var(--fs-12);
+  font-size: var(--fs-10);
   color: #8b949e;
 }
 .ct-mono { font-family: ui-monospace, Menlo, Consolas, monospace; }
@@ -201,10 +234,13 @@
   padding: 0 var(--pd-4);
   border-radius: 999px;
   display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Row actions (smaller buttons) */
-.ct-actions { display: inline-flex; gap: var(--pd-2); }
+/* Row actions */
+.ct-actions { display: inline-flex; gap: var(--pd-2); flex-wrap: wrap; }
 .ct-iconbtn {
   background: #0d1117;
   color: #c9d1d9;
@@ -219,7 +255,7 @@
 }
 .ct-iconbtn:hover { border-color: #58a6ff; }
 
-/* Pager with tiny gaps/padding */
+/* Pager */
 .ct-pager {
   display: flex;
   align-items: center;
@@ -227,5 +263,45 @@
   justify-content: center;
   padding: var(--pd-4) 0 var(--pd-4);
   border-top: 1px solid #30363d;
+  flex-wrap: wrap;
 }
 .ct-page { font-size: var(--fs-10); }
+
+/* --------------------------- */
+/* Responsive: hide some cols  */
+/* --------------------------- */
+@media (max-width: 768px) {
+  .ct-col-title,
+  .ct-col-department,
+  .ct-col-office,
+  th.ct-col-title,
+  th.ct-col-department,
+  th.ct-col-office {
+    display: none;
+  }
+}
+
+/* Super skinny scrollbar */
+.ct-tablewrap::-webkit-scrollbar {
+  width: 6px;         /* vertical scrollbar width */
+  height: 6px;        /* horizontal scrollbar height */
+}
+
+.ct-tablewrap::-webkit-scrollbar-thumb {
+  background: #444c56;   /* thumb color */
+  border-radius: 4px;
+}
+
+.ct-tablewrap::-webkit-scrollbar-thumb:hover {
+  background: #58a6ff;   /* hover color */
+}
+
+.ct-tablewrap::-webkit-scrollbar-track {
+  background: #0d1117;   /* track background */
+}
+
+/* Firefox */
+.ct-tablewrap {
+  scrollbar-width: thin;           /* makes it skinny */
+  scrollbar-color: #444c56 #0d1117; /* thumb + track */
+}

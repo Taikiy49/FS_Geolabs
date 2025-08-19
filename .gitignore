@@ -61,6 +61,7 @@ preprocessed_chunks.json
 *.db
 geolabs_faiss.index
 geolabs.db
+non_app_related/
 
 # ---------------------
 # VS Code
